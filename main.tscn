@@ -1,3 +1,28 @@
 [gd_scene format=3 uid="uid://c8257oy8c1lmb"]
 
-[node name="Node3D" type="Node3D" unique_id=179947457]
+[ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/test_room/test_room.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
+sky_energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_h2yge")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+
+[node name="Main" type="Node3D" unique_id=179947457]
+
+[node name="Game" type="Node3D" parent="." unique_id=1350780846]
+
+[node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
+
+[node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4952861, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
+environment = SubResource("Environment_0xm2m")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]

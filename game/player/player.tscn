@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ct0p6npqva67"]
+
+[ext_resource type="Script" uid="uid://bui3lg8j3ka10" path="res://game/player/player.gd" id="1_b2mth"]
+[ext_resource type="Texture2D" uid="uid://dfxktq3bw8mk1" path="res://assets/player/test.tres" id="1_obar5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8soms"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_obar5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obar5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody3D" unique_id=472072241]
+script = ExtResource("1_b2mth")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1053810935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kpvxy")
+debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
+
+[node name="Visuals" type="Node3D" parent="." unique_id=512528227]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals" unique_id=141534059]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.8662387, 0)
+material_overlay = SubResource("StandardMaterial3D_8soms")
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_obar5")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=58882882]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4, 0)
