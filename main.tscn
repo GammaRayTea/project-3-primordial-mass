@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/test_room/test_room.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bqumv4uggm1d4" path="res://game/interactables/rolling_boulder/rolling_boulder.tscn" id="3_h2yge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_energy_multiplier = 2.0
@@ -12,6 +13,7 @@ sky_material = SubResource("ProceduralSkyMaterial_h2yge")
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
+ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Main" type="Node3D" unique_id=179947457]
 
@@ -19,10 +21,18 @@ sky = SubResource("Sky_0xm2m")
 
 [node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
 
+[node name="RollingBoulder" parent="Game" unique_id=498289684 instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1913025, 1.3392533, 0.074970245)
+mass = 0.1
+
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4952861, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Game" unique_id=1037891163]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0)
+shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]

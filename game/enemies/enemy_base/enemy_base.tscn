@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://bnqdgg1ropvye"]
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/enemy_base.gd" id="1_yh7c5"]
+[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/enemies/state_machine/state_machine.gd" id="2_e5h3j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh7c5"]
 
 [node name="Enemy" type="RigidBody3D" unique_id=1306750449]
 script = ExtResource("1_yh7c5")
 
-[node name="Behaviour" type="Node3D" parent="." unique_id=615599449]
-
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
 shape = SubResource("CapsuleShape3D_yh7c5")
+
+[node name="StateMachine" type="Node" parent="." unique_id=751087973]
+script = ExtResource("2_e5h3j")
+metadata/_custom_type_script = "uid://d10lffcbhtmrp"

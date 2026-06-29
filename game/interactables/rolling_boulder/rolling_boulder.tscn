@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bqumv4uggm1d4"]
+
+[ext_resource type="PackedScene" uid="uid://cup5yapklim3g" path="res://assets/rolling_boulder/Stone.glb" id="1_jq4qs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kpvxy"]
+radius = 0.8339547
+
+[node name="RollingBoulder" type="RigidBody3D" unique_id=498289684]
+
+[node name="Stone" parent="." unique_id=1556413671 instance=ExtResource("1_jq4qs")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1050434509]
+shape = SubResource("SphereShape3D_kpvxy")
