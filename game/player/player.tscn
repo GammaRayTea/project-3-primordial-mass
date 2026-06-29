@@ -21,15 +21,14 @@ animations = [{
 [node name="Player" type="CharacterBody3D" unique_id=472072241]
 script = ExtResource("1_b2mth")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1053810935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
 [node name="Visuals" type="Node3D" parent="." unique_id=512528227]
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals" unique_id=141534059]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.8662387, 0)
+[node name="Head" type="AnimatedSprite3D" parent="Visuals" unique_id=141534059]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.866, 0)
 material_overlay = SubResource("StandardMaterial3D_8soms")
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_obar5")
