@@ -3,21 +3,20 @@
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var area = null
+	var warnings = PackedStringArray()
 	for child in get_children():
 		if child is InteractionBox:
 			area = child
 			if area.area_entered.has_connections() == false:
-				#area.area_entered.connect(onInteractionAreaEntered)
-				pass
+				warnings.append("Connect area_entered of InteractionBox to onInteractionAreaEntered")
 				
-	print(area.area_entered.get_connections())
+
 
 	if area == null:
-		return ["Add an InteractioBox Node as an interaction box for the player!"]
-	else:
-		return []
+		warnings.append("Add an InteractioBox Node as an interaction box for the player!")
+	return warnings
 
-@abstract func onInteractionAreaEntered(area:Area3D)->void
+@abstract func onInteractionAreaEntered(_area:Area3D)->void
 
 func _init() -> void:
 	update_configuration_warnings()

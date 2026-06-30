@@ -1,6 +1,6 @@
 @tool
 extends RigidInteractable
 
-func onInteractionAreaEntered(area:Area3D)->void:
+func onInteractionAreaEntered(_area:Area3D)->void:
 	print("entered")
 	

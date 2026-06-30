@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqumv4uggm1d4"]
 
 [ext_resource type="PackedScene" uid="uid://cup5yapklim3g" path="res://assets/rolling_boulder/Stone.glb" id="1_jq4qs"]
-[ext_resource type="Script" uid="uid://dnl8sixc5gww4" path="res://game/interactables/rolling_boulder/rolling_boulder.gd" id="1_pvbhg"]
+[ext_resource type="Script" uid="uid://dnl8sixc5gww4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.gd" id="1_pvbhg"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_4wenu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kpvxy"]
@@ -10,7 +10,8 @@ radius = 0.8339547
 [sub_resource type="SphereShape3D" id="SphereShape3D_pvbhg"]
 radius = 0.8571686
 
-[node name="RollingBoulder" type="RigidBody3D" unique_id=498289684 groups=["Pushable"]]
+[node name="RollingBoulder" type="RigidBody3D" unique_id=498289684]
+mass = 100.0
 script = ExtResource("1_pvbhg")
 
 [node name="Stone" parent="." unique_id=1556413671 instance=ExtResource("1_jq4qs")]
