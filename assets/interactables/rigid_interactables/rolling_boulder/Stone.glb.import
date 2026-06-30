@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cup5yapklim3g"
-path="res://.godot/imported/Stone.glb-0ef2493e62dec536be43912a0c482fc0.scn"
+path="res://.godot/imported/Stone.glb-11b1cda7b4dd86a45b89626463acfa85.scn"
 
 [deps]
 
-source_file="res://assets/rolling_boulder/Stone.glb"
-dest_files=["res://.godot/imported/Stone.glb-0ef2493e62dec536be43912a0c482fc0.scn"]
+source_file="res://assets/interactables/rigid_interactables/rolling_boulder/Stone.glb"
+dest_files=["res://.godot/imported/Stone.glb-11b1cda7b4dd86a45b89626463acfa85.scn"]
 
 [params]
 
@@ -43,7 +43,7 @@ _subresources={
 "materials": {
 "Material.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/rolling_boulder/Material.001.tres",
+"use_external/fallback_path": "res://assets/interactables/rigid_interactables/rolling_boulder/Material.001.tres",
 "use_external/path": "uid://ddgxrphelltrj"
 }
 }

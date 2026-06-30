@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bogvuxetpstyg"
-path.s3tc="res://.godot/imported/Stone_Basic_Stone_Albedo.png-068a99d18af1eaf6675be8aa7ac472ab.s3tc.ctex"
+path.s3tc="res://.godot/imported/Stone_Basic_Stone_Albedo.png-af4056f2bc6cc166866750a51179c3d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/rolling_boulder/Stone_Basic_Stone_Albedo.png"
-dest_files=["res://.godot/imported/Stone_Basic_Stone_Albedo.png-068a99d18af1eaf6675be8aa7ac472ab.s3tc.ctex"]
+source_file="res://assets/interactables/rigid_interactables/rolling_boulder/Stone_Basic_Stone_Albedo.png"
+dest_files=["res://.godot/imported/Stone_Basic_Stone_Albedo.png-af4056f2bc6cc166866750a51179c3d9.s3tc.ctex"]
 
 [params]
 

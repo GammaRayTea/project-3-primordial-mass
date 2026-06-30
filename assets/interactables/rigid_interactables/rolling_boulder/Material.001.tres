@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://ddgxrphelltrj"]
 
-[ext_resource type="Texture2D" uid="uid://bogvuxetpstyg" path="res://assets/rolling_boulder/Stone_Basic_Stone_Albedo.png" id="1_jv3ye"]
+[ext_resource type="Texture2D" uid="uid://bogvuxetpstyg" path="res://assets/interactables/rigid_interactables/rolling_boulder/Stone_Basic_Stone_Albedo.png" id="1_jv3ye"]
 
 [resource]
 resource_name = "Material.001"

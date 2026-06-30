@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqumv4uggm1d4"]
 
-[ext_resource type="PackedScene" uid="uid://cup5yapklim3g" path="res://assets/rolling_boulder/Stone.glb" id="1_jq4qs"]
+[ext_resource type="PackedScene" uid="uid://cup5yapklim3g" path="res://assets/interactables/rigid_interactables/rolling_boulder/Stone.glb" id="1_jq4qs"]
 [ext_resource type="Script" uid="uid://dnl8sixc5gww4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.gd" id="1_pvbhg"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_4wenu"]
 
