@@ -1,4 +1,5 @@
 extends ControlInteractable
+## Simple Button
 
 ## If [code]false[/code], will only emit Signal [code]on_actiation[/code]. Otherwise, will emit Signal [code]on_deactiation[/code] after [param time_delta] seconds.
 @export var turn_off = false
@@ -12,4 +13,4 @@ func activate() -> void:
 		deactivate()
 	
 func deactivate() -> void:
-	pass
+	on_deactivation.emit()

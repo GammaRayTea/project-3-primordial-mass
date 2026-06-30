@@ -1,5 +1,5 @@
 @abstract class_name ControlInteractable extends Node3D
-
+##Extend this to make a control interactable like a switch or button
 @export var indicator:Node3D
 
 signal on_activation

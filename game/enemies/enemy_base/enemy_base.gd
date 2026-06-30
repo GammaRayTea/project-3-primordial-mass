@@ -1,4 +1,4 @@
-class_name Enemy extends RigidBody3D
+class_name Enemy extends CharacterBody3D
 
 
 const SPEED = 5.0
