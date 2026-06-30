@@ -1,5 +1,5 @@
 @tool
-@abstract class_name InteractionBox extends Area3D
+@abstract class_name TriggerBox extends Area3D
 
 
 # Called when the node enters the scene tree for the first time.
