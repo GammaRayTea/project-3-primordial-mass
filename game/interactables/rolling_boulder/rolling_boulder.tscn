@@ -1,13 +1,31 @@
 [gd_scene format=3 uid="uid://bqumv4uggm1d4"]
 
 [ext_resource type="PackedScene" uid="uid://cup5yapklim3g" path="res://assets/rolling_boulder/Stone.glb" id="1_jq4qs"]
+[ext_resource type="Script" uid="uid://dnl8sixc5gww4" path="res://game/interactables/rolling_boulder/rolling_boulder.gd" id="1_pvbhg"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_4wenu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kpvxy"]
 radius = 0.8339547
 
-[node name="RollingBoulder" type="RigidBody3D" unique_id=498289684]
+[sub_resource type="SphereShape3D" id="SphereShape3D_pvbhg"]
+radius = 0.8571686
+
+[node name="RollingBoulder" type="RigidBody3D" unique_id=498289684 groups=["Pushable"]]
+script = ExtResource("1_pvbhg")
 
 [node name="Stone" parent="." unique_id=1556413671 instance=ExtResource("1_jq4qs")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1050434509]
 shape = SubResource("SphereShape3D_kpvxy")
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=735567889 node_paths=PackedStringArray("target")]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("3_4wenu")
+target = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=758090807]
+shape = SubResource("SphereShape3D_pvbhg")
+debug_color = Color(0.72010946, 0.48022687, 0, 0.41960785)
+
+[connection signal="area_entered" from="InteractionBox" to="." method="onInteractionAreaEntered"]
