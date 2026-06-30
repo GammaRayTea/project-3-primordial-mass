@@ -17,10 +17,12 @@ var current_state = STATE.IDLE
 var push_target: RigidInteractable
 var push_distance:float
 
+var control_interaction_target:ControlInteractable
 
 
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
+	process_interact_input()
 	match current_state:
 		STATE.IDLE:
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
@@ -39,6 +41,12 @@ func process_movement_input() -> Vector3:
 	var input_dir := Input.get_vector("move_left","move_right","move_up","move_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	return direction
+
+func process_interact_input() -> void:
+	if Input.is_action_just_pressed("interact"):
+		
+		if control_interaction_target != null:
+			control_interaction_target.activate()
 
 func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:float) -> void:
 	if _direction:
@@ -65,7 +73,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 func start_push():
 	push_distance = (push_target.position-position).length()
 	velocity = Vector3.ZERO
-	print(push_distance)
+
 	current_state = STATE.PUSHING
 	
 func push(_delta : float, _direction) -> void:
@@ -88,3 +96,18 @@ func on_interactable_box_exited(_area: Area3D) -> void:
 		if _area.target == push_target:
 			push_target = null
 			current_state = STATE.IDLE
+
+
+func on_interaction_box_entered(_area: Area3D) -> void:
+	if _area is InteractionBox:
+		if _area.target is ControlInteractable:
+			_area.target.indicator.show()
+			control_interaction_target = _area.target
+			
+
+
+func on_interaction_box_exited(_area: Area3D) -> void:
+	if _area is InteractionBox:
+		if _area.target is ControlInteractable:
+			_area.target.indicator.hide()
+			control_interaction_target = null

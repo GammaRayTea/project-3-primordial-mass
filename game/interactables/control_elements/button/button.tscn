@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://chhwtehoo1ycb"]
+
+[ext_resource type="Texture2D" uid="uid://jt2wig6v7kt5" path="res://assets/interactables/control_elements/buttons_PNG52-1350505328.png" id="1_gu1mn"]
+[ext_resource type="Script" uid="uid://iitogkx04dsq" path="res://game/interactables/control_elements/button/button.gd" id="1_skx7b"]
+[ext_resource type="PackedScene" uid="uid://c8kkrfis3hku8" path="res://game/interactables/control_elements/indicator/indicator.tscn" id="3_1pe2k"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="4_73v77"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10fwe"]
+albedo_texture = ExtResource("1_gu1mn")
+uv1_scale = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kpvxy"]
+material = SubResource("StandardMaterial3D_10fwe")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73v77"]
+
+[node name="Button" type="Node3D" unique_id=1216729284 node_paths=PackedStringArray("indicator")]
+script = ExtResource("1_skx7b")
+indicator = NodePath("Indicator")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=1785246419]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" unique_id=616390584]
+mesh = SubResource("BoxMesh_kpvxy")
+
+[node name="Indicator" parent="." unique_id=323869586 instance=ExtResource("3_1pe2k")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.913499, 0)
+visible = false
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=1375010260 node_paths=PackedStringArray("target")]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("4_73v77")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1047566199]
+shape = SubResource("BoxShape3D_73v77")

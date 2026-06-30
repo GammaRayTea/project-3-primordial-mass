@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c8kkrfis3hku8"]
+
+[sub_resource type="Gradient" id="Gradient_1pe2k"]
+colors = PackedColorArray(1, 0, 0, 0.25490198, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kpvxy"]
+gradient = SubResource("Gradient_1pe2k")
+fill = 3
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Animation" id="Animation_g7bdv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:fill_to")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j00qh"]
+resource_name = "swirl"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:fill_to")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.5, 0.76666665, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0), Vector2(0, 0.5), Vector2(0.5, 1), Vector2(1, 0.5), Vector2(0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7bdv"]
+_data = {
+&"RESET": SubResource("Animation_g7bdv"),
+&"swirl": SubResource("Animation_j00qh")
+}
+
+[node name="Indicator" type="Sprite3D" unique_id=323869586]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+texture = SubResource("GradientTexture2D_kpvxy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1382996592]
+libraries/ = SubResource("AnimationLibrary_g7bdv")
+autoplay = &"swirl"

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/test_room/test_room.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bqumv4uggm1d4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://chhwtehoo1ycb" path="res://game/interactables/control_elements/button/button.tscn" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_energy_multiplier = 2.0
@@ -38,5 +39,8 @@ environment = SubResource("Environment_0xm2m")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Game" unique_id=1037891163]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Button" parent="Game" unique_id=1394186106 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.46202263)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
