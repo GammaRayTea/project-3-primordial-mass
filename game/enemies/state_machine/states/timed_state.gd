@@ -1,5 +1,6 @@
 @tool
 class_name TimedState extends State
+
 ## the time in seconds after which [code]state_finished[/code] is called
 @export var time:float = 1:
 	set(value):

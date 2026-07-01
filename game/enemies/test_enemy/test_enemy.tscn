@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/enemies/state_machine/states/wait.gd" id="3_7ldnf"]
 [ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="3_oqc07"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ldnf"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpvxy"]
 albedo_texture = ExtResource("3_oqc07")
 uv1_scale = Vector3(3, 2, 3)
@@ -12,8 +14,12 @@ uv1_scale = Vector3(3, 2, 3)
 [sub_resource type="BoxMesh" id="BoxMesh_kpvxy"]
 material = SubResource("StandardMaterial3D_kpvxy")
 
-[node name="Enemy" unique_id=2048773448 node_paths=PackedStringArray("state_machine") instance=ExtResource("1_d0a55")]
+[node name="TestEnemy" unique_id=2048773448 node_paths=PackedStringArray("state_machine") instance=ExtResource("1_d0a55")]
+health = 30.0
 state_machine = NodePath("StateMachine")
+
+[node name="WorldCollider" parent="." index="0" unique_id=1421813303]
+shape = SubResource("BoxShape3D_7ldnf")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("WalkForwardState")
@@ -31,3 +37,11 @@ metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
 mesh = SubResource("BoxMesh_kpvxy")
+
+[node name="HitBox" parent="." index="5" unique_id=565674913]
+collision_mask = 6
+
+[node name="HurtBox" parent="." index="6" unique_id=158402479]
+collision_mask = 24
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
