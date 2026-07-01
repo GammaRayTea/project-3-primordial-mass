@@ -5,7 +5,6 @@ class_name StateMachine extends Node
 var current_state: State
 
 func _ready() -> void:
-
 	for state in get_children():
 		if state is State:
 			prepare_state(state)
