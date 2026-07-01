@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c0i63nfvpi543"]
+
+[ext_resource type="PackedScene" uid="uid://bnqdgg1ropvye" path="res://game/enemies/enemy_base/enemy_base.tscn" id="1_d0a55"]
+[ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/enemies/state_machine/states/walk_forward.gd" id="2_sn51l"]
+[ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/enemies/state_machine/states/wait.gd" id="3_7ldnf"]
+[ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="3_oqc07"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpvxy"]
+albedo_texture = ExtResource("3_oqc07")
+uv1_scale = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kpvxy"]
+material = SubResource("StandardMaterial3D_kpvxy")
+
+[node name="Enemy" unique_id=2048773448 node_paths=PackedStringArray("state_machine") instance=ExtResource("1_d0a55")]
+state_machine = NodePath("StateMachine")
+
+[node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("WalkForwardState")
+
+[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("_subject", "next_state")]
+script = ExtResource("2_sn51l")
+_subject = NodePath("../..")
+next_state = NodePath("../WaitState")
+metadata/_custom_type_script = "uid://bi8u06c53mn68"
+
+[node name="WaitState" type="Node" parent="StateMachine" index="1" unique_id=861100265 node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_7ldnf")
+next_state = NodePath("../WalkForwardState")
+metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
+mesh = SubResource("BoxMesh_kpvxy")
