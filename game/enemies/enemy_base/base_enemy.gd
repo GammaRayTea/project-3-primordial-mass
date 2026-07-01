@@ -7,20 +7,28 @@ class_name Enemy extends CharacterBody3D
 		health = value
 		if health <= 0.0:
 			die()
+
 @export_category("Components")
+@export var animation_tree:AnimationTree:
+	set(value):
+		animation_tree= value
+		update_configuration_warnings()#
+@export var visuals:Node3D
+@export_category("State Machine")
 @export var state_machine:StateMachine:
 	set(value):
 		state_machine = value
 		update_configuration_warnings()
-		
-@export var animation_tree:AnimationTree:
-	set(value):
-		animation_tree= value
-		update_configuration_warnings()
-signal on_death
-signal on_hit
 
-#
+@export_category("Events")
+@export var events_on_death: Array[Event] = []
+@export var events_on_hurt: Array[Event] = []
+@export var events_on_hit: Array[Event] = []
+
+signal enemy_died
+signal enemy_hit
+
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = PackedStringArray()
 	
@@ -38,13 +46,16 @@ func _physics_process(_delta: float) -> void:
 		state_machine._update(_delta)
 
 
-func die() -> void:
-	on_death.emit()
-	queue_free()
 func get_hit(damage:float):
 	health-=damage
-	on_hit.emit()
-	print("damage ", damage, "health ", health)
+	execute_events(events_on_hurt)
+	enemy_hit.emit()
+	print("damage ", damage, " health ", health)
+
+func die() -> void:
+	await execute_events(events_on_death)
+	enemy_died.emit()
+	queue_free()
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
@@ -52,3 +63,9 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 		
 		get_hit(area.damage)
 		
+
+func execute_events(events:Array[Event])->void:
+	for event in events:
+		if event is Event:
+			event.execute()
+			await event.finished

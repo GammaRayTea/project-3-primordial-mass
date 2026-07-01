@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bnqdgg1ropvye"]
 
-[ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/enemy_base.gd" id="1_yh7c5"]
-[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/enemies/state_machine/state_machine.gd" id="2_e5h3j"]
-[ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="3_ps3yp"]
-[ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_ugvyo"]
+[ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
+[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/enemies/state_machine/state_machine.gd" id="2_uxsc4"]
+[ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="3_ypcvc"]
+[ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh7c5"]
 
@@ -13,17 +13,20 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 
-[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("state_machine", "animation_tree")]
-script = ExtResource("1_yh7c5")
-state_machine = NodePath("StateMachine")
+[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "visuals", "state_machine")]
+script = ExtResource("1_p4vjo")
 animation_tree = NodePath("AnimationTree")
+visuals = NodePath("Visuals")
+state_machine = NodePath("StateMachine")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
 shape = SubResource("CapsuleShape3D_yh7c5")
 
 [node name="StateMachine" type="Node" parent="." unique_id=751087973]
-script = ExtResource("2_e5h3j")
+script = ExtResource("2_uxsc4")
 metadata/_custom_type_script = "uid://d10lffcbhtmrp"
+
+[node name="Events" type="Node" parent="." unique_id=1440544615]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=67901383]
 root_node = NodePath("../AnimationTree")
@@ -38,7 +41,7 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="HitBox" type="Area3D" parent="." unique_id=565674913]
 collision_layer = 16
 collision_mask = 16
-script = ExtResource("3_ps3yp")
+script = ExtResource("3_ypcvc")
 metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1689760368]
@@ -47,7 +50,7 @@ shape = SubResource("BoxShape3D_udmuc")
 [node name="HurtBox" type="Area3D" parent="." unique_id=158402479]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("4_ugvyo")
+script = ExtResource("4_yixaj")
 metadata/_custom_type_script = "uid://daou788t0evlx"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=948016057]

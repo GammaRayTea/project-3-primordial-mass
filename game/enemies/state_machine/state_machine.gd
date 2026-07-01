@@ -35,8 +35,7 @@ func _ready() -> void:
 		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
-	_state.state_finished.connect(_on_state_finished)
-	print(_state.state_finished.get_connections())
+	_state.finished.connect(_on_state_finished)
 	_state._setup()
 
 func _update(_delta:float) -> void:
