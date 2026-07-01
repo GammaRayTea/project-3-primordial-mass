@@ -28,10 +28,11 @@ func _init() -> void:
 	update_configuration_warnings()
 
 func _ready() -> void:
-	for state in get_children():
-		if state is State:
-			prepare_state(state)
-	switch_to_state(initial_state)
+	if !Engine.is_editor_hint():
+		for state in get_children():
+			if state is State:
+				prepare_state(state)
+		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
 	_state.state_finished.connect(_on_state_finished)
