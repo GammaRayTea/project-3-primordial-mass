@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bnqdgg1ropvye"]
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
-[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/enemies/state_machine/state_machine.gd" id="2_uxsc4"]
+[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_uxsc4"]
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="3_ypcvc"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 

@@ -25,10 +25,13 @@ window/stretch/aspect="expand"
 folder_colors={
 "res://assets/enemies/": "red",
 "res://assets/interactables/": "orange",
+"res://assets/player/": "teal",
+"res://game/behaviours/": "purple",
 "res://game/enemies/": "red",
 "res://game/environment/": "blue",
 "res://game/interactables/": "orange",
-"res://game/interaction_boxes/": "green"
+"res://game/interaction_boxes/": "green",
+"res://game/player/": "teal"
 }
 
 [input]
