@@ -36,8 +36,7 @@ folder_colors={
 "res://game/interactables/": "orange",
 "res://game/interaction_boxes/": "green",
 "res://game/items/": "yellow",
-"res://game/player/": "teal",
-"res://game/state_machine/": "purple"
+"res://game/player/": "teal"
 }
 
 [input]
