@@ -47,5 +47,4 @@ func switch_to_state(_state:State) -> void:
 	current_state._start()
 
 func _on_state_finished()->void:
-	current_state._exit()
 	switch_to_state(current_state.next_state)

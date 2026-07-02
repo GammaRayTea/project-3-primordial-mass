@@ -1,4 +1,4 @@
-@abstract class_name ControlInteractable extends Interactable
+@abstract class_name ControlInteractable extends Node3D
 ##Extend this to make a control interactable like a switch or button
 @export var indicator:Node3D
 
@@ -23,10 +23,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 func _init() -> void:
 	update_configuration_warnings()
 
-func hover_start()-> void:
-	indicator.show()
 
-func hover_end()-> void:
-	indicator.hide()
+
 @abstract func activate() -> void
 @abstract func deactivate() -> void
