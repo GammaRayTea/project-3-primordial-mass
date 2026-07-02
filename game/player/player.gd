@@ -19,6 +19,7 @@ var push_distance:float
 
 var control_interaction_target:ControlInteractable
 
+var held_item:Item = null
 
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
@@ -81,7 +82,7 @@ func push(_delta : float, _direction) -> void:
 	push_target.apply_force(_direction*0.2,Vector3(0,1,0))
 
 
-func on_interactable_box_entered(_area: Area3D) -> void:
+func on_push_box_entered(_area: Area3D) -> void:
 	if _area is InteractionBox:
 		if _area.target is RigidInteractable and push_target == null:
 			push_target = _area.target
@@ -91,7 +92,8 @@ func on_interactable_box_entered(_area: Area3D) -> void:
 
 
 
-func on_interactable_box_exited(_area: Area3D) -> void:
+
+func on_push_box_exited(_area: Area3D) -> void:
 	if _area is InteractionBox:
 		if _area.target == push_target:
 			push_target = null
@@ -100,14 +102,14 @@ func on_interactable_box_exited(_area: Area3D) -> void:
 
 func on_interaction_box_entered(_area: Area3D) -> void:
 	if _area is InteractionBox:
-		if _area.target is ControlInteractable:
-			_area.target.indicator.show()
+		if _area.target is Interactable:
+			_area.target.hover_start()
 			control_interaction_target = _area.target
 			
 
 
 func on_interaction_box_exited(_area: Area3D) -> void:
 	if _area is InteractionBox:
-		if _area.target is ControlInteractable:
-			_area.target.indicator.hide()
+		if _area.target is Interactable:
+			_area.target.hover_end()
 			control_interaction_target = null
