@@ -1,11 +1,14 @@
 @tool
 class_name WalkForwardState extends TimedState
+##Moves [param target] in direction [code]Vector3.FORWARD = Vector3(0,0,1)[/code] by [param speed] every frame.
 
-@export var _subject:Node3D
+##Target to move.
+@export var target:Node3D
+##Speed of movement.
 @export var speed:float = 1.0
 
 
 
 func _execute(_delta:float) -> void:
-	_subject.position += Vector3.FORWARD * speed*_delta
+	target.position += Vector3.FORWARD * speed*_delta
 	

@@ -24,9 +24,9 @@ shape = SubResource("BoxShape3D_7ldnf")
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("WalkForwardState")
 
-[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("_subject", "next_state")]
+[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("2_sn51l")
-_subject = NodePath("../..")
+target = NodePath("../..")
 next_state = NodePath("../WaitState")
 
 [node name="WaitState" type="Node" parent="StateMachine" index="1" unique_id=861100265 node_paths=PackedStringArray("next_state")]
