@@ -12,9 +12,6 @@
 		else:
 			time = value
 
-func _setup()->void:
-	pass
+
 func _start()-> void:
 	get_tree().create_timer(time).timeout.connect(finished.emit)
-func _execute(_delta:float) -> void:
-	pass

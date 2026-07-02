@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://c0i63nfvpi543"]
 
 [ext_resource type="PackedScene" uid="uid://bnqdgg1ropvye" path="res://game/enemies/enemy_base/base_enemy.tscn" id="1_d0a55"]
-[ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/behaviours/state_machine/states/walk_forward.gd" id="2_sn51l"]
-[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_v0kwb"]
-[ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/behaviours/state_machine/states/wait.gd" id="3_7ldnf"]
+[ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/state_machine/states/walk_forward.gd" id="2_sn51l"]
+[ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/state_machine/states/wait.gd" id="3_7ldnf"]
 [ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="3_oqc07"]
 [ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="4_v0kwb"]
 
@@ -23,7 +22,6 @@ health = 30.0
 shape = SubResource("BoxShape3D_7ldnf")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_v0kwb")
 initial_state = NodePath("WalkForwardState")
 
 [node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
