@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bnqdgg1ropvye"]
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
-[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/state_machine/state_machine.gd" id="2_uxsc4"]
+[ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_uxsc4"]
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="3_ypcvc"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 
@@ -25,6 +25,8 @@ shape = SubResource("CapsuleShape3D_yh7c5")
 [node name="StateMachine" type="Node" parent="." unique_id=751087973]
 script = ExtResource("2_uxsc4")
 metadata/_custom_type_script = "uid://d10lffcbhtmrp"
+
+[node name="Events" type="Node" parent="." unique_id=1440544615]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=67901383]
 root_node = NodePath("../AnimationTree")

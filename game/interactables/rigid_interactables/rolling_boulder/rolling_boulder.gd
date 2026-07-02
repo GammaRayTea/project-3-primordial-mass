@@ -5,7 +5,7 @@ extends RigidInteractable
 func onInteractionAreaEntered(_area:Area3D)->void:
 	print("entered")
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 
 	if linear_velocity.length() > damage_speed_threshold:
 		hit_box.damage = clamp(pow(linear_velocity.length(),3),0, 100)
