@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/state_machine/states/walk_forward.gd" id="2_sn51l"]
 [ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/state_machine/states/wait.gd" id="3_7ldnf"]
 [ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="3_oqc07"]
-[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="4_v0kwb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ldnf"]
 
@@ -16,7 +15,8 @@ uv1_scale = Vector3(3, 2, 3)
 material = SubResource("StandardMaterial3D_kpvxy")
 
 [node name="TestEnemy" unique_id=2048773448 instance=ExtResource("1_d0a55")]
-health = 30.0
+script = ExtResource("2_v0kwb")
+health = 40.0
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 shape = SubResource("BoxShape3D_7ldnf")
@@ -24,26 +24,18 @@ shape = SubResource("BoxShape3D_7ldnf")
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("WalkForwardState")
 
-[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
+[node name="WalkForwardState" type="Node" parent="StateMachine" index="1" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("2_sn51l")
 target = NodePath("../..")
 next_state = NodePath("../WaitState")
 
-[node name="WaitState" type="Node" parent="StateMachine" index="1" unique_id=861100265 node_paths=PackedStringArray("next_state")]
-script = ExtResource("3_7ldnf")
-next_state = NodePath("../WalkForwardState")
-
-[node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=805446347 node_paths=PackedStringArray("target")]
-script = ExtResource("4_v0kwb")
-target = NodePath("../..")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
 mesh = SubResource("BoxMesh_kpvxy")
 
-[node name="HitBox" parent="." index="6" unique_id=565674913]
+[node name="HitBox" parent="." index="5" unique_id=565674913]
 collision_mask = 6
 
-[node name="HurtBox" parent="." index="7" unique_id=158402479]
+[node name="HurtBox" parent="." index="6" unique_id=158402479]
 collision_mask = 24
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
