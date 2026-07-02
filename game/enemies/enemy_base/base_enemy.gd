@@ -21,9 +21,9 @@ class_name Enemy extends CharacterBody3D
 		update_configuration_warnings()
 
 @export_category("Events")
-@export var events_on_death: Array[Event] = []
 @export var events_on_hurt: Array[Event] = []
 @export var events_on_hit: Array[Event] = []
+@export var events_on_death: Array[Event] = []
 
 signal enemy_died
 signal enemy_hit
