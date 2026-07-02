@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://d1eat01tfti8m"]
+
+[ext_resource type="Script" uid="uid://dfrm5n82bb18g" path="res://game/items/item_pickup.gd" id="1_7oju0"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_kgkq4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
+
+[node name="Pickup" type="Node3D" unique_id=1440371517]
+script = ExtResource("1_7oju0")
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=1347584656 node_paths=PackedStringArray("target")]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("2_kgkq4")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1188137458]
+shape = SubResource("BoxShape3D_kpvxy")

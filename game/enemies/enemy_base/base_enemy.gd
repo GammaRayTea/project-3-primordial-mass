@@ -1,12 +1,12 @@
 @tool
 class_name Enemy extends CharacterBody3D
-
+##Enemy base class. Extend to define custom Events.
 @export_category("Attributes")
 @export var health:float = 100.0:
 	set(value):
 		health = value
 		if health <= 0.0:
-			die()
+			_die()
 
 @export_category("Components")
 @export var animation_tree:AnimationTree:
@@ -20,13 +20,10 @@ class_name Enemy extends CharacterBody3D
 		state_machine = value
 		update_configuration_warnings()
 
-@export_category("Events")
-@export var events_on_hurt: Array[Event] = []
-@export var events_on_hit: Array[Event] = []
-@export var events_on_death: Array[Event] = []
+
 
 signal enemy_died
-signal enemy_hit
+signal enemy_hurt
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -46,26 +43,17 @@ func _physics_process(_delta: float) -> void:
 		state_machine._update(_delta)
 
 
-func get_hit(damage:float):
-	health-=damage
-	execute_events(events_on_hurt)
-	enemy_hit.emit()
-	print("damage ", damage, " health ", health)
+##Called when the enemy gets hit
+func _get_hit(source:HitBox):
+	health-=source.damage
+	enemy_hurt.emit()
 
-func die() -> void:
-	await execute_events(events_on_death)
+##Called when the enemy dies
+func _die() -> void:
 	enemy_died.emit()
-	queue_free()
+
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area is HitBox and area.get_parent() != self:
-		
-		get_hit(area.damage)
-		
-
-func execute_events(events:Array[Event])->void:
-	for event in events:
-		if event is Event:
-			event.execute()
-			await event.finished
+		_get_hit(area)
