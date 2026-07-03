@@ -1,6 +1,27 @@
 [gd_scene format=3 uid="uid://q7pghq5h7g5"]
 
 [ext_resource type="Script" uid="uid://cpusm37jok7j6" path="res://game/environment/cell_generator/cell_generator.gd" id="1_667dc"]
+[ext_resource type="Script" uid="uid://uiip4ka6act3" path="res://game/environment/cell_generator/test_map.gd" id="2_udw2b"]
 
 [node name="DungeonGenerator" type="Node3D" unique_id=1510930155]
 script = ExtResource("1_667dc")
+random_seed = 1
+
+[node name="Control" type="Control" parent="." unique_id=600619918]
+layout_mode = 3
+anchor_right = 0.303
+anchor_bottom = 0.354
+offset_left = 69.0
+offset_top = 66.0
+offset_right = 0.23999023
+offset_bottom = -0.32000732
+script = ExtResource("2_udw2b")
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=313650669]
+z_index = -1
+layout_mode = 0
+offset_left = -69.0
+offset_top = -64.0
+offset_right = 230.0
+offset_bottom = 151.0
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.37254903)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c8257oy8c1lmb"]
 
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/environment/test_room/test_room.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://ukbuejw1m15w" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bqumv4uggm1d4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://chhwtehoo1ycb" path="res://game/interactables/control_elements/button/button.tscn" id="4_1bvp3"]
@@ -19,6 +20,7 @@ sky = SubResource("Sky_0xm2m")
 ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Main" type="Node3D" unique_id=179947457]
+script = ExtResource("1_272bh")
 
 [node name="Game" type="Node3D" parent="." unique_id=1350780846]
 
@@ -48,7 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.4620
 [node name="Enemy" parent="Game" unique_id=2048773448 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76589847, 1, -2.1771996)
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 instance=ExtResource("6_7mycd")]
-cell_size = Vector2(16, 16)
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player") instance=ExtResource("6_7mycd")]
+player = NodePath("../Player")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
