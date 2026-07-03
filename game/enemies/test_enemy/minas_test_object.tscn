@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://bala1gaay158g"]
+
+[ext_resource type="PackedScene" uid="uid://bnqdgg1ropvye" path="res://game/enemies/enemy_base/base_enemy.tscn" id="1_vkm76"]
+[ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/behaviours/state_machine/states/walk_forward.gd" id="2_ce21t"]
+[ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/behaviours/state_machine/states/wait.gd" id="3_d8my7"]
+[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="4_s8t45"]
+[ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="5_tur70"]
+[ext_resource type="Shader" uid="uid://b26o8m50binck" path="res://game/enemies/test_enemy/motus_shader.gdshader" id="6_3gkt8"]
+[ext_resource type="Texture2D" uid="uid://ciyisny53odwq" path="res://assets/enemies/test_enemy/001galv.png" id="7_yityq"]
+[ext_resource type="Script" uid="uid://jsqlujmfilpn" path="res://game/enemies/test_enemy/animated_sprite_3d.gd" id="8_tjk0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ldnf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpvxy"]
+albedo_texture = ExtResource("5_tur70")
+uv1_scale = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kpvxy"]
+material = SubResource("StandardMaterial3D_kpvxy")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj1cw"]
+atlas = ExtResource("7_yityq")
+region = Rect2(0, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aq8kb"]
+atlas = ExtResource("7_yityq")
+region = Rect2(66, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2rij"]
+atlas = ExtResource("7_yityq")
+region = Rect2(132, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doi5e"]
+atlas = ExtResource("7_yityq")
+region = Rect2(198, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq368"]
+atlas = ExtResource("7_yityq")
+region = Rect2(264, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ig5i"]
+atlas = ExtResource("7_yityq")
+region = Rect2(330, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjayv"]
+atlas = ExtResource("7_yityq")
+region = Rect2(396, 0, 66, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27jc1"]
+atlas = ExtResource("7_yityq")
+region = Rect2(462, 0, 66, 82)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_u5g3o"]
+frames = 8
+frame_0/texture = SubResource("AtlasTexture_mj1cw")
+frame_1/texture = SubResource("AtlasTexture_aq8kb")
+frame_1/duration = 1.0
+frame_2/texture = SubResource("AtlasTexture_d2rij")
+frame_2/duration = 1.0
+frame_3/texture = SubResource("AtlasTexture_doi5e")
+frame_3/duration = 1.0
+frame_4/texture = SubResource("AtlasTexture_iq368")
+frame_4/duration = 1.0
+frame_5/texture = SubResource("AtlasTexture_6ig5i")
+frame_5/duration = 1.0
+frame_6/texture = SubResource("AtlasTexture_wjayv")
+frame_6/duration = 1.0
+frame_7/texture = SubResource("AtlasTexture_27jc1")
+frame_7/duration = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hae4w"]
+render_priority = 0
+shader = ExtResource("6_3gkt8")
+shader_parameter/original_texture = SubResource("AnimatedTexture_u5g3o")
+shader_parameter/pixel_noise_size = 64.0
+shader_parameter/speed = 5e-05
+shader_parameter/moving = true
+shader_parameter/pixel_brightness_shift = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bbr86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj1cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aq8kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2rij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doi5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq368")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ig5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjayv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27jc1")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="TestEnemy" unique_id=2048773448 instance=ExtResource("1_vkm76")]
+health = 30.0
+
+[node name="WorldCollider" parent="." index="0" unique_id=1421813303]
+shape = SubResource("BoxShape3D_7ldnf")
+
+[node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("WalkForwardState")
+
+[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
+script = ExtResource("2_ce21t")
+target = NodePath("../..")
+next_state = NodePath("../WaitState")
+
+[node name="WaitState" type="Node" parent="StateMachine" index="1" unique_id=861100265 node_paths=PackedStringArray("next_state")]
+script = ExtResource("3_d8my7")
+next_state = NodePath("../WalkForwardState")
+
+[node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=805446347 node_paths=PackedStringArray("target")]
+script = ExtResource("4_s8t45")
+target = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
+mesh = SubResource("BoxMesh_kpvxy")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=1618597645]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.6495839, 0)
+material_override = SubResource("ShaderMaterial_hae4w")
+alpha_cut = 1
+sprite_frames = SubResource("SpriteFrames_bbr86")
+frame_progress = 0.038309667
+script = ExtResource("8_tjk0k")
+
+[node name="HitBox" parent="." index="6" unique_id=565674913]
+collision_mask = 6
+
+[node name="HurtBox" parent="." index="7" unique_id=158402479]
+collision_mask = 24
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
