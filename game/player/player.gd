@@ -11,6 +11,7 @@ class_name Player extends CharacterBody3D
 #Component Nodes
 @export var rotation_pivot:Node3D
 @export var interaction_box:Area3D
+@export var push_box_shape:CollisionShape3D
 enum STATE {IDLE, WALKING, RUNNING, PUSHING}
 var current_state = STATE.IDLE
 
@@ -71,27 +72,25 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	move_and_slide()
 
 func start_push():
+	push_box_shape.set_deferred("disabled", false)
 	push_distance = (push_target.position-position).length()
 	velocity = Vector3.ZERO
-
 	current_state = STATE.PUSHING
 	
 func push(_delta : float, _direction) -> void:
-	
-	push_target.apply_force(_direction*0.2,Vector3(0,1,0))
+	push_target.apply_force(_direction.normalized()*0.15,Vector3(0,1,0))
 
 
-func on_interactable_box_entered(_area: Area3D) -> void:
+
+
+
+func _on_push_start_box_entered(_area: Area3D) -> void:
 	if _area is InteractionBox:
 		if _area.target is RigidInteractable and push_target == null:
 			push_target = _area.target
 			start_push()
 
-
-
-
-
-func on_interactable_box_exited(_area: Area3D) -> void:
+func on_push_box_exited(_area: Area3D) -> void:
 	if _area is InteractionBox:
 		if _area.target == push_target:
 			push_target = null

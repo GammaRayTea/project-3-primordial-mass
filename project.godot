@@ -19,10 +19,12 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [file_customization]
 
@@ -38,6 +40,10 @@ folder_colors={
 "res://game/items/": "yellow",
 "res://game/player/": "teal"
 }
+
+[global_group]
+
+Player="The Player."
 
 [input]
 

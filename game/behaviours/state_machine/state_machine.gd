@@ -29,6 +29,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+
 		for state in get_children():
 			if state is State:
 				prepare_state(state)
@@ -36,6 +37,7 @@ func _ready() -> void:
 
 func prepare_state(_state:State) -> void:
 	_state.finished.connect(_on_state_finished)
+
 	_state._setup()
 
 func _update(_delta:float) -> void:
@@ -43,6 +45,8 @@ func _update(_delta:float) -> void:
 	
 
 func switch_to_state(_state:State) -> void:
+	if current_state:
+		current_state._exit()
 	current_state = _state
 	current_state._start()
 

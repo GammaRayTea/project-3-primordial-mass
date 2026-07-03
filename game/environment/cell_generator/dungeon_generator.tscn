@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://q7pghq5h7g5"]
+
+[ext_resource type="Script" uid="uid://cpusm37jok7j6" path="res://game/environment/cell_generator/cell_generator.gd" id="1_667dc"]
+
+[node name="DungeonGenerator" type="Node3D" unique_id=1510930155]
+script = ExtResource("1_667dc")
