@@ -12,7 +12,7 @@ class_name Enemy extends CharacterBody3D
 @export var animation_tree:AnimationTree:
 	set(value):
 		animation_tree= value
-		update_configuration_warnings()#
+		update_configuration_warnings()
 @export var visuals:Node3D
 @export_category("State Machine")
 @export var state_machine:StateMachine:
@@ -63,7 +63,6 @@ func die() -> void:
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area is HitBox and area.get_parent() != self:
-		
 		get_hit(area)
 		
 

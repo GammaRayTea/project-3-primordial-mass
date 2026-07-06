@@ -140,6 +140,7 @@ script = ExtResource("4_v0kwb")
 target = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
+visible = false
 mesh = SubResource("BoxMesh_kpvxy")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=1618597645]
