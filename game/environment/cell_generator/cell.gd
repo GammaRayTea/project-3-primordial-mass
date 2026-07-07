@@ -1,7 +1,9 @@
-class_name Cell extends Node
+class_name Cell extends Resource
 var point_position:Vector2
 var rng:RandomNumberGenerator
-func _init(_cell_size:Vector2, _rng):
+var locked:bool = false
+var connections
+func _init(_cell_size:Vector2,_margin:int, _rng):
 	rng = _rng
 	@warning_ignore("narrowing_conversion")
-	point_position = Vector2(rng.randi_range(0,_cell_size.x-1),rng.randi_range(0,_cell_size.y-1))
+	point_position = Vector2(rng.randi_range(_margin,_cell_size.x-_margin),rng.randi_range(_margin,_cell_size.y-_margin))
