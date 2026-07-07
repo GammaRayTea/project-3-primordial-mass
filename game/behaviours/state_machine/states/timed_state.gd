@@ -12,9 +12,19 @@
 		else:
 			time = value
 
+var active_timer:Timer
+
 func _setup()->void:
-	pass
+	active_timer = Timer.new()
+	add_child(active_timer)
+	active_timer.timeout.connect(finished.emit)
+
 func _start()-> void:
-	get_tree().create_timer(time).timeout.connect(finished.emit)
+	active_timer.start(time)
+
+
 func _execute(_delta:float) -> void:
 	pass
+	
+func _exit() -> void:
+	active_timer.stop()

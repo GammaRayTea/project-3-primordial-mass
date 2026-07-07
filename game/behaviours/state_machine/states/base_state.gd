@@ -3,8 +3,19 @@
 ##Base class for all States. extends this to create a new one.
 
 ##State that the state machine will switch to after this state is finished.
-@export var next_state:State
+@export var next_state:State:
+	set(value):
+		next_state = value
+		update_configuration_warnings()
 
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings:= PackedStringArray()
+	if next_state == null:
+		warnings.append("No Next State Set")
+	return warnings
+
+func _init() -> void:
+	update_configuration_warnings()
 
 ##Signal that needs to be emited when the state is finished.
 @warning_ignore("unused_signal")
@@ -16,3 +27,5 @@ signal finished
 @abstract func _start()-> void
 ##Called every frame by the state machine when this state is active. [code]_delta[/code] is delta physics frame time.
 @abstract func _execute(_delta:float) -> void
+##Called when the state exits
+@abstract func _exit() -> void

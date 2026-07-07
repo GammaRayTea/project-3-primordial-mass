@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bui3lg8j3ka10" path="res://game/player/player.gd" id="1_b2mth"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="3_8soms"]
-[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_a4w0n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
 
@@ -20,22 +19,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8soms"]
-size = Vector3(0.5, 1, 0.114990234)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
-size = Vector3(0.5, 1, 0.45483398)
+size = Vector3(0.5, 1, 0.28076172)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box") groups=["Player"]]
 script = ExtResource("1_b2mth")
 rotation_pivot = NodePath("RotationPivot")
-interaction_box = NodePath("RotationPivot/InteractionBox")
-push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
+interaction_box = NodePath("RotationPivot/PushBox")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
 shape = SubResource("CapsuleShape3D_kpvxy")
@@ -55,29 +50,18 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_obar5")
 frame_progress = 0.07379633
 
-[node name="PushStartBox" type="Area3D" parent="RotationPivot" unique_id=2123063969]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushStartBox" unique_id=838779612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5244988)
-shape = SubResource("BoxShape3D_8soms")
-debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
-
 [node name="PushBox" type="Area3D" parent="RotationPivot" unique_id=200545129]
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushBox" unique_id=759802779]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6944207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.60738456)
 shape = SubResource("BoxShape3D_kpvxy")
-disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
 [node name="InteractionBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
-collision_layer = 32
+collision_layer = 0
 collision_mask = 32
-script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionBox" unique_id=671184854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
@@ -94,9 +78,7 @@ metadata/_custom_type_script = "uid://daou788t0evlx"
 shape = SubResource("CapsuleShape3D_a4w0n")
 debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 
-[connection signal="area_entered" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_entered"]
-[connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
-[connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
-[connection signal="area_exited" from="RotationPivot/PushBox" to="." method="on_push_box_exited"]
+[connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_interactable_box_entered"]
+[connection signal="area_exited" from="RotationPivot/PushBox" to="." method="on_interactable_box_exited"]
 [connection signal="area_entered" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_entered"]
 [connection signal="area_exited" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_exited"]
