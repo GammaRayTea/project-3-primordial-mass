@@ -1,3 +1,9 @@
-[gd_resource type="Resource" format=3 uid="uid://v4paov7648c6"]
+[gd_resource type="Resource" script_class="Stick" format=3 uid="uid://v4paov7648c6"]
+
+[ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="1_mksct"]
+[ext_resource type="Script" uid="uid://yx7w7catxbwm" path="res://game/items/test_item/stick.gd" id="2_3ywfq"]
 
 [resource]
+script = ExtResource("2_3ywfq")
+name = "Stick"
+icon = ExtResource("1_mksct")

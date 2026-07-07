@@ -87,8 +87,7 @@ func generate_new_cells(_check_range:int,):
 	
 	outer_map.delaunay_ids = delaunayIDs
 	outer_map.delaunay_points = world_points
-	print(delaunayIDs, " ", delaunayIDs.size())
-	print(world_points)
+
 	outer_map.queue_redraw()
 	
 func lock_in_cells(_check_range:int):

@@ -27,10 +27,10 @@ func _ready()->void:
 		sprite = Sprite3D.new()
 		sprite.name = "Icon"
 		add_child(sprite)
+		
 		sprite.rotation.x = deg_to_rad(90)
-		sprite.scale = Vector3(4,1,4)
+		sprite.scale = Vector3(4,4,4)
 		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-		sprite.owner = get_tree().edited_scene_root
 		sprite.texture = item.icon
 		
 
@@ -38,12 +38,16 @@ func _ready()->void:
 		interaction_box = InteractionBox.new()
 		add_child(interaction_box)
 		interaction_box.name = "InteractionBox"
-		interaction_box.owner = get_tree().edited_scene_root
 			
 		interaction_box.set_collision_layer_value(1,false)
 		interaction_box.set_collision_mask_value(1,false)
 		interaction_box.set_collision_layer_value(6,true)
 		interaction_box.target = self
+		
+		
+		if Engine.is_editor_hint():
+			sprite.owner = get_tree().edited_scene_root
+			interaction_box.owner = get_tree().edited_scene_root
 	else:
 		for child in get_children():
 			if child.name == "Icon":

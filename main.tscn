@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://pt0651lb1fab" path="res://game/enemies/test_enemy/minas_tes_subject.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://nr6yjohwcrid" path="res://game/item_pickup.gd" id="9_4c57u"]
-[ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_dg77c"]
+[ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="12_ycdy4"]
 
@@ -32,7 +32,7 @@ script = ExtResource("1_272bh")
 [node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
 
 [node name="RollingBoulder2" parent="Game" unique_id=498289684 instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24023724, 1.5155525, 2.8371687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.739574, 5.1161127, 1.0960178)
 mass = 0.1
 
 [node name="RollingBoulder" parent="Game" unique_id=486248368 instance=ExtResource("3_h2yge")]
@@ -41,7 +41,6 @@ mass = 0.1
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.495, 0)
-MAX_WALKING_SPEED = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = SubResource("Environment_0xm2m")
@@ -66,15 +65,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.629738, 1, 2.3486192)
 [node name="ItemPickup" type="Node3D" parent="Game" unique_id=990009022]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7251453, 0.79667544, 0)
 script = ExtResource("9_4c57u")
-item = ExtResource("10_dg77c")
+item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=776389815]
-transform = Transform3D(4, 0, 0, 0, -4.371139e-08, -4, 0, 1, -1.7484555e-07, 0, 0, 0)
+[node name="@Sprite3D@57046" type="Sprite3D" parent="Game/ItemPickup" unique_id=702605660]
+transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=509330827 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=70206978 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")

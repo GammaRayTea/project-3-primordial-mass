@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://bmdf4c0niky3d"]
+
+[sub_resource type="SystemFont" id="SystemFont_hy781"]
+
+[sub_resource type="FontVariation" id="FontVariation_bxr4m"]
+base_font = SubResource("SystemFont_hy781")
+
+[resource]
+default_font = SubResource("FontVariation_bxr4m")

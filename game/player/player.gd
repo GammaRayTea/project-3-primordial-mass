@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody3D
 ## Class for player character
-
+@export_category("Attributes")
 @export var MAX_WALKING_SPEED = 5.0
 @export var MAX_RUNNING_SPEED = 5.0
 @export var BASE_ACCELERATION = 0.9
@@ -9,9 +9,13 @@ class_name Player extends CharacterBody3D
 @export var JUMP_VELOCITY = 4.5
 
 #Component Nodes
+@export_category("Components")
 @export var rotation_pivot:Node3D
 @export var interaction_box:Area3D
 @export var push_box_shape:CollisionShape3D
+@export var hud:Control
+
+
 enum STATE {IDLE, WALKING, RUNNING, PUSHING}
 var current_state = STATE.IDLE
 
@@ -79,7 +83,7 @@ func start_push():
 	current_state = STATE.PUSHING
 	
 func push(_delta : float, _direction) -> void:
-	push_target.apply_force(_direction.normalized()*0.15,Vector3(0,1,0))
+	push_target.apply_central_force(velocity*0.8)
 
 
 
@@ -89,6 +93,8 @@ func pick_up_item(_item:Item):
 	if held_item == null:
 		held_item = _item
 		print("picked up ",_item.name)
+		hud.set_item(_item)
+		
 
 
 func _on_push_start_box_entered(_area: Area3D) -> void:
