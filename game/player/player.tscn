@@ -34,7 +34,8 @@ radius = 0.5439453
 
 [node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud") groups=["Player"]]
 script = ExtResource("1_b2mth")
-MAX_WALKING_SPEED = 3.0
+MAX_WALKING_SPEED = 100.0
+MAX_RUNNING_SPEED = 8.0
 rotation_pivot = NodePath("RotationPivot")
 interaction_box = NodePath("RotationPivot/InteractionBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
