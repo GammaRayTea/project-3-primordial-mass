@@ -135,7 +135,7 @@ func doIntersect(_points):
 	return false
 
 
-'func _ready() -> void:
-	var room_1 = room_generator(size, center, connecting_points)
-	for i in range(room_1.size()):
-		print(room_1[i])'
+#func _ready() -> void:
+	#var room_1 = room_generator(size, center, connecting_points)
+	#for i in range(room_1.size()):
+		#print(room_1[i])
