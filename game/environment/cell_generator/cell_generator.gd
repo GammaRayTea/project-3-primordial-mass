@@ -1,15 +1,17 @@
 extends Node3D
-@export_category("Cell Attributes")
+@export_category("Parameters")
 @export var cell_size:int = 16
 @export var cell_margin:int = 2
+@export var random_seed:int
+@export var debug:bool = false
 		
-
+@export_category("Components")
 @export var player:Player
 @export var active_map:Control
 @export var outer_map:Control
-@export var random_seed:int
 
-@export var debug:bool = false
+@export var room_generator:RoomGen
+var generated_rooms:Array
 
 var start_pos = Vector2(0,0)
 var current_position := Vector2(0,0):
@@ -28,9 +30,10 @@ var locked_cells:Dictionary[Vector2,Cell] = {}
 
 func _ready() -> void:
 	rng.seed = random_seed
+	
+	room_generator.rng = rng
 	@warning_ignore("narrowing_conversion")
 	var start_cell = Cell.new(cell_size,cell_size/2.0,rng)
-	print(start_cell.point_position)
 	start_cell.global_point_position = start_cell.point_position
 	generated_cells[start_pos] = start_cell
 
@@ -68,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 		current_position = new_pos
 		active_map.player_pos = new_pos
 		outer_map.player_pos = new_pos
-	
+		
 	
 	
 	
@@ -109,15 +112,34 @@ func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> v
 			
 			if !locked_cells.has(pos):
 				locked_cells[pos] = generated_cells[pos]
+				
+				
+				
 				active_map.cells.push_back(pos)
 				active_map.points.push_back(locked_cells[pos].point_position)
+				var cell_accepted_connection_ids:PackedInt32Array = get_cell_draw_ids(_staged_delaunay_ids,pos)
 				
+		
 				
-				active_delaunay.append_array(get_cell_triangles(_staged_delaunay_ids,pos))
+				active_delaunay.append_array(cell_accepted_connection_ids)
+				
+				generated_rooms.append(room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections))
+				
+				#if(pos == start_pos):
+					#for room in generated_rooms:
+						#print("room " ,generated_rooms.find(room),"---------------------------------")
+						#for line in room:
+							#print(line)
 				
 	active_map.draw_point_ids.append_array(active_delaunay)
 	active_map.queue_redraw()
-	
+	for line in generated_rooms[0]:
+		print(line)
+		
+	print(generated_cells[Vector2(-16,-16)].connections[0].global_point_position)
+	print(generated_cells[Vector2(-16,-16)].connections[1].global_point_position)
+	print(generated_cells[Vector2(-16,-16)].connections[2].global_point_position)
+	print(generated_cells[Vector2(-16,-16)].connections[3].global_point_position)
 
 func cell_to_world(_coord:Vector2) -> Vector3:
 	var vec = Vector3(_coord.x * cell_size, 0 ,_coord.y*cell_size)
@@ -132,7 +154,7 @@ func get_points(_cell_dict) -> PackedVector2Array:
 	
 	return points
 	
-func get_cell_triangles(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> PackedInt32Array:
+func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> PackedInt32Array:
 	var cell_id:int = generated_cells.keys().find(_cell_pos)
 	
 	var ids_triangles_with_pos:PackedInt32Array
@@ -158,10 +180,10 @@ func get_cell_triangles(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packe
 			for id in triangle:
 				if cell_neighbour_ids.has(id):
 					accepted_lines.append_array([cell_id,id])
-					var neighbour_point_pos:Vector2 = generated_cells[generated_cells.keys()[id]].global_point_position
-					if !locked_cells[_cell_pos].connections.has(neighbour_point_pos):
+					var neighbour_cell:Cell= generated_cells[generated_cells.keys()[id]]
+					if !locked_cells[_cell_pos].connections.has(neighbour_cell):
 						
-						locked_cells[_cell_pos].connections.append(neighbour_point_pos)
+						locked_cells[_cell_pos].connections.append(neighbour_cell)
 				else:
 					if debug:
 						print("cell ", cell_id ,": cut ", [cell_id,id], " because of ", id)
@@ -169,7 +191,8 @@ func get_cell_triangles(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packe
 		
 		
 		i += 1
-	print("cell ", cell_id," ",_cell_pos, " has ",locked_cells[_cell_pos].connections.size(), " connections: ", locked_cells[_cell_pos].connections, " from ", generated_cells[_cell_pos].global_point_position)
+	if debug:
+		print("cell ", cell_id," ",_cell_pos, " has ",locked_cells[_cell_pos].connections.size(), " connections: ", locked_cells[_cell_pos].connections, " from ", generated_cells[_cell_pos].global_point_position)
 	return accepted_lines
 
 	

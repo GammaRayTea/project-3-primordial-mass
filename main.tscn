@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0i63nfvpi543" path="res://game/enemies/test_enemy/test_enemy.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://pt0651lb1fab" path="res://game/enemies/test_enemy/minas_tes_subject.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="8_ycdy4"]
 [ext_resource type="Script" uid="uid://nr6yjohwcrid" path="res://game/item_pickup.gd" id="9_4c57u"]
 [ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="11_dg77c"]
@@ -55,9 +56,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.4620
 [node name="Enemy" parent="Game" unique_id=2048773448 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76589847, 1, -2.1771996)
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player") instance=ExtResource("6_7mycd")]
-player = NodePath("../Player")
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_generator") instance=ExtResource("6_7mycd")]
 random_seed = 3
+player = NodePath("../Player")
+room_generator = NodePath("RoomGen")
+
+[node name="RoomGen" type="Node3D" parent="Game/DungeonGenerator" unique_id=27122260]
+script = ExtResource("8_ycdy4")
 
 [node name="MinasTestChaser" parent="Game" unique_id=1654651026 instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.629738, 1, 2.3486192)
@@ -68,12 +73,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1051287883]
+[node name="@Sprite3D@26846" type="Sprite3D" parent="Game/ItemPickup" unique_id=795736892]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1065467621 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=299033 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")

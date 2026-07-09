@@ -35,7 +35,7 @@ var held_item:Item = null
 func _ready() -> void:
 	add_child(sprint_timer)
 	sprint_timer.timeout.connect(on_sprint_timer_done)
-	print(sprint_timer.timeout.get_connections())
+
 
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
@@ -49,8 +49,7 @@ func _physics_process(_delta: float) -> void:
 		STATE.WALKING:
 			if Input.is_action_just_pressed("sprint") and can_sprint:
 				current_state = STATE.RUNNING
-				
-				print("sprint done")
+
 			else:
 				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
@@ -67,16 +66,13 @@ func _physics_process(_delta: float) -> void:
 #region movement
 #region sprint
 func handle_sprint() -> void:
-	print("sprint value", current_sprint_value)
 	current_sprint_value-= SPRINT_REDUCTION
 	if current_sprint_value <= 0:
-		print("sprint empty")
 		can_sprint = false
 		current_state = STATE.IDLE
 		sprint_timer.start(SPRINT_RECHARGE_TIME)
 		
 func on_sprint_timer_done() -> void:
-	print("sprint recharged")
 	can_sprint = true
 	sprint_timer.stop()
 #endregion

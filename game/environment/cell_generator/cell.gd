@@ -3,7 +3,7 @@ var point_position:Vector2
 var global_point_position:Vector2
 var rng:RandomNumberGenerator
 var locked:bool = false
-var connections:=PackedVector2Array()
+var connections:Array[Cell] = []
 func _init(_cell_size:int,_margin:int, _rng):
 	rng = _rng
 	@warning_ignore("narrowing_conversion")

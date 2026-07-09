@@ -51,8 +51,8 @@ func _draw() -> void:
 		
 		points_to_draw.push_back(Vector2(delaunay_points[draw_point_ids[i]])  *scalar)
 		
-		if is_inner:
-			print(points_to_draw)
-			print(points_to_draw)
+		#if is_inner:
+			#print(points_to_draw)
+			#print(points_to_draw)
 		draw_polyline(points_to_draw,line_color)
 		i+=draw_point_subdivision

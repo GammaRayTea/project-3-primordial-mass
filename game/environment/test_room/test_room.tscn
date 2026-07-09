@@ -46,6 +46,7 @@ script = ExtResource("1_js5f7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=60603891]
 script = ExtResource("2_20bci")
+
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=665518036]
 transform = Transform3D(0.9254348, 0.3789072, 0, -0.3789072, 0.9254348, 0, 0, 0, 1, 16.117085, 0.5141752, 0)
 
