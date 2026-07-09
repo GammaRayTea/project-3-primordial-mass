@@ -2,12 +2,14 @@ class_name Player extends CharacterBody3D
 ## Class for player character
 @export_category("Attributes")
 @export var MAX_WALKING_SPEED = 5.0
-@export var MAX_RUNNING_SPEED = 5.0
+@export var MAX_RUNNING_SPEED = 10.0
 @export var BASE_ACCELERATION = 0.9
 @export var PUSH_ACCELERATION = 0.05
 @export var TRACTION = 0.3
 @export var JUMP_VELOCITY = 4.5
-
+@export var MAX_SPRINT_VALUE:float = 1000
+@export var SPRINT_REDUCTION:float = 5
+@export var SPRINT_RECHARGE_TIME:float = 5.0
 #Component Nodes
 @export_category("Components")
 @export var rotation_pivot:Node3D
@@ -15,6 +17,10 @@ class_name Player extends CharacterBody3D
 @export var push_box_shape:CollisionShape3D
 @export var hud:Control
 
+
+var current_sprint_value:float = 0
+var can_sprint:bool = true
+var sprint_timer:Timer = Timer.new()
 
 enum STATE {IDLE, WALKING, RUNNING, PUSHING}
 var current_state = STATE.IDLE
@@ -26,26 +32,60 @@ var control_interaction_target:Interactable
 
 var held_item:Item = null
 
+func _ready() -> void:
+	add_child(sprint_timer)
+	sprint_timer.timeout.connect(on_sprint_timer_done)
+	print(sprint_timer.timeout.get_connections())
+
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
 	process_interact_input()
+	
 	match current_state:
 		STATE.IDLE:
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
+			if direction:
+				current_state = STATE.WALKING
 		STATE.WALKING:
+			if Input.is_action_just_pressed("sprint") and can_sprint:
+				current_state = STATE.RUNNING
+				
+				print("sprint done")
+			else:
+				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 		STATE.RUNNING:
 			move(_delta,direction, MAX_RUNNING_SPEED, BASE_ACCELERATION)
+			handle_sprint()
+			if Input.is_action_just_released("sprint"):
+				current_state = STATE.IDLE
+			
 		STATE.PUSHING:
 			move(_delta,direction, MAX_RUNNING_SPEED, PUSH_ACCELERATION)
 			push(_delta,direction)
 			
-
+#region movement
+#region sprint
+func handle_sprint() -> void:
+	print("sprint value", current_sprint_value)
+	current_sprint_value-= SPRINT_REDUCTION
+	if current_sprint_value <= 0:
+		print("sprint empty")
+		can_sprint = false
+		current_state = STATE.IDLE
+		sprint_timer.start(SPRINT_RECHARGE_TIME)
+		
+func on_sprint_timer_done() -> void:
+	print("sprint recharged")
+	can_sprint = true
+	sprint_timer.stop()
+#endregion
 
 ## checks input keys and returns corresponidng values
 func process_movement_input() -> Vector3:
 	var input_dir := Input.get_vector("move_left","move_right","move_up","move_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	return direction
 
 func process_interact_input() -> void:
@@ -75,7 +115,9 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	
 	
 	move_and_slide()
+#endregion
 
+#region push
 func start_push():
 	push_box_shape.set_deferred("disabled", false)
 	push_distance = (push_target.position-position).length()
@@ -84,17 +126,6 @@ func start_push():
 	
 func push(_delta : float, _direction) -> void:
 	push_target.apply_central_force(velocity*0.8)
-
-
-
-
-
-func pick_up_item(_item:Item):
-	if held_item == null:
-		held_item = _item
-		print("picked up ",_item.name)
-		hud.set_item(_item)
-		
 
 
 func _on_push_start_box_entered(_area: Area3D) -> void:
@@ -108,7 +139,15 @@ func on_push_box_exited(_area: Area3D) -> void:
 		if _area.target == push_target:
 			push_target = null
 			current_state = STATE.IDLE
+#endregion
 
+#region items
+func pick_up_item(_item:Item):
+	if held_item == null:
+		held_item = _item
+		print("picked up ",_item.name)
+		hud.set_item(_item)
+		
 
 func on_interaction_box_entered(_area: Area3D) -> void:
 	if _area is InteractionBox:
@@ -123,3 +162,4 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 		if _area.target is Interactable:
 			_area.target.hover_end()
 			control_interaction_target = null
+#endregion
