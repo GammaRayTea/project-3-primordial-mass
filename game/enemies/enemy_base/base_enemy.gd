@@ -12,7 +12,7 @@ class_name Enemy extends CharacterBody3D
 @export var animation_tree:AnimationTree:
 	set(value):
 		animation_tree= value
-		update_configuration_warnings()#
+		update_configuration_warnings()
 @export var visuals:Node3D
 @export_category("State Machine")
 @export var state_machine:StateMachine:
@@ -44,13 +44,16 @@ func _init() -> void:
 func _physics_process(_delta: float) -> void:
 	if !Engine.is_editor_hint():
 		state_machine._update(_delta)
+		move_and_slide()
 
 
-func get_hit(damage:float):
-	health-=damage
+func get_hit(source:HitBox):
+	health-=source.damage
+	
+	
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
-	print("damage ", damage, " health ", health)
+	print("damage ", source.damage, " health ", health)
 
 func die() -> void:
 	await execute_events(events_on_death)
@@ -60,8 +63,7 @@ func die() -> void:
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area is HitBox and area.get_parent() != self:
-		
-		get_hit(area.damage)
+		get_hit(area)
 		
 
 func execute_events(events:Array[Event])->void:

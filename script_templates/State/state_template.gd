@@ -9,3 +9,6 @@ func _start()-> void:
 
 func _execute(_delta:float) -> void:
 	pass
+
+func _exit() -> void:
+	pass

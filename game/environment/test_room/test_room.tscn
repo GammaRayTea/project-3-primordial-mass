@@ -17,6 +17,18 @@ size = Vector2(200, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 size = Vector3(200, 1, 100)
 
+[sub_resource type="BoxMesh" id="BoxMesh_w5spq"]
+size = Vector3(10, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_js5f7"]
+size = Vector3(10, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2v01v"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
+size = Vector3(4, 4, 4)
+
 [node name="Testroom" type="Node3D" unique_id=1197105803]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1855788098]
@@ -33,3 +45,20 @@ script = ExtResource("1_js5f7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=60603891]
 script = ExtResource("2_20bci")
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=665518036]
+transform = Transform3D(0.9254348, 0.3789072, 0, -0.3789072, 0.9254348, 0, 0, 0, 1, 16.117085, 0.5141752, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1845389677]
+mesh = SubResource("BoxMesh_w5spq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=379581106]
+shape = SubResource("BoxShape3D_js5f7")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=598843252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.269838, 2.2706523, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=510993638]
+mesh = SubResource("BoxMesh_2v01v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1481759204]
+shape = SubResource("BoxShape3D_udmuc")
