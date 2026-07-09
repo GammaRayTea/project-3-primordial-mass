@@ -1,34 +1,34 @@
 extends Node3D
-@export var player:Player
+@export_category("Cell Attributes")
 @export var cell_size:Vector2 = Vector2(16,16)
+@export var cell_margin:int = 2
+		
+
+@export var player:Player
+@export var active_map:Control
+@export var outer_map:Control
+@export var random_seed:int
 
 var start_pos = Vector2(0,0)
 var current_position := Vector2(0,0):
 	set(value):
 		current_position = value
 		print("new gen ---------------------------")
-		check_cells(inner_check_range,active_map,active_cells)
-		check_cells(outer_check_range,outer_map,staged_cells)
-		
-
-@export var active_map:Control
-@export var outer_map:Control
-
+		generate_new_cells(outer_check_range)
+		lock_in_cells(inner_check_range)
 
 var outer_check_range:int = 3
 var inner_check_range:int = 1
-@export var random_seed:int
 var rng := RandomNumberGenerator.new()
 
-
-var active_cells:Dictionary[Vector2,Cell] = {}
-var staged_cells:Dictionary[Vector2,Cell] = {}
+var generated_cells:Dictionary[Vector2,Cell] = {}
+var locked_cells:Dictionary[Vector2,Cell] = {}
 
 func _ready() -> void:
 	rng.seed = random_seed
-	var start_cell = Cell.new(cell_size,rng)
-	active_cells[start_pos] = start_cell
-	staged_cells[start_pos] = start_cell
+	var start_cell = Cell.new(cell_size,cell_margin,rng)
+	generated_cells[start_pos] = start_cell
+
 	
 	active_map.cells.push_back(start_pos)
 	outer_map.cells.push_back(start_pos)
@@ -37,18 +37,9 @@ func _ready() -> void:
 	outer_map.points.push_back(start_pos)
 	
 	
-	check_cells(inner_check_range,active_map,active_cells)
-	check_cells(outer_check_range,outer_map, staged_cells)
-	
-	#var test_points:=PackedVector2Array()
-	#test_points.push_back(Vector2(0,0))
-	#test_points.push_back(Vector2(5,0))
-	#test_points.push_back(Vector2(0,5))
-	#test_points.push_back(Vector2(10,0))
-	#test_points.push_back(Vector2(5,20))
-	#active_map.delaunay_points = test_points
-	#active_map.delaunay_ids = Geometry2D.triangulate_delaunay(test_points)
-	#
+	generate_new_cells(outer_check_range)
+	lock_in_cells(inner_check_range)
+
 
 func _physics_process(_delta: float) -> void:
 	var player_pos = Vector2(player.position.x, player.position.z) / cell_size
@@ -75,28 +66,57 @@ func _physics_process(_delta: float) -> void:
 	
 
 ##Check  ells in a rectangle around current cell
-func check_cells(_check_range:int,_map:Control,_cell_dict):
-	
+func generate_new_cells(_check_range:int,):
+	var new_cells:Dictionary[Vector2,Cell] = {}
 	for i in range(_check_range*2+1):
 		for j in range(_check_range*2+1):
 			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
 			#print(pos)
-			if _cell_dict.has(pos):
+			if generated_cells.has(pos):
 				pass
 			else:
-				_cell_dict[pos] = Cell.new(cell_size,rng)
+				new_cells[pos] = Cell.new(cell_size,cell_margin, rng )
 				#print("generated cell (",i + current_position.x,", ",j + current_position.y,")  point:", _cell_dict[pos].point_position)
-				_map.cells.push_back(pos)
-				_map.points.push_back(_cell_dict[pos].point_position)
-	#print("current_pos: ",current_position,"-------------------------------")
-	var world_points = get_points(_cell_dict)
+				outer_map.cells.push_back(pos)
+				outer_map.points.push_back(new_cells[pos].point_position)
+	
+	generated_cells.merge(new_cells)
+	
+	var world_points = get_points(generated_cells)
 	var delaunayIDs = Geometry2D.triangulate_delaunay(world_points)
 	
-	_map.delaunay_ids = delaunayIDs
-	_map.delaunay_points = world_points
-	print(delaunayIDs, " ", delaunayIDs.size())
-	print(world_points)
-	_map.queue_redraw()
+	outer_map.delaunay_ids = delaunayIDs
+	outer_map.delaunay_points = world_points
+
+	outer_map.queue_redraw()
+	
+func lock_in_cells(_check_range:int):
+
+	for i in range(_check_range*2+1):
+		for j in range(_check_range*2+1):
+			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
+			if generated_cells.has(pos):
+
+				locked_cells[pos] = generated_cells[pos]
+				active_map.cells.push_back(pos)
+				active_map.points.push_back(locked_cells[pos].point_position)
+				
+				
+				
+				
+				
+				
+	
+	
+	var world_points = get_points(locked_cells)
+	var delaunayIDs = Geometry2D.triangulate_delaunay(world_points)
+	
+	
+	active_map.delaunay_ids = delaunayIDs
+	active_map.delaunay_points = world_points
+	active_map.queue_redraw()
+	
+
 func cell_to_world(_coord:Vector2) -> Vector3:
 	var vec = Vector3(_coord.x * cell_size.x, 0 ,_coord.y*cell_size.y)
 	return vec

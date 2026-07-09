@@ -5,12 +5,12 @@ extends ControlInteractable
 @export var turn_off = false
 ## Deactivation offset in seconds
 @export var time_delta = 0
-func activate() -> void:
+func activate(_source:Node3D) -> void:
 	on_activation.emit()
 	print("button pressed")
 	if turn_off:
 		await get_tree().create_timer(time_delta).timeout
-		deactivate()
+		deactivate(self)
 	
-func deactivate() -> void:
+func deactivate(_source:Node3D) -> void:
 	on_deactivation.emit()

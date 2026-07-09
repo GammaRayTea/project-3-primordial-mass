@@ -38,11 +38,21 @@ func _draw() -> void:
 		draw_rect(Rect2(scalar*cells[cell].x + points[cell].x-2,scalar* cells[cell].y+ points[cell].y-2, 4,4),point_color)
 		
 
-	draw_rect(Rect2(scalar*player_pos.x - offset.x ,scalar* player_pos.y - offset.y,   2 , 2  ),Color.YELLOW)
+	draw_rect(Rect2(16*scalar*player_pos.x + 8 ,16*scalar* player_pos.y + 8,   2 , 2  ),Color.YELLOW)
 	@warning_ignore("integer_division")
-	for i in range(delaunay_ids.size()-1):
-		var p1 = Vector2(delaunay_points[delaunay_ids[i]].x  , delaunay_points[delaunay_ids[i]].y)  *scalar
-		var p2 = Vector2(delaunay_points[delaunay_ids[i+1 ]].x, delaunay_points[delaunay_ids[i+1]].y) *scalar
+	#for i in range(delaunay_ids.size()-1):
+		#var p1 = Vector2(delaunay_points[delaunay_ids[i]].x  , delaunay_points[delaunay_ids[i]].y)  *scalar
+		#var p2 = Vector2(delaunay_points[delaunay_ids[i+1 ]].x, delaunay_points[delaunay_ids[i+1]].y) *scalar
+		#
+		#
+		#draw_line(p1+offset,p2+offset,line_color)
+	var i = 0
+	while i < delaunay_ids.size():
+		var points_to_draw := PackedVector2Array()
+		points_to_draw.push_back(Vector2(delaunay_points[delaunay_ids[i]].x  , delaunay_points[delaunay_ids[i]].y)  *scalar)
+		points_to_draw.push_back(Vector2(delaunay_points[delaunay_ids[i+1]].x  , delaunay_points[delaunay_ids[i+1]].y)  *scalar)
+		points_to_draw.push_back(Vector2(delaunay_points[delaunay_ids[i+2]].x  , delaunay_points[delaunay_ids[i+2]].y)  *scalar)
 		
-		
-		draw_line(p1+offset,p2+offset,line_color)
+
+		draw_polyline(points_to_draw,line_color)
+		i+=3

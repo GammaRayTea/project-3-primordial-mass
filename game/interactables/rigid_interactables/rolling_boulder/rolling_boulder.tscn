@@ -15,7 +15,7 @@ radius = 0.8571686
 radius = 0.90802497
 
 [node name="RollingBoulder" type="RigidBody3D" unique_id=498289684 node_paths=PackedStringArray("hit_box")]
-mass = 100.0
+mass = 1000.0
 script = ExtResource("1_pvbhg")
 hit_box = NodePath("HitBox")
 damage_speed_threshold = 2.0
