@@ -5,7 +5,10 @@ var size: int = 16
 var connecting_points: Array = [Vector2(randf() * 16 - 16, randf() * 16), Vector2(randf() * 16, randf() * 16 -16), Vector2(randf() * 16 + 16, randf() * 16), Vector2(randf() * 16 - 16, randf() * 16 + 16)]
 
 func build_mesh(_grid: Array[Array]) -> void:
-		
+	var roomGen = RoomGen.new()
+	var room_layout = roomGen.room_generator(size, center, connecting_points)
+	var mesh: Mesh
+	
 	# Array setup
 	var surface_array_ground = []
 	surface_array_ground.resize(Mesh.ARRAY_MAX)
@@ -16,16 +19,9 @@ func build_mesh(_grid: Array[Array]) -> void:
 	var indices_ground = PackedInt32Array()
 	
 	var generate = func(_x: float, _y: float, _height: float) -> void:
-		verts_ground.append(Vector3(_x, _y, _height))
-		normals_ground.append(Vector3(0, 1, 0))
-		verts_ground.append(Vector3(_x + 1.0, _y, _height))
-		normals_ground.append(Vector3(0, 1, 0))
-		verts_ground.append(Vector3(_x + 1.0, _y + 1.0, _height))
-		normals_ground.append(Vector3(0, 1, 0))
-		verts_ground.append(Vector3(_x, _y + 1.0, _height))
-		normals_ground.append(Vector3(0, 1, 0))
 		for i in range(4):
-			Vector2(snappedf(sin((i + 1.5) * PI/2), 1.0), snappedf(sin((i + 0.5) * PI/2), 1.0)) + Vector2(1, 1)
+			verts_ground.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)) + 0.5, _y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)) + 0.5, _height))
+			normals_ground.append(Vector3(0, 1, 0))
 		
 	for current_sub_cell_x in range(roomGen.size):
 		for current_sub_cell_y in range(roomGen.size):
@@ -33,8 +29,6 @@ func build_mesh(_grid: Array[Array]) -> void:
 				generate.call(current_sub_cell_x, current_sub_cell_y, 2.0)
 			else:
 				generate.call(current_sub_cell_x, current_sub_cell_y, 2.0)
-	
-	
 	
 	# Assign arrays to surface array.
 	surface_array_ground[Mesh.ARRAY_VERTEX] = verts_ground

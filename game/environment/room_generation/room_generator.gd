@@ -34,7 +34,6 @@ func generate_room(_size: int, _global_random_point_position: Vector2,_cell_orig
 				or doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x + 1.0, current_sub_cell_y], [current_sub_cell_x + 1.0, current_sub_cell_y + 1.0]]]):
 					value = true
 					break
-
 			bit_map.set_bit(current_sub_cell_x,current_sub_cell_y,value)
 	
 	#generate four additional room corners
@@ -44,15 +43,14 @@ func generate_room(_size: int, _global_random_point_position: Vector2,_cell_orig
 	#put the original center at the right corner possition
 	if (center_lc.x > _size/2.0):
 		if (center_lc.y > _size/2.0):
-			room_corners[0] = center_lc
+			room_corners[0] = center_lc + (Vector2(_size, _size) - center_lc) / 2.0
 		else:
-			room_corners[3] = center_lc
+			room_corners[3] = center_lc + (Vector2(_size, 0.0) - center_lc) / 2.0
 	else:
 		if (center_lc.y > _size/2.0):
-			room_corners[1] = center_lc
+			room_corners[1] = center_lc + (Vector2(0.0, _size) - center_lc) / 2.0
 		else:
-			room_corners[2] = center_lc
-	
+			room_corners[2] = center_lc - center_lc/2
 	
 	#adjust grid with new room
 	#set the boundry and everything in the boundry true
