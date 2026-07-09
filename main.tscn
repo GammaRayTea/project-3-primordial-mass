@@ -57,23 +57,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76589847, 1, -2.1771996)
 
 [node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player") instance=ExtResource("6_7mycd")]
 player = NodePath("../Player")
-random_seed = 2
+random_seed = 3
 
 [node name="MinasTestChaser" parent="Game" unique_id=1654651026 instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.629738, 1, 2.3486192)
 
 [node name="ItemPickup" type="Node3D" parent="Game" unique_id=990009022]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7251453, 0.79667544, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.037080765, 0.79667544, 4.2098384)
 script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="@Sprite3D@57046" type="Sprite3D" parent="Game/ItemPickup" unique_id=702605660]
+[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1051287883]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=70206978 node_paths=PackedStringArray("target")]
+[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1065467621 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
