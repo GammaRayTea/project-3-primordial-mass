@@ -8,6 +8,8 @@ var scalar = 1
 var draw_point_ids:PackedInt32Array = PackedInt32Array()
 var delaunay_points:PackedVector2Array = PackedVector2Array()
 
+
+var room_bit_maps:Array[ImageTexture] = []
 @export var draw_point_subdivision:int
 var offset:Vector2
 
@@ -21,22 +23,27 @@ var offset:Vector2
 func _ready() -> void:
 	#offset = Vector2(- rect_size * 0.5 + 2,- rect_size * 0.5 + 2)
 	offset = Vector2(0,0)
+	rect_size *= scalar
 
 func _draw() -> void:
 	
 	#if draw_cells:
 		
 	draw_rect(Rect2(0 , 0 ,rect_size,rect_size),Color.RED)
-	for cell in range(1,cells.size()):
+	for cell in range(0,cells.size()):
 		#cells
 		draw_rect(Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size),cell_color)
+		if is_inner:
+			
 
+
+			draw_texture_rect(room_bit_maps[cell] , Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size)  , false)
 	
 	
 	
 	for cell in range(0,cells.size()):
 		#small points
-		draw_rect(Rect2(scalar*cells[cell].x + points[cell].x-2,scalar* cells[cell].y+ points[cell].y-2, 4,4),point_color)
+		draw_rect(Rect2(scalar*(cells[cell].x + points[cell].x-1),scalar* (cells[cell].y+ points[cell].y-1), 2,2),point_color)
 		
 
 	@warning_ignore("integer_division")

@@ -57,6 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.4620
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76589847, 1, -2.1771996)
 
 [node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_generator") instance=ExtResource("6_7mycd")]
+cell_margin = 4
 random_seed = 3
 player = NodePath("../Player")
 room_generator = NodePath("RoomGen")
@@ -73,12 +74,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="@Sprite3D@26846" type="Sprite3D" parent="Game/ItemPickup" unique_id=795736892]
+[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1004278863]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=299033 node_paths=PackedStringArray("target")]
+[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1106858112 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")

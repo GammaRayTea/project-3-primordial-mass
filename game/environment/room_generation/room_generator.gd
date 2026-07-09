@@ -7,8 +7,9 @@ var rng:RandomNumberGenerator
 
 ## [param _size] determines cell size in game engine units 
 ## [param _global_random_point_position] is the position of the randomized point of the cell
-func generate_room(_size: int, _global_random_point_position: Vector2,_cell_origin_position, connected_cells: Array[Cell]) -> Array[Array]:
-	var sub_cells: Array = []
+func generate_room(_size: int, _global_random_point_position: Vector2,_cell_origin_position, connected_cells: Array[Cell]) -> BitMap:
+	var bit_map:BitMap = BitMap.new()
+	bit_map.create(Vector2(_size,_size))
 	var room_corners: Array[Vector2] = []
 	var outer_ring_width: int = 1
 	var inner_square_radius: int = int((_size - outer_ring_width * 2.0) / 2.0)
@@ -18,23 +19,23 @@ func generate_room(_size: int, _global_random_point_position: Vector2,_cell_orig
 	for i in range(connected_cells.size()):
 		connected_cell_points.push_back(convert_too_local_coords(_cell_origin_position, _size, connected_cells[i].global_point_position))
 		
-	var center_lc = Vector2(int(floor(_global_random_point_position.x)) % _size, int(floor(_global_random_point_position.y)) % _size)
-	center_lc += _global_random_point_position - floor(_global_random_point_position)
+	var center_lc = convert_too_local_coords(_cell_origin_position,_size,_global_random_point_position)
 
 	
 	#generate sizeXsize cell grid with walkways to the center
 	for current_sub_cell_x in range(_size):
-		sub_cells.append([])
+
 		for current_sub_cell_y in range(_size):
-			var air = false
+			var value:bool = false
 			for i in range(connected_cell_points.size()):
 				if doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x, current_sub_cell_y], [current_sub_cell_x + 1.0, current_sub_cell_y]]]) \
 				or doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x, current_sub_cell_y + 1.0], [current_sub_cell_x + 1.0, current_sub_cell_y + 1.0]]]) \
 				or doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x, current_sub_cell_y], [current_sub_cell_x, current_sub_cell_y + 1.0]]]) \
 				or doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x + 1.0, current_sub_cell_y], [current_sub_cell_x + 1.0, current_sub_cell_y + 1.0]]]):
-					air = true
+					value = true
 					break
-			sub_cells[current_sub_cell_x].append(air)
+
+			bit_map.set_bit(current_sub_cell_x,current_sub_cell_y,value)
 	
 	#generate four additional room corners
 	for i in range(4):
@@ -57,17 +58,17 @@ func generate_room(_size: int, _global_random_point_position: Vector2,_cell_orig
 	#set the boundry and everything in the boundry true
 	for current_sub_cell_x in range(outer_ring_width, _size - outer_ring_width):
 		for current_sub_cell_y in range(outer_ring_width, _size - outer_ring_width):
-			if sub_cells[current_sub_cell_x][current_sub_cell_y] == true:
+			if bit_map.get_bit(current_sub_cell_x,current_sub_cell_y) == true:
 				pass
 			elif in_triangle(room_corners[0], room_corners[1], room_corners[2], Vector2(current_sub_cell_x, current_sub_cell_y)) or in_triangle(room_corners[0], room_corners[2], room_corners[3], Vector2(current_sub_cell_x, current_sub_cell_y)):
-				sub_cells[current_sub_cell_x][current_sub_cell_y] = true
+				bit_map.set_bit(current_sub_cell_x,current_sub_cell_y, true)
 			else:
 				for i in range(room_corners.size()):
 					if doIntersect([[[room_corners[i].x, room_corners[i].y], [room_corners[(i + 1) % room_corners.size()].x, room_corners[(i + 1) % room_corners.size()].y]], [[current_sub_cell_x, current_sub_cell_y], [current_sub_cell_x + 1.0, current_sub_cell_y]]]):
-						sub_cells[current_sub_cell_x][current_sub_cell_y] = true
+						bit_map.set_bit(current_sub_cell_x,current_sub_cell_y, true)
 						break
 	
-	return sub_cells
+	return bit_map
 
 #convert other centers to the local coordinate systhem
 func convert_too_local_coords(_cell_origin_position: Vector2, _size: int,_external_point: Vector2) -> Vector2:

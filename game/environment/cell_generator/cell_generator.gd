@@ -11,7 +11,7 @@ extends Node3D
 @export var outer_map:Control
 
 @export var room_generator:RoomGen
-var generated_rooms:Array
+var generated_rooms:Array[BitMap]
 
 var start_pos = Vector2(0,0)
 var current_position := Vector2(0,0):
@@ -38,11 +38,7 @@ func _ready() -> void:
 	generated_cells[start_pos] = start_cell
 
 	
-	active_map.cells.push_back(start_pos)
-	outer_map.cells.push_back(start_pos)
-	
-	active_map.points.push_back(start_cell.point_position)
-	outer_map.points.push_back(start_cell.point_position)
+
 	
 	
 	expand_map()
@@ -122,24 +118,19 @@ func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> v
 		
 				
 				active_delaunay.append_array(cell_accepted_connection_ids)
+				var room_bit_map:BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
+				generated_rooms.append(room_bit_map)
+				active_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
 				
-				generated_rooms.append(room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections))
-				
-				#if(pos == start_pos):
-					#for room in generated_rooms:
-						#print("room " ,generated_rooms.find(room),"---------------------------------")
-						#for line in room:
-							#print(line)
-				
+				print("cell ", pos)
+				for cell in locked_cells[pos].connections:
+					print(cell.global_point_position)
+
 	active_map.draw_point_ids.append_array(active_delaunay)
 	active_map.queue_redraw()
-	for line in generated_rooms[0]:
-		print(line)
-		
-	print(generated_cells[Vector2(-16,-16)].connections[0].global_point_position)
-	print(generated_cells[Vector2(-16,-16)].connections[1].global_point_position)
-	print(generated_cells[Vector2(-16,-16)].connections[2].global_point_position)
-	print(generated_cells[Vector2(-16,-16)].connections[3].global_point_position)
+	
+	
+
 
 func cell_to_world(_coord:Vector2) -> Vector3:
 	var vec = Vector3(_coord.x * cell_size, 0 ,_coord.y*cell_size)
@@ -202,5 +193,5 @@ func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos-Vector2(0,cell_size)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size,0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0,cell_size)))
-	
+	print
 	return ids
