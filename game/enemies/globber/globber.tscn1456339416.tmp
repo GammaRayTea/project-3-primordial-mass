@@ -307,23 +307,20 @@ metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="Alert" type="Node" parent="StateMachine" index="1" unique_id=1391199121]
 
-[node name="WalkToPositionState" type="Node" parent="StateMachine/Alert" index="0" unique_id=1924766303 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
+[node name="WaitState" type="Node" parent="StateMachine/Alert" index="0" unique_id=966372502 node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_gtf71")
+time = 0.5
+next_state = NodePath("../WalkToPositionState")
+metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+
+[node name="WalkToPositionState" type="Node" parent="StateMachine/Alert" index="1" unique_id=1924766303 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
 script = ExtResource("5_qg7h7")
-ACCELERATION = 0.1
+distance_threshold = 0.1
 target = NodePath("../../..")
 rotation_pivot = NodePath("../../../RotationPivot")
-speed = 1.4
-distance_threshold = 1.3
-next_state = NodePath("../WaitStateAfter")
-metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
-
-[node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
-script = ExtResource("4_gtf71")
-randomize_time = true
-minimum = 0.0
-maximum = 5.0
+speed = 1.5
 next_state = NodePath("../EnableVisionCone")
-metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
 
 [node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("6_joybc")
@@ -407,14 +404,9 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 frame_progress = 0.2459824
 
-[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("enemy", "alert_state") instance=ExtResource("18_2si2q")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
-path_trace = NodePath("../../RayCast3D")
 enemy = NodePath("../..")
 alert_state = NodePath("../../StateMachine/Alert/WalkToPositionState")
-
-[node name="RayCast3D" type="RayCast3D" parent="." index="8" unique_id=912591583]
-collision_mask = 3
-collide_with_areas = true

@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/environment/test_room/test_room.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ukbuejw1m15w" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="2_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://bqumv4uggm1d4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://chhwtehoo1ycb" path="res://game/interactables/control_elements/button/button.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
@@ -30,8 +29,8 @@ script = ExtResource("1_272bh")
 
 [node name="Game" type="Node3D" parent="." unique_id=1350780846]
 
-[node name="Globber" parent="Game" unique_id=2048773448 instance=ExtResource("2_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.27384, 1.1131084, 3.078743)
+[node name="Globber" parent="Game" unique_id=2048773448 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.108516, 1.7873611, 10.5702305)
 
 [node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
 
@@ -72,18 +71,15 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="@Sprite3D@36407" type="Sprite3D" parent="Game/ItemPickup" unique_id=1742936161]
+[node name="@Sprite3D@95965" type="Sprite3D" parent="Game/ItemPickup" unique_id=1329955441]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=977814235 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=73208474 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
 target = NodePath("..")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
-
-[node name="Globber" parent="." unique_id=1727076638 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9391327, 0.5, 2.2435303)

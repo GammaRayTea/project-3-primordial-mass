@@ -13,7 +13,7 @@ class_name Enemy extends CharacterBody3D
 	set(value):
 		animation_tree= value
 		update_configuration_warnings()
-@export var visuals:Node3D
+@export var rotation_pivot:Node3D
 @export_category("State Machine")
 @export var state_machine:StateMachine:
 	set(value):
@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 	if !Engine.is_editor_hint():
 		state_machine._update(_delta)
 		move_and_slide()
-
+	
 
 func get_hit(source:HitBox):
 	health-=source.damage
@@ -65,6 +65,12 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area is HitBox and area.get_parent() != self:
 		get_hit(area)
 		
+
+func rotate_to_direction(_direction:Vector3):
+	var current_pivot_rot = Quaternion(rotation_pivot.transform.basis)
+	var target_rot = Quaternion(Vector3.UP,_direction.normalized().signed_angle_to(Vector3.FORWARD, Vector3.DOWN))
+	rotation_pivot.transform.basis = Basis(current_pivot_rot.slerp(target_rot, 0.5))
+
 
 func execute_events(events:Array[Event])->void:
 	for event in events:

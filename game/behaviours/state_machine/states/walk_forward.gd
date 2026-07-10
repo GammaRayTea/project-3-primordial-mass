@@ -3,7 +3,7 @@ class_name WalkForwardState extends TimedState
 ##Moves [param target] in direction [code]Vector3.FORWARD = Vector3(0,0,1)[/code] by [param speed] every frame.
 
 ##Target to move.
-@export var target:CharacterBody3D
+@export var target:Enemy
 @export var rotation_pivot:Node3D
 ##Speed of movement.
 @export var speed:float = 1.0
