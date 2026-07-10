@@ -121,10 +121,10 @@ func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> v
 				var room_bit_map:BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
 				generated_rooms.append(room_bit_map)
 				active_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
-				
-				print("cell ", pos)
-				for cell in locked_cells[pos].connections:
-					print(cell.global_point_position)
+				if debug:
+					print("cell ", pos)
+					for cell in locked_cells[pos].connections:
+						print(cell.global_point_position)
 
 	active_map.draw_point_ids.append_array(active_delaunay)
 	active_map.queue_redraw()
@@ -193,5 +193,4 @@ func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos-Vector2(0,cell_size)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size,0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0,cell_size)))
-	print
 	return ids

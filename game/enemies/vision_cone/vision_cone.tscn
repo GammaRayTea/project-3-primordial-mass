@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bl53b1u4n37y7"]
 
-[ext_resource type="Script" uid="uid://8dsvnrwpf1t6" path="res://game/enemies/test_enemy/vision_cone.gd" id="1_r5mul"]
+[ext_resource type="Script" uid="uid://8dsvnrwpf1t6" path="res://game/enemies/vision_cone/vision_cone.gd" id="1_r5mul"]
 
 [node name="VisionCone" type="Area3D" unique_id=518248361]
 script = ExtResource("1_r5mul")

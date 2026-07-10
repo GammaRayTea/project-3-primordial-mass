@@ -12,7 +12,65 @@
 		else:
 			time = value
 
+@export var randomize_time:bool = false:
+	set(value):
+		randomize_time = value
+		notify_property_list_changed()
+
+var _minimum:float
+var _maximum:float
+
 var active_timer:Timer
+
+func _get_property_list() -> Array[Dictionary]:
+	var properties:Array[Dictionary]
+	if randomize_time:
+		properties.append({
+			"name":"minimum",
+			"type":TYPE_FLOAT
+		})
+		properties.append({
+			"name":"maximum",
+			"type":TYPE_FLOAT
+		})
+	
+	return properties
+
+func _property_get_revert(property: StringName) -> Variant:
+	match property:
+		"minimum":
+			return 0.0
+		"maximum":
+			return 5.0
+	return null
+	
+func _property_can_revert(property: StringName) -> bool:
+	match property:
+		"minimum":
+			return true
+		"maximum":
+			return true
+	return false
+
+func _get(property: StringName) -> Variant:
+	match property:
+		"minimum":
+			return _minimum
+		"maximum":
+			return _maximum
+	return null
+	
+	
+func _set(property: StringName, value: Variant) -> bool:
+	match property:
+		"minimum":
+			_minimum = value
+			return true
+		"maximum":
+			_maximum = value
+			return true
+	return false
+
 
 func _setup()->void:
 	active_timer = Timer.new()
@@ -20,6 +78,8 @@ func _setup()->void:
 	active_timer.timeout.connect(finished.emit)
 
 func _start()-> void:
+	if randomize_time:
+		time = randf_range(_minimum,_maximum)
 	active_timer.start(time)
 
 
