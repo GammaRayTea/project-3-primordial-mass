@@ -30,7 +30,7 @@ script = ExtResource("1_272bh")
 [node name="Game" type="Node3D" parent="." unique_id=1350780846]
 
 [node name="Globber" parent="Game" unique_id=2048773448 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.108516, 1.7873611, 10.5702305)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.27384, 1.1131084, 3.078743)
 
 [node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
 
@@ -71,12 +71,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="@Sprite3D@95965" type="Sprite3D" parent="Game/ItemPickup" unique_id=1329955441]
+[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=138897883]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=73208474 node_paths=PackedStringArray("target")]
+[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=56664907 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
