@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="12_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_energy_multiplier = 2.0
@@ -71,15 +72,18 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1414852453]
+[node name="@Sprite3D@45585" type="Sprite3D" parent="Game/ItemPickup" unique_id=704720175]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1092578947 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=752428792 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
 target = NodePath("..")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
+
+[node name="Globber" parent="." unique_id=1727076638 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9391327, 0.5, 2.2435303)
