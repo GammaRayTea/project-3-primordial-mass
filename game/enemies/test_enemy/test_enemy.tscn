@@ -119,9 +119,10 @@ shape = SubResource("BoxShape3D_7ldnf")
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("WalkForwardState")
 
-[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "next_state")]
+[node name="WalkForwardState" type="Node" parent="StateMachine" index="0" unique_id=400175986 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
 script = ExtResource("2_sn51l")
 target = NodePath("../..")
+rotation_pivot = NodePath("../../RotationPivot")
 next_state = NodePath("../WaitState")
 
 [node name="WaitState" type="Node" parent="StateMachine" index="1" unique_id=861100265 node_paths=PackedStringArray("next_state")]
@@ -139,28 +140,28 @@ metadata/_custom_type_script = "uid://bi8u06c53mn68"
 script = ExtResource("4_v0kwb")
 target = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
+[node name="HitBox" parent="." index="5" unique_id=565674913]
+collision_mask = 6
+
+[node name="HurtBox" parent="." index="6" unique_id=158402479]
+collision_mask = 24
+
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=518248361 node_paths=PackedStringArray("enemy", "alert_state") instance=ExtResource("6_ugb5v")]
+collision_layer = 0
+collision_mask = 2
+enemy = NodePath("../..")
+alert_state = NodePath("../../StateMachine/WalkForwardChase")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotationPivot/Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=491776649]
 visible = false
 mesh = SubResource("BoxMesh_kpvxy")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=1618597645]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotationPivot/Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=1618597645]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.6495839, 0)
 material_override = SubResource("ShaderMaterial_hae4w")
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_bbr86")
 frame_progress = 0.038309667
 script = ExtResource("8_egj00")
-
-[node name="HitBox" parent="." index="6" unique_id=565674913]
-collision_mask = 6
-
-[node name="HurtBox" parent="." index="7" unique_id=158402479]
-collision_mask = 24
-
-[node name="VisionCone" parent="." index="8" unique_id=518248361 node_paths=PackedStringArray("enemy", "alert_state") instance=ExtResource("6_ugb5v")]
-collision_layer = 0
-collision_mask = 2
-enemy = NodePath("..")
-alert_state = NodePath("../StateMachine/WalkForwardChase")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
