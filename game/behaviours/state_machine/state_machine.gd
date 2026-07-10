@@ -29,22 +29,29 @@ func _init() -> void:
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		
+		for child in get_children():
+			if child is State:
+				prepare_state(child)
+			else:
+				for sub_child in child.get_children():
+					if sub_child is State:
+						prepare_state(sub_child)
 
-		for state in get_children():
-			if state is State:
-				prepare_state(state)
 		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
 	_state.finished.connect(_on_state_finished)
-
 	_state._setup()
+
 
 func _update(_delta:float) -> void:
 	current_state._execute( _delta)
 	
 
 func switch_to_state(_state:State) -> void:
+
+	print(_state)
 	if current_state:
 		current_state._exit()
 	current_state = _state

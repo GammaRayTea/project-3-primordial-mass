@@ -29,7 +29,7 @@ var pass_data_target_amount:int = 0:
 					})
 			else:
 				pass_data_targets = pass_data_targets.slice(0, value)
-		print(pass_data_targets)
+
 		notify_property_list_changed()
 var pass_data_targets: Array[Dictionary] = []
 
@@ -108,7 +108,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 
 func _init() -> void:
-	print(get_property_list())
 	update_configuration_warnings()
 
 ##Signal that needs to be emited when the state is finished.
@@ -127,4 +126,4 @@ signal finished
 
 @warning_ignore("unused_parameter")
 func set_data(value:Variant,target:Dictionary) -> void:
-	target[0].set(target[1], value)
+	target["target"].set(target["property"], value)
