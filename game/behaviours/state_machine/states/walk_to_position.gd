@@ -1,15 +1,17 @@
 @tool
-class_name MoveToPlayer extends TimedState
+class_name WalkToPositionState extends TimedState
 
 ## target to move
 @export var target:Node3D
 ## speed of movement
 @export var speed:float = 1.5
-var pos: Vector3
+
+@export var target_position:Vector3
+
 
 func _setup()->void:
 	pass
 func _start()-> void:
 	pass
 func _execute(_delta:float) -> void:
-	target.position += (pos - target.position) * speed
+	pass
