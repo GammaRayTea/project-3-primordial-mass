@@ -329,7 +329,10 @@ texture = ExtResource("3_cwoiy")
 [node name="Dead" type="Node3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=730677909]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals/Dead" index="0" unique_id=1223630812]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
+frame_progress = 0.76443976
 
 [node name="HitBox" parent="." index="6" unique_id=565674913]
 visible = false

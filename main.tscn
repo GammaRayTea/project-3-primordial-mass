@@ -42,6 +42,7 @@ mass = 0.1
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.495, 0)
+MAX_WALKING_SPEED = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = SubResource("Environment_0xm2m")
@@ -74,12 +75,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1004278863]
+[node name="@Sprite3D@19842" type="Sprite3D" parent="Game/ItemPickup" unique_id=57906351]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1106858112 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=911213696 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
