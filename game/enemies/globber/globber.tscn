@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
+[ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
 [ext_resource type="Script" uid="uid://cqa02cuqcr334" path="res://game/enemies/vision_cone/globber_vision_cone.gd" id="19_2si2q"]
 
@@ -213,40 +214,35 @@ _data = {
 &"globber_walk": ExtResource("2_v1ixo")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y7tjh"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h82rf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o8dyd"]
-atlas = SubResource("CompressedTexture2D_h82rf")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_droo6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
-atlas = SubResource("CompressedTexture2D_h82rf")
-region = Rect2(64, 0, 64, 64)
+atlas = ExtResource("14_o8dyd")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtf71"]
-atlas = SubResource("CompressedTexture2D_h82rf")
-region = Rect2(128, 0, 64, 64)
+atlas = ExtResource("14_o8dyd")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2odp2"]
-atlas = SubResource("CompressedTexture2D_h82rf")
-region = Rect2(192, 0, 64, 64)
+atlas = ExtResource("14_o8dyd")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qg7h7"]
-atlas = SubResource("CompressedTexture2D_h82rf")
-region = Rect2(256, 0, 64, 64)
+atlas = ExtResource("14_o8dyd")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2si2q"]
-atlas = SubResource("CompressedTexture2D_h82rf")
+atlas = ExtResource("14_o8dyd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joybc"]
+atlas = ExtResource("14_o8dyd")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o8dyd")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l3wxe")
 }, {
@@ -261,8 +257,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2si2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joybc")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"default",
 "speed": 5.0
 }]
@@ -334,15 +333,17 @@ libraries/ = SubResource("AnimationLibrary_845p2")
 
 [node name="AnimationTree" parent="." index="4" unique_id=934466786]
 active = false
-tree_root = SubResource("AnimationNodeStateMachine_y7tjh")
+tree_root = SubResource("AnimationNodeStateMachine_droo6")
 
 [node name="HitBox" parent="." index="5" unique_id=565674913]
 visible = false
+
 
 [node name="HurtBox" parent="." index="6" unique_id=158402479]
 visible = false
 
 [node name="Alive" type="Node3D" parent="RotationPivot/Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=1655088542]
+
 
 [node name="FootL" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="0" unique_id=1575607523]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.08233776, 0.5, 0.144)
@@ -399,7 +400,13 @@ texture = ExtResource("3_cwoiy")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-frame_progress = 0.76443976
+frame_progress = 0.2459824
+
+[node name="HitBox" parent="." index="6" unique_id=565674913]
+visible = false
+
+[node name="HurtBox" parent="." index="7" unique_id=158402479]
+visible = false
 
 [node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("enemy", "alert_state") instance=ExtResource("18_2si2q")]
 collision_layer = 0
