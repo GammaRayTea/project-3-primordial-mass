@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ct0p6npqva67"]
 
 [ext_resource type="Script" uid="uid://bui3lg8j3ka10" path="res://game/player/player.gd" id="1_b2mth"]
-[ext_resource type="Script" uid="uid://b2axj48y4gatr" path="res://game/player/camera_3d.gd" id="2_4ste8"]
+[ext_resource type="PackedScene" uid="uid://633w6f2mrac7" path="res://game/player/camera.tscn" id="2_4ste8"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="3_8soms"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_a4w0n"]
@@ -36,7 +36,7 @@ radius = 0.3227539
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud", "camera") groups=["Player"]]
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 100.0
 MAX_RUNNING_SPEED = 8.0
@@ -44,14 +44,18 @@ rotation_pivot = NodePath("RotationPivot")
 interaction_box = NodePath("RotationPivot/InteractionButtonBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
+camera = NodePath("Camera")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=58882882]
+[node name="Camera" parent="." unique_id=1886686640 instance=ExtResource("2_4ste8")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6210704, 0)
-script = ExtResource("2_4ste8")
+bounding_box = Vector2(1.5, 1)
+return_weight = 0.03
+move_weight = 0.07
+height = 2.621
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
 

@@ -16,7 +16,7 @@ class_name Player extends CharacterBody3D
 @export var interaction_box:Area3D
 @export var push_box_shape:CollisionShape3D
 @export var hud:Control
-
+@export var camera:PlayerCam
 
 var current_sprint_value:float = 0
 var can_sprint:bool = true
@@ -43,6 +43,7 @@ func _physics_process(_delta: float) -> void:
 	
 	match current_state:
 		STATE.IDLE:
+			camera._move_to_center()
 			apply_gravity(_delta)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 			if direction:
@@ -51,7 +52,6 @@ func _physics_process(_delta: float) -> void:
 			apply_gravity(_delta)
 			if Input.is_action_just_pressed("sprint") and can_sprint:
 				current_state = STATE.RUNNING
-
 			else:
 				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
@@ -94,13 +94,14 @@ func process_interact_input() -> void:
 		if control_interaction_target != null:
 			control_interaction_target.activate(self)
 
+
 func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:float) -> void:
 	if _direction:
 		var current_pivot_rot = Quaternion(rotation_pivot.transform.basis)
 		var target_rot = Quaternion(Vector3.UP,_direction.signed_angle_to(Vector3.FORWARD, Vector3.DOWN))
 		
 		rotation_pivot.transform.basis = Basis(current_pivot_rot.slerp(target_rot, 0.5))
-		
+		camera._update_position(target_rot)
 		
 		velocity.x = move_toward(velocity.x, _direction.x * _target_speed, _acceleration)
 		velocity.z = move_toward(velocity.z, _direction.z * _target_speed, _acceleration)
@@ -112,7 +113,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	else:
 		velocity.x = move_toward(velocity.x, 0, TRACTION)
 		velocity.z = move_toward(velocity.z, 0,TRACTION)
-	
+		current_state = STATE.IDLE
 	
 	move_and_slide()
 #endregion
