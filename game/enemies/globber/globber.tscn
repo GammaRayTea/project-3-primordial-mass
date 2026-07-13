@@ -440,42 +440,49 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="FootL" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="0" unique_id=1575607523]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.082, 0.03, 0.144)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("4_40eg8")
 
 [node name="FootR" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="1" unique_id=649938572]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.081, 0.01, 0.102)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("5_kjdyy")
 
 [node name="ArmR" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="2" unique_id=571201155]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.149, 0.04, -0.015)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("6_h82rf")
 
 [node name="HandR" type="Sprite3D" parent="RotationPivot/Visuals/Alive/ArmR" index="0" unique_id=559763444]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, -0.003000006, 0.09696986, -0.010000005)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("7_o8dyd")
 
 [node name="ArmL" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="3" unique_id=477204900]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.153, 0.04, -0.035)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("8_l3wxe")
 
 [node name="HandL" type="Sprite3D" parent="RotationPivot/Visuals/Alive/ArmL" index="0" unique_id=927863379]
 transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 0.0054223686, 0.09281641, -0.010000005)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("9_gtf71")
 
 [node name="Head" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="4" unique_id=245677157]
 transform = Transform3D(0.9866967, 0.16256995, 7.106161e-09, 0, -4.3711385e-08, 1.0000002, 0.16256993, -0.9866969, -4.312991e-08, 0, 0.13, 0.003)
+shaded = true
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
@@ -483,6 +490,7 @@ texture = ExtResource("10_2odp2")
 
 [node name="Body" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="5" unique_id=1321173805]
 transform = Transform3D(0.9939601, 0.10974071, 4.7969198e-09, 0, -4.371138e-08, 1, 0.10974071, -0.9939601, -4.3447383e-08, 0, 0.05, 0)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("3_cwoiy")
@@ -492,6 +500,7 @@ visible = false
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotationPivot/Visuals/Death" index="0" unique_id=1223630812]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"death"

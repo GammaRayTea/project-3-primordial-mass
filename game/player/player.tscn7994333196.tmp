@@ -17,16 +17,6 @@ material = SubResource("StandardMaterial3D_anr75")
 radius = 0.1
 height = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ste8"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.42283303, 0.73144084, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_anr75"]
-material = SubResource("StandardMaterial3D_4ste8")
-radius = 0.1
-height = 0.2
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8soms"]
@@ -73,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6210704, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0.4745098, 1)
 
-[node name="Camera" type="Camera3D" parent="CameraStuff" unique_id=1886686640 node_paths=PackedStringArray("ray_cast", "visualizer")]
+[node name="Camera" type="Camera3D" parent="CameraStuff" unique_id=1886686640 node_paths=PackedStringArray("ray_cast")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6210704, 0)
 script = ExtResource("2_4ste8")
 bounding_box = Vector2(1.5, 1)
@@ -81,14 +71,9 @@ return_weight = 0.03
 move_weight = 0.07
 height = 2.621
 ray_cast = NodePath("../CameraRayCast")
-visualizer = NodePath("../TargetVisualizer")
-wall_margin = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraStuff/Camera" unique_id=960573652]
 mesh = SubResource("SphereMesh_4ste8")
-
-[node name="TargetVisualizer" type="MeshInstance3D" parent="CameraStuff" unique_id=2082767170]
-mesh = SubResource("SphereMesh_anr75")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
 shape = SubResource("CapsuleShape3D_kpvxy")

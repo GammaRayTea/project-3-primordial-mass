@@ -83,6 +83,7 @@ anim_player = NodePath("AnimationPlayer")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1092540364]
 billboard = 1
+shaded = true
 texture_filter = 0
 texture = SubResource("DrawableTexture2D_wswa0")
 
