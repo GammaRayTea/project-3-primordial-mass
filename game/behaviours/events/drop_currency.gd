@@ -7,7 +7,7 @@ class_name DropEvent extends Event
 
 @export var min_value:int
 @export var max_value:int
-@export var type:DropContainer.CURRENCY
+@export var type:GlobalEnum.CURRENCY
 
 func execute() -> void:
 	pass

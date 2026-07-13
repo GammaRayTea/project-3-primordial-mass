@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://chhwtehoo1ycb" path="res://game/interactables/control_elements/button/button.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="8_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
@@ -64,3 +65,15 @@ room_generator = NodePath("RoomGen")
 script = ExtResource("8_ycdy4")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
+
+[node name="DropContainer" parent="." unique_id=1625775668 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.399681, 0.82000095, -7.3244677)
+value = 4
+
+[node name="DropContainer2" parent="." unique_id=1901164583 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4413443, 0.81999904, -4.712484)
+value = 5
+
+[node name="DropContainer3" parent="." unique_id=1486167722 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7422295, 0.82, -6.4215074)
+value = 3

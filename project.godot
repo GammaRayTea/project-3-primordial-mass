@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*uid://ukbuejw1m15w"
+GlobalEnum="*uid://nptyhdrtvfm4"
 
 [display]
 
@@ -32,10 +33,10 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://assets/Items/": "yellow",
 "res://assets/enemies/": "red",
 "res://assets/environment/": "blue",
 "res://assets/interactables/": "orange",
+"res://assets/items/": "yellow",
 "res://assets/player/": "teal",
 "res://game/behaviours/": "purple",
 "res://game/enemies/": "red",

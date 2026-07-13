@@ -43,10 +43,12 @@ func _physics_process(_delta: float) -> void:
 	
 	match current_state:
 		STATE.IDLE:
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 			if direction:
 				current_state = STATE.WALKING
 		STATE.WALKING:
+			apply_gravity(_delta)
 			if Input.is_action_just_pressed("sprint") and can_sprint:
 				current_state = STATE.RUNNING
 
@@ -54,12 +56,14 @@ func _physics_process(_delta: float) -> void:
 				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 		STATE.RUNNING:
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, BASE_ACCELERATION)
 			handle_sprint()
 			if Input.is_action_just_released("sprint"):
 				current_state = STATE.IDLE
 			
 		STATE.PUSHING:
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, PUSH_ACCELERATION)
 			push(_delta,direction)
 			
@@ -112,7 +116,9 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	
 	move_and_slide()
 #endregion
-
+func apply_gravity(_delta:float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * _delta
 #region push
 func start_push():
 	push_box_shape.set_deferred("disabled", false)
