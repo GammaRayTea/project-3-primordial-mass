@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dxketbhopi5ju"]
 
-[ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/items/pickups/stick/Sticc.png" id="1_0sy6i"]
 [ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/player/hud_overlay.gd" id="1_8ijb6"]
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_eiboa"]
 [ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/player/item_preview.gd" id="2_dif5i"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_eiboa"]
 
 [node name="Overlay" type="Control" unique_id=1199412428]
 layout_mode = 3
@@ -47,7 +47,7 @@ offset_bottom = -3.6535797
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_eiboa")
-texture = ExtResource("1_0sy6i")
+texture = ExtResource("4_eiboa")
 stretch_mode = 5
 
 [node name="ItemLabel" type="Label" parent="ItemPreview" unique_id=2108661356]
