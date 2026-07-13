@@ -16,10 +16,7 @@
 [ext_resource type="Script" uid="uid://dbrxet3cojgye" path="res://game/behaviours/state_machine/states/set_property_state.gd" id="6_joybc"]
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
-[ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
-[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="9_45htx"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
-[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency_drop/drop_container.tscn" id="9_ydwe4"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
 [ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
@@ -269,8 +266,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
-events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/FreeEvent")]
+[node name="Globber" unique_id=2048773448 instance=ExtResource("1_nrhof")]
+
+[node name="WorldCollider" parent="." index="0" unique_id=1421813303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
@@ -313,23 +312,14 @@ metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="WalkToPositionState" type="Node" parent="StateMachine/Alert" index="0" unique_id=1924766303 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
 script = ExtResource("5_qg7h7")
-ACCELERATION = 0.1
+distance_threshold = 0.1
 target = NodePath("../../..")
 rotation_pivot = NodePath("../../../RotationPivot")
-speed = 1.4
-distance_threshold = 1.3
-next_state = NodePath("../WaitStateAfter")
+speed = 1.5
+next_state = NodePath("../EnableVisionCone")
 metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
 
-[node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
-script = ExtResource("4_gtf71")
-randomize_time = true
-minimum = 0.0
-maximum = 5.0
-next_state = NodePath("../EnableVisionCone")
-metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
-
-[node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
+[node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="1" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("6_joybc")
 target = NodePath("../../../RotationPivot/VisionCone")
 property_name = &"monitoring"
@@ -337,19 +327,6 @@ type = 1
 value = true
 next_state = NodePath("../../Roam/RandomDirectionState")
 metadata/_custom_type_script = "uid://dbrxet3cojgye"
-
-[node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
-script = ExtResource("9_45htx")
-target = NodePath("../..")
-metadata/_custom_type_script = "uid://cxmt2fl7nvfju"
-
-[node name="DropEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="1" unique_id=730886903 node_paths=PackedStringArray("source")]
-script = ExtResource("8_l7o33")
-drop_container = ExtResource("9_ydwe4")
-source = NodePath("../..")
-min_value = null
-max_value = 10
-metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
 [node name="AnimationPlayer" parent="." index="3" unique_id=67901383]
 libraries/ = SubResource("AnimationLibrary_845p2")
@@ -427,14 +404,10 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 frame_progress = 0.2459824
 
-[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("enemy", "alert_state") instance=ExtResource("18_2si2q")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
-path_trace = NodePath("../../RayCast3D")
 enemy = NodePath("../..")
 alert_state = NodePath("../../StateMachine/Alert/WalkToPositionState")
-
-[node name="RayCast3D" type="RayCast3D" parent="." index="8" unique_id=912591583]
-collision_mask = 3
-collide_with_areas = true
