@@ -68,12 +68,15 @@ script = ExtResource("8_ycdy4")
 
 [node name="DropContainer" parent="." unique_id=1625775668 instance=ExtResource("9_kek77")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.399681, 0.82000095, -7.3244677)
-value = 4
+value = 3
+aoutonomous_setup = true
 
 [node name="DropContainer2" parent="." unique_id=1901164583 instance=ExtResource("9_kek77")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4413443, 0.81999904, -4.712484)
 value = 5
+aoutonomous_setup = true
 
 [node name="DropContainer3" parent="." unique_id=1486167722 instance=ExtResource("9_kek77")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7422295, 0.82, -6.4215074)
 value = 3
+aoutonomous_setup = true
