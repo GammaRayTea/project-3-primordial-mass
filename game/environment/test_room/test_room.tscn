@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://slg88wvcuno1"]
 
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="1_js5f7"]
+[ext_resource type="Texture2D" uid="uid://dtxbd1k5lkicx" path="res://assets/environment/textures/FloorWood.png" id="1_xatlg"]
 [ext_resource type="Script" uid="uid://4y5k2jdbfw8u" path="res://game/environment/test_room/mesh_instance_3d.gd" id="2_20bci"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8soms"]
-size = Vector2(20, 20)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2mth"]
-albedo_texture = SubResource("PlaceholderTexture2D_8soms")
-uv1_scale = Vector3(20, 10, 1)
+albedo_texture = ExtResource("1_xatlg")
+uv1_scale = Vector3(200, 100, 1)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kpvxy"]

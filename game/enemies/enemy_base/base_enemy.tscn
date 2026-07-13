@@ -44,16 +44,20 @@ metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1689760368]
 shape = SubResource("BoxShape3D_udmuc")
+debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=158402479]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 24
 script = ExtResource("4_yixaj")
 metadata/_custom_type_script = "uid://daou788t0evlx"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=948016057]
 shape = SubResource("BoxShape3D_kpvxy")
+debug_color = Color(0.99591845, 0, 0.20490283, 0.41960785)
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=1172787614]
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=33426455]
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

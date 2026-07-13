@@ -1,11 +1,10 @@
 @tool
 @abstract class_name Event extends Node
-signal finished
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings  = PackedStringArray()
-	if finished.get_connections().size() <0:
-		warnings.append("Event doesn't emit finished. Enemy will stall when starting it's execution")
+
 	var properties: = get_property_list()
 	
 	for p in properties:

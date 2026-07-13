@@ -51,7 +51,6 @@ func _update(_delta:float) -> void:
 	
 
 func switch_to_state(_state:State) -> void:
-	print("changing to state ", _state.name)
 	if current_state:
 		current_state._exit()
 	current_state = _state

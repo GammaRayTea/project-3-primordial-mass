@@ -29,6 +29,9 @@ size = Vector3(0.5, 1, 0.45483398)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
+radius = 0.3227539
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
@@ -37,7 +40,7 @@ script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 100.0
 MAX_RUNNING_SPEED = 8.0
 rotation_pivot = NodePath("RotationPivot")
-interaction_box = NodePath("RotationPivot/InteractionBox")
+interaction_box = NodePath("RotationPivot/InteractionButtonBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
 
@@ -46,11 +49,12 @@ shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=58882882]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6210704, 0)
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=512528227]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="Head" type="AnimatedSprite3D" parent="RotationPivot/Visuals" unique_id=141534059]
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0.7534457, 0)
@@ -78,14 +82,23 @@ shape = SubResource("BoxShape3D_kpvxy")
 disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
-[node name="InteractionBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
+[node name="InteractionButtonBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("3_a4w0n")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionBox" unique_id=671184854]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
 shape = SubResource("BoxShape3D_udmuc")
+debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
+
+[node name="DropPickupBox" type="Area3D" parent="RotationPivot" unique_id=1869776768]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("3_a4w0n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
+shape = SubResource("CapsuleShape3D_anr75")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=711900110]
@@ -104,5 +117,7 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
 [connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushBox" to="." method="on_push_box_exited"]
-[connection signal="area_entered" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_entered"]
-[connection signal="area_exited" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_exited"]

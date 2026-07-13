@@ -14,9 +14,8 @@ func _on_area_entered(_area: Area3D) -> void:
 		path_trace.target_position*= 1.2 
 
 		var collider = path_trace.get_collider()
-		print(collider)
+
 		if collider == _area:
-			print("player found")
 			(alert_state as WalkToPositionState).target_position = detect_position
 			enemy.state_machine.switch_to_state(alert_state)
 			set_deferred("monitoring", false)

@@ -1,16 +1,12 @@
 [gd_scene format=3 uid="uid://c8257oy8c1lmb"]
 
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/environment/test_room/test_room.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://ukbuejw1m15w" path="res://main.gd" id="1_272bh"]
+[ext_resource type="Script" uid="uid://dowd86n4o64xs" path="res://debug_main_settings.gd" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bqumv4uggm1d4" path="res://game/interactables/rigid_interactables/rolling_boulder/rolling_boulder.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://chhwtehoo1ycb" path="res://game/interactables/control_elements/button/button.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="8_ycdy4"]
-[ext_resource type="Script" uid="uid://nr6yjohwcrid" path="res://game/item_pickup.gd" id="9_4c57u"]
-[ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_4c57u"]
-[ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="11_dg77c"]
-[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="12_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
@@ -25,14 +21,16 @@ sky = SubResource("Sky_0xm2m")
 ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Main" type="Node3D" unique_id=179947457]
-script = ExtResource("1_272bh")
+script = ExtResource("1_5vw27")
+low_resolution = Vector2i(512, 288)
+high_resolution = Vector2i(1920, 1080)
 
-[node name="Game" type="Node3D" parent="." unique_id=1350780846]
-
-[node name="Globber" parent="Game" unique_id=2048773448 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44173622, 0.39026904, 3.078743)
+[node name="Game" type="Node3D" parent="." unique_id=1350780846 groups=["Game"]]
 
 [node name="Testroom" parent="Game" unique_id=1197105803 instance=ExtResource("1_0xm2m")]
+
+[node name="Globber" parent="Game" unique_id=2048773448 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12149215, 1.5113839, -2.3186321)
 
 [node name="RollingBoulder2" parent="Game" unique_id=498289684 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.739574, 5.1161127, 1.0960178)
@@ -43,7 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1913025, 1.3392533, 0.07497
 mass = 0.1
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.495, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6333753, 0)
 MAX_WALKING_SPEED = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
@@ -65,24 +63,4 @@ room_generator = NodePath("RoomGen")
 [node name="RoomGen" type="Node3D" parent="Game/DungeonGenerator" unique_id=27122260]
 script = ExtResource("8_ycdy4")
 
-[node name="ItemPickup" type="Node3D" parent="Game" unique_id=990009022]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.037080765, 0.79667544, 4.2098384)
-script = ExtResource("9_4c57u")
-item = ExtResource("10_4c57u")
-metadata/_custom_type_script = "uid://nr6yjohwcrid"
-
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=715525566]
-transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
-texture_filter = 0
-texture = ExtResource("11_dg77c")
-
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=310639897 node_paths=PackedStringArray("target")]
-collision_layer = 32
-collision_mask = 0
-script = ExtResource("12_ycdy4")
-target = NodePath("..")
-
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
-
-[node name="Globber" parent="." unique_id=1727076638 instance=ExtResource("13_ycdy4")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.9391327, 0.28125, 2.2435303)

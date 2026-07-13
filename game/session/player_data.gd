@@ -1,4 +1,7 @@
 class_name SaveGame extends Resource
 
+@export var currency:Dictionary[DropContainer.CURRENCY, int] = {}
 
-@export var basic_currency:float = 0.0
+func _init() -> void:
+	for key in DropContainer.CURRENCY.values():
+		currency[key] = 0

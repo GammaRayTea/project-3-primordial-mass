@@ -6,21 +6,23 @@
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="4_4hrtm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kpvxy"]
-radius = 0.8339547
+radius = 0.58700025
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pvbhg"]
-radius = 0.8571686
+radius = 0.58323896
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_udmuc"]
-radius = 0.90802497
+radius = 0.57656085
 
 [node name="RollingBoulder" type="RigidBody3D" unique_id=498289684 node_paths=PackedStringArray("hit_box")]
 mass = 1000.0
+angular_damp = 0.4
 script = ExtResource("1_pvbhg")
 hit_box = NodePath("HitBox")
 damage_speed_threshold = 2.0
 
 [node name="Stone" parent="." unique_id=1556413671 instance=ExtResource("1_jq4qs")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1050434509]
 shape = SubResource("SphereShape3D_kpvxy")
@@ -49,3 +51,4 @@ disabled = true
 debug_color = Color(0.9228927, 0.2504923, 0.31508198, 0.41960785)
 
 [connection signal="area_entered" from="InteractionBox" to="." method="onInteractionAreaEntered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
