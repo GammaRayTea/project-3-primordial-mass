@@ -5,6 +5,8 @@ const SAVE_PATH := "user://simple_save.tres"
 var save_game: SaveGame = null
 
 func _ready() -> void:
+	save_game = SaveGame.new()
+	
 	
 	if save:
 		if ResourceLoader.exists(SAVE_PATH):

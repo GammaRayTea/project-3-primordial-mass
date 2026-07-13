@@ -16,7 +16,6 @@ func _start()-> void:
 	print("moving to target...")
 func _execute(_delta:float) -> void:
 	var direction = target.global_position.direction_to(target_position).normalized()
-	print(target.global_position.distance_to(target_position))
 	var target_vel = direction * speed 
 	target.velocity.x = move_toward(target.velocity.x,target_vel.x,ACCELERATION)
 	target.velocity.z = move_toward(target.velocity.z,target_vel.z,ACCELERATION)
@@ -25,8 +24,6 @@ func _execute(_delta:float) -> void:
 	target.rotate_to_direction(direction)
 
 	if target.global_position.distance_to(target_position) <= distance_threshold:
-		print("target reached")
 		finished.emit()
 func _exit() -> void:
 	target.velocity = Vector3(0,0,0)
-	print(target.velocity)

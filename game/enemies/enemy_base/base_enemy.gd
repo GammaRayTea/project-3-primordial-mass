@@ -49,16 +49,15 @@ func _physics_process(_delta: float) -> void:
 
 func get_hit(source:HitBox):
 	health-=source.damage
+	print("damage ", source.damage, " health ", health)
 	
 	
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
-	print("damage ", source.damage, " health ", health)
 
 func die() -> void:
-	await execute_events(events_on_death)
+	execute_events(events_on_death)
 	enemy_died.emit()
-	queue_free()
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
@@ -76,4 +75,3 @@ func execute_events(events:Array[Event])->void:
 	for event in events:
 		if event is Event:
 			event.execute()
-			await event.finished

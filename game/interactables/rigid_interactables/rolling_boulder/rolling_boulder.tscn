@@ -49,3 +49,4 @@ disabled = true
 debug_color = Color(0.9228927, 0.2504923, 0.31508198, 0.41960785)
 
 [connection signal="area_entered" from="InteractionBox" to="." method="onInteractionAreaEntered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

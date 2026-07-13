@@ -37,7 +37,7 @@ script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 100.0
 MAX_RUNNING_SPEED = 8.0
 rotation_pivot = NodePath("RotationPivot")
-interaction_box = NodePath("RotationPivot/InteractionBox")
+interaction_box = NodePath("RotationPivot/InteractionButtonBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
 
@@ -78,12 +78,22 @@ shape = SubResource("BoxShape3D_kpvxy")
 disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
-[node name="InteractionBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
+[node name="InteractionButtonBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("3_a4w0n")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionBox" unique_id=671184854]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
+shape = SubResource("BoxShape3D_udmuc")
+debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
+
+[node name="DropPickupBox" type="Area3D" parent="RotationPivot" unique_id=1869776768]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("3_a4w0n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
 shape = SubResource("BoxShape3D_udmuc")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
@@ -104,5 +114,7 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
 [connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushBox" to="." method="on_push_box_exited"]
-[connection signal="area_entered" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_entered"]
-[connection signal="area_exited" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_exited"]
