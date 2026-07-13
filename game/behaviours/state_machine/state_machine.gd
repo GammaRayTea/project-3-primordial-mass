@@ -23,7 +23,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 var current_state: State
 
-
+var executing:bool = false
 func _init() -> void:
 	update_configuration_warnings()
 
@@ -46,16 +46,18 @@ func prepare_state(_state:State) -> void:
 
 
 func _update(_delta:float) -> void:
-	current_state._execute( _delta)
+	if executing:
+		current_state._execute( _delta)
 	
 
 func switch_to_state(_state:State) -> void:
-
-	print(_state)
+	print("changing to state ", _state.name)
 	if current_state:
 		current_state._exit()
 	current_state = _state
+	executing = true
 	current_state._start()
 
 func _on_state_finished()->void:
+	executing = false
 	switch_to_state(current_state.next_state)
