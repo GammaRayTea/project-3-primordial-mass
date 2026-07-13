@@ -12,5 +12,5 @@ func setup(_type:CURRENCY, _value:int) -> void:
 
 
 func _on_interaction_box_area_entered(_area: Area3D) -> void:
-	#GameState.save_game.currency[type]+= value
+	GameState.save_game.currency[type]+= value
 	queue_free()

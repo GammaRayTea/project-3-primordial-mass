@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://bxc14y6cn37vn"]
 
-[ext_resource type="Script" uid="uid://bjo1esv7cvxe7" path="res://game/items/currency_drop/drop_container.gd" id="1_td8i2"]
+[ext_resource type="Script" uid="uid://c1jfv4i6ttnib" path="res://game/items/currency_drop/drop_container.gd" id="1_td8i2"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_27rtk"]
 
 [sub_resource type="DrawableTexture2D" id="DrawableTexture2D_wswa0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wvjwh"]
+radius = 0.16495846
 
 [node name="DropContainer" type="Node3D" unique_id=1625775668]
 script = ExtResource("1_td8i2")
+value = null
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1092540364]
 billboard = 1

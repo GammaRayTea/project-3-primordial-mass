@@ -44,7 +44,10 @@ func _init() -> void:
 func _physics_process(_delta: float) -> void:
 	if !Engine.is_editor_hint():
 		state_machine._update(_delta)
+		if not is_on_floor():
+			velocity += get_gravity() * _delta
 		move_and_slide()
+		
 	
 
 func get_hit(source:HitBox):

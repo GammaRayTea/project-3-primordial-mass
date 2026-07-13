@@ -272,6 +272,9 @@ animations = [{
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
 events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/FreeEvent")]
 
+[node name="WorldCollider" parent="." index="0" unique_id=1421813303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
 
@@ -347,7 +350,6 @@ metadata/_custom_type_script = "uid://cxmt2fl7nvfju"
 script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
 source = NodePath("../..")
-min_value = null
 max_value = 10
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
@@ -428,6 +430,7 @@ sprite_frames = SubResource("SpriteFrames_g4v7s")
 frame_progress = 0.2459824
 
 [node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
