@@ -269,7 +269,7 @@ animations = [{
 [node name="Globber" unique_id=2048773448 instance=ExtResource("1_nrhof")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0175781, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
