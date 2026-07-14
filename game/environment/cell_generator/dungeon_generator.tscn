@@ -11,7 +11,6 @@ active_map = NodePath("Control/Active")
 outer_map = NodePath("Control/Outer")
 
 [node name="Control" type="Control" parent="." unique_id=1961200669]
-visible = false
 layout_mode = 3
 anchor_right = 1.0020001
 anchor_bottom = 1.0
@@ -63,3 +62,5 @@ offset_bottom = -678.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.105882354, 0.105882354, 0.105882354, 0.37254903)
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

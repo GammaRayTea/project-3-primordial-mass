@@ -50,6 +50,7 @@ shadow_normal_bias = 0.585
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.46202263)
 
 [node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_generator") instance=ExtResource("6_7mycd")]
+visible = false
 cell_margin = 4
 random_seed = 3
 player = NodePath("../Player")

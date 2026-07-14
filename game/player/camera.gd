@@ -60,6 +60,6 @@ func _move_to_center() -> void:
 		current_return_weight = lerpf(current_return_weight,return_weight,0.01)
 
 		position = position.lerp(Vector3(0,height,0),current_return_weight)
-		print(current_return_weight," ", position)
+		#print(current_return_weight," ", position)
 	else:
 		current_time_until_reset-= 1

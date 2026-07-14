@@ -194,3 +194,7 @@ func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size,0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0,cell_size)))
 	return ids
+
+
+func _on_visibility_changed() -> void:
+	$Control.visible = visible
