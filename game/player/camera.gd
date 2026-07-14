@@ -22,48 +22,44 @@ var current_return_weight:float = 0
 
 @export var wall_margin:float = 0.5
 var target_position:Vector3 = Vector3(0,height,0)
+var player_rotation:Quaternion
 
 func _ready():
 	target_position = Vector3(0,height,0)
 func _update_position(_player_rotation:Quaternion) -> void:
-	
-	target_position = -_player_rotation*Vector3.FORWARD * Vector3(bounding_box.x,0,bounding_box.y)
-	ray_cast.target_position = Vector3(target_position.x,0,target_position.z)*1.5
-	
-
-
-	target_position.y = height
-
-	
+	player_rotation = _player_rotation
 	current_time_until_reset = reset_time
 	current_return_weight = 0.0
 
 func _physics_process(_delta):
-	visualizer.position = target_position
-	position = position.lerp(target_position,move_weight)
+	
 
-	if ray_cast.is_colliding():
-		var collision_point:Vector3 = ray_cast.get_collision_point()-global_position
-		if collision_point:
-
-#
-			#target_position.y = height
-			collision_point.y = height
-
-			print(global_position.distance_to(collision_point))
-			if position.distance_to(collision_point)< wall_margin:
-				target_position = collision_point-position.normalized()*(wall_margin)
-				print(collision_point-position.normalized()*(wall_margin))
+	if current_time_until_reset>0:
+		target_position = player_rotation*Vector3.FORWARD * Vector3(bounding_box.x,0,bounding_box.y)
+		ray_cast.target_position = Vector3(target_position.x,0,target_position.z).normalized()*3
+	
+		if ray_cast.is_colliding():
+			var collision_point:Vector3 = ray_cast.get_collision_point()-global_position
+			
+			if collision_point:
 				target_position.y = height
-			position.y = height
+				collision_point.y = height
+				if target_position.distance_to(collision_point) < wall_margin or collision_point.length()< target_position.length():
+				
+					target_position = collision_point-target_position.normalized()*(wall_margin)
+		target_position.y = height
+		position.y = height
+		visualizer.position = target_position
+		position = position.lerp(target_position,move_weight)
 
 	
 
 
 func _move_to_center() -> void:
-	pass
-	#if current_time_until_reset <= 0:
-		#current_return_weight = lerpf(current_return_weight,return_weight,0.01)
-		#position = position.lerp(Vector3(0,height,0),current_return_weight)
-	#else:
-		#current_time_until_reset-= 1
+	if current_time_until_reset <= 0:
+		current_return_weight = lerpf(current_return_weight,return_weight,0.01)
+
+		position = position.lerp(Vector3(0,height,0),current_return_weight)
+		print(current_return_weight," ", position)
+	else:
+		current_time_until_reset-= 1
