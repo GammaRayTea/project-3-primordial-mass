@@ -1,4 +1,4 @@
-extends Node3D
+class_name DungeonGenerator extends Node3D
 @export_category("Parameters")
 @export var cell_size:int = 16
 @export var cell_margin:int = 2
@@ -7,8 +7,10 @@ extends Node3D
 		
 @export_category("Components")
 @export var player:Player
-@export var active_map:Control
+@export var generated_map:Control
 @export var outer_map:Control
+
+
 
 @export var room_generator:RoomGen
 var generated_rooms:Array[BitMap]
@@ -28,7 +30,7 @@ var rng := RandomNumberGenerator.new()
 var generated_cells:Dictionary[Vector2,Cell] = {}
 var locked_cells:Dictionary[Vector2,Cell] = {}
 
-func _ready() -> void:
+func _start_generation() -> void:
 	rng.seed = random_seed
 	
 	room_generator.rng = rng
@@ -65,14 +67,14 @@ func _physics_process(_delta: float) -> void:
 	
 	if (new_pos != current_position):
 		current_position = new_pos
-		active_map.player_pos = new_pos
+		generated_map.player_pos = new_pos
 		outer_map.player_pos = new_pos
 		
 	
 	
 	
 
-##Check Cells in a rectangle around current cell
+##Check Cells in a rectangle around current cell and generate a preliminary delaunay triangulation. Returns ids of points of triangulation in sets of threes, forming triangles.
 func generate_new_cells(_check_range:int) -> PackedInt32Array:
 	var new_cells:Dictionary[Vector2,Cell] = {}
 	for i in range(_check_range*2+1):
@@ -92,27 +94,27 @@ func generate_new_cells(_check_range:int) -> PackedInt32Array:
 	
 	outer_map.draw_point_ids = delaunayIDs
 	outer_map.delaunay_points = world_points
-	active_map.delaunay_points = world_points
+	generated_map.delaunay_points = world_points
 
 	outer_map.queue_redraw()
 	
 	return delaunayIDs
-	
+
+
 func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> void:
-	var new_positions:=PackedVector2Array()
 	var active_delaunay:= PackedInt32Array()
 	for i in range(_check_range*2+1):
 		for j in range(_check_range*2+1):
 			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
-			new_positions.push_back(pos)
+
 			
 			if !locked_cells.has(pos):
 				locked_cells[pos] = generated_cells[pos]
 				
 				
 				
-				active_map.cells.push_back(pos)
-				active_map.points.push_back(locked_cells[pos].point_position)
+				generated_map.cells.push_back(pos)
+				generated_map.points.push_back(locked_cells[pos].point_position)
 				var cell_accepted_connection_ids:PackedInt32Array = get_cell_draw_ids(_staged_delaunay_ids,pos)
 				
 		
@@ -120,14 +122,15 @@ func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> v
 				active_delaunay.append_array(cell_accepted_connection_ids)
 				var room_bit_map:BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
 				generated_rooms.append(room_bit_map)
-				active_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
+				generated_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
+				generated_cells[pos].bit_map = room_bit_map
 				if debug:
 					print("cell ", pos)
 					for cell in locked_cells[pos].connections:
 						print(cell.global_point_position)
 
-	active_map.draw_point_ids.append_array(active_delaunay)
-	active_map.queue_redraw()
+	generated_map.draw_point_ids.append_array(active_delaunay)
+	generated_map.queue_redraw()
 	
 	
 
@@ -182,8 +185,8 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packed
 
 	var accepted_lines := PackedInt32Array()
 	
-	if debug:
-		print(_cell_pos, "---------", cell_id)
+	#if debug:
+		#print(_cell_pos, "---------", cell_id)
 	
 	for neighbour_cell in this_cell.connections:
 		if locked_cells.values().has(neighbour_cell) and !neighbour_cell.connections.has(this_cell):
@@ -198,24 +201,18 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packed
 		var neighbour_cell:Cell= generated_cells.values()[id]
 		
 		if this_cell.connections.has(neighbour_cell):
-			if !neighbour_cell.connections.has(this_cell):
-				if connection_amount>2 and rng.randf()>0.5:
-
-						this_cell.connections.erase(neighbour_cell)
-						connection_amount-=1
-						if debug:
-							print("discarded ", line, ", connection to ", generated_cells.find_key(neighbour_cell))
-				else:
-					accepted_lines.append_array(line)
-					if debug:
-						print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
+			if !neighbour_cell.connections.has(this_cell) and connection_amount>2 and rng.randf()>0.5:
+				this_cell.connections.erase(neighbour_cell)
+				connection_amount-=1
+				#if debug:
+					#print("discarded ", line, ", connection to ", generated_cells.find_key(neighbour_cell))
 			else:
 				accepted_lines.append_array(line)
-				if debug:
-					print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
-
-	if debug:
-		print(accepted_lines)
+				#if debug:
+					#print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
+#
+	#if debug:
+		#print(accepted_lines)
 	return accepted_lines
 
 

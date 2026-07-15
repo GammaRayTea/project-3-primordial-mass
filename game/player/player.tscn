@@ -56,15 +56,16 @@ radius = 0.3227539
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud", "camera") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud", "camera", "sprint_timer") groups=["Player"]]
 script = ExtResource("1_b2mth")
-MAX_WALKING_SPEED = 100.0
+MAX_WALKING_SPEED = 3.0
 MAX_RUNNING_SPEED = 8.0
 rotation_pivot = NodePath("RotationPivot")
 interaction_box = NodePath("RotationPivot/InteractionButtonBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
 camera = NodePath("CameraStuff/Camera")
+sprint_timer = NodePath("SprintTimer")
 
 [node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
 
@@ -165,6 +166,8 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 
 [node name="Overlay" parent="." unique_id=1199412428 instance=ExtResource("5_5fytw")]
 
+[node name="SprintTimer" type="Timer" parent="." unique_id=1112385316]
+
 [connection signal="area_entered" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
 [connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
@@ -173,3 +176,4 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 [connection signal="area_exited" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_exited"]
 [connection signal="area_entered" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_entered"]
 [connection signal="area_exited" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_exited"]
+[connection signal="timeout" from="SprintTimer" to="." method="on_sprint_timer_done"]

@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cpusm37jok7j6" path="res://game/environment/cell_generator/cell_generator.gd" id="1_667dc"]
 [ext_resource type="Script" uid="uid://uiip4ka6act3" path="res://game/environment/cell_generator/test_map.gd" id="2_udw2b"]
+[ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="3_oux4p"]
 
-[node name="DungeonGenerator" type="Node3D" unique_id=1510930155 node_paths=PackedStringArray("active_map", "outer_map")]
+[node name="DungeonGenerator" type="Node3D" unique_id=1510930155 node_paths=PackedStringArray("generated_map", "outer_map", "room_generator")]
+visible = false
 script = ExtResource("1_667dc")
 cell_margin = 1
 random_seed = 1
-active_map = NodePath("Control/Active")
+generated_map = NodePath("Control/Active")
 outer_map = NodePath("Control/Outer")
+room_generator = NodePath("RoomGen")
 
 [node name="Control" type="Control" parent="." unique_id=1961200669]
 layout_mode = 3
@@ -65,5 +68,8 @@ offset_bottom = -678.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.105882354, 0.105882354, 0.105882354, 0.37254903)
+
+[node name="RoomGen" type="Node3D" parent="." unique_id=1968377440]
+script = ExtResource("3_oux4p")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

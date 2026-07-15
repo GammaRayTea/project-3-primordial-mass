@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 @export var render_low_res:bool = false
 @export var low_resolution:Vector2i
@@ -10,3 +10,8 @@ func _ready() -> void:
 	else:
 		get_tree().root.content_scale_size = high_resolution
 	get_tree().root.size = high_resolution
+	
+	
+	$MainMenu.start_button.pressed.connect($Game.start)
+	$Game.start()
+	$MainMenu.hide()

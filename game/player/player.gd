@@ -20,8 +20,7 @@ class_name Player extends CharacterBody3D
 
 var current_sprint_value:float = 0
 var can_sprint:bool = true
-var sprint_timer:Timer = Timer.new()
-
+@export var sprint_timer:Timer
 enum STATE {IDLE, WALKING, RUNNING, PUSHING}
 var current_state = STATE.IDLE
 
@@ -32,9 +31,6 @@ var control_interaction_target:Interactable
 
 var held_item:Item = null
 
-func _ready() -> void:
-	add_child(sprint_timer)
-	sprint_timer.timeout.connect(on_sprint_timer_done)
 
 
 func _physics_process(_delta: float) -> void:
