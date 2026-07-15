@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://pt0651lb1fab" path="res://game/enemies/test_enemy/minas_tes_subject.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="8_ycdy4"]
 [ext_resource type="Script" uid="uid://nr6yjohwcrid" path="res://game/item_pickup.gd" id="9_4c57u"]
+[ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.tres.gd" id="9_w48qg"]
 [ext_resource type="Resource" uid="uid://v4paov7648c6" path="res://game/items/test_item/test_item.tres" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="12_ycdy4"]
@@ -42,6 +43,7 @@ mass = 0.1
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.495, 0)
+MAX_WALKING_SPEED = 15.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = SubResource("Environment_0xm2m")
@@ -56,14 +58,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7247126, 1.0000019, 0.4620
 [node name="Enemy" parent="Game" unique_id=2048773448 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76589847, 1, -2.1771996)
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_generator") instance=ExtResource("6_7mycd")]
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_generator", "room_mesh") instance=ExtResource("6_7mycd")]
 cell_margin = 4
 random_seed = 3
 player = NodePath("../Player")
 room_generator = NodePath("RoomGen")
+room_mesh = NodePath("MeshInstance3D")
 
 [node name="RoomGen" type="Node3D" parent="Game/DungeonGenerator" unique_id=27122260]
 script = ExtResource("8_ycdy4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/DungeonGenerator" unique_id=1927893546]
+script = ExtResource("9_w48qg")
 
 [node name="MinasTestChaser" parent="Game" unique_id=1654651026 instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.629738, 1, 2.3486192)
@@ -74,12 +80,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="Icon" type="Sprite3D" parent="Game/ItemPickup" unique_id=1004278863]
+[node name="@Sprite3D@23332" type="Sprite3D" parent="Game/ItemPickup" unique_id=103678252]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox" type="Area3D" parent="Game/ItemPickup" unique_id=1106858112 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=169195743 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")

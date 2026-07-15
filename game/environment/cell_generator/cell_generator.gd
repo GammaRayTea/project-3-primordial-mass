@@ -11,15 +11,15 @@ extends Node3D
 @export var outer_map:Control
 
 @export var room_generator:RoomGen
+@export var room_mesh:RoomMesh
 var generated_rooms:Array[BitMap]
+var generated_room_mesh: Array[Array]
 
 var start_pos = Vector2(0,0)
 var current_position := Vector2(0,0):
 	set(value):
 		current_position = value
-		if debug:
-			print("new gen ---------------------------")
-		expand_map()
+		call_deferred("expand_map")
 
 var outer_check_range:int = 3
 var inner_check_range:int = 1
@@ -36,15 +36,12 @@ func _ready() -> void:
 	var start_cell = Cell.new(cell_size,cell_size/2.0,rng)
 	start_cell.global_point_position = start_cell.point_position
 	generated_cells[start_pos] = start_cell
-
-	
-
 	
 	
-	expand_map()
+	call_deferred("expand_map")
 
 
-func expand_map()->void:
+func expand_map() -> void:
 	var staged_delanauy_ids := generate_new_cells(outer_check_range)
 	lock_in_cells(inner_check_range, staged_delanauy_ids)
 
@@ -73,15 +70,15 @@ func _physics_process(_delta: float) -> void:
 	
 
 ##Check Cells in a rectangle around current cell
-func generate_new_cells(_check_range:int) -> PackedInt32Array:
-	var new_cells:Dictionary[Vector2,Cell] = {}
-	for i in range(_check_range*2+1):
-		for j in range(_check_range*2+1):
+func generate_new_cells(_check_range: int) -> PackedInt32Array:
+	var new_cells:Dictionary[Vector2, Cell] = {}
+	for i in range(_check_range * 2 + 1):
+		for j in range(_check_range * 2 + 1):
 			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
 			if !generated_cells.has(pos):
 
 				new_cells[pos] = Cell.new(cell_size,cell_margin, rng )
-				new_cells[pos].global_point_position = pos+new_cells[pos].point_position
+				new_cells[pos].global_point_position = pos + new_cells[pos].point_position
 				outer_map.cells.push_back(pos)
 				outer_map.points.push_back(new_cells[pos].point_position)
 	
@@ -98,12 +95,12 @@ func generate_new_cells(_check_range:int) -> PackedInt32Array:
 	
 	return delaunayIDs
 	
-func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> void:
-	var new_positions:=PackedVector2Array()
-	var active_delaunay:= PackedInt32Array()
-	for i in range(_check_range*2+1):
-		for j in range(_check_range*2+1):
-			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
+func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) -> void:
+	var new_positions := PackedVector2Array()
+	var active_delaunay := PackedInt32Array()
+	for i in range(_check_range * 2 + 1):
+		for j in range(_check_range * 2 + 1):
+			var pos = (Vector2(i - _check_range,j - _check_range) + current_position) * cell_size
 			new_positions.push_back(pos)
 			
 			if !locked_cells.has(pos):
@@ -118,13 +115,15 @@ func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> v
 		
 				
 				active_delaunay.append_array(cell_accepted_connection_ids)
-				var room_bit_map:BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
+				var room_bit_map: BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
 				generated_rooms.append(room_bit_map)
+				var cell_instance: RoomMesh = room_mesh.duplicate() as RoomMesh
+				add_child(cell_instance)
+				var cell_position_wc: Vector3 = cell_to_world(pos / cell_size) + Vector3(-cell_size / 2.0, 0.0, -cell_size / 2.0)
+				cell_instance.position = cell_position_wc
+				cell_instance.build_mesh(room_bit_map)
+				generated_room_mesh.append([pos, cell_instance])
 				active_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
-				
-				print("cell ", pos)
-				for cell in locked_cells[pos].connections:
-					print(cell.global_point_position)
 
 	active_map.draw_point_ids.append_array(active_delaunay)
 	active_map.queue_redraw()
@@ -193,5 +192,4 @@ func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos-Vector2(0,cell_size)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size,0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0,cell_size)))
-	print
 	return ids

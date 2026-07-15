@@ -7,7 +7,7 @@ var rng:RandomNumberGenerator
 
 ## [param _size] determines cell size in game engine units 
 ## [param _global_random_point_position] is the position of the randomized point of the cell
-func generate_room(_size: int, _global_random_point_position: Vector2,_cell_origin_position, connected_cells: Array[Cell]) -> BitMap:
+func generate_room(_size: int, _global_random_point_position: Vector2, _cell_origin_position, connected_cells: Array[Cell]) -> BitMap:
 	var bit_map:BitMap = BitMap.new()
 	bit_map.create(Vector2(_size,_size))
 	var room_corners: Array[Vector2] = []
