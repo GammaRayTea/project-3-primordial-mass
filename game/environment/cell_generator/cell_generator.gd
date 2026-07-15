@@ -147,7 +147,7 @@ func get_points(_cell_dict) -> PackedVector2Array:
 	
 func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> PackedInt32Array:
 	var cell_id:int = generated_cells.keys().find(_cell_pos)
-	
+	var this_cell:Cell = generated_cells[_cell_pos]
 	var ids_triangles_with_pos:PackedInt32Array
 	var i:int = 0
 	
@@ -157,36 +157,69 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packed
 		print("neighbours: ", cell_neighbour_ids)
 		print(_outer_ids.count(cell_id), " triangles found")
 	
-	#find indices of where the triangles containing this point start
-	var accepted_lines := PackedInt32Array()
+	#find indices of lines to draw, meaning they have valid connections
+	var found_lines:Array[Array] = []
 	while i < _outer_ids.size():
 		if _outer_ids[i] == cell_id:
-			
+			#get start of triangle that contains cell_id
 			var triangle:=PackedInt32Array()
 			triangle = _outer_ids.slice(i- i%3,i- i%3+3)
 			ids_triangles_with_pos.append(i- i%3)
 			if debug:
 				print(triangle)
-			
+			#find valid lines to neighbours
 			for id in triangle:
 				if cell_neighbour_ids.has(id):
-					accepted_lines.append_array([cell_id,id])
 					var neighbour_cell:Cell= generated_cells[generated_cells.keys()[id]]
-					if !locked_cells[_cell_pos].connections.has(neighbour_cell):
-						
-						locked_cells[_cell_pos].connections.append(neighbour_cell)
-				else:
-					if debug:
-						print("cell ", cell_id ,": cut ", [cell_id,id], " because of ", id)
 					
-		
-		
+					if !locked_cells[_cell_pos].connections.has(neighbour_cell):
+						locked_cells[_cell_pos].connections.append(neighbour_cell)
+						
+					if !found_lines.has([cell_id,id]):
+						found_lines.append([cell_id,id])
+						
 		i += 1
+
+	var accepted_lines := PackedInt32Array()
+	
 	if debug:
-		print("cell ", cell_id," ",_cell_pos, " has ",locked_cells[_cell_pos].connections.size(), " connections: ", locked_cells[_cell_pos].connections, " from ", generated_cells[_cell_pos].global_point_position)
+		print(_cell_pos, "---------", cell_id)
+	
+	for neighbour_cell in this_cell.connections:
+		if locked_cells.values().has(neighbour_cell) and !neighbour_cell.connections.has(this_cell):
+			this_cell.connections.erase(neighbour_cell)
+			
+	var connection_amount = this_cell.connections.size()
+	if connection_amount == 0:
+		push_warning("Cell with no connections detected")
+	for line in found_lines:
+
+		var id = line[1]
+		var neighbour_cell:Cell= generated_cells.values()[id]
+		
+		if this_cell.connections.has(neighbour_cell):
+			if !neighbour_cell.connections.has(this_cell):
+				if connection_amount>2 and rng.randf()>0.5:
+
+						this_cell.connections.erase(neighbour_cell)
+						connection_amount-=1
+						if debug:
+							print("discarded ", line, ", connection to ", generated_cells.find_key(neighbour_cell))
+				else:
+					accepted_lines.append_array(line)
+					if debug:
+						print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
+			else:
+				accepted_lines.append_array(line)
+				if debug:
+					print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
+
+	if debug:
+		print(accepted_lines)
 	return accepted_lines
 
-	
+
+
 func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	var ids:=PackedInt32Array()
 	ids.push_back(generated_cells.keys().find(_cell_pos-Vector2(cell_size,0)))

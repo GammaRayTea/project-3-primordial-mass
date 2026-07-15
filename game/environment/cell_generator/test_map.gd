@@ -36,7 +36,7 @@ func _draw() -> void:
 		#cells
 		draw_rect(Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size),cell_color)
 		if is_inner:
-			
+			pass
 
 
 			draw_texture_rect(room_bit_maps[cell] , Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size)  , false)

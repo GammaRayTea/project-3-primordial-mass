@@ -13,7 +13,6 @@
 
 [node name="Main" type="Node3D" unique_id=179947457]
 script = ExtResource("1_5vw27")
-render_low_res = true
 low_resolution = Vector2i(512, 288)
 high_resolution = Vector2i(1920, 1080)
 
@@ -34,7 +33,6 @@ mass = 0.1
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2683907, 0)
-MAX_WALKING_SPEED = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = ExtResource("6_4c57u")
