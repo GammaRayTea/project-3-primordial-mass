@@ -22,8 +22,9 @@ state_machine = NodePath("StateMachine")
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
 shape = SubResource("CapsuleShape3D_yh7c5")
 
-[node name="StateMachine" type="Node" parent="." unique_id=751087973]
+[node name="StateMachine" type="Node" parent="." unique_id=751087973 node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("2_uxsc4")
+animation_tree = NodePath("../AnimationTree")
 metadata/_custom_type_script = "uid://d10lffcbhtmrp"
 
 [node name="Events" type="Node" parent="." unique_id=1440544615]

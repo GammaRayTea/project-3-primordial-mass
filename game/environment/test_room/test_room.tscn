@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="1_js5f7"]
 [ext_resource type="Texture2D" uid="uid://dtxbd1k5lkicx" path="res://assets/environment/textures/FloorWood.png" id="1_xatlg"]
 [ext_resource type="Script" uid="uid://4y5k2jdbfw8u" path="res://game/environment/test_room/mesh_instance_3d.gd" id="2_20bci"]
+[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="4_y5tei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2mth"]
 albedo_texture = ExtResource("1_xatlg")
@@ -68,3 +69,6 @@ mesh = SubResource("BoxMesh_2v01v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1481759204]
 shape = SubResource("BoxShape3D_udmuc")
+
+[node name="Globber" parent="." unique_id=2048773448 instance=ExtResource("4_y5tei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4492831, 0.5, 3.4029093)

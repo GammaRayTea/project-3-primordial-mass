@@ -7,6 +7,8 @@
 	set(value):
 		next_state = value
 		update_configuration_warnings()
+		
+@export var animation_state_name:String
 @export_category("Pass Data")
 @export var pass_data:bool = false:
 	set(value):
@@ -32,6 +34,8 @@ var pass_data_target_amount:int = 0:
 
 		notify_property_list_changed()
 var pass_data_targets: Array[Dictionary] = []
+
+
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties:Array[Dictionary] = []

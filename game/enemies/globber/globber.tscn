@@ -356,6 +356,7 @@ min_scale = 0.3
 max_scale = 2.0
 mask = Vector3(1, 0, 1)
 next_state = NodePath("../WalkForwardVelocityState")
+animation_state_name = "globber_idle"
 pass_data = true
 target_amount = 1
 target_1 = NodePath("../WalkForwardVelocityState")
@@ -371,6 +372,7 @@ randomize_time = true
 minimum = 0.0
 maximum = 5.0
 next_state = NodePath("../WaitState")
+animation_state_name = "globber_walk"
 metadata/_custom_type_script = "uid://f032hrk67kwx"
 
 [node name="WaitState" type="Node" parent="StateMachine/Roam" index="2" unique_id=1243969389 node_paths=PackedStringArray("next_state")]
@@ -379,6 +381,7 @@ randomize_time = true
 minimum = 0.0
 maximum = 5.0
 next_state = NodePath("../RandomDirectionState")
+animation_state_name = "globber_idle"
 metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="Alert" type="Node" parent="StateMachine" index="1" unique_id=1391199121]
@@ -391,6 +394,7 @@ rotation_pivot = NodePath("../../../RotationPivot")
 speed = 1.4
 distance_threshold = 1.3
 next_state = NodePath("../WaitStateAfter")
+animation_state_name = "globber_walk"
 metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
 
 [node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
@@ -399,6 +403,7 @@ randomize_time = true
 minimum = 0.0
 maximum = 5.0
 next_state = NodePath("../EnableVisionCone")
+animation_state_name = "globber_idle_turning"
 metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
