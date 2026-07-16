@@ -13,6 +13,7 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 	var room_corners: Array[Vector2] = []
 	var outer_ring_width: int = 1
 	var inner_square_radius: int = int((_size - outer_ring_width * 2.0) / 2.0)
+	var min_size: int = 3
 	
 	var connected_cell_points:= PackedVector2Array()
 	#convert all connecting center points and center to local coordinates
@@ -38,7 +39,7 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 	
 	#generate four additional room corners
 	for i in range(4):
-		room_corners.append(Vector2((rng.randf() * inner_square_radius) * snappedf(sin((i + 1.5) * PI/2), 1.0), (rng.randf() * inner_square_radius) * snappedf(sin((i + 0.5) * PI/2), 1.0)) + Vector2(_size/2.0, _size/2.0))
+		room_corners.append(Vector2(((rng.randf() * (inner_square_radius - min_size)) + min_size) * snappedf(sin((i + 1.5) * PI/2), 1.0), (rng.randf() * inner_square_radius) * snappedf(sin((i + 0.5) * PI/2), 1.0)) + Vector2(_size/2.0, _size/2.0))
 	
 	#put the original center at the right corner possition
 	if (center_lc.x > _size/2.0):
@@ -135,9 +136,3 @@ func doIntersect(_points) -> bool:
 		return true
 
 	return false
-
-#
-#func _ready() -> void:
-	#var room_1 = generate_room(size, center, connecting_points)
-	#for i in range(room_1.size()):
-		#print(room_1[i])

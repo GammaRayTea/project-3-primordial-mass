@@ -1,9 +1,6 @@
 class_name RoomMesh extends MeshInstance3D
 
-var center: Vector2 = Vector2(randf() * 16, randf() * 16)
-var size: int = 16
-var cell_origin: Vector2 = Vector2(0.0, 0.0)
-var connecting_points: Array = [Vector2(randf() * 16 - 16, randf() * 16), Vector2(randf() * 16, randf() * 16 -16), Vector2(randf() * 16 + 16, randf() * 16), Vector2(randf() * 16 - 16, randf() * 16 + 16)]
+@onready var rooms: Node3D = get_node("Rooms")
 
 func build_mesh(_grid: BitMap) -> void:
 	print("building mesh")
@@ -22,12 +19,12 @@ func build_mesh(_grid: BitMap) -> void:
 	
 	var verts_ground = PackedVector3Array()
 	var normals_ground = PackedVector3Array()
-	var uvs_ground = PackedVector2Array()
+	#var uvs_ground = PackedVector2Array()
 	var indices_ground = PackedInt32Array()
 	
 	var verts_wall = PackedVector3Array()
 	var normals_wall = PackedVector3Array()
-	var uvs_wall = PackedVector2Array()
+	#var uvs_wall = PackedVector2Array()
 	var indices_wall = PackedInt32Array()
 	
 	
@@ -121,9 +118,19 @@ func build_mesh(_grid: BitMap) -> void:
 	surface_array_ground[Mesh.ARRAY_INDEX] = indices_ground
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_ground)
 	
+	var collision_instance_ground := CollisionShape3D.new()
+	collision_instance_ground.shape = mesh.create_trimesh_shape()
+	rooms.add_child(collision_instance_ground)
+	collision_instance_ground.global_position = Vector3()
+	
 	# Assign arrays to surface array.
 	surface_array_wall[Mesh.ARRAY_VERTEX] = verts_wall
 	surface_array_wall[Mesh.ARRAY_NORMAL] = normals_wall
 	#surface_array_wall[Mesh.ARRAY_TEX_UV] = uvs_wall
 	surface_array_wall[Mesh.ARRAY_INDEX] = indices_wall
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_wall)
+	mesh.create_trimesh_shape()
+	
+	var collision_instance_wall := CollisionShape3D.new()
+	collision_instance_wall.shape = mesh.create_trimesh_shape()
+	rooms.add_child(collision_instance_wall)

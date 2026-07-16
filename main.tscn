@@ -71,6 +71,8 @@ script = ExtResource("8_ycdy4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Game/DungeonGenerator" unique_id=1927893546]
 script = ExtResource("9_w48qg")
 
+[node name="Rooms" type="StaticBody3D" parent="Game/DungeonGenerator/MeshInstance3D" unique_id=2058002799]
+
 [node name="MinasTestChaser" parent="Game" unique_id=1654651026 instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.629738, 1, 2.3486192)
 
@@ -80,12 +82,12 @@ script = ExtResource("9_4c57u")
 item = ExtResource("10_4c57u")
 metadata/_custom_type_script = "uid://nr6yjohwcrid"
 
-[node name="@Sprite3D@23332" type="Sprite3D" parent="Game/ItemPickup" unique_id=103678252]
+[node name="@Sprite3D@38814" type="Sprite3D" parent="Game/ItemPickup" unique_id=582018557]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("11_dg77c")
 
-[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=169195743 node_paths=PackedStringArray("target")]
+[node name="InteractionBox2" type="Area3D" parent="Game/ItemPickup" unique_id=1346995446 node_paths=PackedStringArray("target")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("12_ycdy4")
