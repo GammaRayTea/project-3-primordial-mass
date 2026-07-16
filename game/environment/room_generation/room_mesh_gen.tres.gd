@@ -38,7 +38,7 @@ func build_mesh(_grid: BitMap) -> void:
 	
 	#creating floor tiles
 	var generate_floor = func(_x: float, _y: float, _height: float) -> void:
-		var start_index: int = verts_wall.size()
+		var start_index: int = verts_ground.size()
 		for i in range(4):
 			verts_ground.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)) + 0.5, _height, _y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)) + 0.5))
 			normals_ground.append(Vector3(0, 1, 0))
@@ -50,9 +50,11 @@ func build_mesh(_grid: BitMap) -> void:
 		indices_ground.append(start_index + 3)
 	
 	#creating two stacked wall pieces
-	var generate_wall = func(_x: float, _y: float, _facing, _flip_faces: bool) -> void:
+	var generate_wall = func(_x: float, _y: float, _facing, _flip_faces: bool, _rotated: bool) -> void:
 		var height: float = 0.5
 		var normal: Vector3
+		if _rotated:
+			_flip_faces = not _flip_faces
 		
 		if _facing == PlaneMesh.FACE_Z:
 			if _flip_faces:
@@ -66,37 +68,40 @@ func build_mesh(_grid: BitMap) -> void:
 				normal = Vector3(1.0, 0.0, 0.0)
 		
 		for j in range(2):
-			var start_index: int = verts_ground.size()
+			var start_index: int = verts_wall.size()
 			for i in range(4):
-				verts_wall.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)) + 0.5, height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)) + 0.5, _y))
+				if _rotated:
+					verts_wall.append(Vector3(_x, height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))))
+				else:
+					verts_wall.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y))
 				normals_wall.append(normal)
-			
-			if _flip_faces:
-				indices_wall.append(start_index)
-				indices_wall.append(start_index + 2)
-				indices_wall.append(start_index + 1)
-				indices_wall.append(start_index)
-				indices_wall.append(start_index + 3)
-				indices_wall.append(start_index + 2)
-			else:
-				indices_wall.append(start_index)
-				indices_wall.append(start_index + 1)
-				indices_wall.append(start_index + 2)
-				indices_wall.append(start_index)
-				indices_wall.append(start_index + 2)
-				indices_wall.append(start_index + 3)
+				
+				if _flip_faces:
+					indices_wall.append(start_index)
+					indices_wall.append(start_index + 1)
+					indices_wall.append(start_index + 2)
+					indices_wall.append(start_index)
+					indices_wall.append(start_index + 2)
+					indices_wall.append(start_index + 3)
+				else:
+					indices_wall.append(start_index)
+					indices_wall.append(start_index + 2)
+					indices_wall.append(start_index + 1)
+					indices_wall.append(start_index)
+					indices_wall.append(start_index + 3)
+					indices_wall.append(start_index + 2)
 	
 	
 	#creating the walls for a tile
 	var generate_walls = func(_x: float, _y: float, _adjacent_sub_cells: Array[bool]) -> void:
 		if (_adjacent_sub_cells[1] == true):
-			generate_wall.call(_x + 0.5, _y + 1.0, PlaneMesh.FACE_Z, false)
+			generate_wall.call(_x + 0.5, _y + 1.0, PlaneMesh.FACE_Z, false, false)
 		if (_adjacent_sub_cells[0] == true):
-			generate_wall.call(_x + 0.5, _y, PlaneMesh.FACE_Z, true)
+			generate_wall.call(_x + 0.5, _y, PlaneMesh.FACE_Z, true, false)
 		if (_adjacent_sub_cells[3] == true):
-			generate_wall.call(_x, _y + 0.5, PlaneMesh.FACE_X, true)
+			generate_wall.call(_x, _y + 0.5, PlaneMesh.FACE_X, true, true)
 		if (_adjacent_sub_cells[2] == true):
-			generate_wall.call(_x + 1.0, _y + 0.5, PlaneMesh.FACE_X, false)
+			generate_wall.call(_x + 1.0, _y + 0.5, PlaneMesh.FACE_X, false, true)
 	
 	
 	for current_sub_cell_y in range(grid_size_y):
