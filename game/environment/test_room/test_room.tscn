@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="1_js5f7"]
 [ext_resource type="Texture2D" uid="uid://dtxbd1k5lkicx" path="res://assets/environment/textures/FloorWood.png" id="1_xatlg"]
-[ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.tres.gd" id="2_20bci"]
+[ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.gd" id="2_20bci"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="4_y5tei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2mth"]

@@ -1,6 +1,6 @@
 class_name RoomMesh extends MeshInstance3D
 
-@onready var rooms: Node3D = get_node("Rooms")
+@export var room_collisions: Node3D
 
 func build_mesh(_grid: BitMap) -> void:
 	print("building mesh")
@@ -60,9 +60,9 @@ func build_mesh(_grid: BitMap) -> void:
 				normal = Vector3(0.0, 0.0, 1.0)
 		else:
 			if _flip_faces:
-				normal = Vector3(-1.0, 0.0, 0.0)
-			else:
 				normal = Vector3(1.0, 0.0, 0.0)
+			else:
+				normal = Vector3(-1.0, 0.0, 0.0)
 		
 		for j in range(2):
 			var start_index: int = verts_wall.size()
@@ -120,7 +120,7 @@ func build_mesh(_grid: BitMap) -> void:
 	
 	var collision_instance_ground := CollisionShape3D.new()
 	collision_instance_ground.shape = mesh.create_trimesh_shape()
-	rooms.add_child(collision_instance_ground)
+	room_collisions.add_child(collision_instance_ground)
 	collision_instance_ground.global_position = Vector3()
 	
 	# Assign arrays to surface array.
@@ -133,4 +133,4 @@ func build_mesh(_grid: BitMap) -> void:
 	
 	var collision_instance_wall := CollisionShape3D.new()
 	collision_instance_wall.shape = mesh.create_trimesh_shape()
-	rooms.add_child(collision_instance_wall)
+	room_collisions.add_child(collision_instance_wall)
