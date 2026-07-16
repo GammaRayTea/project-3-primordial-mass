@@ -2,14 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
 [ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_uxsc4"]
-[ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="3_ypcvc"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh7c5"]
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_kpvxy"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 
@@ -36,16 +33,6 @@ root_node = NodePath("../AnimationTree")
 root_node = NodePath(".")
 tree_root = SubResource("AnimationRootNode_kpvxy")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="HitBox" type="Area3D" parent="." unique_id=565674913]
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("3_ypcvc")
-metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1689760368]
-shape = SubResource("BoxShape3D_udmuc")
-debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=158402479]
 collision_layer = 4

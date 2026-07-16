@@ -56,16 +56,15 @@ radius = 0.3227539
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud", "camera", "sprint_timer") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "hud", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 3.0
 MAX_RUNNING_SPEED = 8.0
-rotation_pivot = NodePath("RotationPivot")
-interaction_box = NodePath("RotationPivot/InteractionButtonBox")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
 camera = NodePath("CameraStuff/Camera")
 sprint_timer = NodePath("SprintTimer")
+rotation_pivot = NodePath("RotationPivot")
 
 [node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
 
