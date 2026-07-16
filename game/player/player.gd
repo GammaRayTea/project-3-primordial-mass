@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody3D
+class_name Player extends Entity
 ## Class for player character
 @export_category("Attributes")
 @export var MAX_WALKING_SPEED = 5.0
@@ -12,16 +12,13 @@ class_name Player extends CharacterBody3D
 @export var SPRINT_RECHARGE_TIME:float = 5.0
 #Component Nodes
 @export_category("Components")
-@export var rotation_pivot:Node3D
-@export var interaction_box:Area3D
 @export var push_box_shape:CollisionShape3D
 @export var hud:Control
-
+@export var camera:PlayerCam
+@export var sprint_timer:Timer
 
 var current_sprint_value:float = 0
 var can_sprint:bool = true
-var sprint_timer:Timer = Timer.new()
-
 enum STATE {IDLE, WALKING, RUNNING, PUSHING}
 var current_state = STATE.IDLE
 
@@ -32,9 +29,6 @@ var control_interaction_target:Interactable
 
 var held_item:Item = null
 
-func _ready() -> void:
-	add_child(sprint_timer)
-	sprint_timer.timeout.connect(on_sprint_timer_done)
 
 
 func _physics_process(_delta: float) -> void:
@@ -43,23 +37,27 @@ func _physics_process(_delta: float) -> void:
 	
 	match current_state:
 		STATE.IDLE:
+			camera._move_to_center()
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 			if direction:
 				current_state = STATE.WALKING
 		STATE.WALKING:
+			apply_gravity(_delta)
 			if Input.is_action_just_pressed("sprint") and can_sprint:
 				current_state = STATE.RUNNING
-
 			else:
 				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 		STATE.RUNNING:
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, BASE_ACCELERATION)
 			handle_sprint()
 			if Input.is_action_just_released("sprint"):
 				current_state = STATE.IDLE
 			
 		STATE.PUSHING:
+			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, PUSH_ACCELERATION)
 			push(_delta,direction)
 			
@@ -90,13 +88,11 @@ func process_interact_input() -> void:
 		if control_interaction_target != null:
 			control_interaction_target.activate(self)
 
+
 func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:float) -> void:
 	if _direction:
-		var current_pivot_rot = Quaternion(rotation_pivot.transform.basis)
-		var target_rot = Quaternion(Vector3.UP,_direction.signed_angle_to(Vector3.FORWARD, Vector3.DOWN))
-		
-		rotation_pivot.transform.basis = Basis(current_pivot_rot.slerp(target_rot, 0.5))
-		
+		var target_rot = rotate_to_direction(_direction)
+		camera._update_position(target_rot)
 		
 		velocity.x = move_toward(velocity.x, _direction.x * _target_speed, _acceleration)
 		velocity.z = move_toward(velocity.z, _direction.z * _target_speed, _acceleration)
@@ -108,11 +104,13 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	else:
 		velocity.x = move_toward(velocity.x, 0, TRACTION)
 		velocity.z = move_toward(velocity.z, 0,TRACTION)
-	
+		current_state = STATE.IDLE
 	
 	move_and_slide()
 #endregion
-
+func apply_gravity(_delta:float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * _delta
 #region push
 func start_push():
 	push_box_shape.set_deferred("disabled", false)
@@ -134,6 +132,7 @@ func on_push_box_exited(_area: Area3D) -> void:
 	if _area is InteractionBox:
 		if _area.target == push_target:
 			push_target = null
+			push_box_shape.set_deferred("disabled", true)
 			current_state = STATE.IDLE
 #endregion
 
@@ -158,4 +157,15 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 		if _area.target is Interactable:
 			_area.target.hover_end()
 			control_interaction_target = null
+#endregion
+
+
+
+#region damage handling
+func get_hit(source:HitBox):
+	super(source)
+
+
+func die() -> void:
+	super()
 #endregion

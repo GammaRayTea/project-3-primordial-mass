@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://bi8u06c53mn68" path="res://game/behaviours/state_machine/states/walk_forward.gd" id="2_0qduu"]
 [ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/behaviours/state_machine/states/wait.gd" id="3_qijlw"]
 [ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="4_ovnw3"]
-[ext_resource type="Script" uid="uid://c41r5fjnapxxa" path="res://game/behaviours/state_machine/states/alert_state.gd" id="4_qijlw"]
+[ext_resource type="Script" path="res://game/behaviours/state_machine/states/aler.gd" id="4_qijlw"]
 [ext_resource type="Texture2D" uid="uid://cocr5d27l2mx3" path="res://assets/enemies/test_enemy/657-6574748_mario-goomba-clipart-mario-bros-2372846964.jpg" id="5_231wx"]
-[ext_resource type="Script" uid="uid://drf2ekrhnwk3t" path="res://game/behaviours/state_machine/states/move_to_player.gd" id="5_ovnw3"]
+[ext_resource type="Script" uid="uid://drf2ekrhnwk3t" path="res://game/behaviours/state_machine/states/walk_to_position.gd" id="5_ovnw3"]
 [ext_resource type="Shader" uid="uid://b26o8m50binck" path="res://game/enemies/test_enemy/motus_shader.gdshader" id="6_hqhxi"]
 [ext_resource type="Texture2D" uid="uid://ciyisny53odwq" path="res://assets/enemies/test_enemy/001galv.png" id="7_lwtss"]
 [ext_resource type="Script" uid="uid://jsqlujmfilpn" path="res://game/enemies/test_enemy/animated_sprite_3d.gd" id="8_2224s"]
-[ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/test_enemy/vision_cone.tscn" id="9_lxvgx"]
+[ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="9_lxvgx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ldnf"]
 

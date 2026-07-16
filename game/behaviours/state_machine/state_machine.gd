@@ -6,6 +6,8 @@ class_name StateMachine extends Node
 		initial_state = value
 		update_configuration_warnings()
 
+@export var animation_tree:AnimationTree
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = PackedStringArray()
 	if get_children().size() == 0:
@@ -23,32 +25,53 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 var current_state: State
 
-
+var executing:bool = false
 func _init() -> void:
 	update_configuration_warnings()
 
+var animation_state_names:PackedStringArray =PackedStringArray()
+
 func _ready() -> void:
+	
+	
 	if !Engine.is_editor_hint():
 
-		for state in get_children():
-			if state is State:
-				prepare_state(state)
+		
+		print(animation_tree)
+		for prop in animation_tree.tree_root.get_property_list():
+			if (prop.name as String).begins_with("state") and (prop.name as String).ends_with("node"):
+				animation_state_names.push_back((prop.name as String).get_slice("/", 1))
+		print(animation_state_names)
+		
+		for child in get_children():
+			if child is State:
+				prepare_state(child)
+			else:
+				for sub_child in child.get_children():
+					if sub_child is State:
+						prepare_state(sub_child)
+
 		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
 	_state.finished.connect(_on_state_finished)
-
 	_state._setup()
 
+
 func _update(_delta:float) -> void:
-	current_state._execute( _delta)
+	if executing:
+		current_state._execute( _delta)
 	
 
 func switch_to_state(_state:State) -> void:
+	if animation_state_names.has(_state.animation_state_name):
+		animation_tree["parameters/playback"].travel(_state.animation_state_name)
 	if current_state:
 		current_state._exit()
 	current_state = _state
+	executing = true
 	current_state._start()
 
 func _on_state_finished()->void:
+	executing = false
 	switch_to_state(current_state.next_state)

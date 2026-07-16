@@ -3,7 +3,7 @@ extends RigidInteractable
 @export var hit_box:HitBox
 @export var damage_speed_threshold:float = 1.0
 func onInteractionAreaEntered(_area:Area3D)->void:
-	print("entered")
+	pass
 	
 func _physics_process(_delta: float) -> void:
 

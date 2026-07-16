@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dxketbhopi5ju"]
 
-[ext_resource type="Texture2D" uid="uid://cqkjj6it7sqlb" path="res://assets/Items/Stick/Sticc.png" id="1_0sy6i"]
 [ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/player/hud_overlay.gd" id="1_8ijb6"]
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/Themes/default.tres" id="1_eiboa"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_eiboa"]
 [ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/player/item_preview.gd" id="2_dif5i"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_eiboa"]
 
 [node name="Overlay" type="Control" unique_id=1199412428]
 layout_mode = 3
@@ -40,13 +40,14 @@ anchor_left = 0.2
 anchor_top = 0.1
 anchor_right = 0.8
 anchor_bottom = 0.78200006
-offset_left = 4.5776367e-05
-offset_right = 4.5776367e-05
-offset_bottom = -0.4520111
+offset_left = 0.33927917
+offset_top = -3.2015686
+offset_right = 0.33927917
+offset_bottom = -3.6535797
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_eiboa")
-texture = ExtResource("1_0sy6i")
+texture = ExtResource("4_eiboa")
 stretch_mode = 5
 
 [node name="ItemLabel" type="Label" parent="ItemPreview" unique_id=2108661356]
@@ -56,8 +57,10 @@ anchor_left = 0.0050000004
 anchor_top = 0.80600005
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.06499994
-offset_top = 0.083984375
+offset_left = 0.17199457
+offset_top = -10.343445
+offset_right = 0.10699463
+offset_bottom = 29.000008
 theme = ExtResource("1_eiboa")
 text = "Stick
 "

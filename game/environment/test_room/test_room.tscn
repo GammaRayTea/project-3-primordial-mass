@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://slg88wvcuno1"]
 
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="1_js5f7"]
+[ext_resource type="Texture2D" uid="uid://dtxbd1k5lkicx" path="res://assets/environment/textures/FloorWood.png" id="1_xatlg"]
 [ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.tres.gd" id="2_20bci"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8soms"]
-size = Vector2(20, 20)
+[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="4_y5tei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2mth"]
-albedo_texture = SubResource("PlaceholderTexture2D_8soms")
-uv1_scale = Vector3(20, 10, 1)
+albedo_texture = ExtResource("1_xatlg")
+uv1_scale = Vector3(200, 100, 1)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kpvxy"]
@@ -40,6 +39,7 @@ visible = false
 mesh = SubResource("PlaneMesh_kpvxy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1083989178]
+visible = false
 shape = SubResource("BoxShape3D_kpvxy")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=542146527]
@@ -54,7 +54,9 @@ script = ExtResource("2_20bci")
 visible = false
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=665518036]
+process_mode = 4
 transform = Transform3D(0.9254348, 0.3789072, 0, -0.3789072, 0.9254348, 0, 0, 0, 1, 16.117085, 0.5141752, 0)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1845389677]
 mesh = SubResource("BoxMesh_w5spq")
@@ -70,3 +72,6 @@ mesh = SubResource("BoxMesh_2v01v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1481759204]
 shape = SubResource("BoxShape3D_udmuc")
+
+[node name="Globber" parent="." unique_id=2048773448 instance=ExtResource("4_y5tei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4492831, 0.5, 3.4029093)

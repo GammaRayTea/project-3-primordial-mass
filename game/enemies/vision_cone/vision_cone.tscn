@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bl53b1u4n37y7"]
+
+[ext_resource type="Script" uid="uid://8dsvnrwpf1t6" path="res://game/enemies/vision_cone/vision_cone.gd" id="1_r5mul"]
+
+[node name="VisionCone" type="Area3D" unique_id=518248361]
+script = ExtResource("1_r5mul")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=902548006]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+polygon = PackedVector2Array(5, -10, -5, -10, 0, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

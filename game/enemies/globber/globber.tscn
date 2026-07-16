@@ -2,37 +2,48 @@
 
 [ext_resource type="PackedScene" uid="uid://bnqdgg1ropvye" path="res://game/enemies/enemy_base/base_enemy.tscn" id="1_nrhof"]
 [ext_resource type="Animation" uid="uid://xj47j3efm4vo" path="res://assets/enemies/globber/animations/globber_attack.res" id="2_40eg8"]
+[ext_resource type="Script" uid="uid://d3h5j6rwem265" path="res://game/behaviours/state_machine/states/random_direction.gd" id="2_l3wxe"]
 [ext_resource type="Animation" uid="uid://b3cu40ppr885e" path="res://assets/enemies/globber/animations/globber_walk.res" id="2_v1ixo"]
 [ext_resource type="Texture2D" uid="uid://d5ysd3qo54gs" path="res://assets/enemies/globber/animations/Globber2Body.png" id="3_cwoiy"]
+[ext_resource type="Script" uid="uid://f032hrk67kwx" path="res://game/behaviours/state_machine/states/walk_forward_velocity.gd" id="3_gtf71"]
 [ext_resource type="Animation" uid="uid://cgieqjevkm3km" path="res://assets/enemies/globber/animations/globber_idle.res" id="3_kjdyy"]
 [ext_resource type="Texture2D" uid="uid://c7hd87335il2k" path="res://assets/enemies/globber/animations/Globber2RightFoot.png" id="4_40eg8"]
+[ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/behaviours/state_machine/states/wait.gd" id="4_gtf71"]
 [ext_resource type="Animation" uid="uid://ehu0o6l5st4h" path="res://assets/enemies/globber/animations/globber_idle_turning.res" id="4_h82rf"]
 [ext_resource type="Texture2D" uid="uid://c8cmq24ouf00p" path="res://assets/enemies/globber/animations/Globber2LeftFoot.png" id="5_kjdyy"]
+[ext_resource type="Script" uid="uid://drf2ekrhnwk3t" path="res://game/behaviours/state_machine/states/walk_to_position.gd" id="5_qg7h7"]
 [ext_resource type="Texture2D" uid="uid://dpsmsg8e6vbev" path="res://assets/enemies/globber/animations/Globber2RightArm.png" id="6_h82rf"]
+[ext_resource type="Script" uid="uid://dbrxet3cojgye" path="res://game/behaviours/state_machine/states/set_property_state.gd" id="6_joybc"]
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
+[ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
+[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="9_45htx"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
+[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="9_ydwe4"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
-[ext_resource type="Texture2D" uid="uid://bchescmbkkc6b" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimation-Sheet-export.png" id="14_o8dyd"]
+[ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
+[ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
+[ext_resource type="Script" uid="uid://cqa02cuqcr334" path="res://game/enemies/vision_cone/globber_vision_cone.gd" id="19_2si2q"]
+[ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="25_ydwe4"]
 
 [sub_resource type="Animation" id="Animation_nlepm"]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Visuals/Alive/Head:position")
+tracks/0/path = NodePath("../RotationPivot/Visuals/Alive/Head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0.9421303, 0.002768857)]
+"values": [Vector3(0, 0.13, 0.003)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Visuals/Alive/Body:rotation")
+tracks/1/path = NodePath("../RotationPivot/Visuals/Alive/Body:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -44,19 +55,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Visuals/Alive/ArmL:position")
+tracks/2/path = NodePath("../RotationPivot/Visuals/Alive/ArmL:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.15322615, 0.7, -0.03544605)]
+"values": [Vector3(-0.153, 0.04, -0.035)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Visuals/Alive/ArmL:rotation")
+tracks/3/path = NodePath("../RotationPivot/Visuals/Alive/ArmL:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -68,19 +79,19 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Visuals/Alive/ArmR:position")
+tracks/4/path = NodePath("../RotationPivot/Visuals/Alive/ArmR:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.14890833, 0.7, -0.053000003)]
+"values": [Vector3(0.149, 0.04, -0.015)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Visuals/Alive/ArmR:rotation")
+tracks/5/path = NodePath("../RotationPivot/Visuals/Alive/ArmR:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -92,7 +103,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../Visuals/Alive/ArmL/HandL:rotation")
+tracks/6/path = NodePath("../RotationPivot/Visuals/Alive/ArmL/HandL:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -104,19 +115,19 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Visuals/Alive/ArmL/HandL:position")
+tracks/7/path = NodePath("../RotationPivot/Visuals/Alive/ArmL/HandL:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.010135308, 0.10602206, -0.099999964)]
+"values": [Vector3(0.0054223686, 0.09281641, -0.010000005)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../Visuals/Alive/ArmR/HandR:rotation")
+tracks/8/path = NodePath("../RotationPivot/Visuals/Alive/ArmR/HandR:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -128,55 +139,55 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Visuals/Alive/FootR:position")
+tracks/9/path = NodePath("../RotationPivot/Visuals/Alive/FootR:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.080662236, 0.5, 0.102)]
+"values": [Vector3(0.081, 0.01, 0.102)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../Visuals/Alive/FootL:position")
+tracks/10/path = NodePath("../RotationPivot/Visuals/Alive/FootL:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.08233776, 0.5, 0.144)]
+"values": [Vector3(-0.082, 0.03, 0.144)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("../Visuals/Alive/Body:position")
+tracks/11/path = NodePath("../RotationPivot/Visuals/Alive/Body:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.00012817979, 0.8150839, 0)]
+"values": [Vector3(0, 0.05, 0)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("../Visuals/Alive/ArmR/HandR:position")
+tracks/12/path = NodePath("../RotationPivot/Visuals/Alive/ArmR/HandR:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.003251031, 0.07933146, -0.099999964)]
+"values": [Vector3(-0.003000006, 0.09696986, -0.010000005)]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("../Visuals/Alive/ArmR:scale")
+tracks/13/path = NodePath("../RotationPivot/Visuals/Alive/ArmR:scale")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -188,7 +199,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("../Visuals/Alive/Head:rotation")
+tracks/14/path = NodePath("../RotationPivot/Visuals/Alive/Head:rotation")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -196,6 +207,30 @@ tracks/14/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-1.5707964, -0.16329472, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../RotationPivot/Visuals:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../HitBox/CollisionShape3D:disabled")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_845p2"]
@@ -207,7 +242,64 @@ _data = {
 &"globber_walk": ExtResource("2_v1ixo")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y7tjh"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7o33"]
+animation = &"globber_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_45htx"]
+animation = &"globber_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ydwe4"]
+animation = &"globber_idle_turning"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nsq5j"]
+animation = &"globber_walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ai4x"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri6u3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65y1t"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ckhdf"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g0og0"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cg6f8"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t2uwx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3yu5q"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sana6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08f11"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bnwb"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6q3l"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_droo6"]
+states/Start/position = Vector2(196.66667, 100.120705)
+states/globber_attack/node = SubResource("AnimationNodeAnimation_l7o33")
+states/globber_attack/position = Vector2(624.6667, 228.66669)
+states/globber_idle/node = SubResource("AnimationNodeAnimation_45htx")
+states/globber_idle/position = Vector2(386.66666, 99.67901)
+states/globber_idle_turning/node = SubResource("AnimationNodeAnimation_ydwe4")
+states/globber_idle_turning/position = Vector2(386, 228.00002)
+states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
+states/globber_walk/position = Vector2(625.2593, 99.79789)
+transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turning", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turning", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turning", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_h6q3l")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
 atlas = ExtResource("14_o8dyd")
@@ -233,10 +325,6 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("14_o8dyd")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_111bw"]
-atlas = ExtResource("14_o8dyd")
-region = Rect2(384, 0, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
 "frames": [{
@@ -257,82 +345,208 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_joybc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_111bw")
 }],
-"loop": 1,
-"name": &"default",
+"loop": 0,
+"name": &"death",
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=2048773448 instance=ExtResource("1_nrhof")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
+radius = 0.4
+height = 1.0948181
+
+[node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
+events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/FreeEvent")]
+
+[node name="WorldCollider" parent="." index="0" unique_id=1421813303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+
+[node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Roam/RandomDirectionState")
+
+[node name="Roam" type="Node" parent="StateMachine" index="0" unique_id=66065876]
+
+[node name="RandomDirectionState" type="Node" parent="StateMachine/Roam" index="0" unique_id=909595999 node_paths=PackedStringArray("target", "next_state", "target_1")]
+script = ExtResource("2_l3wxe")
+target = NodePath("../../..")
+min_scale = 0.3
+max_scale = 2.0
+mask = Vector3(1, 0, 1)
+next_state = NodePath("../WalkForwardVelocityState")
+animation_state_name = "globber_idle"
+pass_data = true
+target_amount = 1
+target_1 = NodePath("../WalkForwardVelocityState")
+property_1 = "direction"
+metadata/_custom_type_script = "uid://d3h5j6rwem265"
+
+[node name="WalkForwardVelocityState" type="Node" parent="StateMachine/Roam" index="1" unique_id=719899571 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
+script = ExtResource("3_gtf71")
+MAX_VELOCITY = 10.0
+target = NodePath("../../..")
+rotation_pivot = NodePath("../../../RotationPivot")
+randomize_time = true
+minimum = 0.0
+maximum = 5.0
+next_state = NodePath("../WaitState")
+animation_state_name = "globber_walk"
+metadata/_custom_type_script = "uid://f032hrk67kwx"
+
+[node name="WaitState" type="Node" parent="StateMachine/Roam" index="2" unique_id=1243969389 node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_gtf71")
+randomize_time = true
+minimum = 0.0
+maximum = 5.0
+next_state = NodePath("../RandomDirectionState")
+animation_state_name = "globber_idle"
+metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+
+[node name="Alert" type="Node" parent="StateMachine" index="1" unique_id=1391199121]
+
+[node name="WalkToPositionState" type="Node" parent="StateMachine/Alert" index="0" unique_id=1924766303 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
+script = ExtResource("5_qg7h7")
+ACCELERATION = 0.1
+target = NodePath("../../..")
+rotation_pivot = NodePath("../../../RotationPivot")
+speed = 1.4
+distance_threshold = 1.3
+next_state = NodePath("../WaitStateAfter")
+animation_state_name = "globber_walk"
+metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
+
+[node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_gtf71")
+randomize_time = true
+minimum = 0.0
+maximum = 5.0
+next_state = NodePath("../EnableVisionCone")
+animation_state_name = "globber_idle_turning"
+metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+
+[node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
+script = ExtResource("6_joybc")
+target = NodePath("../../../RotationPivot/VisionCone")
+property_name = &"monitoring"
+type = 1
+value = true
+next_state = NodePath("../../Roam/RandomDirectionState")
+metadata/_custom_type_script = "uid://dbrxet3cojgye"
+
+[node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
+script = ExtResource("9_45htx")
+target = NodePath("../..")
+metadata/_custom_type_script = "uid://cxmt2fl7nvfju"
+
+[node name="DropEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="1" unique_id=730886903 node_paths=PackedStringArray("source")]
+script = ExtResource("8_l7o33")
+drop_container = ExtResource("9_ydwe4")
+source = NodePath("../..")
+max_value = 10
+metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
 [node name="AnimationPlayer" parent="." index="3" unique_id=67901383]
 libraries/ = SubResource("AnimationLibrary_845p2")
 
 [node name="AnimationTree" parent="." index="4" unique_id=934466786]
-active = false
-tree_root = SubResource("AnimationNodeStateMachine_y7tjh")
+tree_root = SubResource("AnimationNodeStateMachine_droo6")
 
-[node name="Alive" type="Node3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="0" unique_id=1655088542]
+[node name="HurtBox" parent="." index="5" unique_id=158402479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45192683, 0)
 
-[node name="FootL" type="Sprite3D" parent="Visuals/Alive" index="0" unique_id=1575607523]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.08233776, 0.5, 0.144)
+[node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=33426455]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Alive" type="Node3D" parent="RotationPivot/Visuals" index="0" unique_id=1655088542]
+
+[node name="FootL" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="0" unique_id=1575607523]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.082, 0.03, 0.144)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("4_40eg8")
 
-[node name="FootR" type="Sprite3D" parent="Visuals/Alive" index="1" unique_id=649938572]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.080662236, 0.5, 0.102)
+[node name="FootR" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="1" unique_id=649938572]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.081, 0.01, 0.102)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("5_kjdyy")
 
-[node name="ArmR" type="Sprite3D" parent="Visuals/Alive" index="2" unique_id=571201155]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.14890833, 0.7, -0.053000003)
+[node name="ArmR" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="2" unique_id=571201155]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.149, 0.04, -0.015)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("6_h82rf")
 
-[node name="HandR" type="Sprite3D" parent="Visuals/Alive/ArmR" index="0" unique_id=559763444]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.9999998, 0, 0, 0, 1, -0.003251031, 0.07933146, -0.099999964)
+[node name="HandR" type="Sprite3D" parent="RotationPivot/Visuals/Alive/ArmR" index="0" unique_id=559763444]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, -0.003000006, 0.09696986, -0.010000005)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("7_o8dyd")
 
-[node name="ArmL" type="Sprite3D" parent="Visuals/Alive" index="3" unique_id=477204900]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15322615, 0.7, -0.03544605)
+[node name="ArmL" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="3" unique_id=477204900]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.153, 0.04, -0.035)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("8_l3wxe")
 
-[node name="HandL" type="Sprite3D" parent="Visuals/Alive/ArmL" index="0" unique_id=927863379]
-transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 0.010135308, 0.10602206, -0.099999964)
+[node name="HandL" type="Sprite3D" parent="RotationPivot/Visuals/Alive/ArmL" index="0" unique_id=927863379]
+transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 0.0054223686, 0.09281641, -0.010000005)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("9_gtf71")
 
-[node name="Head" type="Sprite3D" parent="Visuals/Alive" index="4" unique_id=245677157]
-transform = Transform3D(0.98669666, 0.16256995, 7.10616e-09, 0, -4.3711385e-08, 1.0000001, 0.16256991, -0.9866969, -4.31299e-08, 0, 0.9421303, 0.002768857)
+[node name="Head" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="4" unique_id=245677157]
+transform = Transform3D(0.9866967, 0.16256995, 7.106161e-09, 0, -4.3711385e-08, 1.0000002, 0.16256993, -0.9866969, -4.312991e-08, 0, 0.13, 0.003)
+shaded = true
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("10_2odp2")
 
-[node name="Body" type="Sprite3D" parent="Visuals/Alive" index="5" unique_id=1321173805]
-transform = Transform3D(0.9939601, 0.10974071, 4.7969198e-09, 0, -4.371138e-08, 1, 0.10974071, -0.9939601, -4.3447383e-08, -0.00012817979, 0.8150839, 0)
+[node name="Body" type="Sprite3D" parent="RotationPivot/Visuals/Alive" index="5" unique_id=1321173805]
+transform = Transform3D(0.9939601, 0.10974071, 4.7969198e-09, 0, -4.371138e-08, 1, 0.10974071, -0.9939601, -4.3447383e-08, 0, 0.05, 0)
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("3_cwoiy")
 
-[node name="Dead" type="Node3D" parent="Visuals" parent_id_path=PackedInt32Array(33426455) index="1" unique_id=730677909]
+[node name="Death" type="Node3D" parent="RotationPivot/Visuals" index="1" unique_id=652532910]
+visible = false
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visuals/Dead" index="0" unique_id=1223630812]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotationPivot/Visuals/Death" index="0" unique_id=1223630812]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shaded = true
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"death"
 
-[node name="HitBox" parent="." index="6" unique_id=565674913]
-visible = false
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_2si2q")
+path_trace = NodePath("../../RayCast3D")
+enemy = NodePath("../..")
+alert_state = NodePath("../../StateMachine/Alert/WalkToPositionState")
 
-[node name="HurtBox" parent="." index="7" unique_id=158402479]
-visible = false
+[node name="RayCast3D" type="RayCast3D" parent="." index="7" unique_id=912591583]
+collision_mask = 3
+collide_with_areas = true
+
+[node name="HitBox" type="Area3D" parent="." index="8" unique_id=1715043841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("25_ydwe4")
+metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" index="0" unique_id=966836666]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.04395032, -0.0012564659, 0.42395365)
+shape = SubResource("CapsuleShape3D_mmgqi")
+disabled = true
+debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)

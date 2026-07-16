@@ -15,12 +15,16 @@ run/main_scene="uid://c8257oy8c1lmb"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*uid://ukbuejw1m15w"
+GlobalEnum="*uid://nptyhdrtvfm4"
+
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=512
+window/size/viewport_height=288
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
@@ -29,10 +33,10 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://assets/Items/": "yellow",
 "res://assets/enemies/": "red",
 "res://assets/environment/": "blue",
 "res://assets/interactables/": "orange",
+"res://assets/items/": "yellow",
 "res://assets/player/": "teal",
 "res://game/behaviours/": "purple",
 "res://game/enemies/": "red",
@@ -46,6 +50,7 @@ folder_colors={
 [global_group]
 
 Player="The Player."
+Game=""
 
 [input]
 
@@ -101,6 +106,7 @@ sprint={
 3d_physics/layer_4="PlayerHit"
 3d_physics/layer_5="EnemyHit"
 3d_physics/layer_6="Interaction"
+3d_physics/layer_7="DropPickup"
 
 [physics]
 
@@ -109,3 +115,6 @@ sprint={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+scaling_3d/mode=5
+scaling_3d/mode.ios=5
+scaling_3d/mode.macos=5

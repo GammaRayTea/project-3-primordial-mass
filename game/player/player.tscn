@@ -1,10 +1,31 @@
 [gd_scene format=3 uid="uid://ct0p6npqva67"]
 
 [ext_resource type="Script" uid="uid://bui3lg8j3ka10" path="res://game/player/player.gd" id="1_b2mth"]
+[ext_resource type="Script" uid="uid://b2axj48y4gatr" path="res://game/player/camera.gd" id="2_4ste8"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="3_8soms"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_a4w0n"]
 [ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/player/hud_overlay.tscn" id="5_5fytw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_anr75"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.16078432, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ste8"]
+material = SubResource("StandardMaterial3D_anr75")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ste8"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.42283303, 0.73144084, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_anr75"]
+material = SubResource("StandardMaterial3D_4ste8")
+radius = 0.1
+height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
 radius = 0.4
@@ -30,26 +51,55 @@ size = Vector3(0.5, 1, 0.45483398)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
+radius = 0.3227539
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("rotation_pivot", "interaction_box", "push_box_shape", "hud") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "hud", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
-rotation_pivot = NodePath("RotationPivot")
-interaction_box = NodePath("RotationPivot/InteractionBox")
+MAX_WALKING_SPEED = 3.0
+MAX_RUNNING_SPEED = 8.0
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
+camera = NodePath("CameraStuff/Camera")
+sprint_timer = NodePath("SprintTimer")
+rotation_pivot = NodePath("RotationPivot")
+
+[node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
+
+[node name="CameraRayCast" type="RayCast3D" parent="CameraStuff" unique_id=1700300430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6210704, 0)
+collide_with_areas = true
+debug_shape_custom_color = Color(1, 0, 0.4745098, 1)
+
+[node name="Camera" type="Camera3D" parent="CameraStuff" unique_id=1886686640 node_paths=PackedStringArray("ray_cast", "visualizer")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6210704, 0)
+script = ExtResource("2_4ste8")
+bounding_box = Vector2(1.5, 1)
+return_weight = 0.03
+move_weight = 0.07
+height = 2.621
+ray_cast = NodePath("../CameraRayCast")
+visualizer = NodePath("../TargetVisualizer")
+
+[node name="CamVisualizer" type="MeshInstance3D" parent="CameraStuff/Camera" unique_id=960573652]
+visible = false
+mesh = SubResource("SphereMesh_4ste8")
+
+[node name="TargetVisualizer" type="MeshInstance3D" parent="CameraStuff" unique_id=2082767170]
+visible = false
+mesh = SubResource("SphereMesh_anr75")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=58882882]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4, 0)
-
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=512528227]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.6763976, 0)
 
 [node name="Head" type="AnimatedSprite3D" parent="RotationPivot/Visuals" unique_id=141534059]
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0.7534457, 0)
@@ -77,15 +127,32 @@ shape = SubResource("BoxShape3D_kpvxy")
 disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
-[node name="InteractionBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
+[node name="InteractionButtonBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("3_a4w0n")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionBox" unique_id=671184854]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
 shape = SubResource("BoxShape3D_udmuc")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
+
+[node name="DropPickupBox" type="Area3D" parent="RotationPivot" unique_id=1869776768]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("3_a4w0n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
+shape = SubResource("CapsuleShape3D_anr75")
+debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="RotationPivot" unique_id=2095192303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4906807, 0.20704949)
+light_energy = 0.647
+spot_range = 11.438281
+spot_attenuation = -1.35
+spot_angle = 21.994825
+spot_angle_attenuation = 0.4352755
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=711900110]
 collision_layer = 2
@@ -99,9 +166,14 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 
 [node name="Overlay" parent="." unique_id=1199412428 instance=ExtResource("5_5fytw")]
 
+[node name="SprintTimer" type="Timer" parent="." unique_id=1112385316]
+
 [connection signal="area_entered" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
 [connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushBox" to="." method="on_push_box_exited"]
-[connection signal="area_entered" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_entered"]
-[connection signal="area_exited" from="RotationPivot/InteractionBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/InteractionButtonBox" to="." method="on_interaction_box_exited"]
+[connection signal="area_entered" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_entered"]
+[connection signal="area_exited" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_exited"]
+[connection signal="timeout" from="SprintTimer" to="." method="on_sprint_timer_done"]

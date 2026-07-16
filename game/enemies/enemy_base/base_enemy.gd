@@ -1,19 +1,14 @@
 @tool
-class_name Enemy extends CharacterBody3D
+class_name Enemy extends Entity
 
-@export_category("Attributes")
-@export var health:float = 100.0:
-	set(value):
-		health = value
-		if health <= 0.0:
-			die()
+
 
 @export_category("Components")
 @export var animation_tree:AnimationTree:
 	set(value):
 		animation_tree= value
 		update_configuration_warnings()
-@export var visuals:Node3D
+
 @export_category("State Machine")
 @export var state_machine:StateMachine:
 	set(value):
@@ -44,21 +39,20 @@ func _init() -> void:
 func _physics_process(_delta: float) -> void:
 	if !Engine.is_editor_hint():
 		state_machine._update(_delta)
+		if not is_on_floor():
+			velocity += get_gravity() * _delta
 		move_and_slide()
-
+		
+	
 
 func get_hit(source:HitBox):
-	health-=source.damage
-	
-	
+	super(source)
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
-	print("damage ", source.damage, " health ", health)
 
 func die() -> void:
-	await execute_events(events_on_death)
+	execute_events(events_on_death)
 	enemy_died.emit()
-	queue_free()
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
@@ -66,8 +60,8 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 		get_hit(area)
 		
 
+
 func execute_events(events:Array[Event])->void:
 	for event in events:
 		if event is Event:
 			event.execute()
-			await event.finished

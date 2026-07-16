@@ -24,6 +24,8 @@ func _ready() -> void:
 	#offset = Vector2(- rect_size * 0.5 + 2,- rect_size * 0.5 + 2)
 	offset = Vector2(0,0)
 	rect_size *= scalar
+	
+
 
 func _draw() -> void:
 	
@@ -34,13 +36,9 @@ func _draw() -> void:
 		#cells
 		draw_rect(Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size),cell_color)
 		if is_inner:
-			
-
-
 			draw_texture_rect(room_bit_maps[cell] , Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size)  , false)
 	
-	
-	
+
 	for cell in range(0,cells.size()):
 		#small points
 		draw_rect(Rect2(scalar*(cells[cell].x + points[cell].x-1),scalar* (cells[cell].y+ points[cell].y-1), 2,2),point_color)

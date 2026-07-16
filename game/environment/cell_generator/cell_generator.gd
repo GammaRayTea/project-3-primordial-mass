@@ -1,4 +1,4 @@
-extends Node3D
+class_name DungeonGenerator extends Node3D
 @export_category("Parameters")
 @export var cell_size:int = 16
 @export var cell_margin:int = 2
@@ -7,8 +7,10 @@ extends Node3D
 		
 @export_category("Components")
 @export var player:Player
-@export var active_map:Control
+@export var generated_map:Control
 @export var outer_map:Control
+
+
 
 @export var room_generator:RoomGen
 @export var room_mesh:RoomMesh
@@ -28,7 +30,7 @@ var rng := RandomNumberGenerator.new()
 var generated_cells:Dictionary[Vector2,Cell] = {}
 var locked_cells:Dictionary[Vector2,Cell] = {}
 
-func _ready() -> void:
+func _start_generation() -> void:
 	rng.seed = random_seed
 	
 	room_generator.rng = rng
@@ -62,18 +64,18 @@ func _physics_process(_delta: float) -> void:
 	
 	if (new_pos != current_position):
 		current_position = new_pos
-		active_map.player_pos = new_pos
+		generated_map.player_pos = new_pos
 		outer_map.player_pos = new_pos
 		
 	
 	
 	
 
-##Check Cells in a rectangle around current cell
-func generate_new_cells(_check_range: int) -> PackedInt32Array:
-	var new_cells:Dictionary[Vector2, Cell] = {}
-	for i in range(_check_range * 2 + 1):
-		for j in range(_check_range * 2 + 1):
+##Check Cells in a rectangle around current cell and generate a preliminary delaunay triangulation. Returns ids of points of triangulation in sets of threes, forming triangles.
+func generate_new_cells(_check_range:int) -> PackedInt32Array:
+	var new_cells:Dictionary[Vector2,Cell] = {}
+	for i in range(_check_range*2+1):
+		for j in range(_check_range*2+1):
 			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
 			if !generated_cells.has(pos):
 
@@ -89,27 +91,27 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 	
 	outer_map.draw_point_ids = delaunayIDs
 	outer_map.delaunay_points = world_points
-	active_map.delaunay_points = world_points
+	generated_map.delaunay_points = world_points
 
 	outer_map.queue_redraw()
 	
 	return delaunayIDs
-	
-func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) -> void:
-	var new_positions := PackedVector2Array()
-	var active_delaunay := PackedInt32Array()
-	for i in range(_check_range * 2 + 1):
-		for j in range(_check_range * 2 + 1):
-			var pos = (Vector2(i - _check_range,j - _check_range) + current_position) * cell_size
-			new_positions.push_back(pos)
+
+
+func lock_in_cells(_check_range:int, _staged_delaunay_ids:PackedInt32Array) -> void:
+	var active_delaunay:= PackedInt32Array()
+	for i in range(_check_range*2+1):
+		for j in range(_check_range*2+1):
+			var pos = (Vector2(i-_check_range,j-_check_range) +current_position)*cell_size
+
 			
 			if !locked_cells.has(pos):
 				locked_cells[pos] = generated_cells[pos]
 				
 				
 				
-				active_map.cells.push_back(pos)
-				active_map.points.push_back(locked_cells[pos].point_position)
+				generated_map.cells.push_back(pos)
+				generated_map.points.push_back(locked_cells[pos].point_position)
 				var cell_accepted_connection_ids:PackedInt32Array = get_cell_draw_ids(_staged_delaunay_ids,pos)
 				
 		
@@ -117,16 +119,22 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 				active_delaunay.append_array(cell_accepted_connection_ids)
 				var room_bit_map: BitMap = room_generator.generate_room(cell_size,locked_cells[pos].global_point_position,pos, locked_cells[pos].connections)
 				generated_rooms.append(room_bit_map)
+				generated_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
+				generated_cells[pos].bit_map = room_bit_map
+				if debug:
+					print("cell ", pos)
+					for cell in locked_cells[pos].connections:
+						print(cell.global_point_position)
 				var cell_instance: RoomMesh = room_mesh.duplicate() as RoomMesh
 				add_child(cell_instance)
 				var cell_position_wc: Vector3 = cell_to_world(pos / cell_size) + Vector3(-cell_size / 2.0, 0.0, -cell_size / 2.0)
 				cell_instance.position = cell_position_wc
 				cell_instance.build_mesh(room_bit_map)
 				generated_room_mesh.append([pos, cell_instance])
-				active_map.room_bit_maps.append(ImageTexture.create_from_image(room_bit_map.convert_to_image()))
+				
 
-	active_map.draw_point_ids.append_array(active_delaunay)
-	active_map.queue_redraw()
+	generated_map.draw_point_ids.append_array(active_delaunay)
+	generated_map.queue_redraw()
 	
 	
 
@@ -146,7 +154,7 @@ func get_points(_cell_dict) -> PackedVector2Array:
 	
 func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> PackedInt32Array:
 	var cell_id:int = generated_cells.keys().find(_cell_pos)
-	
+	var this_cell:Cell = generated_cells[_cell_pos]
 	var ids_triangles_with_pos:PackedInt32Array
 	var i:int = 0
 	
@@ -156,36 +164,63 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos:Vector2) -> Packed
 		print("neighbours: ", cell_neighbour_ids)
 		print(_outer_ids.count(cell_id), " triangles found")
 	
-	#find indices of where the triangles containing this point start
-	var accepted_lines := PackedInt32Array()
+	#find indices of lines to draw, meaning they have valid connections
+	var found_lines:Array[Array] = []
 	while i < _outer_ids.size():
 		if _outer_ids[i] == cell_id:
-			
+			#get start of triangle that contains cell_id
 			var triangle:=PackedInt32Array()
 			triangle = _outer_ids.slice(i- i%3,i- i%3+3)
 			ids_triangles_with_pos.append(i- i%3)
 			if debug:
 				print(triangle)
-			
+			#find valid lines to neighbours
 			for id in triangle:
 				if cell_neighbour_ids.has(id):
-					accepted_lines.append_array([cell_id,id])
 					var neighbour_cell:Cell= generated_cells[generated_cells.keys()[id]]
-					if !locked_cells[_cell_pos].connections.has(neighbour_cell):
-						
-						locked_cells[_cell_pos].connections.append(neighbour_cell)
-				else:
-					if debug:
-						print("cell ", cell_id ,": cut ", [cell_id,id], " because of ", id)
 					
-		
-		
+					if !locked_cells[_cell_pos].connections.has(neighbour_cell):
+						locked_cells[_cell_pos].connections.append(neighbour_cell)
+						
+					if !found_lines.has([cell_id,id]):
+						found_lines.append([cell_id,id])
+						
 		i += 1
-	if debug:
-		print("cell ", cell_id," ",_cell_pos, " has ",locked_cells[_cell_pos].connections.size(), " connections: ", locked_cells[_cell_pos].connections, " from ", generated_cells[_cell_pos].global_point_position)
+
+	var accepted_lines := PackedInt32Array()
+	
+	#if debug:
+		#print(_cell_pos, "---------", cell_id)
+	
+	for neighbour_cell in this_cell.connections:
+		if locked_cells.values().has(neighbour_cell) and !neighbour_cell.connections.has(this_cell):
+			this_cell.connections.erase(neighbour_cell)
+			
+	var connection_amount = this_cell.connections.size()
+	if connection_amount == 0:
+		push_warning("Cell with no connections detected")
+	for line in found_lines:
+
+		var id = line[1]
+		var neighbour_cell:Cell= generated_cells.values()[id]
+		
+		if this_cell.connections.has(neighbour_cell):
+			if !neighbour_cell.connections.has(this_cell) and connection_amount>2 and rng.randf()>0.5:
+				this_cell.connections.erase(neighbour_cell)
+				connection_amount-=1
+				#if debug:
+					#print("discarded ", line, ", connection to ", generated_cells.find_key(neighbour_cell))
+			else:
+				accepted_lines.append_array(line)
+				#if debug:
+					#print("accepted ",line, ", connection to ",generated_cells.find_key(neighbour_cell))
+#
+	#if debug:
+		#print(accepted_lines)
 	return accepted_lines
 
-	
+
+
 func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	var ids:=PackedInt32Array()
 	ids.push_back(generated_cells.keys().find(_cell_pos-Vector2(cell_size,0)))
@@ -193,3 +228,7 @@ func get_cell_neighbours(_cell_pos:Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size,0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0,cell_size)))
 	return ids
+
+
+func _on_visibility_changed() -> void:
+	$Control.visible = visible
