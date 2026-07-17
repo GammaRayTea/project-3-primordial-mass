@@ -12,6 +12,9 @@
 [ext_resource type="Material" uid="uid://by4f8r08togll" path="res://assets/environment/materials/floor_material.tres" id="10_efxa6"]
 [ext_resource type="Material" uid="uid://chx08ev0xssxb" path="res://assets/environment/materials/wall_material.tres" id="11_dg77c"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efxa6"]
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node" unique_id=209619049]
 script = ExtResource("1_5vw27")
 render_low_res = true
@@ -58,6 +61,7 @@ room_mesh = NodePath("RoomMesh")
 script = ExtResource("8_5vw27")
 room_collisions = NodePath("RoomCollisions")
 floor_material = ExtResource("10_efxa6")
+ceiling_material = SubResource("StandardMaterial3D_efxa6")
 wall_material = ExtResource("11_dg77c")
 
 [node name="RoomCollisions" type="StaticBody3D" parent="Game/DungeonGenerator/RoomMesh" unique_id=652251928]

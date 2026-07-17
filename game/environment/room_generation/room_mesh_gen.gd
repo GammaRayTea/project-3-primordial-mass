@@ -10,56 +10,30 @@ class_name RoomMesh extends MeshInstance3D
 
 var rng:RandomNumberGenerator
 
-# Array setup
-var surface_array_floor = []
-var surface_array_ceil = []
-
-var surface_array_wall = []
 
 
 
-
-var verts_wall := PackedVector3Array()
-var normals_wall := PackedVector3Array()
-var uvs_wall := PackedVector2Array()
-var colors_wall := PackedColorArray()
-var indices_wall := PackedInt32Array()
-
-
-func reset_arrays() -> void:
-	surface_array_floor = []
-	surface_array_floor.resize(Mesh.ARRAY_MAX)
+func make_array() -> Array:
+	var array = []
+	array.resize(Mesh.ARRAY_MAX)
 	
-	surface_array_wall = []
-	surface_array_wall.resize(Mesh.ARRAY_MAX)
 	
-	surface_array_ceil = []
-	surface_array_ceil.resize(Mesh.ARRAY_MAX)
+	array[Mesh.ARRAY_VERTEX] = PackedVector3Array()
+	array[Mesh.ARRAY_NORMAL] = PackedVector3Array()
+	array[Mesh.ARRAY_TEX_UV] = PackedVector2Array()
+	array[Mesh.ARRAY_COLOR] = PackedColorArray()
+	array[Mesh.ARRAY_INDEX] = PackedInt32Array()
+	return array
 	
-	surface_array_floor[Mesh.ARRAY_VERTEX]  = PackedVector3Array()
-	surface_array_floor[Mesh.ARRAY_NORMAL]  = PackedVector3Array()
-	surface_array_floor[Mesh.ARRAY_TEX_UV]  = PackedVector2Array()
-	surface_array_floor[Mesh.ARRAY_COLOR]  = PackedColorArray()
-	surface_array_floor[Mesh.ARRAY_INDEX]  = PackedInt32Array()
-	
-	surface_array_ceil[Mesh.ARRAY_VERTEX]  = PackedVector3Array()
-	surface_array_ceil[Mesh.ARRAY_NORMAL]  = PackedVector3Array()
-	surface_array_ceil[Mesh.ARRAY_TEX_UV]  = PackedVector2Array()
-	surface_array_ceil[Mesh.ARRAY_COLOR]  = PackedColorArray()
-	surface_array_ceil[Mesh.ARRAY_INDEX]  = PackedInt32Array()
-	
-	surface_array_wall[Mesh.ARRAY_VERTEX] = PackedVector3Array()
-	surface_array_wall[Mesh.ARRAY_NORMAL] = PackedVector3Array()
-	surface_array_wall[Mesh.ARRAY_TEX_UV] = PackedVector2Array()
-	surface_array_wall[Mesh.ARRAY_COLOR] = PackedColorArray()
-	surface_array_wall[Mesh.ARRAY_INDEX] = PackedInt32Array()
-
 
 ## Builds a mesh from a BitMap
 func build_mesh(_grid: BitMap) -> void:
 	
 	
-	reset_arrays()
+	var surface_array_ceil = make_array()
+	var surface_array_wall = make_array()
+	var surface_array_floor = make_array()
+	
 	
 	
 	
