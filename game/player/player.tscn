@@ -147,7 +147,7 @@ shape = SubResource("CapsuleShape3D_anr75")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RotationPivot" unique_id=2095192303]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4906807, 0.70531744)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4906807, 0.20704949)
 light_energy = 0.647
 shadow_enabled = true
 spot_range = 11.438281
