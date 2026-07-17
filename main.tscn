@@ -90,7 +90,4 @@ test_mat2 = SubResource("ShaderMaterial_ryguw")
 
 [node name="Objects" type="Node3D" parent="Game" unique_id=2104293269]
 
-[node name="DropContainer" parent="Game/Objects" unique_id=1625775668 instance=ExtResource("9_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3569317, 1.0126908)
-
 [node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
