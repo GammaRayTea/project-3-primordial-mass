@@ -13,7 +13,6 @@ class_name DungeonGenerator extends Node3D
 
 
 @export var room_generator: RoomGen
-@export var room_mesh: RoomMesh
 var generated_rooms: Array[BitMap]
 var generated_room_mesh: Array[Array]
 
@@ -36,7 +35,6 @@ func _start_generation() -> void:
 	current_cell_tier = 0
 	rng.seed = random_seed
 	room_generator.rng = rng
-	room_mesh.rng = rng
 	@warning_ignore("narrowing_conversion")
 	var start_cell = Cell.new(cell_size, cell_size / 2.0, rng)
 	start_cell.global_point_position = start_cell.point_position
@@ -131,20 +129,30 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 					print("cell ", pos)
 					for cell in locked_cells[pos].connections:
 						print(cell.global_point_position)
+						
 				
-				var cell_instance: RoomMesh = room_mesh.duplicate() as RoomMesh
-				add_child(cell_instance)
-				var cell_position_wc: Vector3 = cell_to_world(pos / cell_size) + Vector3(-cell_size / 2.0, 0.0, -cell_size / 2.0)
-				cell_instance.position = cell_position_wc
-				cell_instance.build_mesh(room_bit_map)
-				generated_room_mesh.append([pos, cell_instance])
-				
+				# Instantiate mesh
+				make_cell_mesh(room_bit_map,pos)
 
 	generated_map.draw_point_ids.append_array(active_delaunay)
 	generated_map.current_cell_tier = current_cell_tier
 	generated_map.queue_redraw()
 	
 	
+
+func make_cell_mesh(_bit_map:BitMap, _position:Vector2) -> void:
+	var cell_instance: RoomMesh = RoomMesh.new(
+		Vector2(cell_size,cell_size),
+		rng,
+		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.FLOOR_WOOD),
+		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.TEST_CEILING),
+		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.WALL_PAPER),
+		)
+	add_child(cell_instance)
+	var cell_position_wc: Vector3 = cell_to_world(_position / cell_size) + Vector3(-cell_size / 2.0, 0.0, -cell_size / 2.0)
+	cell_instance.position = cell_position_wc
+	cell_instance.build_mesh(_bit_map)
+	generated_room_mesh.append([_position, cell_instance])
 
 
 func cell_to_world(_coord:Vector2) -> Vector3:

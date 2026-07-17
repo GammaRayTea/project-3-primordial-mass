@@ -8,12 +8,6 @@
 [ext_resource type="Environment" uid="uid://o1olc25fhgdl" path="res://assets/environment/world_envs/test_environemt.tres" id="5_w48qg"]
 [ext_resource type="Environment" uid="uid://cwug21yqssiod" path="res://assets/environment/world_envs/dark_environment.tres" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.gd" id="8_5vw27"]
-[ext_resource type="Material" uid="uid://by4f8r08togll" path="res://assets/environment/materials/floor_material.tres" id="10_efxa6"]
-[ext_resource type="Material" uid="uid://chx08ev0xssxb" path="res://assets/environment/materials/wall_material.tres" id="11_dg77c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efxa6"]
-albedo_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node" unique_id=209619049]
 script = ExtResource("1_5vw27")
@@ -50,21 +44,11 @@ shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.585
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_mesh") instance=ExtResource("6_7mycd")]
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player") instance=ExtResource("6_7mycd")]
 visible = true
 cell_margin = 4
 random_seed = 3
 player = NodePath("../Player")
-room_mesh = NodePath("RoomMesh")
-
-[node name="RoomMesh" type="MeshInstance3D" parent="Game/DungeonGenerator" unique_id=645045025 node_paths=PackedStringArray("room_collisions")]
-script = ExtResource("8_5vw27")
-room_collisions = NodePath("RoomCollisions")
-floor_material = ExtResource("10_efxa6")
-ceiling_material = SubResource("StandardMaterial3D_efxa6")
-wall_material = ExtResource("11_dg77c")
-
-[node name="RoomCollisions" type="StaticBody3D" parent="Game/DungeonGenerator/RoomMesh" unique_id=652251928]
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 

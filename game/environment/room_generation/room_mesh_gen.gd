@@ -1,16 +1,24 @@
 class_name RoomMesh extends MeshInstance3D
 
-@export var room_collisions: Node3D
+var room_collisions:StaticBody3D
 
-@export var floor_material:Material
-@export var ceiling_material:Material
-@export var wall_material:Material
+var floor_material:Material
+var ceiling_material:Material
+var wall_material:Material
 
-@export var grid_size:Vector2i = Vector2i(16,16)
+var grid_size:Vector2i = Vector2i(16,16)
 
 var rng:RandomNumberGenerator
 
-
+func _init(_grid_size:Vector2,_rng:RandomNumberGenerator,_floor_material:Material,_ceiling_material:Material,_wall_material:Material) -> void:
+	floor_material = _floor_material
+	ceiling_material = _ceiling_material
+	wall_material = _wall_material
+	rng = _rng
+	grid_size = _grid_size
+func _ready() -> void:
+	room_collisions = StaticBody3D.new()
+	add_child(room_collisions)
 
 
 func make_array() -> Array:
