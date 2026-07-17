@@ -2,7 +2,6 @@ class_name DungeonGenerator extends Node3D
 @export_category("Parameters")
 @export var cell_size: int = 16
 @export var cell_margin: int = 2
-@export var random_seed: int
 @export var debug: bool = false
 		
 @export_category("Components")
@@ -24,7 +23,7 @@ var current_position := Vector2(0, 0):
 
 var outer_check_range: int = 3
 var inner_check_range: int = 1
-var rng := RandomNumberGenerator.new()
+var rng : RandomNumberGenerator
 
 var generated_cells: Dictionary[Vector2, Cell] = {}
 var locked_cells: Dictionary[Vector2, Cell] = {}
@@ -33,7 +32,6 @@ var current_cell_tier:int
 
 func _start_generation() -> void:
 	current_cell_tier = 0
-	rng.seed = random_seed
 	room_generator.rng = rng
 	@warning_ignore("narrowing_conversion")
 	var start_cell = Cell.new(cell_size, cell_size / 2.0, rng)

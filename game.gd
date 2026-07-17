@@ -10,7 +10,17 @@ extends Node3D
 @export var testing:bool = true
 @export var dark:bool = true
 @export var test_room:PackedScene
+
+@export var rng_seed:int = 0
+var global_rng:RandomNumberGenerator = RandomNumberGenerator.new()
+
+func _init() -> void:
+	global_rng.seed = rng_seed
+
 func start():
+	
+	for node in get_tree().get_nodes_in_group("RNGUnifier"):
+		node.rng = global_rng
 	
 	show()
 	if dark:

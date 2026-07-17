@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bhcbue5bdeh1l"]
+
+[ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungen_populator.gd" id="1_xplu0"]
+
+[node name="DungenPopulator" type="Node" unique_id=667786978]
+script = ExtResource("1_xplu0")
