@@ -5,6 +5,7 @@ var rng:RandomNumberGenerator
 var locked:bool = false
 var connections:Array[Cell] = []
 var bit_map:BitMap
+var tier:int
 func _init(_cell_size:int,_margin:int, _rng):
 	rng = _rng
 	@warning_ignore("narrowing_conversion")

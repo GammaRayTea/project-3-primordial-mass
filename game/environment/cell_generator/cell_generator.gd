@@ -30,15 +30,18 @@ var rng := RandomNumberGenerator.new()
 var generated_cells: Dictionary[Vector2, Cell] = {}
 var locked_cells: Dictionary[Vector2, Cell] = {}
 
+var current_cell_tier:int
+
 func _start_generation() -> void:
+	current_cell_tier = 0
 	rng.seed = random_seed
-	
 	room_generator.rng = rng
+	room_mesh.rng = rng
 	@warning_ignore("narrowing_conversion")
 	var start_cell = Cell.new(cell_size, cell_size / 2.0, rng)
 	start_cell.global_point_position = start_cell.point_position
 	generated_cells[start_pos] = start_cell
-	
+	start_cell.tier = current_cell_tier
 	
 	call_deferred("expand_map")
 
@@ -73,6 +76,7 @@ func _physics_process(_delta: float) -> void:
 
 ##Check Cells in a rectangle around current cell and generate a preliminary delaunay triangulation. Returns ids of points of triangulation in sets of threes, forming triangles.
 func generate_new_cells(_check_range: int) -> PackedInt32Array:
+	current_cell_tier+=1
 	var new_cells:Dictionary[Vector2, Cell] = {}
 	for i in range(_check_range * 2 + 1):
 		for j in range(_check_range * 2 + 1):
@@ -81,6 +85,8 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 
 				new_cells[pos] = Cell.new(cell_size, cell_margin, rng)
 				new_cells[pos].global_point_position = pos + new_cells[pos].point_position
+				new_cells[pos].tier = current_cell_tier
+				
 				outer_map.cells.push_back(pos)
 				outer_map.points.push_back(new_cells[pos].point_position)
 	
@@ -92,7 +98,7 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 	outer_map.draw_point_ids = delaunayIDs
 	outer_map.delaunay_points = world_points
 	generated_map.delaunay_points = world_points
-
+	outer_map.current_cell_tier = current_cell_tier
 	outer_map.queue_redraw()
 	
 	return delaunayIDs
@@ -135,6 +141,7 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 				
 
 	generated_map.draw_point_ids.append_array(active_delaunay)
+	generated_map.current_cell_tier = current_cell_tier
 	generated_map.queue_redraw()
 	
 	

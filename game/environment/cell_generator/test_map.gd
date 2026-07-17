@@ -20,6 +20,8 @@ var offset:Vector2
 @export var draw_cells:bool = false
 @export var is_inner:bool = false
 
+var current_cell_tier:int
+
 func _ready() -> void:
 	#offset = Vector2(- rect_size * 0.5 + 2,- rect_size * 0.5 + 2)
 	offset = Vector2(0,0)

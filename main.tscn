@@ -9,32 +9,8 @@
 [ext_resource type="Environment" uid="uid://cwug21yqssiod" path="res://assets/environment/world_envs/dark_environment.tres" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.gd" id="8_5vw27"]
-[ext_resource type="Shader" uid="uid://c4e31weirlooc" path="res://assets/environment/floor_variance.gdshader" id="9_kek77"]
-[ext_resource type="Texture2D" uid="uid://eqpilfwu73ps" path="res://assets/environment/textures/FloorWoodHole.png" id="10_dg77c"]
-[ext_resource type="Texture2D" uid="uid://dtxbd1k5lkicx" path="res://assets/environment/textures/FloorWood.png" id="10_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://dwc7ouumitgk0" path="res://assets/environment/textures/FloorWoodSpill1.png" id="11_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://bi3d2irgxgumo" path="res://assets/environment/textures/FloorWoodSpill2.png" id="12_w48qg"]
-[ext_resource type="Texture2D" uid="uid://bwlmg0tnlnig4" path="res://assets/environment/textures/WallpaperBot.png" id="15_074og"]
-[ext_resource type="Shader" uid="uid://cgvw8cutyqund" path="res://assets/environment/wall_variance.gdshader" id="15_cegan"]
-[ext_resource type="Texture2D" uid="uid://bp5xyntwbxpm6" path="res://assets/environment/textures/WallpaperBotHole.png" id="17_82xsv"]
-[ext_resource type="Texture2D" uid="uid://k7g1mcmoynsl" path="res://assets/environment/textures/WallpaperTop.png" id="17_cegan"]
-[ext_resource type="Texture2D" uid="uid://brguq5cdcnegx" path="res://assets/environment/textures/WallpaperTopHole.png" id="18_cegan"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
-render_priority = 0
-shader = ExtResource("9_kek77")
-shader_parameter/default_texture = ExtResource("10_ycdy4")
-shader_parameter/texture2 = ExtResource("10_dg77c")
-shader_parameter/texture3 = ExtResource("11_ycdy4")
-shader_parameter/texture4 = ExtResource("12_w48qg")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ryguw"]
-render_priority = 0
-shader = ExtResource("15_cegan")
-shader_parameter/default_texture = ExtResource("15_074og")
-shader_parameter/texture2 = ExtResource("17_cegan")
-shader_parameter/texture3 = ExtResource("17_82xsv")
-shader_parameter/texture4 = ExtResource("18_cegan")
+[ext_resource type="Material" uid="uid://by4f8r08togll" path="res://assets/environment/materials/floor_material.tres" id="10_efxa6"]
+[ext_resource type="Material" uid="uid://chx08ev0xssxb" path="res://assets/environment/materials/wall_material.tres" id="11_dg77c"]
 
 [node name="Main" type="Node" unique_id=209619049]
 script = ExtResource("1_5vw27")
@@ -81,8 +57,8 @@ room_mesh = NodePath("RoomMesh")
 [node name="RoomMesh" type="MeshInstance3D" parent="Game/DungeonGenerator" unique_id=645045025 node_paths=PackedStringArray("room_collisions")]
 script = ExtResource("8_5vw27")
 room_collisions = NodePath("RoomCollisions")
-test_mat = SubResource("ShaderMaterial_4c57u")
-test_mat2 = SubResource("ShaderMaterial_ryguw")
+floor_material = ExtResource("10_efxa6")
+wall_material = ExtResource("11_dg77c")
 
 [node name="RoomCollisions" type="StaticBody3D" parent="Game/DungeonGenerator/RoomMesh" unique_id=652251928]
 

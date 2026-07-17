@@ -61,6 +61,7 @@ radius = 0.5439453
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 3.0
 MAX_RUNNING_SPEED = 8.0
+do_gravity = false
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 hud = NodePath("Overlay")
 camera = NodePath("CameraStuff/Camera")

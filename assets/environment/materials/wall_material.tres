@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://chx08ev0xssxb"]
+
+[ext_resource type="Shader" uid="uid://cgvw8cutyqund" path="res://assets/environment/wall_variance.gdshader" id="1_x67c3"]
+[ext_resource type="Texture2D" uid="uid://bwlmg0tnlnig4" path="res://assets/environment/textures/WallpaperBot.png" id="2_xfeee"]
+[ext_resource type="Texture2D" uid="uid://k7g1mcmoynsl" path="res://assets/environment/textures/WallpaperTop.png" id="3_fqqcd"]
+[ext_resource type="Texture2D" uid="uid://bp5xyntwbxpm6" path="res://assets/environment/textures/WallpaperBotHole.png" id="4_dis0n"]
+[ext_resource type="Texture2D" uid="uid://brguq5cdcnegx" path="res://assets/environment/textures/WallpaperTopHole.png" id="5_vsygj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_x67c3")
+shader_parameter/default_texture = ExtResource("2_xfeee")
+shader_parameter/texture2 = ExtResource("3_fqqcd")
+shader_parameter/texture3 = ExtResource("4_dis0n")
+shader_parameter/texture4 = ExtResource("5_vsygj")
