@@ -71,7 +71,7 @@ rotation_pivot = NodePath("RotationPivot")
 [node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
 
 [node name="CameraRayCast" type="RayCast3D" parent="CameraStuff" unique_id=1700300430]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6210704, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0.4745098, 1)
 
