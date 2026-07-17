@@ -45,6 +45,8 @@ func _start_generation() -> void:
 
 
 func expand_map() -> void:
+	print("expanding")
+	
 	var staged_delanauy_ids := generate_new_cells(outer_check_range)
 	lock_in_cells(inner_check_range, staged_delanauy_ids)
 
@@ -74,7 +76,6 @@ func _physics_process(_delta: float) -> void:
 
 ##Check Cells in a rectangle around current cell and generate a preliminary delaunay triangulation. Returns ids of points of triangulation in sets of threes, forming triangles.
 func generate_new_cells(_check_range: int) -> PackedInt32Array:
-	current_cell_tier+=1
 	var new_cells:Dictionary[Vector2, Cell] = {}
 	for i in range(_check_range * 2 + 1):
 		for j in range(_check_range * 2 + 1):
@@ -83,7 +84,6 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 
 				new_cells[pos] = Cell.new(cell_size, cell_margin, rng)
 				new_cells[pos].global_point_position = pos + new_cells[pos].point_position
-				new_cells[pos].tier = current_cell_tier
 				
 				outer_map.cells.push_back(pos)
 				outer_map.points.push_back(new_cells[pos].point_position)
@@ -96,7 +96,7 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 	outer_map.draw_point_ids = delaunayIDs
 	outer_map.delaunay_points = world_points
 	generated_map.delaunay_points = world_points
-	outer_map.current_cell_tier = current_cell_tier
+
 	outer_map.queue_redraw()
 	
 	return delaunayIDs
@@ -104,16 +104,21 @@ func generate_new_cells(_check_range: int) -> PackedInt32Array:
 
 func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) -> void:
 	var active_delaunay := PackedInt32Array()
+	var have_new_cells_been_locked:bool = false
+	
 	for i in range(_check_range * 2 + 1):
 		for j in range(_check_range * 2 + 1):
 			var pos = (Vector2(i - _check_range, j - _check_range) + current_position) * cell_size
 
 			
 			if !locked_cells.has(pos):
+				have_new_cells_been_locked = true
+				
+				
 				locked_cells[pos] = generated_cells[pos]
+				locked_cells[pos].tier = current_cell_tier+1
 				
-				
-				
+				print(locked_cells[pos].tier )
 				generated_map.cells.push_back(pos)
 				generated_map.points.push_back(locked_cells[pos].point_position)
 				var cell_accepted_connection_ids: PackedInt32Array = get_cell_draw_ids(_staged_delaunay_ids, pos)
@@ -134,10 +139,11 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 				# Instantiate mesh
 				make_cell_mesh(room_bit_map,pos)
 
+	if have_new_cells_been_locked:
+		current_cell_tier+=1
 	generated_map.draw_point_ids.append_array(active_delaunay)
 	generated_map.current_cell_tier = current_cell_tier
 	generated_map.queue_redraw()
-	
 	
 
 func make_cell_mesh(_bit_map:BitMap, _position:Vector2) -> void:
