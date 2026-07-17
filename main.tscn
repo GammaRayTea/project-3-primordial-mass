@@ -82,6 +82,7 @@ room_mesh = NodePath("RoomMesh")
 script = ExtResource("8_5vw27")
 room_collisions = NodePath("RoomCollisions")
 test_mat = SubResource("ShaderMaterial_4c57u")
+test_mat2 = SubResource("ShaderMaterial_ryguw")
 
 [node name="RoomCollisions" type="StaticBody3D" parent="Game/DungeonGenerator/RoomMesh" unique_id=652251928]
 

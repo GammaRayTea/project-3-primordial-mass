@@ -3,6 +3,7 @@ class_name RoomMesh extends MeshInstance3D
 @export var room_collisions: Node3D
 
 @export var test_mat:Material
+@export var test_mat2:Material
 
 @export var grid_size:Vector2i = Vector2i(16,16)
 
@@ -20,7 +21,8 @@ var indices_floor := PackedInt32Array()
 
 var verts_wall := PackedVector3Array()
 var normals_wall := PackedVector3Array()
-#var uvs_wall := PackedVector2Array()
+var uvs_wall := PackedVector2Array()
+var colors_wall := PackedColorArray()
 var indices_wall := PackedInt32Array()
 
 
@@ -39,7 +41,8 @@ func reset_arrays() -> void:
 	
 	verts_wall = PackedVector3Array()
 	normals_wall = PackedVector3Array()
-	#var uvs_wall = PackedVector2Array()
+	uvs_wall = PackedVector2Array()
+	colors_wall = PackedColorArray()
 	indices_wall = PackedInt32Array()
 
 
@@ -84,11 +87,13 @@ func build_mesh(_grid: BitMap) -> void:
 	# make wall mesh from arrays
 	surface_array_wall[Mesh.ARRAY_VERTEX] = verts_wall
 	surface_array_wall[Mesh.ARRAY_NORMAL] = normals_wall
-	#surface_array_wall[Mesh.ARRAY_TEX_UV] = uvs_wall
+	surface_array_wall[Mesh.ARRAY_TEX_UV] = uvs_wall
+	surface_array_wall[Mesh.ARRAY_COLOR] = colors_wall
 	surface_array_wall[Mesh.ARRAY_INDEX] = indices_wall
 	(mesh as ArrayMesh).add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_wall)
 	(mesh as ArrayMesh).create_trimesh_shape()
 	
+	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,test_mat2)
 	#make floor collision from wall
 	var collision_instance_wall := CollisionShape3D.new()
 	collision_instance_wall.shape = mesh.create_trimesh_shape()
@@ -101,7 +106,6 @@ func build_mesh(_grid: BitMap) -> void:
 func generate_floor(_x: float, _y: float, _height: float) -> void:
 		var start_index: int = verts_floor.size()
 		var rand:float = randf()
-		print(rand)
 		var color:Color
 		if rand < 0.8:
 			color = Color(0,0,0,1)
@@ -176,15 +180,42 @@ func generate_wall(_x: float, _y: float, _facing, _flip_faces: bool, _rotated: b
 		else:
 			normal = Vector3(-1.0, 0.0, 0.0)
 	
+	
+	
+	var rand:float = randf()
+	var colors:Array[Color] = []
+	if rand < 0.8:
+		colors.append(Color(0,0,0,1))
+		colors.append(Color(0,0,0,-1.0))
+	#elif rand < 0.9:
+		#colors.append(Color(1,0,0,1))
+		#colors.append(Color(1,0,0,0.0))
+	#elif rand < 0.95:
+		#colors.append(Color(0,1,0,1))
+		#colors.append(Color(0,1,0,0.0))
+	elif rand <= 1.0:
+		colors.append(Color(0,0,1,1))
+		colors.append(Color(0,0,1,-1.0))
+	
 	for j in range(2):
 		var start_index: int = verts_wall.size()
 		for i in range(4):
 			if _rotated:
 				verts_wall.append(Vector3(_x, height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))))
+				uvs_wall.append(Vector2(
+				verts_wall[verts_wall.size()-1].z,
+				-verts_wall[verts_wall.size()-1].y)
+				)
 			else:
 				verts_wall.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y))
+				uvs_wall.append(Vector2(
+				verts_wall[verts_wall.size()-1].x,
+				-verts_wall[verts_wall.size()-1].y)
+				
+				)
 			normals_wall.append(normal)
-			
+			colors_wall.append(colors[j])
+
 			if _flip_faces:
 				indices_wall.append(start_index)
 				indices_wall.append(start_index + 1)
