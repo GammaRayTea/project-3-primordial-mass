@@ -1,17 +1,17 @@
 shader_type spatial;
 render_mode depth_draw_opaque, depth_prepass_alpha; //Settings needed to cast a shadow
- 
+
 // Overall settings
 uniform bool enabled = true; // enable/disable
 uniform sampler2D sprite_texture : source_color, filter_nearest; // set this in editor
 uniform bool billboard = true; // switch modes
- 
+
 // Outline customization
 //use rgb values > 1 to get HDR glow from a WorldEnvironment node
 instance uniform vec4 color : source_color = vec4(11.0, 11.0, 25.0, 0.1); // outline rgba
 uniform float line_thickness : hint_range(0.0, 20.0) = 1.0; //Works best under 10
 uniform float rings: hint_range(0.0, 10.0, 1.0) = 2;
- 
+
 //4 directions for offset
 const vec2 OFFSETS[4] = {
 	vec2(0, 1), vec2(0, -1), vec2(1, 0), vec2(-1, 0)
