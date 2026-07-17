@@ -4,6 +4,14 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_eiboa"]
 [ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/player/item_preview.gd" id="2_dif5i"]
 [ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_eiboa"]
+[ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_yepel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwwe"]
+shader = ExtResource("5_yepel")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/alpha = 0.42
+shader_parameter/inner_radius = 0.12
+shader_parameter/outer_radius = 0.545
 
 [node name="Overlay" type="Control" unique_id=1199412428]
 layout_mode = 3
@@ -65,3 +73,14 @@ theme = ExtResource("1_eiboa")
 text = "Stick
 "
 horizontal_alignment = 1
+
+[node name="Control" type="ColorRect" parent="." unique_id=715104668]
+z_index = -2
+material = SubResource("ShaderMaterial_6fwwe")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
