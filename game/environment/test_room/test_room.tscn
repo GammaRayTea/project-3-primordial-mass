@@ -35,12 +35,15 @@ size = Vector3(4, 4, 4)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1323844594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("PlaneMesh_kpvxy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1083989178]
+visible = false
 shape = SubResource("BoxShape3D_kpvxy")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=542146527]
+visible = false
 script = ExtResource("1_js5f7")
 
 [node name="RoomVisuals" type="MeshInstance3D" parent="Node3D" unique_id=217339303]
@@ -51,7 +54,9 @@ script = ExtResource("2_20bci")
 visible = false
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=665518036]
+process_mode = 4
 transform = Transform3D(0.9254348, 0.3789072, 0, -0.3789072, 0.9254348, 0, 0, 0, 1, 16.117085, 0.5141752, 0)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1845389677]
 mesh = SubResource("BoxMesh_w5spq")

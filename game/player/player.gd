@@ -10,8 +10,6 @@ class_name Player extends Entity
 @export var MAX_SPRINT_VALUE:float = 1000
 @export var SPRINT_REDUCTION:float = 5
 @export var SPRINT_RECHARGE_TIME:float = 5.0
-
-@export var do_gravity:bool = true
 #Component Nodes
 @export_category("Components")
 @export var push_box_shape:CollisionShape3D
@@ -111,7 +109,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 	move_and_slide()
 #endregion
 func apply_gravity(_delta:float) -> void:
-	if not is_on_floor() and do_gravity:
+	if not is_on_floor():
 		velocity += get_gravity() * _delta
 #region push
 func start_push():

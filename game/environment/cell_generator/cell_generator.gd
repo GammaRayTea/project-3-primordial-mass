@@ -125,7 +125,6 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 					print("cell ", pos)
 					for cell in locked_cells[pos].connections:
 						print(cell.global_point_position)
-				
 				var cell_instance: RoomMesh = room_mesh.duplicate() as RoomMesh
 				add_child(cell_instance)
 				var cell_position_wc: Vector3 = cell_to_world(pos / cell_size) + Vector3(-cell_size / 2.0, 0.0, -cell_size / 2.0)
