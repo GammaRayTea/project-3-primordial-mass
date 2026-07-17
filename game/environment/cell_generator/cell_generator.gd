@@ -178,7 +178,6 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos: Vector2) -> Packe
 	var cell_id: int = generated_cells.keys().find(_cell_pos)
 	var this_cell: Cell = generated_cells[_cell_pos]
 	var ids_triangles_with_pos: PackedInt32Array
-	var i: int = 0
 	
 	var cell_neighbour_ids: PackedInt32Array = get_cell_neighbours(_cell_pos)
 	if debug:
@@ -188,6 +187,8 @@ func get_cell_draw_ids(_outer_ids:PackedInt32Array, _cell_pos: Vector2) -> Packe
 	
 	#find indices of lines to draw, meaning they have valid connections
 	var found_lines: Array[Array] = []
+	
+	var i: int = 0
 	while i < _outer_ids.size():
 		if _outer_ids[i] == cell_id:
 			#get start of triangle that contains cell_id

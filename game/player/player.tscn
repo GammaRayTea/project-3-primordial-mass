@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="3_8soms"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_a4w0n"]
-[ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/player/hud_overlay.tscn" id="5_5fytw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_anr75"]
 shading_mode = 0
@@ -57,13 +56,12 @@ radius = 0.3227539
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.5439453
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "hud", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 3.0
 MAX_RUNNING_SPEED = 8.0
 do_gravity = false
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
-hud = NodePath("Overlay")
 camera = NodePath("CameraStuff/Camera")
 sprint_timer = NodePath("SprintTimer")
 rotation_pivot = NodePath("RotationPivot")
@@ -165,8 +163,6 @@ metadata/_custom_type_script = "uid://daou788t0evlx"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1349563344]
 shape = SubResource("CapsuleShape3D_a4w0n")
 debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
-
-[node name="Overlay" parent="." unique_id=1199412428 instance=ExtResource("5_5fytw")]
 
 [node name="SprintTimer" type="Timer" parent="." unique_id=1112385316]
 

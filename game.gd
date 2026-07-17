@@ -1,5 +1,6 @@
 extends Node3D
 @export var player:Player
+@export var hud:Control
 @export var dungeon_gen:DungeonGenerator
 @export var enemies:Node3D
 @export var objects:Node3D
@@ -17,6 +18,7 @@ func start():
 	else:
 		world_environment.environment = test_env
 	player.process_mode = Node.PROCESS_MODE_INHERIT
+	hud.show()
 	if testing:
 		var room = test_room.instantiate()
 		add_child(room)
