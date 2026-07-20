@@ -37,11 +37,11 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 
 		
-		print(animation_tree)
+
 		for prop in animation_tree.tree_root.get_property_list():
 			if (prop.name as String).begins_with("state") and (prop.name as String).ends_with("node"):
 				animation_state_names.push_back((prop.name as String).get_slice("/", 1))
-		print(animation_state_names)
+
 		
 		for child in get_children():
 			if child is State:

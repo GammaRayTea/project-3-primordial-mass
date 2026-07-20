@@ -21,6 +21,7 @@ func start():
 	
 	for node in get_tree().get_nodes_in_group("RNGUnifier"):
 		node.rng = global_rng
+		print(node)
 	
 	show()
 	if dark:

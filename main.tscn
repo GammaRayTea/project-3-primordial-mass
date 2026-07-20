@@ -8,7 +8,8 @@
 [ext_resource type="Environment" uid="uid://o1olc25fhgdl" path="res://assets/environment/world_envs/test_environemt.tres" id="5_w48qg"]
 [ext_resource type="Environment" uid="uid://cwug21yqssiod" path="res://assets/environment/world_envs/dark_environment.tres" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
-[ext_resource type="PackedScene" uid="uid://bhcbue5bdeh1l" path="res://game/environment/dungeon_populator/dungen_populator.tscn" id="7_4c57u"]
+[ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungeon_populator.gd" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/player/hud_overlay.tscn" id="9_kek77"]
 
 [node name="Main" type="Node" unique_id=209619049 node_paths=PackedStringArray("main_menu", "game")]
@@ -35,7 +36,7 @@ test_room = ExtResource("1_0xm2m")
 
 [node name="Player" parent="Game" unique_id=472072241 node_paths=PackedStringArray("hud") instance=ExtResource("2_h2yge")]
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
 hud = NodePath("../../UI/Overlay")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
@@ -48,15 +49,22 @@ shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.585
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "dungeon_populator") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
 visible = true
 cell_margin = 4
 player = NodePath("../Player")
+dungeon_populator = NodePath("../DungeonPopulator")
 
-[node name="DungenPopulator" parent="Game" unique_id=667786978 node_paths=PackedStringArray("generator", "enemy_wrapper", "object_wrapper") groups=["RNGUnifier"] instance=ExtResource("7_4c57u")]
-generator = NodePath("../DungeonGenerator")
+[node name="DungeonPopulator" type="Node" parent="Game" unique_id=884732775 node_paths=PackedStringArray("enemy_wrapper", "object_wrapper") groups=["RNGUnifier"]]
+script = ExtResource("8_4c57u")
 enemy_wrapper = NodePath("../Enemies")
 object_wrapper = NodePath("../Objects")
+enemy_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("9_efxa6"),
+1: ExtResource("9_efxa6"),
+2: ExtResource("9_efxa6")
+})
+metadata/_custom_type_script = "uid://csp4fpbvwywgg"
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 

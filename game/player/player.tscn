@@ -79,7 +79,7 @@ script = ExtResource("2_4ste8")
 bounding_box = Vector2(1.5, 1)
 return_weight = 0.03
 move_weight = 0.07
-height = 2.621
+height = 1.5
 ray_cast = NodePath("../CameraRayCast")
 visualizer = NodePath("../TargetVisualizer")
 
