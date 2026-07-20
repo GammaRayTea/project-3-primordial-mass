@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://vlwpvfw4jtmo"]
+
+[ext_resource type="PackedScene" uid="uid://ct2utkfn4fkv5" path="res://assets/interactables/Loot/chests/chest.blend" id="1_m45to"]
+
+[node name="Chest" type="Node3D" unique_id=1493347121]
+
+[node name="Visuals" type="Node3D" parent="." unique_id=735256497]
+
+[node name="chest" parent="Visuals" unique_id=1318608102 instance=ExtResource("1_m45to")]
