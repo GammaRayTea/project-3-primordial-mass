@@ -63,40 +63,8 @@ func build_mesh(_grid: BitMap) -> void:
 					does_bit_exist(current_sub_cell_x + 1, current_sub_cell_y, _grid), 
 					does_bit_exist(current_sub_cell_x - 1, current_sub_cell_y, _grid)
 				]
-				generate_walls(current_sub_cell_x, current_sub_cell_y, adjacent)
-	
-	
-	# make floor mesh from arrays
-	surface_array_floor[Mesh.ARRAY_VERTEX] = verts_floor
-	surface_array_floor[Mesh.ARRAY_NORMAL] = normals_floor
-	surface_array_floor[Mesh.ARRAY_TEX_UV] = uvs_floor
-	surface_array_floor[Mesh.ARRAY_COLOR] = colors_floor
-	surface_array_floor[Mesh.ARRAY_INDEX] = indices_floor
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_floor)
-	
-	#make floor collision from mesh
-	var collision_instance_floor := CollisionShape3D.new()
-	collision_instance_floor.shape = mesh.create_trimesh_shape()
-	room_collisions.add_child(collision_instance_floor)
-	
-	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,test_mat)
-	
-	
-	
-	# make wall mesh from arrays
-	surface_array_wall[Mesh.ARRAY_VERTEX] = verts_wall
-	surface_array_wall[Mesh.ARRAY_NORMAL] = normals_wall
-	surface_array_wall[Mesh.ARRAY_TEX_UV] = uvs_wall
-	surface_array_wall[Mesh.ARRAY_COLOR] = colors_wall
-	surface_array_wall[Mesh.ARRAY_INDEX] = indices_wall
-	(mesh as ArrayMesh).add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_wall)
-	(mesh as ArrayMesh).create_trimesh_shape()
-	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,test_mat2)
-	
-	#make floor collision from wall
-	var collision_instance_wall := CollisionShape3D.new()
-	collision_instance_wall.shape = mesh.create_trimesh_shape()
-	room_collisions.add_child(collision_instance_wall)
+				surface_array_wall = generate_walls(current_sub_cell_x, current_sub_cell_y, adjacent, surface_array_wall)
+				
 
 	add_mesh(surface_array_floor,floor_material)
 	add_mesh(surface_array_ceil,ceiling_material)
@@ -147,18 +115,6 @@ func generate_floor(_x: float, _y: float, _height: float, _surface_array:Array) 
 			_surface_array[Mesh.ARRAY_VERTEX][_surface_array[Mesh.ARRAY_VERTEX].size()-1].x,
 			_surface_array[Mesh.ARRAY_VERTEX][_surface_array[Mesh.ARRAY_VERTEX].size()-1].z)
 			)
-			uvs_floor.append(Vector2(
-				verts_floor[verts_floor.size()-1].x,
-				verts_floor[verts_floor.size()-1].z)
-				)
-			colors_floor.append(color)
-			normals_floor.append(Vector3(0, 1, 0))
-		indices_floor.append(start_index)
-		indices_floor.append(start_index + 1)
-		indices_floor.append(start_index + 2)
-		indices_floor.append(start_index)
-		indices_floor.append(start_index + 2)
-		indices_floor.append(start_index + 3)
 		_surface_array[Mesh.ARRAY_COLOR].append(color)
 		_surface_array[Mesh.ARRAY_NORMAL].append(Vector3(0, 1, 0))
 	_surface_array[Mesh.ARRAY_INDEX].append(start_index)
@@ -172,11 +128,11 @@ func generate_floor(_x: float, _y: float, _height: float, _surface_array:Array) 
 
 
 
-##checks if a bit, with coords _x, _y, is inside the given bitmap
-func does_bit_exist(_x: int, _y: int, _grid: BitMap) -> bool:
-	if (_x < 0 or _y < 0 or _x >= _grid.get_size().x or _y >= _grid.get_size().y):
-		return true
-	return _grid.get_bit(_x, _y)
+func does_bit_exist(_x: int, _y: int, _grid:BitMap) -> bool:
+		
+		if (_x < 0 or _y < 0 or _x >= _grid.get_size().x or _y >= _grid.get_size().y):
+			return true
+		return _grid.get_bit(_x, _y)
 
 
 
