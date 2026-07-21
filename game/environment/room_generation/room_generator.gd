@@ -4,6 +4,9 @@ class_name RoomGen extends Node
 #var center: Vector2 = Vector2(rng.randf() * 16, rng.randf() * 16)
 #var size: int = 16
 var rng:RandomNumberGenerator
+var walkway_thickness_chance: float = 0.95
+var walkway_more_thickness_chance: float = 0.8
+var walkway_evem_more_thickness_chance: float = 0.6
 
 ## [param _size] determines cell size in game engine units 
 ## [param _global_random_point_position] is the position of the randomized point of the cell
@@ -16,16 +19,16 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 	var min_size: int = 3
 	
 	var connected_cell_points:= PackedVector2Array()
+	
 	#convert all connecting center points and center to local coordinates
 	for i in range(connected_cells.size()):
 		connected_cell_points.push_back(convert_too_local_coords(_cell_origin_position, _size, connected_cells[i].global_point_position))
 		
 	var center_lc = convert_too_local_coords(_cell_origin_position,_size,_global_random_point_position)
-
+	
 	
 	#generate sizeXsize cell grid with walkways to the center
 	for current_sub_cell_x in range(_size):
-
 		for current_sub_cell_y in range(_size):
 			var value:bool = false
 			for i in range(connected_cell_points.size()):
@@ -35,11 +38,25 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 				or doIntersect([[[center_lc.x, center_lc.y], [connected_cell_points[i].x, connected_cell_points[i].y]], [[current_sub_cell_x + 1.0, current_sub_cell_y], [current_sub_cell_x + 1.0, current_sub_cell_y + 1.0]]]):
 					value = true
 					break
-			bit_map.set_bit(current_sub_cell_x,current_sub_cell_y,value)
+			if rng.randf() < walkway_thickness_chance && value == true:
+				for i in range(4):
+					if does_bit_exist(current_sub_cell_x + sin(i * (PI / 2.0)), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2), _size):
+						bit_map.set_bit(current_sub_cell_x + sin(i * (PI / 2.0)), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2), value)
+				if rng.randf() < walkway_more_thickness_chance:
+					for i in range(4):
+						if does_bit_exist(current_sub_cell_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), current_sub_cell_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _size):
+							bit_map.set_bit(current_sub_cell_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), current_sub_cell_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), value)
+					if rng.randf() < walkway_evem_more_thickness_chance:
+						for i in range(4):
+							if does_bit_exist(current_sub_cell_x + sin(i * (PI / 2.0) * 2), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2) * 2, _size):
+								bit_map.set_bit(current_sub_cell_x + sin(i * (PI / 2.0) * 2), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2) * 2, value)
+			bit_map.set_bit(current_sub_cell_x, current_sub_cell_y, value)
+	
 	
 	#generate four additional room corners
 	for i in range(4):
 		room_corners.append(Vector2(((rng.randf() * (inner_square_radius - min_size)) + min_size) * snappedf(sin((i + 1.5) * PI/2), 1.0), (rng.randf() * inner_square_radius) * snappedf(sin((i + 0.5) * PI/2), 1.0)) + Vector2(_size/2.0, _size/2.0))
+	
 	
 	#put the original center at the right corner possition
 	if (center_lc.x > _size/2.0):
@@ -52,6 +69,7 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 			room_corners[1] = center_lc + (Vector2(0.0, _size) - center_lc) / 2.0
 		else:
 			room_corners[2] = center_lc - center_lc/2
+	
 	
 	#adjust grid with new room
 	#set the boundry and everything in the boundry true
@@ -69,10 +87,19 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 	
 	return bit_map
 
+
+##checks if a bit, with coords _x, _y, is inside the given bitmap
+func does_bit_exist(_x: int, _y: int, _size: int) -> bool:
+	if (_x < 0 or _y < 0 or _x >= _size or _y >= _size):
+		return false
+	return true
+
+
 #convert other centers to the local coordinate systhem
 func convert_too_local_coords(_cell_origin_position: Vector2, _size: int,_external_point: Vector2) -> Vector2:
 	var localized_center_point = _external_point - _cell_origin_position
 	return localized_center_point
+
 
 #function to check if a point lies in a triangle
 func in_triangle(_tri_1: Vector2, _tri_2: Vector2, _tri_3: Vector2, _point: Vector2):
