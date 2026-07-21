@@ -1,9 +1,21 @@
 [gd_scene format=3 uid="uid://vlwpvfw4jtmo"]
 
 [ext_resource type="PackedScene" uid="uid://ct2utkfn4fkv5" path="res://assets/interactables/Loot/chests/chest.blend" id="1_m45to"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_tpa3f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bbr86"]
+size = Vector3(2, 1.2, 2.5)
 
 [node name="Chest" type="Node3D" unique_id=1493347121]
 
 [node name="Visuals" type="Node3D" parent="." unique_id=735256497]
 
 [node name="chest" parent="Visuals" unique_id=1318608102 instance=ExtResource("1_m45to")]
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=430079423]
+script = ExtResource("2_tpa3f")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=444910470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_bbr86")

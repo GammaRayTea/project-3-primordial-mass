@@ -78,7 +78,6 @@ func build_mesh(_grid: BitMap) -> void:
 	var collision_instance_floor := CollisionShape3D.new()
 	collision_instance_floor.shape = mesh.create_trimesh_shape()
 	room_collisions.add_child(collision_instance_floor)
-	collision_instance_floor.global_position = Vector3()
 	
 	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,test_mat)
 	
@@ -92,8 +91,8 @@ func build_mesh(_grid: BitMap) -> void:
 	surface_array_wall[Mesh.ARRAY_INDEX] = indices_wall
 	(mesh as ArrayMesh).add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array_wall)
 	(mesh as ArrayMesh).create_trimesh_shape()
-	
 	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,test_mat2)
+	
 	#make floor collision from wall
 	var collision_instance_wall := CollisionShape3D.new()
 	collision_instance_wall.shape = mesh.create_trimesh_shape()
@@ -135,15 +134,14 @@ func generate_floor(_x: float, _y: float, _height: float) -> void:
 		indices_floor.append(start_index)
 		indices_floor.append(start_index + 2)
 		indices_floor.append(start_index + 3)
-		
 
 
 
-func does_bit_exist(_x: int, _y: int, _grid:BitMap) -> bool:
-		
-		if (_x < 0 or _y < 0 or _x >= _grid.get_size().x or _y >= _grid.get_size().y):
-			return true
-		return _grid.get_bit(_x, _y)
+##checks if a bit, with coords _x, _y, is inside the given bitmap
+func does_bit_exist(_x: int, _y: int, _grid: BitMap) -> bool:
+	if (_x < 0 or _y < 0 or _x >= _grid.get_size().x or _y >= _grid.get_size().y):
+		return true
+	return _grid.get_bit(_x, _y)
 
 
 
