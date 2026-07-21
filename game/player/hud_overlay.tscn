@@ -20,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_eiboa")
 script = ExtResource("1_8ijb6")
 
@@ -54,6 +55,7 @@ offset_right = 0.33927917
 offset_bottom = -3.6535797
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_eiboa")
 texture = ExtResource("4_eiboa")
 stretch_mode = 5
