@@ -1,23 +1,25 @@
 @tool
-class_name CheckPlayerDistanceState extends WaitState
+class_name CheckPlayerDistanceState extends State
 
 @export var target:Enemy
-@export var branch_state:State
-@export var default_state:State
+@export var event:Event
+
 @export var distance_threshold:float
 var player:Player
 
+func _start()-> void:
+	pass
+
+
 func _setup() -> void:
-	super()
 	player = get_tree().get_first_node_in_group("Player")
 
 
 func _execute(_delta:float) -> void:
 	if target.global_position.distance_to(player.global_position) < distance_threshold:
-		next_state = branch_state
+		event.execute()
 		finished.emit()
-	else:
-		next_state = default_state
+
 
 func _exit() -> void:
 	pass

@@ -1,7 +1,7 @@
 extends VisionCone
 var detect_position:Vector3
 @export var path_trace:RayCast3D
-
+@export var walk_to_pos_state:WalkToPositionState
 
 func _physics_process(_delta: float) -> void:
 	path_trace.target_position = -(path_trace.global_position - get_tree().get_nodes_in_group("Player")[0].global_position)
@@ -16,6 +16,8 @@ func _on_area_entered(_area: Area3D) -> void:
 		var collider = path_trace.get_collider()
 
 		if collider == _area:
-			(alert_state as WalkToPositionState).target_position = detect_position
+			walk_to_pos_state.target_position = detect_position
+			print(detect_position)
 			enemy.state_machine.switch_to_state(alert_state)
+			print("player detected")
 			set_deferred("monitoring", false)

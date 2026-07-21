@@ -59,8 +59,8 @@ radius = 0.33740234
 [node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
 collision_layer = 0
 script = ExtResource("1_b2mth")
-MAX_WALKING_SPEED = 3.0
-MAX_RUNNING_SPEED = 8.0
+MAX_WALKING_SPEED = 100.0
+MAX_RUNNING_SPEED = 4.0
 do_gravity = false
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 camera = NodePath("CameraStuff/Camera")

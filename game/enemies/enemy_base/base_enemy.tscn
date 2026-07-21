@@ -10,11 +10,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 
-[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "rotation_pivot", "state_machine")]
+[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "state_machine", "rotation_pivot")]
 script = ExtResource("1_p4vjo")
 animation_tree = NodePath("AnimationTree")
-rotation_pivot = NodePath("RotationPivot")
 state_machine = NodePath("StateMachine")
+rotation_pivot = NodePath("RotationPivot")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
 shape = SubResource("CapsuleShape3D_yh7c5")
@@ -48,4 +48,9 @@ debug_color = Color(0.99591845, 0, 0.20490283, 0.41960785)
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=33426455]
 
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="." unique_id=226181715]
+aabb = AABB(-4, -4, -4, 8, 8, 8)
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler3D" to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler3D" to="." method="_on_screen_exited"]

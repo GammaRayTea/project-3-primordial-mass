@@ -23,8 +23,8 @@ func _execute(_delta:float) -> void:
 
 	
 	target.rotate_to_direction(direction)
-
 	if target.global_position.distance_to(target_position) <= distance_threshold:
+		print("target reacehd")
 		finished.emit()
 func _exit() -> void:
 	target.velocity = Vector3(0,0,0)

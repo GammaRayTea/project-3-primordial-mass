@@ -122,10 +122,13 @@ signal finished
 
 ##Called once when the state is first loaded.
 @abstract func _setup()->void
+
 ##Called when the state starts execution.
 @abstract func _start()-> void
+
 ##Called every frame by the state machine when this state is active. [code]_delta[/code] is delta physics frame time.
 @abstract func _execute(_delta:float) -> void
+
 ##Called when the state exits
 @abstract func _exit() -> void
 

@@ -70,3 +70,13 @@ func execute_events(events:Array[Event])->void:
 	for event in events:
 		if event is Event:
 			event.execute()
+
+
+func _on_screen_entered() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
+	print("active")
+
+
+func _on_screen_exited() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	print("exited")

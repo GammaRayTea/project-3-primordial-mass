@@ -46,6 +46,7 @@ func _ready() -> void:
 		for child in get_children():
 			if child is State:
 				prepare_state(child)
+				
 			else:
 				for sub_child in child.get_children():
 					if sub_child is State:
@@ -54,6 +55,7 @@ func _ready() -> void:
 		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
+	print(_state)
 	_state.finished.connect(_on_state_finished)
 	_state._setup()
 
@@ -64,8 +66,9 @@ func _update(_delta:float) -> void:
 	
 
 func switch_to_state(_state:State) -> void:
-	if animation_state_names.has(_state.animation_state_name):
-		animation_tree["parameters/playback"].travel(_state.animation_state_name)
+	if _state.animation_state_name:
+		if animation_state_names.has(_state.animation_state_name):
+			animation_tree["parameters/playback"].travel(_state.animation_state_name)
 	if current_state:
 		current_state._exit()
 	current_state = _state
