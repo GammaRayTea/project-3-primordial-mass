@@ -356,7 +356,7 @@ radius = 0.4
 height = 1.0948181
 
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
-events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/FreeEvent")]
+events_on_death = [NodePath("Events/DropEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
@@ -375,9 +375,12 @@ mask = Vector3(1, 0, 1)
 next_state = NodePath("../WalkForwardVelocityState")
 animation_state_name = "globber_idle"
 pass_data = true
-target_amount = 1
+target_amount = 4
 target_1 = NodePath("../WalkForwardVelocityState")
 property_1 = "direction"
+property_2 = ""
+property_3 = ""
+property_4 = ""
 metadata/_custom_type_script = "uid://d3h5j6rwem265"
 
 [node name="WalkForwardVelocityState" type="Node" parent="StateMachine/Roam" index="1" unique_id=719899571 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]

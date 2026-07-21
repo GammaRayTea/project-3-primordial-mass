@@ -1,7 +1,8 @@
 @tool
 class_name Enemy extends Entity
 
-
+@export_category("Attributes")
+@export var tile_spawn_margin:int = 1
 
 @export_category("Components")
 @export var animation_tree:AnimationTree:

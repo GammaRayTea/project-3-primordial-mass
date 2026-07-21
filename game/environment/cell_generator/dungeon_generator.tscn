@@ -8,12 +8,15 @@
 visible = false
 script = ExtResource("1_667dc")
 cell_margin = 1
-random_seed = 1
-generated_map = NodePath("Control/Active")
-outer_map = NodePath("Control/Outer")
+generated_map = NodePath("CanvasLayer/Control/Active")
+outer_map = NodePath("CanvasLayer/Control/Outer")
 room_generator = NodePath("RoomGen")
 
-[node name="Control" type="Control" parent="." unique_id=1961200669]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=626695493]
+layer = 2
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1961200669]
+z_as_relative = false
 layout_mode = 3
 anchor_right = 1.0020001
 anchor_bottom = 1.0
@@ -21,8 +24,11 @@ offset_left = 81.0
 offset_top = 62.0
 offset_right = 0.15979004
 offset_bottom = -1.0
+mouse_filter = 2
 
-[node name="Active" type="Control" parent="Control" unique_id=413907987]
+[node name="Active" type="Control" parent="CanvasLayer/Control" unique_id=413907987]
+z_index = 1
+z_as_relative = false
 texture_filter = 1
 layout_mode = 1
 anchor_left = -0.187
@@ -31,6 +37,7 @@ offset_left = 79.00001
 offset_top = 66.999985
 offset_right = 217.01599
 offset_bottom = 138.985
+mouse_filter = 2
 script = ExtResource("2_udw2b")
 draw_point_subdivision = 2
 line_color = Color(1, 1, 0.60784316, 0.84313726)
@@ -39,8 +46,8 @@ point_color = Color(0, 0.92941177, 0, 1)
 draw_cells = true
 is_inner = true
 
-[node name="Outer" type="Control" parent="Control" unique_id=941957906]
-z_index = -1
+[node name="Outer" type="Control" parent="CanvasLayer/Control" unique_id=941957906]
+z_as_relative = false
 texture_filter = 1
 layout_mode = 1
 anchor_left = -0.187
@@ -49,6 +56,7 @@ offset_left = 79.00001
 offset_top = 66.999985
 offset_right = 217.01599
 offset_bottom = 138.985
+mouse_filter = 2
 script = ExtResource("2_udw2b")
 draw_point_subdivision = 3
 line_color = Color(0.20269454, 0.49464202, 0.08862399, 0.627451)
