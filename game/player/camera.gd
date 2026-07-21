@@ -11,7 +11,7 @@ var move_weight:float
 
 @export var max_speed:float
 @export_range(0,10,0.0001)
-var height:float = 2.621
+var height:float
 
 @export var reset_time:int = 40
 var current_time_until_reset:int = 0

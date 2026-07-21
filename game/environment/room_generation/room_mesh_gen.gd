@@ -1,62 +1,62 @@
 class_name RoomMesh extends MeshInstance3D
 
-var room_collisions:StaticBody3D
+@export var room_collisions: Node3D
 
-var floor_material:Material
-var ceiling_material:Material
-var wall_material:Material
+@export var test_mat:Material
+@export var test_mat2:Material
 
-var grid_size:Vector2i = Vector2i(16,16)
+@export var grid_size:Vector2i = Vector2i(16,16)
 
-var rng:RandomNumberGenerator
+# Array setup
+var surface_array_floor = []
 
-func _init(_grid_size:Vector2,_rng:RandomNumberGenerator,_floor_material:Material,_ceiling_material:Material,_wall_material:Material) -> void:
-	floor_material = _floor_material
-	ceiling_material = _ceiling_material
-	wall_material = _wall_material
-	rng = _rng
-	grid_size = _grid_size
-func _ready() -> void:
-	room_collisions = StaticBody3D.new()
-	add_child(room_collisions)
+var surface_array_wall = []
 
 
-func make_array() -> Array:
-	var array = []
-	array.resize(Mesh.ARRAY_MAX)
+var verts_floor := PackedVector3Array()
+var normals_floor := PackedVector3Array()
+var uvs_floor := PackedVector2Array()
+var colors_floor := PackedColorArray()
+var indices_floor := PackedInt32Array()
+
+var verts_wall := PackedVector3Array()
+var normals_wall := PackedVector3Array()
+var uvs_wall := PackedVector2Array()
+var colors_wall := PackedColorArray()
+var indices_wall := PackedInt32Array()
+
+
+func reset_arrays() -> void:
+	surface_array_floor = []
+	surface_array_floor.resize(Mesh.ARRAY_MAX)
 	
+	surface_array_wall = []
+	surface_array_wall.resize(Mesh.ARRAY_MAX)
 	
-	array[Mesh.ARRAY_VERTEX] = PackedVector3Array()
-	array[Mesh.ARRAY_NORMAL] = PackedVector3Array()
-	array[Mesh.ARRAY_TEX_UV] = PackedVector2Array()
-	array[Mesh.ARRAY_COLOR] = PackedColorArray()
-	array[Mesh.ARRAY_INDEX] = PackedInt32Array()
-	return array
+	verts_floor = PackedVector3Array()
+	normals_floor = PackedVector3Array()
+	uvs_floor = PackedVector2Array()
+	colors_floor = PackedColorArray()
+	indices_floor = PackedInt32Array()
 	
+	verts_wall = PackedVector3Array()
+	normals_wall = PackedVector3Array()
+	uvs_wall = PackedVector2Array()
+	colors_wall = PackedColorArray()
+	indices_wall = PackedInt32Array()
+
 
 ## Builds a mesh from a BitMap
 func build_mesh(_grid: BitMap) -> void:
-	
-	
-	var surface_array_ceil = make_array()
-	var surface_array_wall = make_array()
-	var surface_array_floor = make_array()
-	
-	
-	
-	
+	reset_arrays()
 	if mesh == null:
 		mesh = ArrayMesh.new()
 
 	for current_sub_cell_y in range(grid_size.y):
-		
 		for current_sub_cell_x in range(grid_size.x):
-
 			if (_grid.get_bit(current_sub_cell_x, current_sub_cell_y) == true):
-				surface_array_floor = generate_floor(current_sub_cell_x, current_sub_cell_y, 0.0, surface_array_floor)
-				
+				generate_floor(current_sub_cell_x, current_sub_cell_y, 0.0)
 			else:
-				surface_array_ceil = generate_floor(current_sub_cell_x,current_sub_cell_y,2.0, surface_array_ceil)
 				var adjacent: Array[bool] = [
 					does_bit_exist(current_sub_cell_x, current_sub_cell_y - 1, _grid), 
 					does_bit_exist(current_sub_cell_x, current_sub_cell_y + 1, _grid) , 
@@ -98,54 +98,29 @@ func build_mesh(_grid: BitMap) -> void:
 	collision_instance_wall.shape = mesh.create_trimesh_shape()
 	room_collisions.add_child(collision_instance_wall)
 
-	add_mesh(surface_array_floor,floor_material)
-	add_mesh(surface_array_ceil,ceiling_material)
-	add_mesh(surface_array_wall, wall_material)
-
-	
-	
-	#make collisionmesh
-	var collision_instance := CollisionShape3D.new()
-	collision_instance.shape = mesh.create_trimesh_shape()
-	room_collisions.add_child(collision_instance)
-
-
-
-
-func add_mesh(_mesh_array:Array, _material:Material) -> void:
-	
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _mesh_array)
-	(mesh as ArrayMesh).surface_set_material((mesh as ArrayMesh).get_surface_count()-1,_material)
 
 
 
 #create floor tiles
-func generate_floor(_x: float, _y: float, _height: float, _surface_array:Array) -> Array:
-	
-	
-	var start_index:int = _surface_array[Mesh.ARRAY_VERTEX].size()
+func generate_floor(_x: float, _y: float, _height: float) -> void:
+		var start_index: int = verts_floor.size()
+		var rand:float = randf()
+		var color:Color
+		if rand < 0.8:
+			color = Color(0,0,0,1)
+		elif rand < 0.9:
+			color = Color(1,0,0,1)
+		elif rand < 0.95:
+			color = Color(0,1,0,1)
+		elif rand <= 1.0:
+			color = Color(0,0,1,1)
 
-	var rand:float = randf()
-	var color:Color
-	if rand < 0.8:
-		color = Color(0,0,0,1)
-	elif rand < 0.9:
-		color = Color(1,0,0,1)
-	elif rand < 0.95:
-		color = Color(0,1,0,1)
-	elif rand <= 1.0:
-		color = Color(0,0,1,1)
-
-	
-	for i in range(4):
-		_surface_array[Mesh.ARRAY_VERTEX].append(Vector3(
-			_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)) + 0.5, 
-		_height, 
-		_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)) + 0.5)
-		)
-		_surface_array[Mesh.ARRAY_TEX_UV].append(Vector2(
-			_surface_array[Mesh.ARRAY_VERTEX][_surface_array[Mesh.ARRAY_VERTEX].size()-1].x,
-			_surface_array[Mesh.ARRAY_VERTEX][_surface_array[Mesh.ARRAY_VERTEX].size()-1].z)
+		
+		for i in range(4):
+			verts_floor.append(Vector3(
+				_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)) + 0.5, 
+			_height, 
+			_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)) + 0.5)
 			)
 			uvs_floor.append(Vector2(
 				verts_floor[verts_floor.size()-1].x,
@@ -159,16 +134,6 @@ func generate_floor(_x: float, _y: float, _height: float, _surface_array:Array) 
 		indices_floor.append(start_index)
 		indices_floor.append(start_index + 2)
 		indices_floor.append(start_index + 3)
-		_surface_array[Mesh.ARRAY_COLOR].append(color)
-		_surface_array[Mesh.ARRAY_NORMAL].append(Vector3(0, 1, 0))
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index)
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index + 1)
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index)
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-	_surface_array[Mesh.ARRAY_INDEX].append(start_index + 3)
-	
-	return _surface_array
 
 
 
@@ -182,21 +147,21 @@ func does_bit_exist(_x: int, _y: int, _grid: BitMap) -> bool:
 
 
 #creating the walls for a tile
-func generate_walls(_x: float, _y: float, _adjacent_sub_cells: Array[bool], _mesh_array:Array) -> Array:
+func generate_walls(_x: float, _y: float, _adjacent_sub_cells: Array[bool]) -> void:
 	if (_adjacent_sub_cells[1] == true):
-		_mesh_array = generate_wall(_x + 0.5, _y + 1.0, PlaneMesh.FACE_Z, false, false, _mesh_array)
+		generate_wall(_x + 0.5, _y + 1.0, PlaneMesh.FACE_Z, false, false)
 	if (_adjacent_sub_cells[0] == true):
-		_mesh_array = generate_wall(_x + 0.5, _y, PlaneMesh.FACE_Z, true, false, _mesh_array)
+		generate_wall(_x + 0.5, _y, PlaneMesh.FACE_Z, true, false)
 	if (_adjacent_sub_cells[3] == true):
-		_mesh_array = generate_wall(_x, _y + 0.5, PlaneMesh.FACE_X, true, true, _mesh_array)
+		generate_wall(_x, _y + 0.5, PlaneMesh.FACE_X, true, true)
 	if (_adjacent_sub_cells[2] == true):
-		_mesh_array = generate_wall(_x + 1.0, _y + 0.5, PlaneMesh.FACE_X, false, true, _mesh_array)
-	return _mesh_array
+		generate_wall(_x + 1.0, _y + 0.5, PlaneMesh.FACE_X, false, true)
+
 
 
 
 #creating two stacked wall pieces
-func generate_wall(_x: float, _y: float, _facing, _flip_faces: bool, _rotated: bool, _mesh_array:Array) -> Array:
+func generate_wall(_x: float, _y: float, _facing, _flip_faces: bool, _rotated: bool) -> void:
 	var height: float = 0.5
 	var normal: Vector3
 	if _rotated:
@@ -231,43 +196,35 @@ func generate_wall(_x: float, _y: float, _facing, _flip_faces: bool, _rotated: b
 		colors.append(Color(0,0,1,-1.0))
 	
 	for j in range(2):
-		var start_index: int = _mesh_array[Mesh.ARRAY_VERTEX].size()
+		var start_index: int = verts_wall.size()
 		for i in range(4):
 			if _rotated:
-				_mesh_array[Mesh.ARRAY_VERTEX].append(Vector3(
-					_x, 
-					height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), 
-					_y + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))
-				))
-				_mesh_array[Mesh.ARRAY_TEX_UV].append(Vector2(
-					_mesh_array[Mesh.ARRAY_VERTEX][_mesh_array[Mesh.ARRAY_VERTEX].size()-1].z,
-					-_mesh_array[Mesh.ARRAY_VERTEX][_mesh_array[Mesh.ARRAY_VERTEX].size()-1].y)
+				verts_wall.append(Vector3(_x, height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))))
+				uvs_wall.append(Vector2(
+				verts_wall[verts_wall.size()-1].z,
+				-verts_wall[verts_wall.size()-1].y)
 				)
 			else:
-				_mesh_array[Mesh.ARRAY_VERTEX].append(Vector3(
-					_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), 
-					height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), 
-					_y
-				))
-				_mesh_array[Mesh.ARRAY_TEX_UV].append(Vector2(
-					_mesh_array[Mesh.ARRAY_VERTEX][_mesh_array[Mesh.ARRAY_VERTEX].size()-1].x,
-					-_mesh_array[Mesh.ARRAY_VERTEX][_mesh_array[Mesh.ARRAY_VERTEX].size()-1].y)
+				verts_wall.append(Vector3(_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), height + j + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _y))
+				uvs_wall.append(Vector2(
+				verts_wall[verts_wall.size()-1].x,
+				-verts_wall[verts_wall.size()-1].y)
+				
 				)
-			_mesh_array[Mesh.ARRAY_NORMAL].append(normal)
-			_mesh_array[Mesh.ARRAY_COLOR].append(colors[j])
+			normals_wall.append(normal)
+			colors_wall.append(colors[j])
 
 			if _flip_faces:
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 1)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 3)
+				indices_wall.append(start_index)
+				indices_wall.append(start_index + 1)
+				indices_wall.append(start_index + 2)
+				indices_wall.append(start_index)
+				indices_wall.append(start_index + 2)
+				indices_wall.append(start_index + 3)
 			else:
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 1)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 3)
-				_mesh_array[Mesh.ARRAY_INDEX].append(start_index + 2)
-	return _mesh_array
+				indices_wall.append(start_index)
+				indices_wall.append(start_index + 2)
+				indices_wall.append(start_index + 1)
+				indices_wall.append(start_index)
+				indices_wall.append(start_index + 3)
+				indices_wall.append(start_index + 2)
