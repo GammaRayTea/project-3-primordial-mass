@@ -13,7 +13,8 @@ class_name WalkToPositionState extends State
 func _setup()->void:
 	pass
 func _start()-> void:
-	print("moving to target...")
+	#print("moving to target...")
+	pass
 func _execute(_delta:float) -> void:
 	var direction = target.global_position.direction_to(target_position).normalized()
 	var target_vel = direction * speed 

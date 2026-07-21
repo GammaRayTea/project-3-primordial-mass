@@ -1,14 +1,22 @@
-class_name Entity extends CharacterBody3D
+@abstract class_name Entity extends CharacterBody3D
 @export_category("Attributes")
 
 @export_category("Components")
 @export var rotation_pivot:Node3D
 
-func get_hit(source:HitBox):
-	pass
+
+
+func _on_hurt_box_area_entered(area: Area3D) -> void:
+	if area is HitBox and area.parent != self:
+		get_hit(area)
+		
+
+@abstract func get_hit(_source:HitBox)
 
 func die() -> void:
 	pass
+
+
 
 
 

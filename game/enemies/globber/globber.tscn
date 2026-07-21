@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dbrxet3cojgye" path="res://game/behaviours/state_machine/states/set_property_state.gd" id="6_joybc"]
 [ext_resource type="Script" uid="uid://bni0ohsqn0ibr" path="res://game/behaviours/state_machine/states/check_player_distance_state.gd" id="6_nsq5j"]
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
+[ext_resource type="Script" uid="uid://yc0ay2h3j4ck" path="res://game/behaviours/state_machine/states/await_animation_state.gd" id="8_3ai4x"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
 [ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
 [ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="9_45htx"]
@@ -26,6 +27,9 @@
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
 [ext_resource type="Script" uid="uid://cqa02cuqcr334" path="res://game/enemies/vision_cone/globber_vision_cone.gd" id="19_2si2q"]
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="25_ydwe4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ai4x"]
+radius = 0.3540039
 
 [sub_resource type="Animation" id="Animation_nlepm"]
 length = 4.0
@@ -224,7 +228,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("../HitBox/CollisionShape3D:disabled")
+tracks/16/path = NodePath("../RotationPivot/HitBox/CollisionShape3D:disabled")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -285,7 +289,6 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bnwb"]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6q3l"]
 switch_mode = 2
@@ -301,6 +304,10 @@ states/globber_idle_turning/position = Vector2(386, 228.00002)
 states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
 states/globber_walk/position = Vector2(625.2593, 99.79789)
 transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turning", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turning", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turning", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_h6q3l")]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
+radius = 0.4
+height = 1.0948181
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
 atlas = ExtResource("14_o8dyd")
@@ -352,15 +359,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
-radius = 0.4
-height = 1.0948181
-
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
 events_on_death = [NodePath("Events/DropEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+shape = SubResource("CapsuleShape3D_3ai4x")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
@@ -418,11 +422,12 @@ next_state = NodePath("../CheckPlayerDistanceState")
 animation_state_name = "globber_walk"
 metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
 
-[node name="CheckPlayerDistanceState" type="Node" parent="StateMachine/Alert" index="1" unique_id=475245288 node_paths=PackedStringArray("target", "default_state", "next_state")]
+[node name="CheckPlayerDistanceState" type="Node" parent="StateMachine/Alert" index="1" unique_id=475245288 node_paths=PackedStringArray("target", "branch_state", "default_state", "next_state")]
 script = ExtResource("6_nsq5j")
 target = NodePath("../../..")
+branch_state = NodePath("../../Attack/AwaitAnimationState")
 default_state = NodePath("../EnableVisionCone")
-distance_threshold = 7.0
+distance_threshold = 3.0
 randomize_time = true
 minimum = 1.0
 maximum = 3.0
@@ -440,6 +445,13 @@ next_state = NodePath("../../Roam/RandomDirectionState")
 metadata/_custom_type_script = "uid://dbrxet3cojgye"
 
 [node name="Attack" type="Node" parent="StateMachine" index="2" unique_id=1492443935]
+
+[node name="AwaitAnimationState" type="Node" parent="StateMachine/Attack" index="0" unique_id=895425256 node_paths=PackedStringArray("animation_tree", "next_state")]
+script = ExtResource("8_3ai4x")
+animation_tree = NodePath("../../../AnimationTree")
+animation = "globber_attack"
+next_state = NodePath("../../Alert/EnableVisionCone")
+metadata/_custom_type_script = "uid://yc0ay2h3j4ck"
 
 [node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
 script = ExtResource("9_45htx")
@@ -460,10 +472,27 @@ libraries/ = SubResource("AnimationLibrary_845p2")
 [node name="AnimationTree" parent="." index="4" unique_id=934466786]
 tree_root = SubResource("AnimationNodeStateMachine_droo6")
 
-[node name="HurtBox" parent="." index="5" unique_id=158402479]
+[node name="HurtBox" parent="." index="5" unique_id=158402479 node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45192683, 0)
+parent = NodePath("..")
 
-[node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=33426455]
+[node name="HitBox" type="Area3D" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=1715043841 node_paths=PackedStringArray("parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("25_ydwe4")
+parent = NodePath("../..")
+damage = 100.0
+knockback = 10.0
+metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/HitBox" index="0" unique_id=966836666]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.04395032, -0.0012564659, 0.42395365)
+shape = SubResource("CapsuleShape3D_mmgqi")
+disabled = true
+debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)
+
+[node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=33426455]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Alive" type="Node3D" parent="RotationPivot/Visuals" index="0" unique_id=1655088542]
@@ -535,7 +564,7 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"death"
 
-[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="2" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
 collision_layer = 0
 collision_mask = 2
@@ -547,16 +576,3 @@ alert_state = NodePath("../../StateMachine/Alert/WalkToPositionState")
 [node name="RayCast3D" type="RayCast3D" parent="." index="7" unique_id=912591583]
 collision_mask = 3
 collide_with_areas = true
-
-[node name="HitBox" type="Area3D" parent="." index="8" unique_id=1715043841]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("25_ydwe4")
-metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" index="0" unique_id=966836666]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.04395032, -0.0012564659, 0.42395365)
-shape = SubResource("CapsuleShape3D_mmgqi")
-disabled = true
-debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)

@@ -3,7 +3,8 @@ class_name DungeonGenerator extends Node3D
 @export var cell_size: int = 16
 @export var cell_margin: int = 2
 @export var debug: bool = false
-		
+
+@export var draw_map: bool = false
 @export_category("Components")
 @export var player: Player
 @export var generated_map: Control
@@ -30,7 +31,11 @@ var locked_cells: Dictionary[Vector2, Cell] = {}
 
 var current_cell_tier:int
 
+
 func _start_generation() -> void:
+	$CanvasLayer.visible = draw_map
+	
+	
 	current_cell_tier = 0
 	room_generator.rng = rng
 	@warning_ignore("narrowing_conversion")
@@ -44,7 +49,7 @@ func _start_generation() -> void:
 
 
 func expand_map() -> void:
-	print("expanding")
+	#print("expanding")
 	
 	var staged_delanauy_ids := generate_new_cells(outer_check_range)
 	lock_in_cells(inner_check_range, staged_delanauy_ids)
@@ -254,7 +259,3 @@ func get_cell_neighbours(_cell_pos: Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size, 0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0, cell_size)))
 	return ids
-
-
-func _on_visibility_changed() -> void:
-	$Control.visible = visible

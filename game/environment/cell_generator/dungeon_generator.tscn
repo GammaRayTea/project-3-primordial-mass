@@ -56,20 +56,5 @@ cell_color = Color(0.65229505, 0.53455144, 0.22780472, 0.49019608)
 point_color = Color(0.8621473, 0.73683655, 0.059056364, 1)
 draw_cells = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=313650669]
-z_index = -4
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 17.0
-offset_right = -1355.0
-offset_bottom = -678.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.105882354, 0.105882354, 0.105882354, 0.37254903)
-
 [node name="RoomGen" type="Node3D" parent="." unique_id=1968377440]
 script = ExtResource("3_oux4p")
-
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

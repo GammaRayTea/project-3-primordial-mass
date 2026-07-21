@@ -55,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 
 func get_hit(source:HitBox):
 	health-=source.damage
+	velocity += source.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
 
@@ -63,10 +64,6 @@ func die() -> void:
 	enemy_died.emit()
 
 
-func _on_hurt_box_area_entered(area: Area3D) -> void:
-	if area is HitBox and area.get_parent() != self:
-		get_hit(area)
-		
 
 
 func execute_events(events:Array[Event])->void:

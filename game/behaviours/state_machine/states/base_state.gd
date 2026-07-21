@@ -18,6 +18,7 @@
 		else:
 			pass_data_target_amount = 0
 		notify_property_list_changed()
+
 var pass_data_target_amount:int = 0:
 	set(value):
 		if value >=0:
@@ -33,6 +34,7 @@ var pass_data_target_amount:int = 0:
 				pass_data_targets = pass_data_targets.slice(0, value)
 
 		notify_property_list_changed()
+		
 var pass_data_targets: Array[Dictionary] = []
 
 

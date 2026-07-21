@@ -165,8 +165,15 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 
 
 #region damage handling
+
+
+
+
 func get_hit(source:HitBox):
+	velocity += source.parent.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
+	print("Player took damage ", source.damage)
 	GameState.decrease_stability(source.damage)
+	
 
 
 func die() -> void:
