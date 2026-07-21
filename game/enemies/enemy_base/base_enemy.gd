@@ -2,13 +2,20 @@
 class_name Enemy extends Entity
 
 @export_category("Attributes")
+@export var health:float = 100.0:
+	set(value):
+		health = value
+		if health <= 0.0:
+			die()
 @export var tile_spawn_margin:int = 1
-
 @export_category("Components")
 @export var animation_tree:AnimationTree:
 	set(value):
 		animation_tree= value
 		update_configuration_warnings()
+
+
+
 
 @export_category("State Machine")
 @export var state_machine:StateMachine:
@@ -47,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 	
 
 func get_hit(source:HitBox):
-	super(source)
+	health-=source.damage
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
 

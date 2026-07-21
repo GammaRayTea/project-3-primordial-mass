@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*uid://ukbuejw1m15w"
 GlobalEnum="*uid://nptyhdrtvfm4"
+GameState="*uid://ukbuejw1m15w"
 
 [display]
 
@@ -52,6 +52,7 @@ folder_colors={
 Player="The Player."
 Game=""
 RNGUnifier=""
+StabilityBar=""
 
 [input]
 

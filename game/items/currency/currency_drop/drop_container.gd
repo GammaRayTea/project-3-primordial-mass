@@ -23,5 +23,5 @@ func setup(_type:GlobalEnum.CURRENCY, _value:int) -> void:
 
 
 func _on_interaction_box_area_entered(_area: Area3D) -> void:
-	GameState.save_game.add_currency(type,value)
+	(get_tree().get_first_node_in_group("RunManager") as RunManager).add_currency(type,value)
 	queue_free()

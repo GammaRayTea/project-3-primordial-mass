@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://drf2ekrhnwk3t" path="res://game/behaviours/state_machine/states/walk_to_position.gd" id="5_qg7h7"]
 [ext_resource type="Texture2D" uid="uid://dpsmsg8e6vbev" path="res://assets/enemies/globber/animations/Globber2RightArm.png" id="6_h82rf"]
 [ext_resource type="Script" uid="uid://dbrxet3cojgye" path="res://game/behaviours/state_machine/states/set_property_state.gd" id="6_joybc"]
+[ext_resource type="Script" uid="uid://bni0ohsqn0ibr" path="res://game/behaviours/state_machine/states/check_player_distance_state.gd" id="6_nsq5j"]
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
 [ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
@@ -413,18 +414,21 @@ target = NodePath("../../..")
 rotation_pivot = NodePath("../../../RotationPivot")
 speed = 1.4
 distance_threshold = 1.3
-next_state = NodePath("../WaitStateAfter")
+next_state = NodePath("../CheckPlayerDistanceState")
 animation_state_name = "globber_walk"
 metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
 
-[node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
-script = ExtResource("4_gtf71")
+[node name="CheckPlayerDistanceState" type="Node" parent="StateMachine/Alert" index="1" unique_id=475245288 node_paths=PackedStringArray("target", "default_state", "next_state")]
+script = ExtResource("6_nsq5j")
+target = NodePath("../../..")
+default_state = NodePath("../EnableVisionCone")
+distance_threshold = 7.0
 randomize_time = true
-minimum = 0.0
-maximum = 5.0
+minimum = 1.0
+maximum = 3.0
 next_state = NodePath("../EnableVisionCone")
 animation_state_name = "globber_idle_turning"
-metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+metadata/_custom_type_script = "uid://bni0ohsqn0ibr"
 
 [node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("6_joybc")
@@ -434,6 +438,8 @@ type = 1
 value = true
 next_state = NodePath("../../Roam/RandomDirectionState")
 metadata/_custom_type_script = "uid://dbrxet3cojgye"
+
+[node name="Attack" type="Node" parent="StateMachine" index="2" unique_id=1492443935]
 
 [node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
 script = ExtResource("9_45htx")
@@ -445,6 +451,7 @@ script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
 source = NodePath("../..")
 max_value = 10
+type = 1
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
 [node name="AnimationPlayer" parent="." index="3" unique_id=67901383]

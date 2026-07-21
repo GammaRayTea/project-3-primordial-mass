@@ -103,6 +103,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 		velocity.x = clampf(velocity.x, -_target_speed, _target_speed)
 		velocity.z = clampf(velocity.z, -_target_speed, _target_speed)
 		
+		GameState.decrease_stability(1)
 	else:
 		velocity.x = move_toward(velocity.x, 0, TRACTION)
 		velocity.z = move_toward(velocity.z, 0,TRACTION)
@@ -165,7 +166,7 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 
 #region damage handling
 func get_hit(source:HitBox):
-	super(source)
+	GameState.decrease_stability(source.damage)
 
 
 func die() -> void:

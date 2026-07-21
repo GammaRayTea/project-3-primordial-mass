@@ -1,16 +1,11 @@
 class_name Entity extends CharacterBody3D
 @export_category("Attributes")
-@export var health:float = 100.0:
-	set(value):
-		health = value
-		if health <= 0.0:
-			die()
+
 @export_category("Components")
 @export var rotation_pivot:Node3D
 
 func get_hit(source:HitBox):
-	health-=source.damage
-	print("damage ", source.damage, " health ", health)
+	pass
 
 func die() -> void:
 	pass

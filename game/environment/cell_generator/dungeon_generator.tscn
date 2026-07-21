@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://chowmieepq3d1" path="res://game/environment/room_generation/room_generator.gd" id="3_oux4p"]
 
 [node name="DungeonGenerator" type="Node3D" unique_id=1510930155 node_paths=PackedStringArray("generated_map", "outer_map", "room_generator")]
-visible = false
 script = ExtResource("1_667dc")
 cell_margin = 1
 generated_map = NodePath("CanvasLayer/Control/Active")
@@ -18,12 +17,7 @@ layer = 2
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1961200669]
 z_as_relative = false
 layout_mode = 3
-anchor_right = 1.0020001
-anchor_bottom = 1.0
-offset_left = 81.0
-offset_top = 62.0
-offset_right = 0.15979004
-offset_bottom = -1.0
+anchors_preset = 0
 mouse_filter = 2
 
 [node name="Active" type="Control" parent="CanvasLayer/Control" unique_id=413907987]
@@ -31,12 +25,11 @@ z_index = 1
 z_as_relative = false
 texture_filter = 1
 layout_mode = 1
-anchor_left = -0.187
-anchor_top = -0.27600002
-offset_left = 79.00001
-offset_top = 66.999985
-offset_right = 217.01599
-offset_bottom = 138.985
+anchors_preset = 0
+offset_left = 54.0
+offset_top = 45.0
+offset_right = 192.01599
+offset_bottom = 116.985016
 mouse_filter = 2
 script = ExtResource("2_udw2b")
 draw_point_subdivision = 2
@@ -50,12 +43,11 @@ is_inner = true
 z_as_relative = false
 texture_filter = 1
 layout_mode = 1
-anchor_left = -0.187
-anchor_top = -0.27600002
-offset_left = 79.00001
-offset_top = 66.999985
-offset_right = 217.01599
-offset_bottom = 138.985
+anchors_preset = 0
+offset_left = 54.0
+offset_top = 45.0
+offset_right = 192.01599
+offset_bottom = 116.985016
 mouse_filter = 2
 script = ExtResource("2_udw2b")
 draw_point_subdivision = 3

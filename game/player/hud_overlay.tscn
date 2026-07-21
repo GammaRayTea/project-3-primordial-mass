@@ -13,7 +13,7 @@ shader_parameter/alpha = 0.42
 shader_parameter/inner_radius = 0.12
 shader_parameter/outer_radius = 0.545
 
-[node name="Overlay" type="Control" unique_id=1199412428]
+[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("stability_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,9 +23,11 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_eiboa")
 script = ExtResource("1_8ijb6")
+stability_bar = NodePath("")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.90300006

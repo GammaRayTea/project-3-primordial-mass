@@ -1,2 +1,2 @@
 extends Node
-enum CURRENCY {GOO}
+enum CURRENCY {GOO, STABILITY}

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungeon_populator.gd" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/player/hud_overlay.tscn" id="9_kek77"]
+[ext_resource type="Script" uid="uid://b81pxbvyow2e5" path="res://run_manager.gd" id="10_dg77c"]
 
 [sub_resource type="Gradient" id="Gradient_yepel"]
 colors = PackedColorArray(0, 0, 0, 1, 0.22201729, 0, 0.0033882183, 1)
@@ -29,7 +30,6 @@ script = ExtResource("1_5vw27")
 jump_to_game = false
 main_menu = NodePath("UI/MainMenu")
 game = NodePath("Game")
-render_low_res = true
 low_resolution = Vector2i(512, 288)
 high_resolution = Vector2i(1920, 1080)
 
@@ -47,6 +47,9 @@ testing = false
 dark = false
 test_room = ExtResource("1_0xm2m")
 
+[node name="RunManager" type="Node" parent="Game" unique_id=1077142703 groups=["RunManager"]]
+script = ExtResource("10_dg77c")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = ExtResource("6_4c57u")
 
@@ -58,6 +61,7 @@ shadow_bias = 0.0
 shadow_normal_bias = 0.585
 
 [node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "dungeon_populator") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
+visible = true
 cell_margin = 4
 player = NodePath("../Player")
 dungeon_populator = NodePath("DungeonPopulator")
@@ -91,7 +95,7 @@ z_index = -1
 visible = false
 z_index = -1
 
-[node name="StabilityBar" type="TextureProgressBar" parent="UI/Overlay" unique_id=431322894 groups=["StabilityBar"]]
+[node name="StabilityBar" type="TextureProgressBar" parent="UI/Overlay" unique_id=431322894]
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -103,7 +107,6 @@ offset_top = -0.040008545
 offset_right = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-max_value = 10000.0
 value = 88.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_dg77c")

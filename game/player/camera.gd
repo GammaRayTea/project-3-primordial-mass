@@ -10,7 +10,7 @@ var return_weight:float
 var move_weight:float
 
 @export var max_speed:float
-@export_range(0,10,0.0001)
+@export_range(0,100,0.0001)
 var height:float = 2.621
 
 @export var reset_time:int = 40
@@ -26,6 +26,8 @@ var player_rotation:Quaternion
 
 func _ready():
 	target_position = Vector3(0,height,0)
+	position.y = height
+	
 func _update_position(_player_rotation:Quaternion) -> void:
 	player_rotation = _player_rotation
 	current_time_until_reset = reset_time
@@ -58,8 +60,6 @@ func _physics_process(_delta):
 func _move_to_center() -> void:
 	if current_time_until_reset <= 0:
 		current_return_weight = lerpf(current_return_weight,return_weight,0.01)
-
 		position = position.lerp(Vector3(0,height,0),current_return_weight)
-		#print(current_return_weight," ", position)
 	else:
 		current_time_until_reset-= 1

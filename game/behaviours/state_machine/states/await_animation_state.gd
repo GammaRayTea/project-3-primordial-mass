@@ -1,10 +1,8 @@
 @tool
-class_name CheckPlayerDistanceState extends ConditionState
-
-var player:Player
+extends State
 
 func _setup() -> void:
-	player = get_tree().get_first_node_in_group("Player")
+	pass
 
 func _start() -> void:
 	pass

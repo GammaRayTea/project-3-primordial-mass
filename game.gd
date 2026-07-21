@@ -14,6 +14,14 @@ extends Node3D
 @export var rng_seed:int = 0
 var global_rng:RandomNumberGenerator = RandomNumberGenerator.new()
 
+
+@export var process_save:bool = false
+const SAVE_PATH := "user://simple_save.tres"
+
+var save_game: SaveGame = null
+
+
+
 func _init() -> void:
 	global_rng.seed = rng_seed
 
@@ -39,3 +47,22 @@ func start():
 		
 		dungeon_gen.show()
 		dungeon_gen._start_generation()
+		
+		
+		
+
+func create_save() -> void:
+	save_game = SaveGame.new()
+	
+	
+	if process_save:
+		if ResourceLoader.exists(SAVE_PATH):
+			save_game = ResourceLoader.load(SAVE_PATH, "", ResourceLoader.CACHE_MODE_IGNORE)
+		else:
+			save_game = SaveGame.new()
+			ResourceSaver.save(save_game,SAVE_PATH)
+			print(ResourceLoader.load(SAVE_PATH, "", ResourceLoader.CACHE_MODE_IGNORE))
+
+func save(_currency:Dictionary):
+	if process_save:
+		save_game.add_currency()
