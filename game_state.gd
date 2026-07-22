@@ -17,7 +17,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	stability_bar = get_tree().get_first_node_in_group("StabilityBar")
-	stability_bar.value = stability_bar.max_value
+	if stability_bar:
+		stability_bar.value = stability_bar.max_value
 	
 	
 	if process_save:

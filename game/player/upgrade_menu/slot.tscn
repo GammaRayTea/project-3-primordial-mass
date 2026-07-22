@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ci45w48oatrfs"]
+
+[ext_resource type="Script" uid="uid://s3hyew0qg2gq" path="res://game/player/upgrade_menu/slot.gd" id="1_vq8o4"]
+
+[sub_resource type="Gradient" id="Gradient_vq8o4"]
+offsets = PackedFloat32Array(0, 0.8891967)
+colors = PackedColorArray(0.41122052, 0.077318974, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vq8o4"]
+gradient = SubResource("Gradient_vq8o4")
+width = 16
+height = 16
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_m51b8"]
+offsets = PackedFloat32Array(0, 0.8891967)
+colors = PackedColorArray(0, 0.64817756, 0.15774259, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m51b8"]
+gradient = SubResource("Gradient_m51b8")
+width = 16
+height = 16
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Slot" type="TextureRect" unique_id=912120537]
+texture_filter = 1
+texture = SubResource("GradientTexture2D_vq8o4")
+script = ExtResource("1_vq8o4")
+on_texture = SubResource("GradientTexture2D_m51b8")
+off_texture = SubResource("GradientTexture2D_vq8o4")

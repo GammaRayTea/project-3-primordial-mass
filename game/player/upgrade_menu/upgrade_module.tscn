@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://duokir7aj41i1"]
+
+[ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/player/upgrade_menu/upgrade_module.gd" id="1_rd50c"]
+[ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="2_cb86v"]
+[ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/player/upgrade_menu/slot.tscn" id="2_x7456"]
+
+[node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "minus_button")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 3
+anchor_right = 0.36900002
+anchor_bottom = 0.13900001
+offset_right = 0.07199097
+offset_bottom = -0.03200531
+script = ExtResource("1_rd50c")
+slot_scene = ExtResource("2_x7456")
+slot_container = NodePath("VBoxContainer/SlotContainer")
+plus_button = NodePath("VBoxContainer/SlotContainer/PlusButton")
+minus_button = NodePath("VBoxContainer/SlotContainer/PlusButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=641852516]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 0
+offset_right = 137.0
+offset_bottom = 28.0
+
+[node name="UpgradeInfo" type="HBoxContainer" parent="VBoxContainer" unique_id=1662264470]
+custom_minimum_size = Vector2(0, 20)
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/UpgradeInfo" unique_id=1107695928]
+layout_mode = 2
+texture = ExtResource("2_cb86v")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/UpgradeInfo" unique_id=903002760]
+custom_maximum_size = Vector2(-1, 10)
+layout_mode = 2
+text = "Item Text"
+
+[node name="SlotContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=466764378]
+custom_minimum_size = Vector2(0, 20)
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+
+[node name="MinusButton" type="Button" parent="VBoxContainer/SlotContainer" unique_id=1485387703]
+layout_mode = 2
+
+[node name="PlusButton" type="Button" parent="VBoxContainer/SlotContainer" unique_id=479713067]
+layout_mode = 2

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c5y7sl6x7c0w3"]
+
+[ext_resource type="Script" uid="uid://daofuuwba4548" path="res://game/player/upgrade_menu/upgrade_menu.gd" id="1_f1pfv"]
+[ext_resource type="PackedScene" uid="uid://duokir7aj41i1" path="res://game/player/upgrade_menu/upgrade_module.tscn" id="2_tdrua"]
+
+[node name="UpgradeMenu" type="Control" unique_id=1730159824 node_paths=PackedStringArray("upgrade_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f1pfv")
+upgrade_container = NodePath("ScrollContainer/VBoxContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=568882911]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45898438
+anchor_top = 0.13194445
+anchor_right = 0.94921875
+anchor_bottom = 0.7083333
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=329675532]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UpgradeModule" parent="ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+
+[node name="UpgradeModule2" parent="ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+
+[node name="UpgradeModule3" parent="ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+
+[node name="UpgradeModule4" parent="ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
+layout_mode = 2
