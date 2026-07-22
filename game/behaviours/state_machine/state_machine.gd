@@ -55,7 +55,6 @@ func _ready() -> void:
 		switch_to_state(initial_state)
 
 func prepare_state(_state:State) -> void:
-	print(_state)
 	_state.finished.connect(_on_state_finished)
 	_state._setup()
 
