@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkfh5h56aufpy"
-path="res://.godot/imported/inkblack.png-b7114c0ce2605b90ad2c01185106d6d6.ctex"
+path="res://.godot/imported/inkblack.png-226d3b178db826b52446bdb11492b148.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Items/currency/ink/inkblack.png"
-dest_files=["res://.godot/imported/inkblack.png-b7114c0ce2605b90ad2c01185106d6d6.ctex"]
+source_file="res://assets/items/currency/ink/inkblack.png"
+dest_files=["res://.godot/imported/inkblack.png-226d3b178db826b52446bdb11492b148.ctex"]
 
 [params]
 
