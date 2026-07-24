@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/player/hud_overlay.gd" id="1_8ijb6"]
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_eiboa"]
 [ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/player/item_preview.gd" id="2_dif5i"]
-[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_eiboa"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/items/pickups/stick/Stick.png" id="4_eiboa"]
 [ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_yepel"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwwe"]
