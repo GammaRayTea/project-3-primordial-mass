@@ -25,7 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="9_ydwe4"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
 [ext_resource type="Script" uid="uid://duu5egquqhy1c" path="res://game/behaviours/events/switch_to_state_event.gd" id="13_65y1t"]
+[ext_resource type="Script" uid="uid://3uiian2ekh1" path="res://game/behaviours/events/play_animation.gd" id="14_g0og0"]
 [ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
+[ext_resource type="Animation" uid="uid://i48k115031a8" path="res://assets/enemies/globber/animations/globber_death.res" id="15_ckhdf"]
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
 [ext_resource type="Script" uid="uid://cqa02cuqcr334" path="res://game/enemies/vision_cone/globber_vision_cone.gd" id="19_2si2q"]
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="25_ydwe4"]
@@ -239,11 +241,36 @@ tracks/16/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../RotationPivot/Visuals/Alive:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../RotationPivot/Visuals/Death:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_845p2"]
 _data = {
 &"RESET": SubResource("Animation_nlepm"),
 &"globber_attack": ExtResource("2_40eg8"),
+&"globber_death": ExtResource("15_ckhdf"),
 &"globber_idle": ExtResource("3_kjdyy"),
 &"globber_idle_turning": ExtResource("4_h82rf"),
 &"globber_walk": ExtResource("2_v1ixo")
@@ -251,6 +278,9 @@ _data = {
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7o33"]
 animation = &"globber_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ckhdf"]
+animation = &"globber_death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_45htx"]
 animation = &"globber_idle"
@@ -295,17 +325,32 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6q3l"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k75j0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76j58"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_drkgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0883v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmiyw"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_droo6"]
 states/Start/position = Vector2(196.66667, 100.120705)
 states/globber_attack/node = SubResource("AnimationNodeAnimation_l7o33")
 states/globber_attack/position = Vector2(624.6667, 228.66669)
+states/globber_death/node = SubResource("AnimationNodeAnimation_ckhdf")
+states/globber_death/position = Vector2(497.99994, 490.66666)
 states/globber_idle/node = SubResource("AnimationNodeAnimation_45htx")
 states/globber_idle/position = Vector2(386.66666, 99.67901)
 states/globber_idle_turn/node = SubResource("AnimationNodeAnimation_ydwe4")
 states/globber_idle_turn/position = Vector2(386, 228.00002)
 states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
 states/globber_walk/position = Vector2(625.2593, 99.79789)
-transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turn", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turn", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turn", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_h6q3l")]
+transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turn", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turn", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turn", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_h6q3l"), "globber_idle", "globber_death", SubResource("AnimationNodeStateMachineTransition_k75j0"), "globber_idle_turn", "globber_death", SubResource("AnimationNodeStateMachineTransition_76j58"), "globber_attack", "globber_death", SubResource("AnimationNodeStateMachineTransition_drkgp"), "globber_walk", "globber_death", SubResource("AnimationNodeStateMachineTransition_0883v"), "globber_death", "End", SubResource("AnimationNodeStateMachineTransition_xmiyw")]
+graph_offset = Vector2(-134, 43)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
 radius = 0.4
@@ -366,6 +411,7 @@ events_on_death = [NodePath("Events/DropEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_3ai4x")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
@@ -500,6 +546,12 @@ state_machine = NodePath("../../StateMachine")
 state = NodePath("../../StateMachine/Attack/AwaitAnimationState")
 metadata/_custom_type_script = "uid://duu5egquqhy1c"
 
+[node name="PlayAnimationEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="3" unique_id=528173217 node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("14_g0og0")
+animation_tree = NodePath("../../AnimationTree")
+animation_name = "globber_death"
+metadata/_custom_type_script = "uid://3uiian2ekh1"
+
 [node name="AnimationPlayer" parent="." index="3" unique_id=67901383]
 libraries/ = SubResource("AnimationLibrary_845p2")
 
@@ -508,10 +560,12 @@ tree_root = SubResource("AnimationNodeStateMachine_droo6")
 
 [node name="HurtBox" parent="." index="5" unique_id=158402479 node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45192683, 0)
+visible = false
 parent = NodePath("..")
 
 [node name="HitBox" type="Area3D" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=1715043841 node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
+visible = false
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("25_ydwe4")
@@ -597,9 +651,12 @@ shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"death"
+frame = 5
+frame_progress = 1.0
 
 [node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="2" unique_id=518248361 node_paths=PackedStringArray("path_trace", "walk_to_pos_state", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
