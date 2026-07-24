@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://em0uywivb118"]
+
+[ext_resource type="Texture2D" uid="uid://coll2nnqp464v" path="res://assets/environment/textures/portal0.png" id="1_1m0y6"]
+[ext_resource type="Script" uid="uid://c15jldnc88l8" path="res://game/environment/start_portal/start_portal.gd" id="1_jn4hp"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_jn4hp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_udmuc"]
+height = 0.49163818
+radius = 0.18652344
+
+[node name="StartPortal" type="Node3D" unique_id=1420404931]
+script = ExtResource("1_jn4hp")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1406339180]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.005, 0)
+texture_filter = 0
+texture = ExtResource("1_1m0y6")
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=818320370 node_paths=PackedStringArray("target")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("2_jn4hp")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1997861657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2394104, 0)
+shape = SubResource("CylinderShape3D_udmuc")
+
+[connection signal="area_entered" from="InteractionBox" to="." method="_on_interaction_box_entered"]

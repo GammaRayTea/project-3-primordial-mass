@@ -13,7 +13,8 @@ shader_parameter/alpha = 0.42
 shader_parameter/inner_radius = 0.12
 shader_parameter/outer_radius = 0.545
 
-[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("stability_bar")]
+[node name="Overlay" type="Control" unique_id=1199412428]
+oversampling_with_scale = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +24,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_eiboa")
 script = ExtResource("1_8ijb6")
-stability_bar = NodePath("")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
@@ -88,3 +88,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ActivatePortalHint" type="Label" parent="." unique_id=1253020850]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -46.0
+offset_right = 62.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_eiboa")
+text = "Press E to leave "
+horizontal_alignment = 1
