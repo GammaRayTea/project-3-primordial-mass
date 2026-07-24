@@ -2,13 +2,15 @@ extends Node
 var process_save:bool = true
 
 var run_curreny:Dictionary[GlobalEnum.CURRENCY, int]
+var player_upgrades:Dictionary[GlobalEnum.UPGRADES,int]
+
 
 var stability_bar:TextureProgressBar
 
 const SAVE_PATH := "user://simple_save.tres"
 
 
-
+var stability_bar_increase_factor:float = 1.0
 
 var save_game: SaveGame = null
 func _init() -> void:
@@ -30,9 +32,14 @@ func _ready() -> void:
 			print(ResourceLoader.load(SAVE_PATH, "", ResourceLoader.CACHE_MODE_IGNORE))
 
 
+func reset_stability_bar() -> void:
+	if stability_bar:
+		stability_bar.value = stability_bar.max_value
+
 func save(_currency:Dictionary):
 	if process_save:
-		save_game.add_currency()
+		pass
+
 
 func increase_stability(_by_value:float) -> void:
 	stability_bar.value += _by_value
@@ -47,3 +54,9 @@ func add_currency(_type:GlobalEnum.CURRENCY,_value:int):
 			increase_stability(_value)
 		_:
 			run_curreny[_type] += _value
+
+## changes given stats upgrade level by [param _value]
+func change_stat(_type:GlobalEnum.UPGRADES, _value:int) -> void:
+	if !player_upgrades.has(_type):
+		player_upgrades[_type] = 0
+	player_upgrades[_type]+= _value
