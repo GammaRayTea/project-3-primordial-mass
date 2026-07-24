@@ -17,7 +17,6 @@ func _on_area_entered(_area: Area3D) -> void:
 
 		if collider == _area:
 			walk_to_pos_state.target_position = detect_position
-			print(detect_position)
+
 			enemy.state_machine.switch_to_state(alert_state)
-			print("player detected")
 			set_deferred("monitoring", false)

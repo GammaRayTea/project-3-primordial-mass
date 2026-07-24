@@ -85,7 +85,6 @@ func _setup() -> void:
 
 
 func _start() -> void:
-	print(await_state_list.values().count(true))
 	states_finished = 0
 	for state in states:
 		state._start()

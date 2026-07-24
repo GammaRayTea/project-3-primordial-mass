@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dvceyisvpqphh"
-path="res://.godot/imported/stability_depleted.wav-3c1ecb391e622ac931c8ec40175d70f0.sample"
+path="res://.godot/imported/stability_depleted.wav-19b2c3b946b600257af7abe50df002e8.sample"
 
 [deps]
 
-source_file="res://assets/general_sounds/game_events/stability_depleted.wav"
-dest_files=["res://.godot/imported/stability_depleted.wav-3c1ecb391e622ac931c8ec40175d70f0.sample"]
+source_file="res://assets/sound/game_events/stability_depleted.wav"
+dest_files=["res://.godot/imported/stability_depleted.wav-19b2c3b946b600257af7abe50df002e8.sample"]
 
 [params]
 

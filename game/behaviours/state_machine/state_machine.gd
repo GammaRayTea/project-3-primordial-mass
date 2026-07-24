@@ -1,6 +1,8 @@
 @tool
 class_name StateMachine extends Node
 
+@export var debug:bool
+
 @export var initial_state: State:
 	set(value):
 		initial_state = value
@@ -8,6 +10,7 @@ class_name StateMachine extends Node
 
 @export var animation_tree:AnimationTree
 
+@export var sound_effect_manager:SoundEffectManager
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = PackedStringArray()
 	if get_children().size() == 0:
@@ -65,9 +68,15 @@ func _update(_delta:float) -> void:
 	
 
 func switch_to_state(_state:State) -> void:
+	if debug:
+		print(_state)
 	if _state.animation_state_name:
 		if animation_state_names.has(_state.animation_state_name):
 			animation_tree["parameters/playback"].travel(_state.animation_state_name)
+			
+	if _state._play_sound:
+		if _state.sound_names:
+			sound_effect_manager._play(_state.sound_names)
 	if current_state:
 		current_state._exit()
 	current_state = _state

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dfx847h4thxgf"
-path="res://.godot/imported/run_start.wav-7e5d9b7eb5af04b9fcd9b926aeb9a114.sample"
+path="res://.godot/imported/run_start.wav-f727324ce994690658789f0d2b361ac5.sample"
 
 [deps]
 
-source_file="res://assets/general_sounds/game_events/run_start.wav"
-dest_files=["res://.godot/imported/run_start.wav-7e5d9b7eb5af04b9fcd9b926aeb9a114.sample"]
+source_file="res://assets/sound/game_events/run_start.wav"
+dest_files=["res://.godot/imported/run_start.wav-f727324ce994690658789f0d2b361ac5.sample"]
 
 [params]
 

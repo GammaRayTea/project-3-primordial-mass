@@ -38,13 +38,15 @@ folder_colors={
 "res://assets/interactables/": "orange",
 "res://assets/items/": "yellow",
 "res://assets/player/": "teal",
+"res://assets/sound/": "pink",
 "res://game/behaviours/": "purple",
 "res://game/enemies/": "red",
 "res://game/environment/": "blue",
 "res://game/interactables/": "orange",
 "res://game/interaction_boxes/": "green",
 "res://game/items/": "yellow",
-"res://game/player/": "teal"
+"res://game/player/": "teal",
+"res://game/sound/": "pink"
 }
 
 [global_group]
