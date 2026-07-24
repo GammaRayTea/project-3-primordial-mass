@@ -13,12 +13,12 @@ func _setup()->void:
 	player = get_tree().get_first_node_in_group("Player")
 
 func _start()-> void:
-	super()
 	next_state = close_enough_state
+	super()
 
 func _execute(_delta:float) -> void:
-	super(_delta)
 	target_position = player.global_position
+	super(_delta)
 	if target.global_position.distance_to(target_position) >= distance_limit:
 		print(target.global_position.distance_to(target_position))
 		next_state = too_far_state
