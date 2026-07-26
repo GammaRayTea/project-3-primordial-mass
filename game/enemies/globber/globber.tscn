@@ -443,7 +443,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
 shape = SubResource("CapsuleShape3D_3ai4x")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
-debug = true
 initial_state = NodePath("Roam/RandomDirectionState")
 
 [node name="Roam" type="Node" parent="StateMachine" index="0" unique_id=66065876]
