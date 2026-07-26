@@ -1,4 +1,4 @@
-extends Node3D
+class_name Game extends Node3D
 @export var player:Player
 @export var hud:Control
 @export var dungeon_gen:DungeonGenerator
@@ -30,6 +30,7 @@ func start():
 	for node in get_tree().get_nodes_in_group("RNGUnifier"):
 		node.rng = global_rng
 	
+	
 	show()
 	if dark:
 		world_environment.environment = default_env
@@ -48,7 +49,8 @@ func start():
 		dungeon_gen._start_generation()
 		
 		
-		
+	GlobalSoundManager.fade_out_music(1.5)
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MAIN_AMBIENCE)
 
 func create_save() -> void:
 	save_game = SaveGame.new()

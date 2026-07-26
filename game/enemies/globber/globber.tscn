@@ -529,7 +529,6 @@ too_far_state = NodePath("../../Alert/EnableVisionCone")
 ACCELERATION = 1.0
 target = NodePath("../../..")
 speed = 1.7
-target_position = null
 distance_threshold = 1.3
 next_state = NodePath("../../Attack/AwaitAttackAnimationState")
 animation_state_name = "globber_walk"
@@ -688,6 +687,8 @@ collide_with_areas = true
 [node name="Walk" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="0" unique_id=20060384]
 stream = SubResource("AudioStreamRandomizer_kpvxy")
 volume_db = -7.0
+bus = &"SoundEffects"
 
 [node name="Attack" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="1" unique_id=547935468]
 stream = SubResource("AudioStreamRandomizer_xmiyw")
+bus = &"SoundEffects"
