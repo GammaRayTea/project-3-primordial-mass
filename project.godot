@@ -22,8 +22,8 @@ GlobalEnum="*uid://nptyhdrtvfm4"
 
 [display]
 
-window/size/viewport_width=512
-window/size/viewport_height=288
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="viewport"
 
 [editor_plugins]
