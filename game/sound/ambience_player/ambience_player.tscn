@@ -70,6 +70,7 @@ medium_curve = SubResource("Curve_ofmxm")
 high_curve = SubResource("Curve_7v2vm")
 
 [node name="Drone" type="AudioStreamPlayer" parent="." unique_id=1259721445]
+process_mode = 4
 stream = ExtResource("43_ofmxm")
 volume_db = -60.0
 bus = &"Ambience"

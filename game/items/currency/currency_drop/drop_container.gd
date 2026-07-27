@@ -10,18 +10,17 @@ class_name DropContainer extends Node3D
 func _ready() -> void:
 	anim_player.play("hover")
 	if aoutonomous_setup:
-		sprite.texture = load(ItemAssets.assets[type])
+		sprite.texture = load(ItemAssets.currency_icons[type])
 
 
 func setup(_type:GlobalEnum.CURRENCY, _value:int) -> void:
 	if _value <1:
 		_value = 1
 	type = _type
-	sprite.texture = load(ItemAssets.assets[type])
-	print(sprite.texture )
+	sprite.texture = load(ItemAssets.currency_icons[type])
 	value = _value
 
 
 func _on_interaction_box_area_entered(_area: Area3D) -> void:
-	(get_tree().get_first_node_in_group("RunManager") as RunManager).add_currency(type,value)
+	(get_tree().get_first_node_in_group("RunManager") as RunManager).change_currency(type,value)
 	queue_free()

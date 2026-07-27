@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://buj68u071kmbs"]
 
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_b2sle"]
-[ext_resource type="Script" uid="uid://sp7uqxf7j40l" path="res://game/session/main_menu/main_menu.gd" id="1_n860x"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2ww3u"]
+[ext_resource type="Script" uid="uid://sp7uqxf7j40l" path="res://game/ui/main_menu/main_menu.gd" id="2_mkp5f"]
 
-[node name="MainMenu" type="Control" unique_id=1891432706 node_paths=PackedStringArray("start_button")]
+[node name="MainMenu" type="Control" unique_id=1891432706 node_paths=PackedStringArray("start_button", "clear_save_button")]
 oversampling_with_scale = 2
 layout_mode = 3
 anchors_preset = 15
@@ -12,9 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_b2sle")
-script = ExtResource("1_n860x")
+theme = ExtResource("1_2ww3u")
+script = ExtResource("2_mkp5f")
 start_button = NodePath("StartButton")
+clear_save_button = NodePath("ClearSaveButton")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=291667159]
 layout_mode = 1
@@ -56,5 +57,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.20551914, 0.07341867, 0.28173468, 1)
+
+[node name="ClearSaveButton" type="Button" parent="." unique_id=1452795649]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -41.0
+offset_right = 108.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "Clear save data
+"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]

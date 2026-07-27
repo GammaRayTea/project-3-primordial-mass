@@ -10,7 +10,7 @@ class_name Slot extends TextureRect
 			texture = on_texture
 		else:
 			texture = off_texture
-		print(texture)
+
 
 func _ready() -> void:
 	texture = off_texture

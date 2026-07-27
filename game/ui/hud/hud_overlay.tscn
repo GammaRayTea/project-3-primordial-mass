@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dxketbhopi5ju"]
 
-[ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/player/hud_overlay.gd" id="1_8ijb6"]
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_eiboa"]
-[ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/player/item_preview.gd" id="2_dif5i"]
-[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/items/pickups/stick/Stick.png" id="4_eiboa"]
-[ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_yepel"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2tv8o"]
+[ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/ui/hud/hud_overlay.gd" id="2_cofoi"]
+[ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/ui/hud/item_preview.gd" id="3_2gjfp"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_gtlt3"]
+[ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_lp4vu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwwe"]
-shader = ExtResource("5_yepel")
+shader = ExtResource("5_lp4vu")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/alpha = 0.42
 shader_parameter/inner_radius = 0.12
@@ -22,8 +22,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_eiboa")
-script = ExtResource("1_8ijb6")
+theme = ExtResource("1_2tv8o")
+script = ExtResource("2_cofoi")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
@@ -38,8 +38,8 @@ offset_left = -0.76013184
 offset_top = -0.24005127
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_eiboa")
-script = ExtResource("2_dif5i")
+theme = ExtResource("1_2tv8o")
+script = ExtResource("3_2gjfp")
 image = NodePath("ItemTexture")
 label = NodePath("ItemLabel")
 
@@ -58,8 +58,8 @@ offset_bottom = -3.6535797
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_eiboa")
-texture = ExtResource("4_eiboa")
+theme = ExtResource("1_2tv8o")
+texture = ExtResource("4_gtlt3")
 stretch_mode = 5
 
 [node name="ItemLabel" type="Label" parent="ItemPreview" unique_id=2108661356]
@@ -73,7 +73,7 @@ offset_left = 0.17199457
 offset_top = -10.343445
 offset_right = 0.10699463
 offset_bottom = 29.000008
-theme = ExtResource("1_eiboa")
+theme = ExtResource("1_2tv8o")
 text = "Stick
 "
 horizontal_alignment = 1
@@ -103,6 +103,6 @@ offset_right = 62.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("1_eiboa")
+theme = ExtResource("1_2tv8o")
 text = "Press E to leave "
 horizontal_alignment = 1

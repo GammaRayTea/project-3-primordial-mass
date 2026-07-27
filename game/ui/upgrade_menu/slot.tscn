@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ci45w48oatrfs"]
 
-[ext_resource type="Script" uid="uid://s3hyew0qg2gq" path="res://game/player/upgrade_menu/slot.gd" id="1_vq8o4"]
+[ext_resource type="Script" uid="uid://s3hyew0qg2gq" path="res://game/ui/upgrade_menu/slot.gd" id="1_vq8o4"]
 
 [sub_resource type="Gradient" id="Gradient_vq8o4"]
 offsets = PackedFloat32Array(0, 0.8891967)

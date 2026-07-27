@@ -75,7 +75,7 @@ func _set(property: StringName, value: Variant) -> bool:
 func _setup()->void:
 	active_timer = Timer.new()
 	add_child(active_timer)
-	active_timer.timeout.connect(finished.emit)
+	active_timer.timeout.connect(finished.emit.bind(self))
 
 func _start()-> void:
 	if randomize_time:

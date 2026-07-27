@@ -32,11 +32,10 @@ var current_intensity:float = 0.0:
 @export var medium_curve:Curve
 @export var high_curve:Curve
 
-var low
 
-var low_players:Array[AudioStreamPlayer2D]
-var medium_players:Array[AudioStreamPlayer2D]
-var high_players:Array[AudioStreamPlayer2D]
+
+var players:Array[AudioStreamPlayer2D]
+
 
 func _ready():
 	GlobalSoundManager.ambience_player = self
@@ -44,13 +43,18 @@ func _ready():
 
 
 func start() -> void:
-	process_mode =Node.PROCESS_MODE_INHERIT
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	drone_player.volume_db = -60
 	drone_player.play()
-	var tween  = GlobalSoundManager.fade_player(drone_player, 0.5, 0.0)
+	GlobalSoundManager.fade_player(drone_player, 0.5, 0.0)
 
-
-
+func stop() ->void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	while players.size() > 0:
+		delete_player(players[players.size()-1])
+	
+	drone_player.stop()
+	
 var increment_counter:int = 60
 func _physics_process(_delta) -> void:
 	if increment_counter< 60 * 1.0:
@@ -72,14 +76,20 @@ func _physics_process(_delta) -> void:
 func play_sample(_intensity:INTENSITY) ->void:
 	var player = stream_player_2d_template.duplicate()
 	add_child(player)
-	player.finished.connect(player.queue_free)
+	player.finished.connect(delete_player.bind(player))
 	
 	player.position = calculate_random_position()
 	
 	player.stream = choose_sample(_intensity)
 	
 	player.play()
+	players.append(player)
 	#print("played " ,INTENSITY.keys()[_intensity], " at position ", player.position)
+
+func delete_player(_player:AudioStreamPlayer2D) -> void:
+	if !_player.is_queued_for_deletion():
+		_player.queue_free()
+	players.erase(_player)
 
 func choose_sample(_intensity:INTENSITY) -> AudioStream:
 	var sample:AudioStream

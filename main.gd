@@ -13,11 +13,9 @@ func _ready() -> void:
 		get_tree().root.content_scale_size = high_resolution
 	get_tree().root.size = high_resolution
 	
-	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	
 	
 	
 
 	if jump_to_game:
-		game.start_run()
-	else:
-		ui.start()
+		game.switch_to_state(Game.STATE.IN_GAME)

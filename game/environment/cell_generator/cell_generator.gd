@@ -17,10 +17,8 @@ var generated_rooms: Array[BitMap]
 var generated_room_mesh: Array[Array]
 
 var start_pos = Vector2(0, 0)
-var current_position := Vector2(0, 0):
-	set(value):
-		current_position = value
-		call_deferred("expand_map")
+var current_position := Vector2(0, 0)
+
 
 var outer_check_range: int = 3
 var inner_check_range: int = 1
@@ -34,8 +32,7 @@ var current_cell_tier:int
 
 func _start_generation() -> void:
 	$CanvasLayer.visible = draw_map
-	
-	
+
 	current_cell_tier = 0
 	room_generator.rng = rng
 	@warning_ignore("narrowing_conversion")
@@ -71,6 +68,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if (new_pos != current_position):
 		current_position = new_pos
+		call_deferred("expand_map")
 		generated_map.player_pos = new_pos
 		outer_map.player_pos = new_pos
 		
@@ -267,7 +265,7 @@ func clear_dungeon() -> void:
 	generated_rooms.clear()
 	generated_room_mesh.clear()
 	
-	current_position = Vector2(0, 0)
+	current_position = Vector2(0,0)
 	current_cell_tier = 0
 	
 	outer_map.clear_map()
