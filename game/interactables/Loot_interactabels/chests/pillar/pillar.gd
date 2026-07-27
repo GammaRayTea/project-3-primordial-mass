@@ -1,4 +1,4 @@
-class_name StandardChest extends Chest
+class_name Pillar extends Chest
 
 @export var currency_type: GlobalEnum.CURRENCY
 @export var min_amount_goo: int = 1

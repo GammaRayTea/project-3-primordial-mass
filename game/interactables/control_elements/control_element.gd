@@ -23,8 +23,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 func _init() -> void:
 	update_configuration_warnings()
 
-func hover_start()-> void:
+func hover_start() -> void:
 	indicator.show()
 
-func hover_end()-> void:
+func hover_end() -> void:
 	indicator.hide()

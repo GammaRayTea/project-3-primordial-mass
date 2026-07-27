@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cq022x5yko3lc"]
+
+[ext_resource type="PackedScene" uid="uid://xsag4itubpsr" path="res://assets/interactables/Loot/pillar/pillar.blend" id="1_rmm4o"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_osc8c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tdl64"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bbr86"]
+
+[node name="Pillar" type="Node3D" unique_id=1869070663]
+
+[node name="Visuals" type="Node3D" parent="." unique_id=319837126]
+
+[node name="pillar" parent="Visuals" unique_id=509864017 instance=ExtResource("1_rmm4o")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Visuals/pillar" unique_id=843547834]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/pillar/StaticBody3D" unique_id=884673796]
+shape = SubResource("BoxShape3D_tdl64")
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=1633760111]
+script = ExtResource("2_osc8c")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=500904784]
+shape = SubResource("BoxShape3D_bbr86")
