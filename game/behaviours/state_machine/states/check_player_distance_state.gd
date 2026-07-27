@@ -19,7 +19,7 @@ func _execute(_delta:float) -> void:
 	if target.global_position.distance_to(player.global_position) < distance_threshold:
 		if event:
 			event.execute()
-		finished.emit()
+		finished.emit(self)
 
 
 func _exit() -> void:

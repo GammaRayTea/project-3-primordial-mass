@@ -47,3 +47,8 @@ func on_music_faded() -> void:
 
 func start_ambience() -> void:
 	ambience_player.start()
+
+
+func increase_intensity(_amount:float) -> void:
+	ambience_player.current_intensity += _amount
+	ambience_player.current_density += _amount

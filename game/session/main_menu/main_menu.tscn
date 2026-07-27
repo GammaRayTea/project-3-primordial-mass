@@ -14,7 +14,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_b2sle")
 script = ExtResource("1_n860x")
-start_button = NodePath("Button")
+start_button = NodePath("StartButton")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=291667159]
 layout_mode = 1
@@ -30,7 +30,7 @@ text = "PRIMORDIAL MASS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=1903112996]
+[node name="StartButton" type="Button" parent="." unique_id=1903112996]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,4 +57,4 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.20551914, 0.07341867, 0.28173468, 1)
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]

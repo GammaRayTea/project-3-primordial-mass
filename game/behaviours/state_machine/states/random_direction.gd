@@ -21,7 +21,7 @@ func _setup()->void:
 func _start()-> void:
 	direction = Vector3(randf_range(-1,1) * mask.x, randf_range(-1,1) * mask.y, randf_range(-1,1) * mask.z).normalized()*randf_range(min_scale,max_scale)
 	set_data(direction,pass_data_targets[0])
-	finished.emit()
+	finished.emit(self)
 
 func _execute(_delta:float) -> void:
 	pass

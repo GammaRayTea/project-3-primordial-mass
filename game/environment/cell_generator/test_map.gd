@@ -1,15 +1,16 @@
-extends Control
+class_name DungeonMap extends Control
 
 var cells:PackedVector2Array = PackedVector2Array()
 var points:PackedVector2Array = PackedVector2Array()
+var draw_point_ids:PackedInt32Array = PackedInt32Array()
+var delaunay_points:PackedVector2Array = PackedVector2Array()
+var room_bit_maps:Array[ImageTexture] = []
+
 var rect_size:int = 16
 var player_pos:Vector2
 var scalar = 1
-var draw_point_ids:PackedInt32Array = PackedInt32Array()
-var delaunay_points:PackedVector2Array = PackedVector2Array()
 
 
-var room_bit_maps:Array[ImageTexture] = []
 @export var draw_point_subdivision:int
 var offset:Vector2
 
@@ -60,3 +61,13 @@ func _draw() -> void:
 
 		draw_polyline(points_to_draw,line_color)
 		i+=draw_point_subdivision
+
+
+func clear_map() -> void:
+	cells.clear()
+	room_bit_maps.clear()
+	cells.clear()
+	points.clear()
+	draw_point_ids.clear()
+	delaunay_points.clear()
+	current_cell_tier = 0

@@ -1,7 +1,7 @@
 extends Node
 @export var jump_to_game:bool = true
-@export var main_menu:MainMenu
 @export var game:Game
+@export var ui:UIController
 @export var render_low_res:bool = false
 @export var low_resolution:Vector2i
 @export var high_resolution:Vector2i
@@ -15,7 +15,9 @@ func _ready() -> void:
 	
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
 	
-	main_menu.start_button.pressed.connect(game.start)
+	
+
 	if jump_to_game:
-		game.start()
-		main_menu.hide()
+		game.start_run()
+	else:
+		ui.start()

@@ -13,14 +13,13 @@ var upgrade_stat_value:int
 @export var slot_scene:PackedScene
 @export var slot_container:HBoxContainer
 @export var plus_button:Button
-@export var minus_button:Button
+
 
 
 var slots:Array[Slot] = []
 
 func _ready() -> void:
 	update_slot_amount()
-	minus_button.pressed.connect(on_button_press.bind(false))
 	plus_button.pressed.connect(on_button_press.bind(true))
 
 func update_slot_amount() -> void:
@@ -34,11 +33,9 @@ func update_slot_amount() -> void:
 			slots[slot] = load(slot_scene.resource_path).instantiate()
 			slot_container.add_child(slots[slot])
 			slots[slot].set_owner(slot_container)
-	slot_container.move_child(plus_button,slot_amount+1)
+
 
 
 func on_button_press(_increase:bool) -> void:
 	if _increase:
 		GameState.change_stat(upgrade_stat, 1)
-	else:
-		GameState.change_stat(upgrade_stat, -1)

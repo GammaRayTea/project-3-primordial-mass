@@ -1,7 +1,7 @@
 class_name Game extends Node3D
 
-@export var hud:Control
-@export var ui_sound_manager:SoundEffectManager
+@export var ui_controller:UIController
+
 
 @export var world_environment:WorldEnvironment
 @export var default_env:Environment
@@ -28,13 +28,20 @@ var save_game: SaveGame = null
 
 
 
-func _init() -> void:
+func _ready() -> void:
 	global_rng.seed = rng_seed
-
-func start():
+	ui_controller.upgrade_menu.start_run_button.pressed.connect(start_run)
 	
+func to_title() -> void:
+	ui_controller.switch_to_state(UIController.STATE.MAIN_MENU)
+	clear_game()
+
+func start_run():
+	
+	ui_controller.switch_to_state(UIController.STATE.IN_GAME)
 	for node in get_tree().get_nodes_in_group("RNGUnifier"):
 		node.rng = global_rng
+	
 	
 	
 	show()
@@ -42,9 +49,9 @@ func start():
 		world_environment.environment = default_env
 	else:
 		world_environment.environment = test_env
-	player.process_mode = Node.PROCESS_MODE_INHERIT
+	process_mode = Node.PROCESS_MODE_INHERIT
 
-	hud.show()
+	
 	if testing:
 		var room = test_room.instantiate()
 		add_child(room)
@@ -54,7 +61,7 @@ func start():
 		
 		dungeon_gen.show()
 		dungeon_gen._start_generation()
-		ui_sound_manager._play(["StartRun"])
+		
 		
 	GlobalSoundManager.fade_out_music(1.5)
 	GlobalSoundManager.start_ambience()
@@ -74,3 +81,12 @@ func create_save() -> void:
 func save(_currency:Dictionary):
 	if process_save:
 		save_game.add_currency()
+
+
+func clear_game() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	for child in enemies.get_children():
+		child.queue_free()
+	for child in objects.get_children():
+		child.queue_free()
+	dungeon_gen.clear_dungeon()

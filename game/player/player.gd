@@ -15,7 +15,6 @@ class_name Player extends Entity
 #Component Nodes
 @export_category("Components")
 @export var push_box_shape:CollisionShape3D
-@export var hud:Control
 @export var camera:PlayerCam
 @export var sprint_timer:Timer
 
@@ -144,7 +143,6 @@ func pick_up_item(_item:Item):
 	if held_item == null:
 		held_item = _item
 		print("picked up ",_item.name)
-		hud.set_item(_item)
 		
 
 func on_interaction_box_entered(_area: Area3D) -> void:

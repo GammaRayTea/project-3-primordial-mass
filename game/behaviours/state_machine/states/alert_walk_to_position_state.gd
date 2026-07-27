@@ -14,6 +14,6 @@ func _setup()->void:
 func _execute(_delta:float) -> void:
 	if target.global_position.distance_to(player.global_position) < distance_threshold:
 		next_state = branch_state
-		finished.emit()
+		finished.emit(self)
 		return
 	super(_delta)

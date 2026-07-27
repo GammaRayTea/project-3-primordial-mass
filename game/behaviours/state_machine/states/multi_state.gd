@@ -102,4 +102,4 @@ func on_state_finished(_state:State) -> void:
 		states_finished += 1
 
 	if states_finished == await_state_list.values().count(true):
-		finished.emit()
+		finished.emit(self)

@@ -57,10 +57,11 @@ point_count = 3
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.74712646), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="AmbiencePlayer" type="Node2D" unique_id=2024238858 node_paths=PackedStringArray("drone_player", "center_marker")]
+[node name="AmbiencePlayer" type="Node2D" unique_id=2024238858 node_paths=PackedStringArray("drone_player", "stream_player_2d_template", "center_marker")]
 process_mode = 4
 script = ExtResource("1_vm1t4")
 drone_player = NodePath("Drone")
+stream_player_2d_template = NodePath("AudioStreamPlayer2DTemplate")
 center_marker = NodePath("CenterMarker")
 low_samples = Array[AudioStream]([ExtResource("2_q46os"), ExtResource("3_ofmxm"), ExtResource("4_7v2vm"), ExtResource("5_1x6i1"), ExtResource("6_8yj6u"), ExtResource("7_c1i2t"), ExtResource("8_f0mud"), ExtResource("9_8p6yo"), ExtResource("10_tc0r7"), ExtResource("11_qjiba"), ExtResource("12_w1jyf"), ExtResource("13_4ts7j"), ExtResource("14_ohtkc"), ExtResource("15_t0oir"), ExtResource("16_3jlob"), ExtResource("17_jptcn"), ExtResource("18_31r8q"), ExtResource("19_c5wlq"), ExtResource("20_26k8c"), ExtResource("21_7v2vm")])
 medium_samples = Array[AudioStream]([ExtResource("21_irgpu"), ExtResource("22_ntvvp"), ExtResource("23_fg4f3"), ExtResource("24_0n6mh"), ExtResource("25_1hnw5"), ExtResource("26_7qisn"), ExtResource("27_e275a"), ExtResource("28_pe13c"), ExtResource("29_pjbgf"), ExtResource("30_a0r75"), ExtResource("31_poooc"), ExtResource("32_sujb4"), ExtResource("33_i6pyq"), ExtResource("34_luxob"), ExtResource("35_20hau"), ExtResource("36_i4sq0"), ExtResource("37_hi55u"), ExtResource("38_g4ng1"), ExtResource("39_u58pc"), ExtResource("40_0dxsg"), ExtResource("41_kuau2"), ExtResource("42_lk1e4")])
@@ -76,3 +77,7 @@ playback_type = 1
 
 [node name="CenterMarker" type="Marker2D" parent="." unique_id=1359356345]
 position = Vector2(256, 144)
+
+[node name="AudioStreamPlayer2DTemplate" type="AudioStreamPlayer2D" parent="." unique_id=1159960573]
+panning_strength = 2.0
+bus = &"Ambience"

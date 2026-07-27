@@ -9,7 +9,7 @@
 		update_configuration_warnings()
 		
 @export var animation_state_name:String
-
+@export var animation_time_scale:float = 1.0
 
 
 
@@ -214,7 +214,7 @@ func _init() -> void:
 
 ##Signal that needs to be emited when the state is finished.
 @warning_ignore("unused_signal")
-signal finished
+signal finished(_source:State)
 
 ##Called once when the state is first loaded.
 @abstract func _setup()->void

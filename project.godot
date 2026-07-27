@@ -51,7 +51,8 @@ folder_colors={
 "res://game/interaction_boxes/": "green",
 "res://game/items/": "yellow",
 "res://game/player/": "teal",
-"res://game/sound/": "pink"
+"res://game/sound/": "pink",
+"res://game/ui/": "gray"
 }
 
 [global_group]

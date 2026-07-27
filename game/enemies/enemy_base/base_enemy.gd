@@ -73,6 +73,7 @@ func execute_events(events:Array[Event])->void:
 
 
 func _on_screen_entered() -> void:
+	GlobalSoundManager.increase_intensity(0.5)
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 

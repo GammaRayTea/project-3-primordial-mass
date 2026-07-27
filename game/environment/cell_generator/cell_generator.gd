@@ -7,8 +7,8 @@ class_name DungeonGenerator extends Node3D
 @export var draw_map: bool = false
 @export_category("Components")
 @export var player: Player
-@export var generated_map: Control
-@export var outer_map: Control
+@export var generated_map: DungeonMap
+@export var outer_map: DungeonMap
 @export var dungeon_populator:DungeonPopulator
 
 
@@ -259,3 +259,16 @@ func get_cell_neighbours(_cell_pos: Vector2) -> PackedInt32Array:
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(cell_size, 0)))
 	ids.push_back(generated_cells.keys().find(_cell_pos+Vector2(0, cell_size)))
 	return ids
+
+
+func clear_dungeon() -> void:
+	generated_cells.clear()
+	locked_cells.clear()
+	generated_rooms.clear()
+	generated_room_mesh.clear()
+	
+	current_position = Vector2(0, 0)
+	current_cell_tier = 0
+	
+	outer_map.clear_map()
+	generated_map.clear_map()
