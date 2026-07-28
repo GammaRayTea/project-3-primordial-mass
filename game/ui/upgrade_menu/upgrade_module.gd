@@ -44,12 +44,14 @@ var current_upgrade_level:int = 0:
 
 var slots:Array[Slot] = []
 
+func retrieve_saved_data() -> void:
+	current_upgrade_level = GameSaveManager.save_game.player_stat_levels[upgrade_stat]
+
 func _ready() -> void:
 	update_data()
 	update_slot_amount()
 	plus_button.pressed.connect(on_button_press.bind(true))
-	if !Engine.is_editor_hint():
-		current_upgrade_level = RunManager.player_stat_levels[upgrade_stat]
+
 	
 
 func update_slot_amount() -> void:
