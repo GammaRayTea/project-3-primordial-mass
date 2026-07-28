@@ -41,8 +41,8 @@ func _ready() -> void:
 	switch_to_state(STATE.MAIN_MENU)
 	
 func to_title() -> void:
-	GlobalSoundManager.stop_ambience()
-	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	#GlobalSoundManager.stop_ambience()
+	#GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
 	clear_game()
 
 func start_run():
@@ -90,7 +90,7 @@ func end_run() -> void:
 	switch_to_state(STATE.UPGRADE_MENU)
 
 func to_upgrade_menu() -> void:
-	GlobalSoundManager.stop_ambience()
+	#GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
 
 func pause() -> void:

@@ -27,4 +27,12 @@ metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2394104, 0)
 shape = SubResource("CylinderShape3D_udmuc")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1354280854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4001062, 0)
+light_color = Color(0.98039216, 0.96862745, 0.6117647, 1)
+light_energy = 12.137
+shadow_enabled = true
+omni_range = 37.454
+omni_attenuation = 3.008
+
 [connection signal="area_entered" from="InteractionBox" to="." method="_on_interaction_box_entered"]

@@ -458,7 +458,7 @@ metadata/_custom_type_script = "uid://dbrxet3cojgye"
 
 [node name="ChasePlayerState" type="Node" parent="StateMachine/Chase" index="0" unique_id=1015325903 node_paths=PackedStringArray("close_enough_state", "too_far_state", "target", "next_state")]
 script = ExtResource("9_dvtg5")
-distance_limit = 3.0
+distance_limit = 7.0
 close_enough_state = NodePath("../../Attack/AwaitAttackAnimationState")
 too_far_state = NodePath("../AwaitIdleTurnAnimationState")
 ACCELERATION = 1.0
