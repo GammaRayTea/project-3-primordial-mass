@@ -12,17 +12,26 @@ class_name Pillar extends Chest
 @export var max_drops_coins: int = 5
 
 
+@export var sprite:Sprite3D
+@export var animation_player:AnimationPlayer
+@export var sound_effect_manager:SoundEffectManager
 func activate(_source: Node3D) -> void:
-	if is_locked:
-		return
-	if was_opened:
-		return
-	was_opened = true
-	
-	find_child("Sprite3D").visible = true
-	find_child("AnimationPlayer").play("hover")
-	
-	_spawn_loot()
+	if _source is Player:
+		if _source.held_items[GlobalEnum.ITEM.PEARL] > 0:
+			_source.held_items[GlobalEnum.ITEM.PEARL] -= 1
+			if is_locked:
+				return
+			if was_opened:
+				return
+			was_opened = true
+			
+			sprite.visible = true
+			animation_player.play("hover")
+			sound_effect_manager._play(["Activate"])
+			RunManager.increase_stability(3000)
+			_spawn_loot()
+		else:
+			print("not enough pearl")
 
 
 func get_loot() -> Array[Dictionary]:
