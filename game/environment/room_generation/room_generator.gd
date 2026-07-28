@@ -40,16 +40,16 @@ func generate_room(_size: int, _global_random_point_position: Vector2, _cell_ori
 					break
 			if rng.randf() < walkway_thickness_chance && value == true:
 				for i in range(4):
-					if does_bit_exist(current_sub_cell_x + sin(i * (PI / 2.0)), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2), _size):
-						bit_map.set_bit(current_sub_cell_x + sin(i * (PI / 2.0)), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2), value)
+					if does_bit_exist(current_sub_cell_x + int(sin(i * (PI / 2.0))), current_sub_cell_y +  int(sin(i * (PI / 2.0) + PI / 2)), _size):
+						bit_map.set_bit(current_sub_cell_x +  int(sin(i * (PI / 2.0))), current_sub_cell_y +  int(sin(i * (PI / 2.0) + PI / 2)), value)
 				if rng.randf() < walkway_more_thickness_chance:
 					for i in range(4):
-						if does_bit_exist(current_sub_cell_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), current_sub_cell_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), _size):
-							bit_map.set_bit(current_sub_cell_x + (0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0)), current_sub_cell_y + (0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0)), value)
+						if does_bit_exist(current_sub_cell_x +  int((0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))), current_sub_cell_y +  int((0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0))), _size):
+							bit_map.set_bit(current_sub_cell_x +  int((0.5 * snappedf(sin((i + 1.5) * PI/2), 1.0))), current_sub_cell_y +  int((0.5 * snappedf(sin((i + 0.5) * PI/2), 1.0))), value)
 					if rng.randf() < walkway_evem_more_thickness_chance:
 						for i in range(4):
-							if does_bit_exist(current_sub_cell_x + sin(i * (PI / 2.0) * 2), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2) * 2, _size):
-								bit_map.set_bit(current_sub_cell_x + sin(i * (PI / 2.0) * 2), current_sub_cell_y + sin(i * (PI / 2.0) + PI / 2) * 2, value)
+							if does_bit_exist(current_sub_cell_x +  int(sin(i * (PI / 2.0) * 2)), current_sub_cell_y +  int(sin(i * (PI / 2.0) + PI / 2) * 2), _size):
+								bit_map.set_bit(current_sub_cell_x +  int(sin(i * (PI / 2.0) * 2)), current_sub_cell_y +  int(sin(i * (PI / 2.0) + PI / 2) * 2), value)
 			bit_map.set_bit(current_sub_cell_x, current_sub_cell_y, value)
 	
 	

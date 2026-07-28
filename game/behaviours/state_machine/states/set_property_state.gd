@@ -43,7 +43,7 @@ func _setup() -> void:
 
 func _start() -> void:
 	target.set(property_name,property_value)
-	finished.emit()
+	finished.emit(self)
 
 func _execute(_delta:float) -> void:
 	pass

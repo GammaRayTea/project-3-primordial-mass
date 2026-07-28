@@ -1,5 +1,6 @@
 @tool
 class_name HitBox extends TriggerBox
+@export var parent:Entity
 
 @export var damage:= 10.0
 @export var knockback:= 2.0

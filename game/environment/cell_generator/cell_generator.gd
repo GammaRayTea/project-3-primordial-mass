@@ -3,11 +3,12 @@ class_name DungeonGenerator extends Node3D
 @export var cell_size: int = 16
 @export var cell_margin: int = 2
 @export var debug: bool = false
-		
+
+@export var draw_map: bool = false
 @export_category("Components")
 @export var player: Player
-@export var generated_map: Control
-@export var outer_map: Control
+@export var generated_map: DungeonMap
+@export var outer_map: DungeonMap
 @export var dungeon_populator:DungeonPopulator
 
 
@@ -16,10 +17,8 @@ var generated_rooms: Array[BitMap]
 var generated_room_mesh: Array[Array]
 
 var start_pos = Vector2(0, 0)
-var current_position := Vector2(0, 0):
-	set(value):
-		current_position = value
-		call_deferred("expand_map")
+var current_position := Vector2(0, 0)
+
 
 var outer_check_range: int = 3
 var inner_check_range: int = 1
@@ -30,7 +29,10 @@ var locked_cells: Dictionary[Vector2, Cell] = {}
 
 var current_cell_tier:int
 
+
 func _start_generation() -> void:
+	$CanvasLayer.visible = draw_map
+
 	current_cell_tier = 0
 	room_generator.rng = rng
 	@warning_ignore("narrowing_conversion")
@@ -44,7 +46,7 @@ func _start_generation() -> void:
 
 
 func expand_map() -> void:
-	print("expanding")
+	#print("expanding")
 	
 	var staged_delanauy_ids := generate_new_cells(outer_check_range)
 	lock_in_cells(inner_check_range, staged_delanauy_ids)
@@ -66,6 +68,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if (new_pos != current_position):
 		current_position = new_pos
+		call_deferred("expand_map")
 		generated_map.player_pos = new_pos
 		outer_map.player_pos = new_pos
 		
@@ -256,5 +259,14 @@ func get_cell_neighbours(_cell_pos: Vector2) -> PackedInt32Array:
 	return ids
 
 
-func _on_visibility_changed() -> void:
-	$Control.visible = visible
+func clear_dungeon() -> void:
+	generated_cells.clear()
+	locked_cells.clear()
+	generated_rooms.clear()
+	generated_room_mesh.clear()
+	
+	current_position = Vector2(0,0)
+	current_cell_tier = 0
+	
+	outer_map.clear_map()
+	generated_map.clear_map()

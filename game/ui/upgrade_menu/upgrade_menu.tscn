@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c5y7sl6x7c0w3"]
+
+[ext_resource type="Script" uid="uid://daofuuwba4548" path="res://game/ui/upgrade_menu/upgrade_menu.gd" id="1_f1pfv"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_hn35m"]
+[ext_resource type="PackedScene" uid="uid://duokir7aj41i1" path="res://game/ui/upgrade_menu/upgrade_module.tscn" id="2_tdrua"]
+
+[node name="UpgradeMenu" type="Control" unique_id=1730159824 node_paths=PackedStringArray("upgrade_container", "start_run_button", "return_to_menu_button")]
+oversampling_with_scale = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hn35m")
+script = ExtResource("1_f1pfv")
+upgrade_container = NodePath("ScrollContainer/VBoxContainer")
+start_run_button = NodePath("StartRunButton")
+return_to_menu_button = NodePath("ReturnToMenuButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=568882911]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 0.042000003
+anchor_right = 0.92800003
+anchor_bottom = 0.712
+offset_left = 0.19999695
+offset_top = -0.09600067
+offset_right = -0.13601685
+offset_bottom = -0.055999756
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=329675532]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UpgradeStBuildup" parent="ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+upgrade_stat_amount = 0.1
+
+[node name="UpgradeStRes" parent="ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+upgrade_stat = 1
+
+[node name="UpgradeStCap" parent="ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+upgrade_stat = 2
+upgrade_stat_amount = 0.1
+
+[node name="UpgradeStam" parent="ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
+layout_mode = 2
+upgrade_stat = 3
+upgrade_stat_amount = 0.1
+max_level = 5
+
+[node name="StartRunButton" type="Button" parent="." unique_id=1383201851]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -38.0
+offset_right = -17.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 13
+text = "Enter Realm
+
+"
+
+[node name="ReturnToMenuButton" type="Button" parent="." unique_id=779805888]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 100.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 13
+text = "Return To Title"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2103488165]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.19217557, 2.5346857e-05, 0.19217399, 1)
+
+[connection signal="pressed" from="StartRunButton" to="." method="_on_start_run_button_pressed"]

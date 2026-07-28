@@ -11,20 +11,41 @@
 [ext_resource type="Script" uid="uid://cv8ndqtg5slh6" path="res://game/behaviours/state_machine/states/wait.gd" id="4_gtf71"]
 [ext_resource type="Animation" uid="uid://ehu0o6l5st4h" path="res://assets/enemies/globber/animations/globber_idle_turning.res" id="4_h82rf"]
 [ext_resource type="Texture2D" uid="uid://c8cmq24ouf00p" path="res://assets/enemies/globber/animations/Globber2LeftFoot.png" id="5_kjdyy"]
-[ext_resource type="Script" uid="uid://drf2ekrhnwk3t" path="res://game/behaviours/state_machine/states/walk_to_position.gd" id="5_qg7h7"]
+[ext_resource type="Script" uid="uid://ylkxrw65lga3" path="res://game/behaviours/state_machine/states/alert_walk_to_position_state.gd" id="6_dvtg5"]
 [ext_resource type="Texture2D" uid="uid://dpsmsg8e6vbev" path="res://assets/enemies/globber/animations/Globber2RightArm.png" id="6_h82rf"]
 [ext_resource type="Script" uid="uid://dbrxet3cojgye" path="res://game/behaviours/state_machine/states/set_property_state.gd" id="6_joybc"]
+[ext_resource type="Script" uid="uid://c2wfmt5nh4iv5" path="res://game/behaviours/state_machine/states/alert_wait_state.gd" id="6_pwbr7"]
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
+[ext_resource type="Script" uid="uid://yc0ay2h3j4ck" path="res://game/behaviours/state_machine/states/await_animation_state.gd" id="8_3ai4x"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
 [ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
 [ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="9_45htx"]
+[ext_resource type="Script" uid="uid://dbl8jqdiqljv7" path="res://game/behaviours/state_machine/states/chase_player_state.gd" id="9_dvtg5"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
 [ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="9_ydwe4"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
+[ext_resource type="Script" uid="uid://3uiian2ekh1" path="res://game/behaviours/events/play_animation.gd" id="14_g0og0"]
 [ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
+[ext_resource type="Animation" uid="uid://i48k115031a8" path="res://assets/enemies/globber/animations/globber_death.res" id="15_ckhdf"]
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
 [ext_resource type="Script" uid="uid://cqa02cuqcr334" path="res://game/enemies/vision_cone/globber_vision_cone.gd" id="19_2si2q"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://c223ulqhjtoyo" path="res://assets/enemies/globber/animations/globber_anim_state_machine.tres" id="19_xmiyw"]
 [ext_resource type="Script" uid="uid://b3nhgfvthi5qc" path="res://game/interaction_boxes/hit_box.gd" id="25_ydwe4"]
+[ext_resource type="AudioStream" uid="uid://cfpvh7yqjqtg8" path="res://assets/enemies/globber/sounds/globber_walk_1.wav" id="32_0bnwb"]
+[ext_resource type="AudioStream" uid="uid://nhpyg88ejcn6" path="res://assets/enemies/globber/sounds/globber_walk_2.wav" id="33_h6q3l"]
+[ext_resource type="AudioStream" uid="uid://036yyg8irvkt" path="res://assets/enemies/globber/sounds/globber_walk_3.wav" id="34_k75j0"]
+[ext_resource type="AudioStream" uid="uid://d00xke0tr2l12" path="res://assets/enemies/globber/sounds/globber_walk_4.wav" id="35_76j58"]
+[ext_resource type="AudioStream" uid="uid://beianbw1h6420" path="res://assets/enemies/globber/sounds/globber_walk_5.wav" id="36_drkgp"]
+[ext_resource type="AudioStream" uid="uid://1c50i0skjxsg" path="res://assets/enemies/globber/sounds/globber_walk_6.wav" id="37_0883v"]
+[ext_resource type="AudioStream" uid="uid://cei4yol81dd1i" path="res://assets/enemies/globber/sounds/globber_attack_1.wav" id="38_xmiyw"]
+[ext_resource type="AudioStream" uid="uid://c84e7shtda3y4" path="res://assets/enemies/globber/sounds/globber_attack_2.wav" id="39_dvtg5"]
+[ext_resource type="AudioStream" uid="uid://c1f161ldjdu2t" path="res://assets/enemies/globber/sounds/globber_attack_3.wav" id="40_pwbr7"]
+[ext_resource type="AudioStream" uid="uid://vgfis06i7twp" path="res://assets/enemies/globber/sounds/globber_attack_4.wav" id="41_jtqg3"]
+[ext_resource type="AudioStream" uid="uid://c3jkkn81mf13e" path="res://assets/enemies/globber/sounds/globber_attack_5.wav" id="42_4p7uc"]
+[ext_resource type="AudioStream" uid="uid://dbtorwjege1hf" path="res://assets/enemies/globber/sounds/globber_attack_6.wav" id="43_jd2m3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ai4x"]
+radius = 0.3540039
 
 [sub_resource type="Animation" id="Animation_nlepm"]
 length = 4.0
@@ -223,7 +244,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("../HitBox/CollisionShape3D:disabled")
+tracks/16/path = NodePath("../RotationPivot/AttackHitBox/CollisionShape3D:disabled")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -232,74 +253,54 @@ tracks/16/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../RotationPivot/Visuals/Alive:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../RotationPivot/Visuals/Death:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_845p2"]
 _data = {
 &"RESET": SubResource("Animation_nlepm"),
 &"globber_attack": ExtResource("2_40eg8"),
+&"globber_death": ExtResource("15_ckhdf"),
 &"globber_idle": ExtResource("3_kjdyy"),
 &"globber_idle_turning": ExtResource("4_h82rf"),
 &"globber_walk": ExtResource("2_v1ixo")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7o33"]
-animation = &"globber_attack"
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dvtg5"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_45htx"]
-animation = &"globber_idle"
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_depq0"]
+graph_offset = Vector2(-537, -41)
+nodes/StateMachine/node = ExtResource("19_xmiyw")
+nodes/StateMachine/position = Vector2(-180, 160)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_dvtg5")
+nodes/TimeScale/position = Vector2(120, 120)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"StateMachine"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ydwe4"]
-animation = &"globber_idle_turning"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nsq5j"]
-animation = &"globber_walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ai4x"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri6u3"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65y1t"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ckhdf"]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g0og0"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cg6f8"]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t2uwx"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3yu5q"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sana6"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08f11"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bnwb"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6q3l"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_droo6"]
-states/Start/position = Vector2(196.66667, 100.120705)
-states/globber_attack/node = SubResource("AnimationNodeAnimation_l7o33")
-states/globber_attack/position = Vector2(624.6667, 228.66669)
-states/globber_idle/node = SubResource("AnimationNodeAnimation_45htx")
-states/globber_idle/position = Vector2(386.66666, 99.67901)
-states/globber_idle_turning/node = SubResource("AnimationNodeAnimation_ydwe4")
-states/globber_idle_turning/position = Vector2(386, 228.00002)
-states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
-states/globber_walk/position = Vector2(625.2593, 99.79789)
-transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turning", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turning", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turning", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_h6q3l")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
+radius = 0.4
+height = 1.0948181
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
 atlas = ExtResource("14_o8dyd")
@@ -351,15 +352,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
-radius = 0.4
-height = 1.0948181
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kpvxy"]
+streams_count = 6
+stream_0/stream = ExtResource("32_0bnwb")
+stream_1/stream = ExtResource("33_h6q3l")
+stream_2/stream = ExtResource("34_k75j0")
+stream_3/stream = ExtResource("35_76j58")
+stream_4/stream = ExtResource("36_drkgp")
+stream_5/stream = ExtResource("37_0883v")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xmiyw"]
+streams_count = 6
+stream_0/stream = ExtResource("38_xmiyw")
+stream_1/stream = ExtResource("39_dvtg5")
+stream_2/stream = ExtResource("40_pwbr7")
+stream_3/stream = ExtResource("41_jtqg3")
+stream_4/stream = ExtResource("42_4p7uc")
+stream_5/stream = ExtResource("43_jd2m3")
 
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
-events_on_death = [NodePath("Events/DropEvent")]
+events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/PlayAnimationEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+shape = SubResource("CapsuleShape3D_3ai4x")
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
@@ -375,12 +391,10 @@ mask = Vector3(1, 0, 1)
 next_state = NodePath("../WalkForwardVelocityState")
 animation_state_name = "globber_idle"
 pass_data = true
-target_amount = 4
+target_amount = 1
 target_1 = NodePath("../WalkForwardVelocityState")
 property_1 = "direction"
-property_2 = ""
-property_3 = ""
-property_4 = ""
+play_sound = false
 metadata/_custom_type_script = "uid://d3h5j6rwem265"
 
 [node name="WalkForwardVelocityState" type="Node" parent="StateMachine/Roam" index="1" unique_id=719899571 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
@@ -393,6 +407,8 @@ minimum = 0.0
 maximum = 5.0
 next_state = NodePath("../WaitState")
 animation_state_name = "globber_walk"
+animation_time_scale = 5.0
+play_sound = false
 metadata/_custom_type_script = "uid://f032hrk67kwx"
 
 [node name="WaitState" type="Node" parent="StateMachine/Roam" index="2" unique_id=1243969389 node_paths=PackedStringArray("next_state")]
@@ -402,29 +418,31 @@ minimum = 0.0
 maximum = 5.0
 next_state = NodePath("../RandomDirectionState")
 animation_state_name = "globber_idle"
+play_sound = false
 metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
 
 [node name="Alert" type="Node" parent="StateMachine" index="1" unique_id=1391199121]
 
-[node name="WalkToPositionState" type="Node" parent="StateMachine/Alert" index="0" unique_id=1924766303 node_paths=PackedStringArray("target", "rotation_pivot", "next_state")]
-script = ExtResource("5_qg7h7")
-ACCELERATION = 0.1
+[node name="AlertWalkToPositionState" type="Node" parent="StateMachine/Alert" index="0" unique_id=626566685 node_paths=PackedStringArray("branch_state", "target", "next_state")]
+script = ExtResource("6_dvtg5")
+branch_state = NodePath("../../Chase/ChasePlayerState")
+ACCELERATION = 1.0
 target = NodePath("../../..")
-rotation_pivot = NodePath("../../../RotationPivot")
-speed = 1.4
-distance_threshold = 1.3
-next_state = NodePath("../WaitStateAfter")
+speed = 1.5
+distance_threshold = 2.0
+next_state = NodePath("../AlertWaitState")
 animation_state_name = "globber_walk"
-metadata/_custom_type_script = "uid://drf2ekrhnwk3t"
+play_sound = false
+metadata/_custom_type_script = "uid://ylkxrw65lga3"
 
-[node name="WaitStateAfter" type="Node" parent="StateMachine/Alert" index="1" unique_id=966372502 node_paths=PackedStringArray("next_state")]
-script = ExtResource("4_gtf71")
-randomize_time = true
-minimum = 0.0
-maximum = 5.0
+[node name="AlertWaitState" type="Node" parent="StateMachine/Alert" index="1" unique_id=333379486 node_paths=PackedStringArray("target", "branch_state", "next_state")]
+script = ExtResource("6_pwbr7")
+target = NodePath("../../..")
+distance_threshold = 2.0
+branch_state = NodePath("../../Chase/ChasePlayerState")
 next_state = NodePath("../EnableVisionCone")
-animation_state_name = "globber_idle_turning"
-metadata/_custom_type_script = "uid://cv8ndqtg5slh6"
+play_sound = false
+metadata/_custom_type_script = "uid://c2wfmt5nh4iv5"
 
 [node name="EnableVisionCone" type="Node" parent="StateMachine/Alert" index="2" unique_id=1290367276 node_paths=PackedStringArray("target", "next_state")]
 script = ExtResource("6_joybc")
@@ -433,7 +451,53 @@ property_name = &"monitoring"
 type = 1
 value = true
 next_state = NodePath("../../Roam/RandomDirectionState")
+play_sound = false
 metadata/_custom_type_script = "uid://dbrxet3cojgye"
+
+[node name="Chase" type="Node" parent="StateMachine" index="2" unique_id=1246458767]
+
+[node name="ChasePlayerState" type="Node" parent="StateMachine/Chase" index="0" unique_id=1015325903 node_paths=PackedStringArray("close_enough_state", "too_far_state", "target", "next_state")]
+script = ExtResource("9_dvtg5")
+distance_limit = 3.0
+close_enough_state = NodePath("../../Attack/AwaitAttackAnimationState")
+too_far_state = NodePath("../AwaitIdleTurnAnimationState")
+ACCELERATION = 1.0
+target = NodePath("../../..")
+speed = 1.7
+distance_threshold = 1.3
+next_state = NodePath("../../Attack/AwaitAttackAnimationState")
+animation_state_name = "globber_walk"
+animation_time_scale = 10.0
+play_sound = false
+metadata/_custom_type_script = "uid://dbl8jqdiqljv7"
+
+[node name="AwaitIdleTurnAnimationState" type="Node" parent="StateMachine/Chase" index="1" unique_id=1269915402 node_paths=PackedStringArray("animation_tree", "next_state")]
+script = ExtResource("8_3ai4x")
+animation_tree = NodePath("../../../AnimationTree")
+next_state = NodePath("../../Alert/EnableVisionCone")
+animation_state_name = "globber_idle_turn"
+play_sound = true
+sound_amount = 1
+sound_properties_1 = {
+"name": "Attack",
+"offset": 0.0
+}
+metadata/_custom_type_script = "uid://yc0ay2h3j4ck"
+
+[node name="Attack" type="Node" parent="StateMachine" index="3" unique_id=1492443935]
+
+[node name="AwaitAttackAnimationState" type="Node" parent="StateMachine/Attack" index="0" unique_id=895425256 node_paths=PackedStringArray("animation_tree", "next_state")]
+script = ExtResource("8_3ai4x")
+animation_tree = NodePath("../../../AnimationTree")
+next_state = NodePath("../../Chase/ChasePlayerState")
+animation_state_name = "globber_attack"
+play_sound = true
+sound_amount = 1
+sound_properties_1 = {
+"name": "Attack",
+"offset": 0.0
+}
+metadata/_custom_type_script = "uid://yc0ay2h3j4ck"
 
 [node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
 script = ExtResource("9_45htx")
@@ -445,18 +509,43 @@ script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
 source = NodePath("../..")
 max_value = 10
+type = 1
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
+
+[node name="PlayAnimationEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="2" unique_id=528173217 node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("14_g0og0")
+animation_tree = NodePath("../../AnimationTree")
+animation_name = "globber_death"
+metadata/_custom_type_script = "uid://3uiian2ekh1"
 
 [node name="AnimationPlayer" parent="." index="3" unique_id=67901383]
 libraries/ = SubResource("AnimationLibrary_845p2")
 
 [node name="AnimationTree" parent="." index="4" unique_id=934466786]
-tree_root = SubResource("AnimationNodeStateMachine_droo6")
+tree_root = SubResource("AnimationNodeBlendTree_depq0")
+parameters/TimeScale/scale = 1.0
 
-[node name="HurtBox" parent="." index="5" unique_id=158402479]
+[node name="HurtBox" parent="." index="5" unique_id=158402479 node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45192683, 0)
+parent = NodePath("..")
 
-[node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=33426455]
+[node name="AttackHitBox" type="Area3D" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=1715043841 node_paths=PackedStringArray("parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("25_ydwe4")
+parent = NodePath("../..")
+damage = 2000.0
+knockback = 10.0
+metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/AttackHitBox" index="0" unique_id=966836666]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.04395032, -0.0012564659, 0.42395365)
+shape = SubResource("CapsuleShape3D_mmgqi")
+disabled = true
+debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)
+
+[node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=33426455]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Alive" type="Node3D" parent="RotationPivot/Visuals" index="0" unique_id=1655088542]
@@ -527,29 +616,30 @@ shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"death"
+frame = 5
+frame_progress = 1.0
 
-[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
+[node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="2" unique_id=518248361 node_paths=PackedStringArray("path_trace", "walk_to_pos_state", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
 path_trace = NodePath("../../RayCast3D")
+walk_to_pos_state = NodePath("../../StateMachine/Alert/AlertWalkToPositionState")
 enemy = NodePath("../..")
-alert_state = NodePath("../../StateMachine/Alert/WalkToPositionState")
+alert_state = NodePath("../../StateMachine/Alert/AlertWalkToPositionState")
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="7" unique_id=912591583]
 collision_mask = 3
 collide_with_areas = true
 
-[node name="HitBox" type="Area3D" parent="." index="8" unique_id=1715043841]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("25_ydwe4")
-metadata/_custom_type_script = "uid://b3nhgfvthi5qc"
+[node name="Walk" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="0" unique_id=20060384]
+stream = SubResource("AudioStreamRandomizer_kpvxy")
+volume_db = -8.0
+bus = &"EnemySoundEffects"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" index="0" unique_id=966836666]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.04395032, -0.0012564659, 0.42395365)
-shape = SubResource("CapsuleShape3D_mmgqi")
-disabled = true
-debug_color = Color(0.2941713, 0.6122485, 0.42343524, 0.41960785)
+[node name="Attack" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="1" unique_id=547935468]
+stream = SubResource("AudioStreamRandomizer_xmiyw")
+volume_db = 50.0
+bus = &"EnemySoundEffects"

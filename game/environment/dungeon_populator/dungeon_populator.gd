@@ -14,15 +14,6 @@ enum ENEMY_NAMES {GLOBBER, BUNNY, DRAGONFLY}
 var rng:RandomNumberGenerator
 
 
-#func _ready() -> void:
-	#rng = generator.rng
-
-#TODO: 
-#need lists of enemies and puzzles
-
-#decide what can spawn based on modifiers
-
-#function that branches into spawners and stuff
 func evaluate_cell(_cell:Cell) -> void:
 	
 	var valid_positions:Array[Vector2i] = get_list_of_true_positions(_cell.bit_map)
@@ -38,16 +29,11 @@ func evaluate_cell(_cell:Cell) -> void:
 			p_enemy -= 10.0
 	var test = rng.randf_range(0.0,100.0)
 	if test< p_enemy and _cell.cell_position!= Vector2(0,0):
-		print("spawned with ",test, " ", p_enemy)
 		var result = spawn_enemy(_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
-	else:
-		print("rejected with ",test, " ", p_enemy)
-	# randomize whether one spawns based on that value
-	# same for traps
-	#spawn enemeis, assign modifers, make puzzles
-	pass
+
+
 
 
 ##Spawns random enemy at random position of given valid positions. Returns chosen position.
@@ -74,11 +60,9 @@ func spawn_enemy(_cell:Cell, _valid_positions:Array[Vector2i]) -> Array:
 		spawn_pos = _valid_positions[rng.randi_range(0,_valid_positions.size()-1)]
 		var adjacent_true_amount:int = get_adjacent_true_amount(spawn_pos,enemy_instance.tile_spawn_margin, _cell.bit_map)
 		if iteration_countdown <= 0:
-			print("no time")
 			return [false, Vector2.ZERO]
 		if adjacent_true_amount >= enemy_margin:
 			location_found = true
-			print("loc found")
 		
 	#spawn at location
 	
@@ -116,6 +100,5 @@ func get_adjacent_true_amount(_pos:Vector2,_enemy_margin:int, _bit_map:BitMap) -
 					count += 1
 
 	return count
-	
 	
 	

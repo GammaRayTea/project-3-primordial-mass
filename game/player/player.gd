@@ -15,7 +15,6 @@ class_name Player extends Entity
 #Component Nodes
 @export_category("Components")
 @export var push_box_shape:CollisionShape3D
-@export var hud:Control
 @export var camera:PlayerCam
 @export var sprint_timer:Timer
 
@@ -49,7 +48,8 @@ func _physics_process(_delta: float) -> void:
 			if Input.is_action_just_pressed("sprint") and can_sprint:
 				current_state = STATE.RUNNING
 			else:
-				current_sprint_value = lerp(current_sprint_value,MAX_SPRINT_VALUE,0.1)
+				current_sprint_value = lerp(current_sprint_value, MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA], 0.1)
+				print(current_sprint_value)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 		STATE.RUNNING:
 			apply_gravity(_delta)
@@ -77,6 +77,7 @@ func on_sprint_timer_done() -> void:
 	sprint_timer.stop()
 #endregion
 
+#region input
 ## checks input keys and returns corresponidng values
 func process_movement_input() -> Vector3:
 	var input_dir := Input.get_vector("move_left","move_right","move_up","move_down")
@@ -91,6 +92,8 @@ func process_interact_input() -> void:
 			control_interaction_target.activate(self)
 
 
+#endregion
+
 func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:float) -> void:
 	if _direction:
 		var target_rot = rotate_to_direction(_direction)
@@ -103,6 +106,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 		velocity.x = clampf(velocity.x, -_target_speed, _target_speed)
 		velocity.z = clampf(velocity.z, -_target_speed, _target_speed)
 		
+		RunManager.decrease_stability(0.1)
 	else:
 		velocity.x = move_toward(velocity.x, 0, TRACTION)
 		velocity.z = move_toward(velocity.z, 0,TRACTION)
@@ -143,7 +147,6 @@ func pick_up_item(_item:Item):
 	if held_item == null:
 		held_item = _item
 		print("picked up ",_item.name)
-		hud.set_item(_item)
 		
 
 func on_interaction_box_entered(_area: Area3D) -> void:
@@ -164,8 +167,16 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 
 
 #region damage handling
+
+
+
+
 func get_hit(source:HitBox):
-	super(source)
+	velocity += source.parent.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
+	print("Player took damage ", source.damage)
+	RunManager.decrease_stability(source.damage)
+	GlobalSoundManager.increase_intensity(0.5)
+	
 
 
 func die() -> void:

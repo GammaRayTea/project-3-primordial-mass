@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
 [ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_uxsc4"]
+[ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="4_p4vjo"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh7c5"]
@@ -10,18 +11,19 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 
-[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "rotation_pivot", "state_machine")]
+[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "state_machine", "rotation_pivot")]
 script = ExtResource("1_p4vjo")
 animation_tree = NodePath("AnimationTree")
-rotation_pivot = NodePath("RotationPivot")
 state_machine = NodePath("StateMachine")
+rotation_pivot = NodePath("RotationPivot")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
 shape = SubResource("CapsuleShape3D_yh7c5")
 
-[node name="StateMachine" type="Node" parent="." unique_id=751087973 node_paths=PackedStringArray("animation_tree")]
+[node name="StateMachine" type="Node" parent="." unique_id=751087973 node_paths=PackedStringArray("animation_tree", "sound_effect_manager")]
 script = ExtResource("2_uxsc4")
 animation_tree = NodePath("../AnimationTree")
+sound_effect_manager = NodePath("../SoundEffectManager")
 metadata/_custom_type_script = "uid://d10lffcbhtmrp"
 
 [node name="Events" type="Node" parent="." unique_id=1440544615]
@@ -48,4 +50,13 @@ debug_color = Color(0.99591845, 0, 0.20490283, 0.41960785)
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=33426455]
 
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="." unique_id=226181715]
+aabb = AABB(-4, -4, -4, 8, 8, 8)
+
+[node name="SoundEffectManager" type="Node3D" parent="." unique_id=700150437]
+script = ExtResource("4_p4vjo")
+metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler3D" to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler3D" to="." method="_on_screen_exited"]

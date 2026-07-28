@@ -2,13 +2,20 @@
 class_name Enemy extends Entity
 
 @export_category("Attributes")
+@export var health:float = 100.0:
+	set(value):
+		health = value
+		if health <= 0.0:
+			die()
 @export var tile_spawn_margin:int = 1
-
 @export_category("Components")
 @export var animation_tree:AnimationTree:
 	set(value):
 		animation_tree= value
 		update_configuration_warnings()
+
+
+
 
 @export_category("State Machine")
 @export var state_machine:StateMachine:
@@ -47,7 +54,8 @@ func _physics_process(_delta: float) -> void:
 	
 
 func get_hit(source:HitBox):
-	super(source)
+	health-=source.damage
+	velocity += source.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
 	execute_events(events_on_hurt)
 	enemy_hit.emit()
 
@@ -56,13 +64,19 @@ func die() -> void:
 	enemy_died.emit()
 
 
-func _on_hurt_box_area_entered(area: Area3D) -> void:
-	if area is HitBox and area.get_parent() != self:
-		get_hit(area)
-		
 
 
 func execute_events(events:Array[Event])->void:
 	for event in events:
 		if event is Event:
 			event.execute()
+
+
+func _on_screen_entered() -> void:
+	GlobalSoundManager.increase_intensity(0.5)
+	process_mode = Node.PROCESS_MODE_INHERIT
+
+
+
+func _on_screen_exited() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED

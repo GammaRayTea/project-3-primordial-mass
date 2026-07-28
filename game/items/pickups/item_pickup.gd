@@ -55,7 +55,7 @@ func _ready()->void:
 			if child.name == "InteractionBox":
 				interaction_box = child
 
-	
+
 
 
 func hover_start()-> void:
