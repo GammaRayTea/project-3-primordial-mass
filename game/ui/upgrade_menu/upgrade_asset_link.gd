@@ -14,7 +14,7 @@ static var stat_names:Dictionary[GlobalEnum.UPGRADES, String] = {
 
 }
 
-var stat_descriptions:Dictionary[GlobalEnum.UPGRADES, String] = {
+static var stat_descriptions:Dictionary[GlobalEnum.UPGRADES, String] = {
 	GlobalEnum.UPGRADES.STABILITY_BUILDUP: "Increases stability gained",
 	GlobalEnum.UPGRADES.STABILITY_RESILIENCE: "Decreases stability reduction",
 	GlobalEnum.UPGRADES.STABILITY_CAPACITY: "Increases stability limit",

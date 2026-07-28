@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bqhqcsa5vck2x"
-path="res://.godot/imported/CoveredByYourGrace-Regular.ttf-9230adab60dfc7e0ffea1fd849a8efb7.fontdata"
+path="res://.godot/imported/CoveredByYourGrace-Regular.ttf-e8c9e5e07114840807fe3960ac9f4556.fontdata"
 
 [deps]
 
-source_file="res://assets/Themes/fonts/Covered_By_Your_Grace/CoveredByYourGrace-Regular.ttf"
-dest_files=["res://.godot/imported/CoveredByYourGrace-Regular.ttf-9230adab60dfc7e0ffea1fd849a8efb7.fontdata"]
+source_file="res://assets/themes/fonts/Covered_By_Your_Grace/CoveredByYourGrace-Regular.ttf"
+dest_files=["res://.godot/imported/CoveredByYourGrace-Regular.ttf-e8c9e5e07114840807fe3960ac9f4556.fontdata"]
 
 [params]
 
