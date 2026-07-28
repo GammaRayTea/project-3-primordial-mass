@@ -1,7 +1,7 @@
 class_name DropContainer extends Node3D
 
 
-@export var type :GlobalEnum.CURRENCY
+@export var type:GlobalEnum.CURRENCY
 @export var value:int
 @export var sprite:Sprite3D
 @export var anim_player:AnimationPlayer
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func setup(_type:GlobalEnum.CURRENCY, _value:int) -> void:
-	if _value <1:
+	if _value < 1:
 		_value = 1
 	type = _type
 	sprite.texture = load(ItemAssets.currency_icons[type])

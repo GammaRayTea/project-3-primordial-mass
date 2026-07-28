@@ -1,15 +1,10 @@
 @tool
 class_name InteractionBox extends TriggerBox
 
-@export var target:Node3D
+var target: Node3D = null
 
-func _init() -> void:
-	#if !find_children("Collision","CollisionShape3D"):
-		#var shape = CollisionShape3D.new()
-		#add_child(shape)
-		#shape.owner = self
-		#shape.shape = BoxShape3D.new()
-		#
-		#
-		#
-	pass
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	if target == null:
+		target = get_parent()
