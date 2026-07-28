@@ -1,9 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://bmdf4c0niky3d"]
 
-[sub_resource type="SystemFont" id="SystemFont_hy781"]
-
-[sub_resource type="FontVariation" id="FontVariation_bxr4m"]
-base_font = SubResource("SystemFont_hy781")
+[ext_resource type="FontFile" uid="uid://g8ydbi7g6o7b" path="res://assets/themes/fonts/Shadows_Into_Light/ShadowsIntoLight-Regular.ttf" id="1_x0tin"]
 
 [resource]
-default_font = SubResource("FontVariation_bxr4m")
+default_font = ExtResource("1_x0tin")

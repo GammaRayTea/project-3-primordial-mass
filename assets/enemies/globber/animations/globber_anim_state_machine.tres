@@ -1,0 +1,79 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://c223ulqhjtoyo"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7o33"]
+animation = &"globber_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ckhdf"]
+animation = &"globber_death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_45htx"]
+animation = &"globber_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ydwe4"]
+animation = &"globber_idle_turning"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nsq5j"]
+animation = &"globber_walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ai4x"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri6u3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65y1t"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ckhdf"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g0og0"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cg6f8"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t2uwx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3yu5q"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sana6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08f11"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bnwb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6q3l"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k75j0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76j58"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_drkgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0883v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmiyw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_depq0"]
+
+[resource]
+states/Start/position = Vector2(196.66667, 100.120705)
+states/globber_attack/node = SubResource("AnimationNodeAnimation_l7o33")
+states/globber_attack/position = Vector2(625.4568, 227.77779)
+states/globber_death/node = SubResource("AnimationNodeAnimation_ckhdf")
+states/globber_death/position = Vector2(497.99994, 490.66666)
+states/globber_idle/node = SubResource("AnimationNodeAnimation_45htx")
+states/globber_idle/position = Vector2(386.66666, 99.67901)
+states/globber_idle_turn/node = SubResource("AnimationNodeAnimation_ydwe4")
+states/globber_idle_turn/position = Vector2(386, 228.00002)
+states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
+states/globber_walk/position = Vector2(650.2593, 66.79789)
+transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turn", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turn", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turn", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_h6q3l"), "globber_idle", "globber_death", SubResource("AnimationNodeStateMachineTransition_k75j0"), "globber_idle_turn", "globber_death", SubResource("AnimationNodeStateMachineTransition_76j58"), "globber_attack", "globber_death", SubResource("AnimationNodeStateMachineTransition_drkgp"), "globber_walk", "globber_death", SubResource("AnimationNodeStateMachineTransition_0883v"), "globber_death", "End", SubResource("AnimationNodeStateMachineTransition_xmiyw"), "globber_walk", "globber_idle_turn", SubResource("AnimationNodeStateMachineTransition_depq0")]
+graph_offset = Vector2(-134, 43)

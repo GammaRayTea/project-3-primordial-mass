@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://buj68u071kmbs"]
+
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2ww3u"]
+[ext_resource type="Script" uid="uid://sp7uqxf7j40l" path="res://game/ui/main_menu/main_menu.gd" id="2_mkp5f"]
+
+[node name="MainMenu" type="Control" unique_id=1891432706 node_paths=PackedStringArray("start_button", "clear_save_button")]
+oversampling_with_scale = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_2ww3u")
+script = ExtResource("2_mkp5f")
+start_button = NodePath("StartButton")
+clear_save_button = NodePath("ClearSaveButton")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=291667159]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+text = "PRIMORDIAL MASS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="." unique_id=1903112996]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+text = "START"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1390811763]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.20551914, 0.07341867, 0.28173468, 1)
+
+[node name="ClearSaveButton" type="Button" parent="." unique_id=1452795649]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -41.0
+offset_right = 108.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "Clear save data
+"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]

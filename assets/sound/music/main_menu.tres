@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://b2jp3vfe5xo4d"]
+
+[ext_resource type="AudioStream" uid="uid://b0jjk3n2hsttx" path="res://assets/sound/music/raw/main_menu_intro.ogg" id="1_72e86"]
+[ext_resource type="AudioStream" uid="uid://ddavo1pshp1rw" path="res://assets/sound/music/raw/main_menu_loop.ogg" id="2_j8202"]
+
+[resource]
+clip_count = 2
+clip_0/name = &"Main Menu Intro"
+clip_0/stream = ExtResource("1_72e86")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Main Menu Loop"
+clip_1/stream = ExtResource("2_j8202")
+clip_1/auto_advance = 0

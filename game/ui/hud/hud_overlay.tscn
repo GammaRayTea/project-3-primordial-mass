@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://dxketbhopi5ju"]
+
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2tv8o"]
+[ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/ui/hud/hud_overlay.gd" id="2_cofoi"]
+[ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/ui/hud/item_preview.gd" id="3_2gjfp"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_gtlt3"]
+[ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_lp4vu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwwe"]
+shader = ExtResource("5_lp4vu")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/alpha = 0.42
+shader_parameter/inner_radius = 0.12
+shader_parameter/outer_radius = 0.545
+
+[node name="Overlay" type="Control" unique_id=1199412428]
+oversampling_with_scale = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_2tv8o")
+script = ExtResource("2_cofoi")
+
+[node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.90300006
+anchor_top = 0.82800007
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.76013184
+offset_top = -0.24005127
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2tv8o")
+script = ExtResource("3_2gjfp")
+image = NodePath("ItemTexture")
+label = NodePath("ItemLabel")
+
+[node name="ItemTexture" type="TextureRect" parent="ItemPreview" unique_id=1859054212]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.78200006
+offset_left = 0.33927917
+offset_top = -3.2015686
+offset_right = 0.33927917
+offset_bottom = -3.6535797
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_2tv8o")
+texture = ExtResource("4_gtlt3")
+stretch_mode = 5
+
+[node name="ItemLabel" type="Label" parent="ItemPreview" unique_id=2108661356]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0050000004
+anchor_top = 0.80600005
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.17199457
+offset_top = -10.343445
+offset_right = 0.10699463
+offset_bottom = 29.000008
+theme = ExtResource("1_2tv8o")
+text = "Stick
+"
+horizontal_alignment = 1
+
+[node name="Control" type="ColorRect" parent="." unique_id=715104668]
+z_index = -2
+material = SubResource("ShaderMaterial_6fwwe")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ActivatePortalHint" type="Label" parent="." unique_id=1253020850]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -46.0
+offset_right = 62.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_2tv8o")
+text = "Press E to leave "
+horizontal_alignment = 1

@@ -1,15 +1,16 @@
-extends Control
+class_name DungeonMap extends Control
 
 var cells:PackedVector2Array = PackedVector2Array()
 var points:PackedVector2Array = PackedVector2Array()
+var draw_point_ids:PackedInt32Array = PackedInt32Array()
+var delaunay_points:PackedVector2Array = PackedVector2Array()
+var room_bit_maps:Array[ImageTexture] = []
+
 var rect_size:int = 16
 var player_pos:Vector2
 var scalar = 1
-var draw_point_ids:PackedInt32Array = PackedInt32Array()
-var delaunay_points:PackedVector2Array = PackedVector2Array()
 
 
-var room_bit_maps:Array[ImageTexture] = []
 @export var draw_point_subdivision:int
 var offset:Vector2
 
@@ -20,6 +21,8 @@ var offset:Vector2
 @export var draw_cells:bool = false
 @export var is_inner:bool = false
 
+var current_cell_tier:int
+
 func _ready() -> void:
 	#offset = Vector2(- rect_size * 0.5 + 2,- rect_size * 0.5 + 2)
 	offset = Vector2(0,0)
@@ -29,9 +32,8 @@ func _ready() -> void:
 
 func _draw() -> void:
 	
-	#if draw_cells:
-		
-	draw_rect(Rect2(0 , 0 ,rect_size,rect_size),Color.RED)
+	#highlight first cell
+	#draw_rect(Rect2(0 , 0 ,rect_size,rect_size),Color.RED)
 	for cell in range(0,cells.size()):
 		#cells
 		draw_rect(Rect2(scalar*cells[cell].x,scalar* cells[cell].y , rect_size,rect_size),cell_color)
@@ -43,9 +45,9 @@ func _draw() -> void:
 		#small points
 		draw_rect(Rect2(scalar*(cells[cell].x + points[cell].x-1),scalar* (cells[cell].y+ points[cell].y-1), 2,2),point_color)
 		
-
-	@warning_ignore("integer_division")
-	draw_rect(Rect2(rect_size*scalar*player_pos.x+rect_size/4, rect_size*scalar* player_pos.y +rect_size/4,   rect_size/2 , rect_size/2  ),Color.YELLOW)
+	#draw player
+	#@warning_ignore("integer_division")
+	#draw_rect(Rect2(rect_size*scalar*player_pos.x+rect_size/4, rect_size*scalar* player_pos.y +rect_size/4,   rect_size/2 , rect_size/2  ),Color.YELLOW)
 
 	var i = 0
 	while i < draw_point_ids.size():
@@ -56,8 +58,16 @@ func _draw() -> void:
 		
 		points_to_draw.push_back(Vector2(delaunay_points[draw_point_ids[i]])  *scalar)
 		
-		#if is_inner:
-			#print(points_to_draw)
-			#print(points_to_draw)
+
 		draw_polyline(points_to_draw,line_color)
 		i+=draw_point_subdivision
+
+
+func clear_map() -> void:
+	cells.clear()
+	room_bit_maps.clear()
+	cells.clear()
+	points.clear()
+	draw_point_ids.clear()
+	delaunay_points.clear()
+	current_cell_tier = 0

@@ -1,35 +1,40 @@
 [gd_scene format=3 uid="uid://c8257oy8c1lmb"]
 
 [ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/environment/test_room/test_room.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://dowd86n4o64xs" path="res://debug_main_settings.gd" id="1_5vw27"]
-[ext_resource type="PackedScene" uid="uid://buj68u071kmbs" path="res://game/session/main_menu/main_menu.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://dowd86n4o64xs" path="res://main.gd" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://dnlold3vjngv1" path="res://game.gd" id="3_efxa6"]
-[ext_resource type="Environment" uid="uid://cwug21yqssiod" path="res://assets/environment/dark_environment.tres" id="6_4c57u"]
+[ext_resource type="Environment" uid="uid://o1olc25fhgdl" path="res://assets/environment/world_envs/test_environemt.tres" id="5_w48qg"]
+[ext_resource type="Environment" uid="uid://cwug21yqssiod" path="res://assets/environment/world_envs/dark_environment.tres" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://bapt7cirwaonw" path="res://game/environment/room_generation/room_mesh_gen.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungeon_populator.gd" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="9_efxa6"]
+[ext_resource type="PackedScene" uid="uid://27250itoet37" path="res://game/ui/ui.tscn" id="10_4c57u"]
 
-[node name="Main" type="Node" unique_id=209619049]
+[node name="Main" type="Node" unique_id=209619049 node_paths=PackedStringArray("game", "ui")]
 script = ExtResource("1_5vw27")
+jump_to_game = false
+game = NodePath("Game")
+ui = NodePath("UI")
+render_low_res = true
 low_resolution = Vector2i(512, 288)
 high_resolution = Vector2i(1920, 1080)
 
-[node name="MainMenu" parent="." unique_id=1891432706 instance=ExtResource("2_7mycd")]
-z_index = 3
-
-[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("player", "dungeon_gen", "enemies", "objects") groups=["Game"]]
+[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "player", "enemies", "objects") groups=["Game"]]
+process_mode = 4
 visible = false
 script = ExtResource("3_efxa6")
-player = NodePath("Player")
+ui_controller = NodePath("../UI")
+world_environment = NodePath("WorldEnvironment")
+default_env = ExtResource("6_4c57u")
+test_env = ExtResource("5_w48qg")
 dungeon_gen = NodePath("DungeonGenerator")
+player = NodePath("Player")
 enemies = NodePath("Enemies")
 objects = NodePath("Objects")
 testing = false
 test_room = ExtResource("1_0xm2m")
-
-[node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2683907, 0)
+lock_seed = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = ExtResource("6_4c57u")
@@ -41,21 +46,27 @@ shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.585
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "room_mesh") instance=ExtResource("6_7mycd")]
-visible = true
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "dungeon_populator") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
 cell_margin = 4
-random_seed = 3
 player = NodePath("../Player")
-room_mesh = NodePath("RoomMesh")
+dungeon_populator = NodePath("DungeonPopulator")
 
-[node name="RoomMesh" type="MeshInstance3D" parent="Game/DungeonGenerator" unique_id=645045025 node_paths=PackedStringArray("room_collisions")]
-script = ExtResource("8_5vw27")
-room_collisions = NodePath("RoomCollisions")
+[node name="DungeonPopulator" type="Node" parent="Game/DungeonGenerator" unique_id=884732775 node_paths=PackedStringArray("enemy_wrapper", "object_wrapper") groups=["RNGUnifier"]]
+script = ExtResource("8_4c57u")
+enemy_wrapper = NodePath("../../Enemies")
+object_wrapper = NodePath("../../Objects")
+enemy_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("9_efxa6"),
+1: ExtResource("9_efxa6"),
+2: ExtResource("9_efxa6")
+})
+metadata/_custom_type_script = "uid://csp4fpbvwywgg"
 
-[node name="RoomCollisions" type="StaticBody3D" parent="Game/DungeonGenerator/RoomMesh" unique_id=652251928]
+[node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
 [node name="Objects" type="Node3D" parent="Game" unique_id=2104293269]
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1735095429]
+[node name="UI" parent="." unique_id=982157194 instance=ExtResource("10_4c57u")]

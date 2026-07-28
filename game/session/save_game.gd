@@ -1,12 +1,6 @@
 class_name SaveGame extends Resource
 
+var player_stats:Dictionary[GlobalEnum.UPGRADES,float]
 
-@export var currency:Dictionary[GlobalEnum.CURRENCY, int] = {}
-func _init() -> void:
-	for key in GlobalEnum.CURRENCY.values():
-		currency[key] = 0
-
-
-func add_currency(_type:GlobalEnum.CURRENCY,_value:int):
-	currency[_type] +=_value
-	print(currency)
+var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int]
+var currency:Dictionary[GlobalEnum.CURRENCY, int] 
