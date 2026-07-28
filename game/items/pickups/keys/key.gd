@@ -1,5 +1,5 @@
 @tool
-class_name Key extends Item
+class_name Key extends ItemPickup
 
 func _setup() -> void:
 	pass

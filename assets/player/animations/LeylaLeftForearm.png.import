@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cce5meexmc10"
-path.s3tc="res://.godot/imported/LeylaLeftForeArm.png-62d04bb1a31008821c8e68a5d27bce98.s3tc.ctex"
+path.s3tc="res://.godot/imported/LeylaLeftForearm.png-6d4330770df0004aec1391483075e88f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/player/animations/LeylaLeftForeArm.png"
-dest_files=["res://.godot/imported/LeylaLeftForeArm.png-62d04bb1a31008821c8e68a5d27bce98.s3tc.ctex"]
+source_file="res://assets/player/animations/LeylaLeftForearm.png"
+dest_files=["res://.godot/imported/LeylaLeftForearm.png-6d4330770df0004aec1391483075e88f.s3tc.ctex"]
 
 [params]
 

@@ -1,5 +1,5 @@
 @tool
-class_name Pearl extends Item
+class_name Pearl extends ItemPickup
 
 func _setup() -> void:
 	pass
