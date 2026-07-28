@@ -49,6 +49,7 @@ size = Vector3(0.5, 1, 0.2791748)
 size = Vector3(0.5, 1, 0.45483398)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
+size = Vector3(1, 1, 1.8989258)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
 radius = 0.3227539
@@ -133,7 +134,7 @@ collision_mask = 32
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954497)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5050341)
 shape = SubResource("BoxShape3D_udmuc")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 

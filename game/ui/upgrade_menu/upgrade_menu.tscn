@@ -42,15 +42,19 @@ size_flags_vertical = 3
 [node name="UpgradeStBuildup" parent="ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat_amount = 0.1
+max_level = 5
 
 [node name="UpgradeStRes" parent="ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
+upgrade_stat_amount = 0.1
+max_level = 6
 
 [node name="UpgradeStCap" parent="ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
 upgrade_stat_amount = 0.1
+max_level = 6
 
 [node name="UpgradeStam" parent="ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
 layout_mode = 2
@@ -92,8 +96,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

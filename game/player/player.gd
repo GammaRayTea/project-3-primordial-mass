@@ -30,7 +30,14 @@ var control_interaction_target:Interactable
 
 var held_item:Item = null
 
-
+func start() -> void:
+	global_position = Vector3(8,1,8)
+	current_sprint_value = MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA]
+	held_item = null
+	current_state = STATE.IDLE
+	push_target = null
+	control_interaction_target = null
+	can_sprint = true
 
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
@@ -49,7 +56,6 @@ func _physics_process(_delta: float) -> void:
 				current_state = STATE.RUNNING
 			else:
 				current_sprint_value = lerp(current_sprint_value, MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA], 0.1)
-				print(current_sprint_value)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
 		STATE.RUNNING:
 			apply_gravity(_delta)

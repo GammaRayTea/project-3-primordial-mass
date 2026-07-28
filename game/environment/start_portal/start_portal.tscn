@@ -12,12 +12,12 @@ radius = 0.18652344
 script = ExtResource("1_jn4hp")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1406339180]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.005, 0)
+transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0.005, 0)
 texture_filter = 0
 texture = ExtResource("1_1m0y6")
 
 [node name="InteractionBox" type="Area3D" parent="." unique_id=818320370 node_paths=PackedStringArray("target")]
-collision_layer = 0
+collision_layer = 32
 collision_mask = 32
 script = ExtResource("2_jn4hp")
 target = NodePath("..")

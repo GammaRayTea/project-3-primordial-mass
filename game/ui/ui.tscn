@@ -35,10 +35,8 @@ visible = false
 z_index = -1
 
 [node name="UpgradeMenu" parent="." unique_id=1730159824 instance=ExtResource("3_cshcc")]
-visible = false
 
 [node name="Overlay" parent="." unique_id=1199412428 instance=ExtResource("4_eogtg")]
-visible = false
 z_index = -1
 
 [node name="StabilityBar" type="TextureProgressBar" parent="Overlay" unique_id=1776531798 groups=["StabilityBar"]]

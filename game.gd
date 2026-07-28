@@ -66,7 +66,10 @@ func start_run():
 	else:
 		world_environment.environment = test_env
 	process_mode = Node.PROCESS_MODE_INHERIT
-
+	
+	#init player
+	player.start()
+	
 	#start dungeon gen
 	if testing:
 		var room = test_room.instantiate()
@@ -81,8 +84,14 @@ func start_run():
 	RunManager.start_run()
 
 
+func end_run() -> void:
+	RunManager.leave_run()
+	clear_game()
+	switch_to_state(STATE.UPGRADE_MENU)
+
 func to_upgrade_menu() -> void:
-	pass
+	GlobalSoundManager.stop_ambience()
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
 
 func pause() -> void:
 	get_tree().paused = true
@@ -94,7 +103,7 @@ func unpause() -> void:
 
 
 func switch_to_state(_state:STATE) -> void:
-	print("switching to ", STATE.keys()[_state])
+	#print("switching to ", STATE.keys()[_state])
 	var previous = current_state
 	current_state = _state
 	ui_controller.switch_to_state(_state)

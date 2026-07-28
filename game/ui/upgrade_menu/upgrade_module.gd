@@ -7,9 +7,15 @@ class_name UpgradeModule extends Control
 
 
 @export var upgrade_currency:GlobalEnum.CURRENCY
-@export var base_cost:int
+@export var base_cost:int:
+	set(value):
+		base_cost = value
+		update_data()
 var current_cost:int
-@export var cost_mulitplier:float
+@export var cost_mulitplier:float = 1.0:
+	set(value):
+		cost_mulitplier = value
+		update_data()
 
 
 var current_upgrade_level:int = 0:
@@ -60,8 +66,10 @@ func update_slot_amount() -> void:
 
 func update_data() -> void:
 	#TODO
-	
-	name_label.text = ItemAssets.stat_names[upgrade_stat]
+	@warning_ignore("narrowing_conversion")
+	current_cost = base_cost *cost_mulitplier * (current_upgrade_level+1)
+	name_label.text =ItemAssets.stat_names[upgrade_stat]
+	cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
 
 func on_button_press(_increase:bool) -> void:
 	

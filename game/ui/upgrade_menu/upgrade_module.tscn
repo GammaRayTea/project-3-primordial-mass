@@ -52,7 +52,7 @@ custom_maximum_size = Vector2(-1, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 16
-text = "Item Namey"
+text = "Stability Buildup"
 fit_content = true
 scroll_active = false
 
@@ -71,7 +71,7 @@ alignment = 2
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "Cost"
+text = "[img]res://assets/Items/currency/goo/goo.png[/img]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

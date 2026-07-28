@@ -1,6 +1,6 @@
 class_name UIController extends CanvasLayer
 @export var main_menu:MainMenu
-@export var hud:Control
+@export var hud:HUD
 @export var upgrade_menu:UpgradeMenu
 @export var pause_screen:PauseScreen
 @export var sound_manager:SoundEffectManager
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func switch_to_state(_state:Game.STATE) -> void:
-	print("ui switching to ", Game.STATE.keys()[_state])
+	#print("ui switching to ", Game.STATE.keys()[_state])
 	match _state:
 		Game.STATE.MAIN_MENU:
 			upgrade_menu.hide()

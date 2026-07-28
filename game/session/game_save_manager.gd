@@ -14,7 +14,7 @@ var stability_bar_increase_factor:float = 1.0
 
 var save_game: SaveGame = null
 func _ready() -> void:
-	delete_save()
+	pass
 #
 	#if process_save:
 		#var load_success:bool = load_save()

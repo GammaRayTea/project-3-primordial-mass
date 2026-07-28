@@ -63,7 +63,7 @@ func reset() -> void:
 func start_escape_event() -> void:
 	stable_phase = false
 
-func escaped() -> void:
+func leave_run() -> void:
 	for key in run_currency.keys():
 		saved_currency[key]+= run_currency[key]
 	GameSaveManager.save(saved_currency,player_stats, player_stat_levels)

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungeon_populator.gd" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="9_efxa6"]
 [ext_resource type="PackedScene" uid="uid://27250itoet37" path="res://game/ui/ui.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://em0uywivb118" path="res://game/environment/start_portal/start_portal.tscn" id="10_efxa6"]
 
 [node name="Main" type="Node" unique_id=209619049 node_paths=PackedStringArray("game", "ui")]
 script = ExtResource("1_5vw27")
@@ -22,7 +23,6 @@ high_resolution = Vector2i(1920, 1080)
 
 [node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "player", "enemies", "objects") groups=["Game"]]
 process_mode = 4
-visible = false
 script = ExtResource("3_efxa6")
 ui_controller = NodePath("../UI")
 world_environment = NodePath("WorldEnvironment")
@@ -68,5 +68,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
 [node name="Objects" type="Node3D" parent="Game" unique_id=2104293269]
+
+[node name="StartPortal" parent="Game" unique_id=1420404931 node_paths=PackedStringArray("ui") instance=ExtResource("10_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.1, 8)
+ui = NodePath("../../UI")
 
 [node name="UI" parent="." unique_id=982157194 instance=ExtResource("10_4c57u")]
