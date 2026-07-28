@@ -292,7 +292,7 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_droo6"]
 states/Start/position = Vector2(196.66667, 100.120705)
 states/globber_attack/node = SubResource("AnimationNodeAnimation_l7o33")
-states/globber_attack/position = Vector2(624.6667, 228.66669)
+states/globber_attack/position = Vector2(625.06177, 228.22224)
 states/globber_idle/node = SubResource("AnimationNodeAnimation_45htx")
 states/globber_idle/position = Vector2(386.66666, 99.67901)
 states/globber_idle_turning/node = SubResource("AnimationNodeAnimation_ydwe4")
@@ -300,6 +300,7 @@ states/globber_idle_turning/position = Vector2(386, 228.00002)
 states/globber_walk/node = SubResource("AnimationNodeAnimation_nsq5j")
 states/globber_walk/position = Vector2(625.2593, 99.79789)
 transitions = ["Start", "globber_idle", SubResource("AnimationNodeStateMachineTransition_3ai4x"), "globber_idle", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_ri6u3"), "globber_idle_turning", "globber_idle", SubResource("AnimationNodeStateMachineTransition_65y1t"), "globber_idle", "globber_walk", SubResource("AnimationNodeStateMachineTransition_ckhdf"), "globber_idle_turning", "globber_walk", SubResource("AnimationNodeStateMachineTransition_g0og0"), "globber_walk", "globber_idle", SubResource("AnimationNodeStateMachineTransition_cg6f8"), "globber_walk", "globber_attack", SubResource("AnimationNodeStateMachineTransition_t2uwx"), "globber_attack", "globber_walk", SubResource("AnimationNodeStateMachineTransition_3yu5q"), "globber_idle", "globber_attack", SubResource("AnimationNodeStateMachineTransition_sana6"), "globber_attack", "globber_idle", SubResource("AnimationNodeStateMachineTransition_08f11"), "globber_idle_turning", "globber_attack", SubResource("AnimationNodeStateMachineTransition_0bnwb"), "globber_attack", "globber_idle_turning", SubResource("AnimationNodeStateMachineTransition_h6q3l")]
+graph_offset = Vector2(33, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
 atlas = ExtResource("14_o8dyd")
@@ -360,6 +361,7 @@ events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/FreeEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
+visible = false
 
 [node name="StateMachine" parent="." index="1" unique_id=751087973 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam/RandomDirectionState")
@@ -452,6 +454,7 @@ tree_root = SubResource("AnimationNodeStateMachine_droo6")
 
 [node name="HurtBox" parent="." index="5" unique_id=158402479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45192683, 0)
+visible = false
 
 [node name="Visuals" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="0" unique_id=33426455]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -527,6 +530,7 @@ animation = &"death"
 
 [node name="VisionCone" parent="RotationPivot" parent_id_path=PackedInt32Array(1172787614) index="1" unique_id=518248361 node_paths=PackedStringArray("path_trace", "enemy", "alert_state") instance=ExtResource("18_2si2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5937547, 0)
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_2si2q")
@@ -540,6 +544,7 @@ collide_with_areas = true
 
 [node name="HitBox" type="Area3D" parent="." index="8" unique_id=1715043841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37255335, -1.0219889)
+visible = false
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("25_ydwe4")
