@@ -37,9 +37,9 @@ var current_upgrade_level:int = 0:
 @export var slot_scene:PackedScene
 @export var slot_container:HBoxContainer
 @export var plus_button:Button
-@export var name_label:RichTextLabel#TODO
-@export var cost_label:RichTextLabel#TODO
-
+@export var name_label:RichTextLabel
+@export var cost_label:RichTextLabel
+@export var description_label:RichTextLabel
 
 
 var slots:Array[Slot] = []
@@ -68,9 +68,10 @@ func update_data() -> void:
 	#TODO
 	@warning_ignore("narrowing_conversion")
 	current_cost = base_cost *cost_mulitplier * (current_upgrade_level+1)
-	name_label.text =ItemAssets.stat_names[upgrade_stat]
+	name_label.text = ItemAssets.stat_names[upgrade_stat]
 	cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
-
+	description_label.text = ItemAssets.stat_descriptions[upgrade_stat]
+	
 func on_button_press(_increase:bool) -> void:
 	
 	if _increase:
