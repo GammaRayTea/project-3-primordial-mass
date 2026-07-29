@@ -64,10 +64,6 @@ folder_colors={
 "res://game/ui/": "gray"
 }
 
-[filesystem]
-
-import/blender/enabled=false
-
 [global_group]
 
 Player="The Player."
