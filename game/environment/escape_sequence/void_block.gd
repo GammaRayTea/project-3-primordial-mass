@@ -2,10 +2,13 @@ class_name VoidBlock extends Node3D
 
 @export var fog_volume: FogVolume
 @export var collison_shape:CollisionShape3D
+@export var escape_fog_material:FogMaterial
 var activation_time:float = 0.0
 
 
 func _ready() -> void:
+	fog_volume.material = escape_fog_material.duplicate_deep()
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property(fog_volume.material,"density", 6.0, activation_time)
 	await tween.finished

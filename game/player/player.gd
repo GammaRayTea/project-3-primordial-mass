@@ -85,7 +85,7 @@ func _physics_process(_delta: float) -> void:
 			push(_delta,direction)
 		STATE.HIT_STUN:
 			hit_stun_counter-= 1
-			print(hit_stun_counter)
+
 			if hit_stun_counter <= 0:
 				switch_state( STATE.IDLE)
 			reduce_velocity()
@@ -119,7 +119,7 @@ func switch_state(_state:STATE) -> void:
 	animation_tree["parameters/TimeScale/scale"] = time_scale
 	animation_tree["parameters/StateMachine/playback"].travel(animation)
 	current_state =  _state
-	print(animation, " ", _state)
+
 
 func start_idle_variation_animation() -> void:
 	if current_state == STATE.IDLE:
@@ -252,6 +252,10 @@ func get_hit(source:HitBox):
 	GlobalSoundManager.increase_intensity(0.5)
 	hit_stun_counter = source.hit_stun
 	switch_state( STATE.HIT_STUN)
+	Engine.time_scale = 0.1
+	var timer =  get_tree().create_timer(0.02)
+	await timer.timeout
+	Engine.time_scale = 1.0
 
 
 func die() -> void:

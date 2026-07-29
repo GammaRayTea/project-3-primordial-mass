@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bxc14y6cn37vn"]
 
 [ext_resource type="Script" uid="uid://dccjfkf16ks5n" path="res://game/items/currency/currency_drop/currency_drop.gd" id="1_ulwgc"]
-[ext_resource type="Shader" uid="uid://cf1neow66gyr1" path="res://game/items/Shader/outline_shader.gdshader" id="2_5svqk"]
 [ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/items/currency/goo/goo.png" id="3_o8x5x"]
 [ext_resource type="Script" uid="uid://byvyg00hv12vc" path="res://game/items/currency/currency_drop/apply_shader.gd" id="4_fykas"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="5_spiiy"]
@@ -10,17 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://b0416mfltmmr0" path="res://assets/sound/general_sfx/basic/collect_2.wav" id="8_iq80n"]
 [ext_resource type="AudioStream" uid="uid://dc8o8f8v824on" path="res://assets/sound/general_sfx/basic/collect_3.wav" id="9_motpm"]
 [ext_resource type="AudioStream" uid="uid://dektrn8vklvac" path="res://assets/sound/general_sfx/basic/collect_4.wav" id="10_m47nt"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ej25"]
-render_priority = 0
-shader = ExtResource("2_5svqk")
-shader_parameter/enabled = true
-shader_parameter/sprite_texture = ExtResource("3_o8x5x")
-shader_parameter/billboard = true
-shader_parameter/color = Color(11, 11, 25, 0.1)
-shader_parameter/line_thickness = 1.0
-shader_parameter/rings = 2.0
-shader_parameter/self_glow = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wvjwh"]
 radius = 0.16495846
@@ -107,7 +95,6 @@ anim_player = NodePath("AnimationPlayer")
 sound_manager = NodePath("SoundEffectManager")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1092540364]
-material_override = SubResource("ShaderMaterial_5ej25")
 billboard = 2
 shaded = true
 texture_filter = 0

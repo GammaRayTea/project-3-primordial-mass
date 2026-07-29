@@ -2,6 +2,10 @@ class_name CurrencyDrop extends DropContainer
 
 
 
+func _ready() -> void:
+	#sprite.material_override =sprite.material_overlay.duplicate()
+	super()
+	
 func hover_start() -> void:
 	RunManager.change_currency(item.type,item.value)
 	sound_manager._play(["PickUp"])

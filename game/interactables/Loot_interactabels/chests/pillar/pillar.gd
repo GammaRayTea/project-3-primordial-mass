@@ -41,13 +41,13 @@ func get_loot() -> Array[Dictionary]:
 	
 	for i in range(drop_count_goo):
 		loot.append({
-			"type": currency_type,
+			"type": GlobalEnum.CURRENCY.GOO,
 			"value": randi_range(min_value_goo, max_value_goo)
 		})
 	
 	for i in range(drop_count_coins):
 		loot.append({
-			"type": currency_type,
+			"type": GlobalEnum.CURRENCY.COINS,
 			"value": randi_range(min_value_coins, max_value_coins)
 		})
 	

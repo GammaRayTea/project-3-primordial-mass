@@ -76,11 +76,12 @@ states/leyla_run/position = Vector2(557, 262)
 states/leyla_walk/node = SubResource("AnimationNodeAnimation_vshn3")
 states/leyla_walk/position = Vector2(395, 262)
 transitions = ["Start", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_q04we"), "leyla_idle", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_8jog3"), "leyla_walk", "leyla_run", SubResource("AnimationNodeStateMachineTransition_tr7te"), "leyla_idle", "leyla_idle_var", SubResource("AnimationNodeStateMachineTransition_3vkea"), "leyla_idle_var", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_kvwkn"), "leyla_walk", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_hxa5m"), "leyla_idle", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_0k81q"), "leyla_run", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_vw4qa"), "leyla_idle_var", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_7j02c"), "leyla_idle_var", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_my75e"), "leyla_flinch", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_07ahx"), "leyla_walk", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_mn7ul"), "leyla_run", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_amxh6"), "leyla_run", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_vshn3")]
+graph_offset = Vector2(-8, 43)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_07ahx"]
 
 [resource]
-graph_offset = Vector2(-608.91315, -39.077408)
+graph_offset = Vector2(-255.38742, -21.625084)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_07ahx")
 nodes/TimeScale/position = Vector2(80, 100)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_my75e")

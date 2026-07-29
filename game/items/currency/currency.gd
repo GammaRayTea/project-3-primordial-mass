@@ -2,12 +2,15 @@
 class_name Currency extends Item
 
 
-@export var type:GlobalEnum.CURRENCY
+@export var type:GlobalEnum.CURRENCY:
+	set(value):
+		type = value
+		icon = load(ItemAssets.currency_icons[value])
+
+
 @export var value:int
 
-func _init() -> void:
-	icon = load(ItemAssets.currency_icons[type])
-	
+
 	
 static func make_random(_min_value:int, max_value:int) -> Currency:
 	var new_item = Currency.new()

@@ -7,5 +7,8 @@
 @export var sound_manager:SoundEffectManager
 
 func _ready() -> void:
-	sprite.texture = item.icon
+	update_texture()
 	anim_player.play("hover")
+
+func update_texture() -> void:
+	sprite.texture = item.icon
