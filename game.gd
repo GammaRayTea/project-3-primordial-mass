@@ -30,6 +30,7 @@ func _ready() -> void:
 	#ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(save)
 	ui_controller.main_menu.start_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
+	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(RunManager.save_game)
 	
 	ui_controller.pause_screen.continue_button.pressed.connect(unpause)
 	
@@ -42,7 +43,8 @@ func _ready() -> void:
 	
 func to_title() -> void:
 	#GlobalSoundManager.stop_ambience()
-	#GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+
 	clear_game()
 
 func start_run():
@@ -113,6 +115,7 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.UPGRADE_MENU:
 			if previous == STATE.MAIN_MENU:
 				GameSaveManager.load_save()
+				ui_controller.upgrade_menu.retrieve_saved_data()
 			to_upgrade_menu()
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:

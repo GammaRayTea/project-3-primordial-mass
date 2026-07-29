@@ -18,13 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://clc4utnnqtjv7" path="res://assets/enemies/globber/animations/Globber2RightHand.png" id="7_o8dyd"]
 [ext_resource type="Script" uid="uid://yc0ay2h3j4ck" path="res://game/behaviours/state_machine/states/await_animation_state.gd" id="8_3ai4x"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
-[ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency.gd" id="8_l7o33"]
-[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free.gd" id="9_45htx"]
+[ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency_event.gd" id="8_l7o33"]
+[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free_event.gd" id="9_45htx"]
 [ext_resource type="Script" uid="uid://dbl8jqdiqljv7" path="res://game/behaviours/state_machine/states/chase_player_state.gd" id="9_dvtg5"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
-[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="9_ydwe4"]
+[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/currency_drop.tscn" id="9_ydwe4"]
 [ext_resource type="Texture2D" uid="uid://cyridy5dd1i67" path="res://assets/enemies/globber/animations/Globber2Head.png" id="10_2odp2"]
-[ext_resource type="Script" uid="uid://3uiian2ekh1" path="res://game/behaviours/events/play_animation.gd" id="14_g0og0"]
+[ext_resource type="Script" uid="uid://3uiian2ekh1" path="res://game/behaviours/events/play_animation_event.gd" id="14_g0og0"]
 [ext_resource type="Texture2D" uid="uid://dv6igb3os748t" path="res://assets/enemies/globber/animations/GlobberSprite2DeathAnimationpuddleSheet.png" id="14_o8dyd"]
 [ext_resource type="Animation" uid="uid://i48k115031a8" path="res://assets/enemies/globber/animations/globber_death.res" id="15_ckhdf"]
 [ext_resource type="PackedScene" uid="uid://bl53b1u4n37y7" path="res://game/enemies/vision_cone/vision_cone.tscn" id="18_2si2q"]
@@ -507,9 +507,9 @@ metadata/_custom_type_script = "uid://cxmt2fl7nvfju"
 [node name="DropEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="1" unique_id=730886903 node_paths=PackedStringArray("source")]
 script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
-source = NodePath("../..")
 max_value = 10
 type = 1
+source = NodePath("../..")
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
 [node name="PlayAnimationEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="2" unique_id=528173217 node_paths=PackedStringArray("animation_tree")]

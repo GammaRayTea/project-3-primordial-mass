@@ -36,7 +36,7 @@ var current_upgrade_level:int = 0:
 @export_category("Components")
 @export var slot_scene:PackedScene
 @export var slot_container:HBoxContainer
-@export var plus_button:Button
+@export var plus_button:TextureButton
 @export var name_label:RichTextLabel
 @export var cost_label:RichTextLabel
 @export var description_label:RichTextLabel
@@ -44,23 +44,25 @@ var current_upgrade_level:int = 0:
 
 var slots:Array[Slot] = []
 
+func retrieve_saved_data() -> void:
+	current_upgrade_level = GameSaveManager.save_game.player_stat_levels[upgrade_stat]
+
 func _ready() -> void:
 	update_data()
 	update_slot_amount()
 	plus_button.pressed.connect(on_button_press.bind(true))
-	if !Engine.is_editor_hint():
-		current_upgrade_level = RunManager.player_stat_levels[upgrade_stat]
+
 	
 
 func update_slot_amount() -> void:
 
 	if slots.size() > max_level:
-		for i in slots.size()-max_level:
-			slots[slots.size()-1-i].queue_free()
+		for i in slots.size() - max_level:
+			slots[slots.size() - 1 - i].queue_free()
 	slots.resize(max_level)
 	for slot in max_level:
 		if !slots[slot]:
-			slots[slot] = load(slot_scene.resource_path).instantiate()
+			slots[slot] = slot_scene.instantiate()
 			slot_container.add_child(slots[slot])
 			slots[slot].set_owner(slot_container)
 

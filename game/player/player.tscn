@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="3_a4w0n"]
 [ext_resource type="Texture2D" uid="uid://2etyiyviocqx" path="res://assets/player/animations/LeylaHead.png" id="3_epc1c"]
 [ext_resource type="Texture2D" uid="uid://duybdblw0hali" path="res://assets/player/animations/LeylaPonytail1.png" id="4_kjljb"]
-[ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/player/hud_overlay.tscn" id="5_5fytw"]
 [ext_resource type="Texture2D" uid="uid://dqacvixngy0o4" path="res://assets/player/animations/LeylaPonytail2.png" id="5_brh81"]
 [ext_resource type="Texture2D" uid="uid://df38pnxrkstb5" path="res://assets/player/animations/LeylaPonytail3.png" id="6_ib3u0"]
 [ext_resource type="Texture2D" uid="uid://dp77b3buv42sc" path="res://assets/player/animations/LeylaPonytail4.png" id="7_bp242"]
@@ -14,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://ca2desep1uh0u" path="res://assets/player/animations/LeylaPonytail5.png" id="8_y6drd"]
 [ext_resource type="Texture2D" uid="uid://cs0eugxk5485e" path="res://assets/player/animations/LeylaLeftArm.png" id="9_y6drd"]
 [ext_resource type="Texture2D" uid="uid://ckyivx16byu3a" path="res://assets/player/animations/LeylaLeftHand.png" id="11_22cju"]
-[ext_resource type="Texture2D" uid="uid://cce5meexmc10" path="res://assets/player/animations/LeylaLeftForeArm.png" id="11_w24bm"]
+[ext_resource type="Texture2D" uid="uid://cce5meexmc10" path="res://assets/player/animations/LeylaLeftForearm.png" id="11_w24bm"]
 [ext_resource type="Texture2D" uid="uid://o2g30inle3kk" path="res://assets/player/animations/LeylaRightArm.png" id="12_wrff0"]
-[ext_resource type="Texture2D" uid="uid://u1ivtheeewgn" path="res://assets/player/animations/LeylaRightForeArm.png" id="14_22cju"]
+[ext_resource type="Texture2D" uid="uid://u1ivtheeewgn" path="res://assets/player/animations/LeylaRightForearm.png" id="14_22cju"]
 [ext_resource type="Texture2D" uid="uid://bmuvxaee5eueu" path="res://assets/player/animations/LeylaRightHand.png" id="14_uv21l"]
 [ext_resource type="Texture2D" uid="uid://cr30s7l6w5e12" path="res://assets/player/animations/LeylaHips.png" id="15_qxyrc"]
 [ext_resource type="Texture2D" uid="uid://cljkocto7w0d" path="res://assets/player/animations/LeylaLeftLeg.png" id="16_cy4e0"]
@@ -45,19 +44,21 @@ radius = 0.1
 height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
-radius = 0.4
+radius = 0.13427734
+height = 1.133606
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8soms"]
-size = Vector3(0.5, 1, 0.2791748)
+size = Vector3(0.5, 1.324707, 0.2791748)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
-size = Vector3(0.5, 1, 0.45483398)
+size = Vector3(0.5, 1.3132324, 0.45483398)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
-size = Vector3(1, 1, 1.8989258)
+size = Vector3(0.94091797, 1.2299805, 1.3635254)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
 radius = 0.3227539
+height = 1.2138672
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.33740234
@@ -2156,7 +2157,7 @@ _data = {
 &"RESET": SubResource("Animation_qfwia")
 }
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "hud", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "sprint_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 2.0
 MAX_RUNNING_SPEED = 4.0
@@ -2179,7 +2180,7 @@ visible = false
 script = ExtResource("2_4ste8")
 bounding_box = Vector2(1.5, 1)
 return_weight = 0.03
-move_weight = 0.07
+move_weight = 0.03
 height = 2.0
 ray_cast = NodePath("../CameraRayCast")
 visualizer = NodePath("../TargetVisualizer")
@@ -2193,14 +2194,14 @@ visible = false
 mesh = SubResource("SphereMesh_anr75")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17654419, 0)
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=512528227]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.6763976, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.84691143, 0)
 
 [node name="Head" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=46428984]
 transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, 0.97, 0)
@@ -2311,44 +2312,41 @@ texture_filter = 0
 texture = ExtResource("19_p3uph")
 
 [node name="PushStartBox" type="Area3D" parent="RotationPivot" unique_id=2123063969]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushStartBox" unique_id=838779612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6065911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16235352, -0.6065911)
 shape = SubResource("BoxShape3D_8soms")
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
 [node name="PushBox" type="Area3D" parent="RotationPivot" unique_id=200545129]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushBox" unique_id=759802779]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6944207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15661621, -0.6944207)
 shape = SubResource("BoxShape3D_kpvxy")
 disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
 [node name="InteractionButtonBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
-visible = false
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5050341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029541016, -0.114990234, -0.2373339)
 shape = SubResource("BoxShape3D_udmuc")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
 [node name="DropPickupBox" type="Area3D" parent="RotationPivot" unique_id=1869776768]
-visible = false
 collision_layer = 64
-collision_mask = 0
+collision_mask = 64
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06515837, -0.274588, -0.024813399)
 shape = SubResource("CapsuleShape3D_anr75")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
