@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jw51yopv3fkg"
-path="res://.godot/imported/upgrade_button_max.png-1fd8e44ddc6797d1ac3c0c71272f133d.ctex"
+path="res://.godot/imported/upgrade_button_max.png-dbb5b30716d72faf1cfea5e212eb06bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Themes/ui_elements/upgrade_button_max.png"
-dest_files=["res://.godot/imported/upgrade_button_max.png-1fd8e44ddc6797d1ac3c0c71272f133d.ctex"]
+source_file="res://assets/themes/ui_elements/upgrade_button_max.png"
+dest_files=["res://.godot/imported/upgrade_button_max.png-dbb5b30716d72faf1cfea5e212eb06bd.ctex"]
 
 [params]
 
