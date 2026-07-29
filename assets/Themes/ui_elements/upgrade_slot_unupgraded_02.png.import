@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3q1vr55eub6r"
-path="res://.godot/imported/upgrade_slot_unupgraded_02.png-4efc72b70d48836939f3d5b287a65970.ctex"
+path="res://.godot/imported/upgrade_slot_unupgraded_02.png-2d53c47a900d1aa9a4eabe8977b10a5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/themes/ui_elements/upgrade_slot_unupgraded_02.png"
-dest_files=["res://.godot/imported/upgrade_slot_unupgraded_02.png-4efc72b70d48836939f3d5b287a65970.ctex"]
+source_file="res://assets/Themes/ui_elements/upgrade_slot_unupgraded_02.png"
+dest_files=["res://.godot/imported/upgrade_slot_unupgraded_02.png-2d53c47a900d1aa9a4eabe8977b10a5a.ctex"]
 
 [params]
 
