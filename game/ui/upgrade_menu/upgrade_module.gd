@@ -23,7 +23,7 @@ var current_upgrade_level:int = 0:
 		if current_upgrade_level < max_level:
 			current_upgrade_level = _value
 			for i in current_upgrade_level:
-				slots[_value-1].value = true
+				slots[i].value = true
 
 		
 		
