@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://duokir7aj41i1"]
 
-[ext_resource type="Theme" path="res://assets/themes/default.tres" id="1_vanuw"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_vanuw"]
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
-[ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="4_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://bhtw8j4os52tv" path="res://assets/Themes/ui_elements/upgrade_icon_gain_increase.png" id="4_45m71"]
 [ext_resource type="Texture2D" uid="uid://dwkpur8bojh0h" path="res://assets/themes/ui_elements/upgrade_button_03.png" id="5_vject"]
 [ext_resource type="Texture2D" uid="uid://bhi4fsoj10yr7" path="res://assets/themes/ui_elements/upgrade_button_click_03.png" id="6_45m71"]
 [ext_resource type="Texture2D" uid="uid://dhxanof2fm14m" path="res://assets/themes/ui_elements/upgrade_button_hover_03.png" id="7_t8u42"]
 [ext_resource type="Texture2D" uid="uid://dfgx85ib3kj78" path="res://assets/themes/ui_elements/upgrade_button_max_03.png" id="8_vject"]
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="9_t8u42"]
 
 [node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label", "upgrade_icon")]
 oversampling_with_scale = 2
@@ -50,7 +51,7 @@ offset_bottom = 24.0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control/UpgradeInfo" unique_id=1107695928]
 layout_mode = 2
-texture = ExtResource("4_s5jsc")
+texture = ExtResource("4_45m71")
 expand_mode = 3
 
 [node name="ItemNameLabel" type="RichTextLabel" parent="VBoxContainer/Control/UpgradeInfo" unique_id=983414388]
@@ -124,3 +125,20 @@ theme_override_font_sizes/normal_font_size = 14
 text = "Increases stability gained"
 fit_content = true
 scroll_active = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=301934923]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_t8u42")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
