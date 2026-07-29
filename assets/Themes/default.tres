@@ -1,6 +1,16 @@
 [gd_resource type="Theme" format=3 uid="uid://bmdf4c0niky3d"]
 
-[ext_resource type="FontFile" uid="uid://g8ydbi7g6o7b" path="res://assets/themes/fonts/Shadows_Into_Light/ShadowsIntoLight-Regular.ttf" id="1_x0tin"]
+[ext_resource type="Texture2D" uid="uid://f6w8yufmicuu" path="res://assets/Themes/ui_elements/bg.png" id="1_ewnwd"]
+[ext_resource type="FontFile" uid="uid://g8ydbi7g6o7b" path="res://assets/Themes/fonts/Shadows_Into_Light/ShadowsIntoLight-Regular.ttf" id="1_x0tin"]
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/Themes/ui_elements/bg_dark.png" id="2_dw7e0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tdl64"]
+texture = ExtResource("1_ewnwd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hae4w"]
+texture = ExtResource("2_dw7e0")
 
 [resource]
 default_font = ExtResource("1_x0tin")
+/styles/Hover = SubResource("StyleBoxTexture_tdl64")
+/styles/Normal = SubResource("StyleBoxTexture_hae4w")
