@@ -18,10 +18,15 @@ class_name Player extends Entity
 @export var camera:PlayerCam
 @export var sprint_timer:Timer
 
+var hit_stun_timer:float = 0.0
+
 var current_sprint_value:float = 0
 var can_sprint:bool = true
-enum STATE {IDLE, WALKING, RUNNING, PUSHING}
-var current_state = STATE.IDLE
+enum STATE {IDLE, WALKING, RUNNING, PUSHING, HIT_STUN}
+var current_state = STATE.IDLE:
+	set(state):
+		current_state = state
+		print("state changed to " , STATE.keys()[state])
 
 var push_target: RigidInteractable
 var push_distance:float
@@ -74,7 +79,14 @@ func _physics_process(_delta: float) -> void:
 			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, PUSH_ACCELERATION)
 			push(_delta,direction)
-			
+		STATE.HIT_STUN:
+			hit_stun_timer-= 1
+			print(hit_stun_timer)
+			if hit_stun_timer <= 0:
+				current_state = STATE.IDLE
+			reduce_velocity()
+			move_and_slide()
+			apply_gravity(_delta)
 #region movement
 #region sprint
 func handle_sprint() -> void:
@@ -120,12 +132,19 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 		
 		RunManager.decrease_stability(1)
 	else:
-		velocity.x = move_toward(velocity.x, 0, TRACTION)
-		velocity.z = move_toward(velocity.z, 0,TRACTION)
-		current_state = STATE.IDLE
-	
+		reduce_velocity()
+		if velocity.x == 0 and velocity.z == 0:
+			current_state = STATE.IDLE
 	move_and_slide()
 #endregion
+
+
+func reduce_velocity() -> void:
+		velocity.x = move_toward(velocity.x, 0, TRACTION)
+		velocity.z = move_toward(velocity.z, 0,TRACTION)
+		
+	
+
 func apply_gravity(_delta:float) -> void:
 	if not is_on_floor() and do_gravity:
 		velocity += get_gravity() * _delta
@@ -189,7 +208,8 @@ func get_hit(source:HitBox):
 	camera.cam_shake()
 	RunManager.decrease_stability(source.damage)
 	GlobalSoundManager.increase_intensity(0.5)
-	
+	hit_stun_timer = source.hit_stun
+	current_state = STATE.HIT_STUN
 
 
 func die() -> void:
