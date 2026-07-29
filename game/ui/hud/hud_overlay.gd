@@ -1,7 +1,7 @@
 class_name HUD extends Control
 
 
-@export var activate_portal_hint:Label
+@export var hint:Label
 
 
 func _ready() -> void:
@@ -10,5 +10,11 @@ func _ready() -> void:
 func set_item(_item:Item) -> void:
 	%ItemPreview.set_item(_item)
 
-func set_active_portal_hint_vis(_value:bool) -> void:
-	activate_portal_hint.visible = _value
+
+
+func show_hint(_text:String) -> void:
+	hint.text = _text
+	hint.show()
+
+func hide_hint() -> void:
+	hint.hide()

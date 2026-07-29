@@ -21,7 +21,7 @@ func deactivate(_source:Node3D) -> void:
 	pass
 	
 func hover_start()-> void:
-	ui.hud.set_active_portal_hint_vis(true)
+	ui.hud.show_hint("Press E to leave realm")
 
 func hover_end()-> void:
-	ui.hud.set_active_portal_hint_vis(false)
+	ui.hud.hide_hint()

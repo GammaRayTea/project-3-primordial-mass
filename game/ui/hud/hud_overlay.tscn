@@ -13,7 +13,7 @@ shader_parameter/alpha = 0.42
 shader_parameter/inner_radius = 0.12
 shader_parameter/outer_radius = 0.545
 
-[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("activate_portal_hint")]
+[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("hint")]
 oversampling_with_scale = 2
 layout_mode = 3
 anchors_preset = 15
@@ -24,7 +24,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_2tv8o")
 script = ExtResource("2_cofoi")
-activate_portal_hint = NodePath("ActivatePortalHint")
+hint = NodePath("Hint")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
@@ -90,7 +90,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ActivatePortalHint" type="Label" parent="." unique_id=1253020850]
+[node name="Hint" type="Label" parent="." unique_id=1253020850]
 visible = false
 texture_filter = 1
 layout_mode = 1
