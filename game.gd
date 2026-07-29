@@ -7,6 +7,7 @@ class_name Game extends Node3D
 @export var default_env:Environment
 @export var test_env:Environment
 @export var dungeon_gen:DungeonGenerator
+@export var escape_sequence:EscapeSequence
 @export var dark:bool = true
 
 @export var player:Player
@@ -41,14 +42,11 @@ func _ready() -> void:
 		node.rng = global_rng
 	switch_to_state(STATE.MAIN_MENU)
 	
-func to_title() -> void:
-	#GlobalSoundManager.stop_ambience()
-	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
-
-	clear_game()
 
 func start_run():
 	#start ambience
+	ui_controller.hud.set_escape_effect(false)
+	ui_controller.hud.play_vignette_effect("RESET")
 	GlobalSoundManager.fade_out_music(1.5)
 	GlobalSoundManager.start_ambience()
 
@@ -86,14 +84,35 @@ func start_run():
 	RunManager.start_run()
 
 
+func start_escape_sequence() -> void:
+	ui_controller.hud.set_escape_effect(true)
+	escape_sequence.start(dungeon_gen.locked_cells)
+	ui_controller.sound_manager._play(["EscapeStart"])
+	GlobalSoundManager.ambience_player.escaping = true
+	GlobalSoundManager.increase_intensity(1)
+	player.camera.cam_shake(2)
+
 func end_run() -> void:
 	RunManager.leave_run()
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)
 
-func to_upgrade_menu() -> void:
-	#GlobalSoundManager.stop_ambience()
+
+func die() -> void:
+	RunManager.lose_progress()
+	clear_game()
+	switch_to_state(STATE.UPGRADE_MENU)
+
+func to_title() -> void:
+	GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+
+	clear_game()
+
+func to_upgrade_menu() -> void:
+	GlobalSoundManager.stop_ambience()
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	clear_game()
 
 func pause() -> void:
 	get_tree().paused = true
@@ -120,7 +139,6 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:
 				start_run()
-
 		STATE.PAUSED:
 			pause()
 
@@ -138,3 +156,4 @@ func clear_game() -> void:
 	for child in objects.get_children():
 		child.queue_free()
 	dungeon_gen.clear_dungeon()
+	escape_sequence.clear()

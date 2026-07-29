@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _apply_material_override():
 	var shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://game/items/Shader/outline_shader.gdshader")
+	shader_material.shader = load("res://game/items/Shader/outline_shader.gdshader").duplicate()
 	material_override = shader_material
 
 

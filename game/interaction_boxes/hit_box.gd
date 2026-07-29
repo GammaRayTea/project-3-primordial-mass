@@ -4,6 +4,7 @@ class_name HitBox extends TriggerBox
 
 @export var damage:= 10.0
 @export var knockback:= 2.0
+@export var hit_stun := 25
 
 func _init() -> void:
 	for c in get_children():

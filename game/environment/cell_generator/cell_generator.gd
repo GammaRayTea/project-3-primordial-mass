@@ -263,10 +263,15 @@ func clear_dungeon() -> void:
 	generated_cells.clear()
 	locked_cells.clear()
 	generated_rooms.clear()
+	generated_room_mesh.all(delete_mesh)
 	generated_room_mesh.clear()
-	
 	current_position = Vector2(0,0)
 	current_cell_tier = 0
 	
 	outer_map.clear_map()
 	generated_map.clear_map()
+
+func delete_mesh(_mesh:Array) -> bool:
+	
+	_mesh[1].queue_free()
+	return true

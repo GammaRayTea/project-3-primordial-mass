@@ -13,6 +13,7 @@
 
 [node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "state_machine", "rotation_pivot")]
 script = ExtResource("1_p4vjo")
+active = null
 animation_tree = NodePath("AnimationTree")
 state_machine = NodePath("StateMachine")
 rotation_pivot = NodePath("RotationPivot")
@@ -32,6 +33,7 @@ metadata/_custom_type_script = "uid://d10lffcbhtmrp"
 root_node = NodePath("../AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=934466786]
+process_mode = 3
 root_node = NodePath(".")
 tree_root = SubResource("AnimationRootNode_kpvxy")
 anim_player = NodePath("../AnimationPlayer")

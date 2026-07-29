@@ -13,6 +13,8 @@ var current_density:float = 0.3:
 var min_intensity:float = 0.0
 var max_intensity:float = 1.0
 
+var playing:bool = false
+
 var current_intensity:float = 0.0:
 	set(value):
 		current_intensity = clamp(value, 0.0, 1.0)
@@ -32,23 +34,32 @@ var current_intensity:float = 0.0:
 @export var medium_curve:Curve
 @export var high_curve:Curve
 
-
+var escaping:bool = false:
+	set(value):
+		escaping = value
+		if escaping:
+			drone_player.volume_db+=2.0
 
 var players:Array[AudioStreamPlayer2D]
 
-
-func _ready():
+func _init() -> void:
 	GlobalSoundManager.ambience_player = self
 
 
 
+
 func start() -> void:
+	current_density = 0
+	current_intensity = 0
+	playing = true
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	drone_player.volume_db = -60
 	drone_player.play()
 	GlobalSoundManager.fade_player(drone_player, 0.5, 0.0)
 
 func stop() ->void:
+	escaping = false
+	playing = false
 	process_mode = Node.PROCESS_MODE_DISABLED
 	while players.size() > 0:
 		delete_player(players[players.size()-1])
@@ -68,10 +79,11 @@ func _physics_process(_delta) -> void:
 			play_sample(INTENSITY.MEDIUM)
 		if randf() < high_curve.sample(current_intensity) * current_density:
 			play_sample(INTENSITY.HIGH)
-		current_intensity -= 0.001
-		current_density -= 0.001
-		
-		
+		if !escaping:
+			current_intensity -= 0.005
+			current_density -= 0.005
+	
+
 
 func play_sample(_intensity:INTENSITY) ->void:
 	var player = stream_player_2d_template.duplicate()

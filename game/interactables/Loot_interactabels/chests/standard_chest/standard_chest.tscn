@@ -13,6 +13,8 @@ size = Vector3(0.8715088, 0.8, 1.0998535)
 
 [node name="Chest" type="Node3D" unique_id=1493347121]
 script = ExtResource("1_2b8yh")
+min_drops_coins = 3
+max_drops_coins = 5
 currency_drop_scene = ExtResource("2_b8rt4")
 
 [node name="Visuals" type="Node3D" parent="." unique_id=735256497]

@@ -38,7 +38,10 @@ func _spawn_loot() -> void:
 		var instance := currency_drop_scene.instantiate()
 		instance.item = Currency.new()
 		(instance.item as Currency).type = drop.type
+		if drop.type == GlobalEnum.CURRENCY.GOO:
+			pass
 		(instance.item as Currency).value = drop.value
+		instance.update_texture()
 		get_parent().add_child(instance)
 		instance.global_position = global_position + Vector3(
 			randf_range(drop_scatter_radius_min, drop_scatter_radius_max),

@@ -1,0 +1,89 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://c831vj66lf82r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_my75e"]
+animation = &"Leyla_Flinch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_07ahx"]
+animation = &"Leyla_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amxh6"]
+animation = &"Leyla_Idlevar"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mn7ul"]
+animation = &"Leyla_Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vshn3"]
+animation = &"Leyla_Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q04we"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8jog3"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tr7te"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3vkea"]
+xfade_time = 0.3
+break_loop_at_end = true
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvwkn"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hxa5m"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0k81q"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vw4qa"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7j02c"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_my75e"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_07ahx"]
+xfade_time = 0.5
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mn7ul"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_amxh6"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vshn3"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_my75e"]
+states/Start/position = Vector2(227, 84)
+states/leyla_flinch/node = SubResource("AnimationNodeAnimation_my75e")
+states/leyla_flinch/position = Vector2(722, 155)
+states/leyla_idle/node = SubResource("AnimationNodeAnimation_07ahx")
+states/leyla_idle/position = Vector2(395, 28)
+states/leyla_idle_var/node = SubResource("AnimationNodeAnimation_amxh6")
+states/leyla_idle_var/position = Vector2(557, 28)
+states/leyla_run/node = SubResource("AnimationNodeAnimation_mn7ul")
+states/leyla_run/position = Vector2(557, 262)
+states/leyla_walk/node = SubResource("AnimationNodeAnimation_vshn3")
+states/leyla_walk/position = Vector2(395, 262)
+transitions = ["Start", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_q04we"), "leyla_idle", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_8jog3"), "leyla_walk", "leyla_run", SubResource("AnimationNodeStateMachineTransition_tr7te"), "leyla_idle", "leyla_idle_var", SubResource("AnimationNodeStateMachineTransition_3vkea"), "leyla_idle_var", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_kvwkn"), "leyla_walk", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_hxa5m"), "leyla_idle", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_0k81q"), "leyla_run", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_vw4qa"), "leyla_idle_var", "leyla_flinch", SubResource("AnimationNodeStateMachineTransition_7j02c"), "leyla_idle_var", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_my75e"), "leyla_flinch", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_07ahx"), "leyla_walk", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_mn7ul"), "leyla_run", "leyla_walk", SubResource("AnimationNodeStateMachineTransition_amxh6"), "leyla_run", "leyla_idle", SubResource("AnimationNodeStateMachineTransition_vshn3")]
+graph_offset = Vector2(-8, 43)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_07ahx"]
+
+[resource]
+graph_offset = Vector2(-255.38742, -21.625084)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_07ahx")
+nodes/TimeScale/position = Vector2(80, 100)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_my75e")
+nodes/StateMachine/position = Vector2(-200, 140)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"StateMachine"]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://nr6yjohwcrid" path="res://game/items/pickups/item_drop.gd" id="1_0lvmp"]
 [ext_resource type="Script" uid="uid://pu453h7dgaif" path="res://game/items/base_item.gd" id="2_athrp"]
-[ext_resource type="Shader" uid="uid://cf1neow66gyr1" path="res://game/items/Shader/outline_shader.gdshader" id="2_f27do"]
 [ext_resource type="Texture2D" uid="uid://bbrkpjkudmro6" path="res://assets/interactables/Loot/Keys/pearl.png" id="2_s3lf6"]
 [ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/items/currency/goo/goo.png" id="3_pcf5b"]
 [ext_resource type="Script" uid="uid://byvyg00hv12vc" path="res://game/items/currency/currency_drop/apply_shader.gd" id="4_25hcr"]
@@ -15,17 +14,6 @@ script = ExtResource("2_athrp")
 name = "Pearl"
 icon = ExtResource("2_s3lf6")
 metadata/_custom_type_script = "uid://pu453h7dgaif"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ej25"]
-render_priority = 0
-shader = ExtResource("2_f27do")
-shader_parameter/enabled = true
-shader_parameter/sprite_texture = ExtResource("3_pcf5b")
-shader_parameter/billboard = true
-shader_parameter/color = Color(11, 11, 25, 0.1)
-shader_parameter/line_thickness = 1.0
-shader_parameter/rings = 2.0
-shader_parameter/self_glow = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wvjwh"]
 radius = 0.16495846
@@ -107,7 +95,6 @@ anim_player = NodePath("AnimationPlayer")
 sound_manager = NodePath("SoundEffectManager")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1092540364]
-material_override = SubResource("ShaderMaterial_5ej25")
 billboard = 2
 shaded = true
 texture_filter = 0
