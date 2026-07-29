@@ -100,7 +100,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 theme_override_constants/separation = 4
 
-[node name="PlusButton" type="TextureButton" parent="VBoxContainer/ButtonContainer" unique_id=1624114475]
+[node name="PlusButton" type="TextureButton" parent="VBoxContainer/ButtonContainer" unique_id=1624114475 groups=["UpgradeButton"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

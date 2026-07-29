@@ -18,6 +18,8 @@ var current_cost:int
 		update_data()
 
 
+signal upgrade_successful
+
 var current_upgrade_level:int = 0:
 	set(_value):
 		if current_upgrade_level < max_level:
@@ -82,4 +84,7 @@ func on_button_press(_increase:bool) -> void:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
 			RunManager.change_currency(upgrade_currency, -current_cost)
 			current_upgrade_level += 1
+			upgrade_successful.emit()
 			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
+			if current_upgrade_level == max_level:
+				plus_button.disabled = true

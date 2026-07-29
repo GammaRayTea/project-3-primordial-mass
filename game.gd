@@ -23,21 +23,33 @@ var global_rng:RandomNumberGenerator = RandomNumberGenerator.new()
 
 var current_state:Game.STATE
 var paused:bool = false
-enum STATE {MAIN_MENU, UPGRADE_MENU, IN_GAME, PAUSED}
+enum STATE {MAIN_MENU, UPGRADE_MENU, IN_GAME, PAUSED, DIED}
 
 
 func _ready() -> void:
 	ui_controller.upgrade_menu.start_run_button.pressed.connect(switch_to_state.bind(STATE.IN_GAME))
 	#ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(save)
 	ui_controller.main_menu.start_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
+	
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(RunManager.save_game)
 	
 	ui_controller.pause_screen.continue_button.pressed.connect(unpause)
-	
+	ui_controller.pause_screen.continue_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
+
 	ui_controller.pause_screen.exit_button.pressed.connect(unpause)
 	ui_controller.pause_screen.exit_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
 	
+	ui_controller.death_screen.continue_button.pressed.connect(unpause)
+	ui_controller.death_screen.continue_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
+
+	ui_controller.death_screen.exit_button.pressed.connect(unpause)
+	ui_controller.death_screen.exit_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
+	
+
+
+
+
 	for node in get_tree().get_nodes_in_group("RNGUnifier"):
 		node.rng = global_rng
 	switch_to_state(STATE.MAIN_MENU)
@@ -101,7 +113,7 @@ func end_run() -> void:
 func die() -> void:
 	RunManager.lose_progress()
 	clear_game()
-	switch_to_state(STATE.UPGRADE_MENU)
+	switch_to_state(STATE.DIED)
 
 func to_title() -> void:
 	GlobalSoundManager.stop_ambience()
@@ -120,7 +132,7 @@ func pause() -> void:
 
 func unpause() -> void:
 	get_tree().paused = false
-	switch_to_state(STATE.IN_GAME)
+	
 
 
 func switch_to_state(_state:STATE) -> void:
@@ -140,6 +152,8 @@ func switch_to_state(_state:STATE) -> void:
 			if !previous == STATE.PAUSED:
 				start_run()
 		STATE.PAUSED:
+			pause()
+		STATE.DIED:
 			pause()
 
 

@@ -31,7 +31,7 @@ text = "PRIMORDIAL MASS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="." unique_id=1903112996]
+[node name="StartButton" type="Button" parent="." unique_id=1903112996 groups=["Button"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -58,7 +58,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.20551914, 0.07341867, 0.28173468, 1)
 
-[node name="ClearSaveButton" type="Button" parent="." unique_id=1452795649]
+[node name="ClearSaveButton" type="Button" parent="." unique_id=1452795649 groups=["Button"]]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

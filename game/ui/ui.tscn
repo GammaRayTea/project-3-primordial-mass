@@ -2,30 +2,28 @@
 
 [ext_resource type="Script" uid="uid://d0uqv8g5t4w3s" path="res://game/ui/ui_controller.gd" id="1_8573q"]
 [ext_resource type="PackedScene" uid="uid://buj68u071kmbs" path="res://game/ui/main_menu/main_menu.tscn" id="2_6fpg5"]
+[ext_resource type="PackedScene" uid="uid://ctym585pvvu3v" path="res://game/ui/death_screen/death_screen.tscn" id="2_vhpns"]
 [ext_resource type="PackedScene" uid="uid://c5y7sl6x7c0w3" path="res://game/ui/upgrade_menu/upgrade_menu.tscn" id="3_cshcc"]
 [ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/ui/hud/hud_overlay.tscn" id="4_eogtg"]
 [ext_resource type="PackedScene" uid="uid://1mhtbtiot2rb" path="res://game/ui/pause_screen/pause_screen.tscn" id="5_6fpg5"]
 [ext_resource type="PackedScene" uid="uid://5y1v8bn7cx7o" path="res://game/sound/ambience_player/ambience_player.tscn" id="5_8lmuw"]
-[ext_resource type="Texture2D" path="res://assets/themes/ui_elements/bar_complete.png" id="5_cshcc"]
+[ext_resource type="Texture2D" uid="uid://cfdjrho7tgmx2" path="res://assets/themes/ui_elements/bar_complete.png" id="5_cshcc"]
 [ext_resource type="Texture2D" uid="uid://dqa0vg0cd5cs8" path="res://assets/themes/ui_elements/bar_bg_01.png" id="5_n6aae"]
 [ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="6_n6aae"]
 [ext_resource type="Texture2D" uid="uid://b65syeubd67r1" path="res://assets/themes/ui_elements/bar_topper_04.png" id="6_vhpns"]
 [ext_resource type="AudioStream" uid="uid://dfx847h4thxgf" path="res://assets/sound/general_sfx/game_events/run_start.wav" id="7_vhpns"]
 [ext_resource type="AudioStream" uid="uid://dvceyisvpqphh" path="res://assets/sound/general_sfx/game_events/stability_depleted.wav" id="10_eogtg"]
+[ext_resource type="AudioStream" uid="uid://b8ru7b5h1jeux" path="res://assets/sound/general_sfx/menu/click.wav" id="14_p2jv8"]
+[ext_resource type="AudioStream" uid="uid://bjldqlqa154bj" path="res://assets/sound/general_sfx/menu/upgrade.wav" id="15_s7oao"]
 
-[sub_resource type="Gradient" id="Gradient_yepel"]
-colors = PackedColorArray(0, 0, 0, 1, 0.22201729, 0, 0.0033882183, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dg77c"]
-gradient = SubResource("Gradient_yepel")
-
-[node name="UI" type="CanvasLayer" unique_id=982157194 node_paths=PackedStringArray("main_menu", "hud", "upgrade_menu", "pause_screen", "sound_manager")]
+[node name="UI" type="CanvasLayer" unique_id=982157194 node_paths=PackedStringArray("main_menu", "hud", "upgrade_menu", "pause_screen", "death_screen", "sound_manager")]
 process_mode = 3
 script = ExtResource("1_8573q")
 main_menu = NodePath("MainMenu")
 hud = NodePath("Overlay")
 upgrade_menu = NodePath("UpgradeMenu")
 pause_screen = NodePath("PauseScreen")
+death_screen = NodePath("DeathScreen")
 sound_manager = NodePath("SoundEffectManager")
 
 [node name="MainMenu" parent="." unique_id=1891432706 instance=ExtResource("2_6fpg5")]
@@ -57,7 +55,11 @@ texture_under = ExtResource("5_n6aae")
 texture_over = ExtResource("6_vhpns")
 texture_progress = ExtResource("5_cshcc")
 
-[node name="PauseScreen" parent="." unique_id=234784416 instance=ExtResource("5_6fpg5")]
+[node name="PauseScreen" parent="." unique_id=653894896 instance=ExtResource("5_6fpg5")]
+visible = false
+
+[node name="DeathScreen" parent="." unique_id=234784416 instance=ExtResource("2_vhpns")]
+process_mode = 4
 visible = false
 
 [node name="AmbiencePlayer" parent="." unique_id=2024238858 instance=ExtResource("5_8lmuw")]
@@ -70,8 +72,19 @@ metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
 
 [node name="StartRun" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=4619969]
 stream = ExtResource("7_vhpns")
+volume_db = -5.0
 bus = &"UISoundEffects"
 
 [node name="EscapeStart" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1064475499]
 stream = ExtResource("10_eogtg")
 volume_db = -6.0
+
+[node name="Clicked" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1722763158]
+stream = ExtResource("14_p2jv8")
+volume_db = -10.0
+max_polyphony = 16
+
+[node name="Upgraded" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1145636445]
+stream = ExtResource("15_s7oao")
+volume_db = -9.1
+max_polyphony = 16
