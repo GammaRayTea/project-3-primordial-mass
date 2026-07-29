@@ -45,7 +45,7 @@ func load_save() -> bool:
 		save_game = ResourceLoader.load(SAVE_PATH, "", ResourceLoader.CACHE_MODE_IGNORE)
 		RunManager.saved_currency = save_game.currency
 		print("game loaded")
-		print(save_game)
+		print(save_game.player_stat_levels)
 		return true
 	else: 
 		print("No save data found")

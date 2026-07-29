@@ -64,11 +64,12 @@ func start_escape_event() -> void:
 	stable_phase = false
 
 func leave_run() -> void:
-	for key in run_currency.keys():
+	for key in run_currency:
 		saved_currency[key]+= run_currency[key]
+	save_game()
+
+func save_game() -> void:
 	GameSaveManager.save(saved_currency,player_stats, player_stat_levels)
-
-
 
 func increase_stability(_by_value:float) -> void:
 	if stable_phase:

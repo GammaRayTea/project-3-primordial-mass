@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" uid="uid://beq5bykhnp84k" path="res://game/interactables/Loot_interactabels/chests/standard_chest/standard_chest.gd" id="1_2b8yh"]
 [ext_resource type="PackedScene" uid="uid://ct2utkfn4fkv5" path="res://assets/interactables/Loot/chests/chest.blend" id="1_m45to"]
-[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="2_b8rt4"]
+[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/currency_drop.tscn" id="2_b8rt4"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_tpa3f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hae4w"]
 size = Vector3(1, 1.238, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbr86"]
-size = Vector3(1.8, 0.8, 2)
+size = Vector3(0.8715088, 0.8, 1.0998535)
 
 [node name="Chest" type="Node3D" unique_id=1493347121]
 script = ExtResource("1_2b8yh")
-drop_container_scene = ExtResource("2_b8rt4")
+currency_drop_scene = ExtResource("2_b8rt4")
 
 [node name="Visuals" type="Node3D" parent="." unique_id=735256497]
 
@@ -34,5 +34,5 @@ script = ExtResource("2_tpa3f")
 metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=444910470]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07693982, 0.40478152, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00048938394, 0.40478152, -0.0015869141)
 shape = SubResource("BoxShape3D_bbr86")

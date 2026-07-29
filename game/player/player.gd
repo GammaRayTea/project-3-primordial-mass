@@ -28,12 +28,18 @@ var push_distance:float
 
 var control_interaction_target:Interactable
 
-var held_item:Item = null
+var held_items:Dictionary[GlobalEnum.ITEM, int] = {
+	GlobalEnum.ITEM.PEARL:0
+}
 
 func start() -> void:
 	global_position = Vector3(8,1,8)
 	current_sprint_value = MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA]
-	held_item = null
+	
+
+	for key in held_items:
+		held_items.set(key, 0)
+	
 	current_state = STATE.IDLE
 	push_target = null
 	control_interaction_target = null
@@ -150,10 +156,10 @@ func on_push_box_exited(_area: Area3D) -> void:
 
 #region items
 func pick_up_item(_item:Item):
-	if held_item == null:
-		held_item = _item
-		print("picked up ",_item.name)
-		
+	print("picked up ",_item.name)
+	if _item.name == "Pearl":
+		held_items[GlobalEnum.ITEM.PEARL] += 1
+	
 
 func on_interaction_box_entered(_area: Area3D) -> void:
 	if _area is InteractionBox:

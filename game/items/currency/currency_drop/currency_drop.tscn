@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://bxc14y6cn37vn"]
+
+[ext_resource type="Script" uid="uid://dccjfkf16ks5n" path="res://game/items/currency/currency_drop/currency_drop.gd" id="1_ulwgc"]
+[ext_resource type="Shader" uid="uid://cf1neow66gyr1" path="res://game/items/Shader/outline_shader.gdshader" id="2_5svqk"]
+[ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/Items/currency/goo/goo.png" id="3_o8x5x"]
+[ext_resource type="Script" uid="uid://byvyg00hv12vc" path="res://game/items/currency/currency_drop/apply_shader.gd" id="4_fykas"]
+[ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="5_spiiy"]
+[ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="6_5svqk"]
+[ext_resource type="AudioStream" uid="uid://dop4mwk1i2n5u" path="res://assets/sound/general_sfx/basic/collect_1.wav" id="7_c55qj"]
+[ext_resource type="AudioStream" uid="uid://b0416mfltmmr0" path="res://assets/sound/general_sfx/basic/collect_2.wav" id="8_iq80n"]
+[ext_resource type="AudioStream" uid="uid://dc8o8f8v824on" path="res://assets/sound/general_sfx/basic/collect_3.wav" id="9_motpm"]
+[ext_resource type="AudioStream" uid="uid://dektrn8vklvac" path="res://assets/sound/general_sfx/basic/collect_4.wav" id="10_m47nt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ej25"]
+render_priority = 0
+shader = ExtResource("2_5svqk")
+shader_parameter/enabled = true
+shader_parameter/sprite_texture = ExtResource("3_o8x5x")
+shader_parameter/billboard = true
+shader_parameter/color = Color(11, 11, 25, 0.1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/rings = 2.0
+shader_parameter/self_glow = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wvjwh"]
+radius = 0.16495846
+
+[sub_resource type="Animation" id="Animation_smqkc"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_fg3d7"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ysr3k"]
+_data = {
+&"RESET": SubResource("Animation_smqkc"),
+&"hover": SubResource("Animation_fg3d7")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kpvxy"]
+streams_count = 4
+stream_0/stream = ExtResource("7_c55qj")
+stream_1/stream = ExtResource("8_iq80n")
+stream_2/stream = ExtResource("9_motpm")
+stream_3/stream = ExtResource("10_m47nt")
+
+[node name="DropContainer" type="Node3D" unique_id=1625775668 node_paths=PackedStringArray("sprite", "anim_player", "sound_manager")]
+script = ExtResource("1_ulwgc")
+sprite = NodePath("Sprite3D")
+anim_player = NodePath("AnimationPlayer")
+sound_manager = NodePath("SoundEffectManager")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1092540364]
+material_override = SubResource("ShaderMaterial_5ej25")
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_o8x5x")
+script = ExtResource("4_fykas")
+
+[node name="InteractionBox" type="Area3D" parent="." unique_id=1132708494]
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("5_spiiy")
+metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1098248224]
+shape = SubResource("SphereShape3D_wvjwh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=621764233]
+libraries/ = SubResource("AnimationLibrary_ysr3k")
+
+[node name="SoundEffectManager" type="Node3D" parent="." unique_id=963121083]
+script = ExtResource("6_5svqk")
+persist = true
+metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
+
+[node name="PickUp" type="AudioStreamPlayer3D" parent="SoundEffectManager" unique_id=1050182114]
+stream = SubResource("AudioStreamRandomizer_kpvxy")
+volume_db = -12.0
+bus = &"SoundEffects"
+
+[connection signal="area_entered" from="InteractionBox" to="." method="_on_interaction_box_area_entered"]
