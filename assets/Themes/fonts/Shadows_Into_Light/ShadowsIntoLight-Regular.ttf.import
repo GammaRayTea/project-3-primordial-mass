@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://g8ydbi7g6o7b"
-path="res://.godot/imported/ShadowsIntoLight-Regular.ttf-9eebb5a254a028af716c49019cbd0e93.fontdata"
+path="res://.godot/imported/ShadowsIntoLight-Regular.ttf-276729d6907d283e2e7972bea5153baf.fontdata"
 
 [deps]
 
-source_file="res://assets/themes/fonts/Shadows_Into_Light/ShadowsIntoLight-Regular.ttf"
-dest_files=["res://.godot/imported/ShadowsIntoLight-Regular.ttf-9eebb5a254a028af716c49019cbd0e93.fontdata"]
+source_file="res://assets/Themes/fonts/Shadows_Into_Light/ShadowsIntoLight-Regular.ttf"
+dest_files=["res://.godot/imported/ShadowsIntoLight-Regular.ttf-276729d6907d283e2e7972bea5153baf.fontdata"]
 
 [params]
 
