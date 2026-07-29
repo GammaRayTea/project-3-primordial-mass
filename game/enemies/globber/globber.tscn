@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://yc0ay2h3j4ck" path="res://game/behaviours/state_machine/states/await_animation_state.gd" id="8_3ai4x"]
 [ext_resource type="Texture2D" uid="uid://sr0t8p36qtyk" path="res://assets/enemies/globber/animations/Globber2LeftArm.png" id="8_l3wxe"]
 [ext_resource type="Script" uid="uid://bjk3g7dq7gj20" path="res://game/behaviours/events/drop_currency_event.gd" id="8_l7o33"]
-[ext_resource type="Script" uid="uid://cxmt2fl7nvfju" path="res://game/behaviours/events/free_event.gd" id="9_45htx"]
 [ext_resource type="Script" uid="uid://dbl8jqdiqljv7" path="res://game/behaviours/state_machine/states/chase_player_state.gd" id="9_dvtg5"]
 [ext_resource type="Texture2D" uid="uid://c05h2pexxxc1b" path="res://assets/enemies/globber/animations/Globber2LeftHand.png" id="9_gtf71"]
 [ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/currency_drop.tscn" id="9_ydwe4"]
@@ -291,7 +290,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dvtg5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_depq0"]
-graph_offset = Vector2(-537, -41)
+graph_offset = Vector2(-769.485, -244.84288)
 nodes/StateMachine/node = ExtResource("19_xmiyw")
 nodes/StateMachine/position = Vector2(-180, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_dvtg5")
@@ -301,6 +300,10 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"StateMachine"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmgqi"]
 radius = 0.4
 height = 1.0948181
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joybc"]
+atlas = ExtResource("14_o8dyd")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3wxe"]
 atlas = ExtResource("14_o8dyd")
@@ -322,13 +325,12 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("14_o8dyd")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_joybc"]
-atlas = ExtResource("14_o8dyd")
-region = Rect2(320, 0, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joybc")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l3wxe")
 }, {
@@ -343,9 +345,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2si2q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_joybc")
 }],
 "loop": 0,
 "name": &"death",
@@ -371,7 +370,8 @@ stream_4/stream = ExtResource("42_4p7uc")
 stream_5/stream = ExtResource("43_jd2m3")
 
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
-events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/PlayAnimationEvent")]
+active = true
+events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/PlayAnimationEvent"), NodePath("Events/SetPropertyEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)
@@ -499,20 +499,15 @@ sound_properties_1 = {
 }
 metadata/_custom_type_script = "uid://yc0ay2h3j4ck"
 
-[node name="FreeEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=212106046 node_paths=PackedStringArray("target")]
-script = ExtResource("9_45htx")
-target = NodePath("../..")
-metadata/_custom_type_script = "uid://cxmt2fl7nvfju"
-
-[node name="DropEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="1" unique_id=730886903 node_paths=PackedStringArray("source")]
+[node name="DropEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="0" unique_id=730886903 node_paths=PackedStringArray("source")]
 script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
+source = NodePath("../..")
 max_value = 10
 type = 1
-source = NodePath("../..")
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 
-[node name="PlayAnimationEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="2" unique_id=528173217 node_paths=PackedStringArray("animation_tree")]
+[node name="PlayAnimationEvent" type="Node" parent="Events" parent_id_path=PackedInt32Array(1440544615) index="1" unique_id=528173217 node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("14_g0og0")
 animation_tree = NodePath("../../AnimationTree")
 animation_name = "globber_death"
@@ -522,6 +517,7 @@ metadata/_custom_type_script = "uid://3uiian2ekh1"
 libraries/ = SubResource("AnimationLibrary_845p2")
 
 [node name="AnimationTree" parent="." index="4" unique_id=934466786]
+process_mode = 0
 tree_root = SubResource("AnimationNodeBlendTree_depq0")
 parameters/TimeScale/scale = 1.0
 

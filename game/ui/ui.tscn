@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dxketbhopi5ju" path="res://game/ui/hud/hud_overlay.tscn" id="4_eogtg"]
 [ext_resource type="PackedScene" uid="uid://1mhtbtiot2rb" path="res://game/ui/pause_screen/pause_screen.tscn" id="5_6fpg5"]
 [ext_resource type="PackedScene" uid="uid://5y1v8bn7cx7o" path="res://game/sound/ambience_player/ambience_player.tscn" id="5_8lmuw"]
-[ext_resource type="Texture2D" uid="uid://cfdjrho7tgmx2" path="res://assets/Themes/ui_elements/bar_complete.png" id="5_cshcc"]
+[ext_resource type="Texture2D" uid="uid://cfdjrho7tgmx2" path="res://assets/themes/ui_elements/bar_complete.png" id="5_cshcc"]
 [ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="6_n6aae"]
 [ext_resource type="AudioStream" uid="uid://dfx847h4thxgf" path="res://assets/sound/general_sfx/game_events/run_start.wav" id="7_vhpns"]
+[ext_resource type="AudioStream" uid="uid://dvceyisvpqphh" path="res://assets/sound/general_sfx/game_events/stability_depleted.wav" id="10_eogtg"]
 
 [sub_resource type="Gradient" id="Gradient_yepel"]
 colors = PackedColorArray(0, 0, 0, 1, 0.22201729, 0, 0.0033882183, 1)
@@ -67,3 +68,7 @@ metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
 [node name="StartRun" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=4619969]
 stream = ExtResource("7_vhpns")
 bus = &"UISoundEffects"
+
+[node name="EscapeStart" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1064475499]
+stream = ExtResource("10_eogtg")
+volume_db = -6.0

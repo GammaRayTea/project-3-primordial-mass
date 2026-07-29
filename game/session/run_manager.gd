@@ -62,6 +62,12 @@ func reset() -> void:
 
 func start_escape_event() -> void:
 	stable_phase = false
+	(get_tree().get_first_node_in_group("Game") as Game).start_escape_sequence()
+
+func lose_progress() -> void:
+	for key in run_currency:
+		run_currency[key] = 0
+	save_game()
 
 func leave_run() -> void:
 	for key in run_currency:

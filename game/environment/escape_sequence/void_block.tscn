@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://barfmjgbphg3s"]
+
+[ext_resource type="Script" uid="uid://koked3gr4de6" path="res://game/environment/escape_sequence/void_block.gd" id="1_pgv6n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
+size = Vector3(16, 4, 16)
+
+[sub_resource type="FogMaterial" id="FogMaterial_pgv6n"]
+density = 7.7639
+albedo = Color(0.5518937, 0.13129514, 0.7244987, 1)
+edge_fade = 0.8282107
+
+[node name="VoidBlock" type="Node3D" unique_id=1893426942 node_paths=PackedStringArray("fog_volume", "collison_shape")]
+script = ExtResource("1_pgv6n")
+fog_volume = NodePath("FogVolume")
+collison_shape = NodePath("Area3D/CollisionShape3D")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=266980424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 8)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=78778640]
+shape = SubResource("BoxShape3D_kpvxy")
+disabled = true
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=478246294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 8)
+size = Vector3(16, 4, 16)
+material = SubResource("FogMaterial_pgv6n")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
