@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbjo18fpf8hus" path="res://game/enemies/enemy_base/base_enemy.gd" id="1_p4vjo"]
 [ext_resource type="Script" uid="uid://d10lffcbhtmrp" path="res://game/behaviours/state_machine/state_machine.gd" id="2_uxsc4"]
+[ext_resource type="Script" uid="uid://d1sl4152od0vf" path="res://game/behaviours/events/set_property_event.gd" id="3_uxsc4"]
 [ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="4_p4vjo"]
 [ext_resource type="Script" uid="uid://daou788t0evlx" path="res://game/interaction_boxes/hurt_box.gd" id="4_yixaj"]
 
@@ -11,10 +12,12 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 
-[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "state_machine", "rotation_pivot")]
+[node name="Enemy" type="CharacterBody3D" unique_id=2048773448 node_paths=PackedStringArray("animation_tree", "state_machine", "events_on_death", "rotation_pivot")]
 script = ExtResource("1_p4vjo")
+active = null
 animation_tree = NodePath("AnimationTree")
 state_machine = NodePath("StateMachine")
+events_on_death = [NodePath("Events/SetPropertyEvent")]
 rotation_pivot = NodePath("RotationPivot")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1421813303]
@@ -28,10 +31,18 @@ metadata/_custom_type_script = "uid://d10lffcbhtmrp"
 
 [node name="Events" type="Node" parent="." unique_id=1440544615]
 
+[node name="SetPropertyEvent" type="Node" parent="Events" unique_id=1096852124 node_paths=PackedStringArray("target")]
+script = ExtResource("3_uxsc4")
+target = NodePath("../../AnimationTree")
+property = "active"
+value = false
+metadata/_custom_type_script = "uid://d1sl4152od0vf"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=67901383]
 root_node = NodePath("../AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=934466786]
+process_mode = 3
 root_node = NodePath(".")
 tree_root = SubResource("AnimationRootNode_kpvxy")
 anim_player = NodePath("../AnimationPlayer")

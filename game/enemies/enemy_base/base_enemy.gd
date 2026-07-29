@@ -1,5 +1,6 @@
 @tool
 class_name Enemy extends Entity
+@export var active:bool = true
 
 @export_category("Attributes")
 @export var health:float = 100.0:
@@ -45,35 +46,41 @@ func _init() -> void:
 	update_configuration_warnings()
 
 func _physics_process(_delta: float) -> void:
-	if !Engine.is_editor_hint():
-		state_machine._update(_delta)
-		if not is_on_floor():
-			velocity += get_gravity() * _delta
-		move_and_slide()
-		
+	if active:
+		if !Engine.is_editor_hint():
+			state_machine._update(_delta)
+			if not is_on_floor():
+				velocity += get_gravity() * _delta
+			move_and_slide()
+			
 	
 
 func get_hit(source:HitBox):
-	health-=source.damage
-	velocity += source.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
-	execute_events(events_on_hurt)
-	enemy_hit.emit()
+	if active:
+		health-=source.damage
+		velocity += source.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
+		execute_events(events_on_hurt)
+		enemy_hit.emit()
 
 func die() -> void:
-	execute_events(events_on_death)
-	enemy_died.emit()
-
+	if active:
+		execute_events(events_on_death)
+		enemy_died.emit()
+		active = false
+		
 
 
 
 func execute_events(events:Array[Event])->void:
-	for event in events:
-		if event is Event:
-			event.execute()
+	if active:
+		for event in events:
+			if event is Event:
+				event.execute()
 
 
 func _on_screen_entered() -> void:
-	GlobalSoundManager.increase_intensity(0.3)
+	if active:
+		GlobalSoundManager.increase_intensity(0.3)
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 

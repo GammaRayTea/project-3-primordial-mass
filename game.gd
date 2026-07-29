@@ -7,6 +7,7 @@ class_name Game extends Node3D
 @export var default_env:Environment
 @export var test_env:Environment
 @export var dungeon_gen:DungeonGenerator
+@export var escape_sequence:EscapeSequence
 @export var dark:bool = true
 
 @export var player:Player
@@ -81,8 +82,18 @@ func start_run():
 	RunManager.start_run()
 
 
+func start_escape_sequence() -> void:
+	escape_sequence.start(dungeon_gen.locked_cells)
+	ui_controller.sound_manager._play(["EscapeStart"])
+
 func end_run() -> void:
 	RunManager.leave_run()
+	clear_game()
+	switch_to_state(STATE.UPGRADE_MENU)
+
+
+func die() -> void:
+	RunManager.lose_progress()
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)
 
@@ -122,7 +133,6 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:
 				start_run()
-
 		STATE.PAUSED:
 			pause()
 
@@ -140,3 +150,4 @@ func clear_game() -> void:
 	for child in objects.get_children():
 		child.queue_free()
 	dungeon_gen.clear_dungeon()
+	escape_sequence.clear()
