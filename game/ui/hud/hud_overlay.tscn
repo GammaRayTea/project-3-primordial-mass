@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dxketbhopi5ju"]
 
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2tv8o"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/Themes/default.tres" id="1_2tv8o"]
 [ext_resource type="Script" uid="uid://b4m2ukfp1flmy" path="res://game/ui/hud/hud_overlay.gd" id="2_cofoi"]
 [ext_resource type="Script" uid="uid://ckvbkcwchwycb" path="res://game/ui/hud/item_preview.gd" id="3_2gjfp"]
-[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/items/pickups/stick/Stick.png" id="4_gtlt3"]
+[ext_resource type="Texture2D" uid="uid://du4c280ayue5a" path="res://assets/Items/pickups/stick/Stick.png" id="4_gtlt3"]
 [ext_resource type="Shader" uid="uid://d2htihvav3eds" path="res://assets/player/vignette.gdshader" id="5_lp4vu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwwe"]
