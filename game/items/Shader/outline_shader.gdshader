@@ -43,7 +43,7 @@ void vertex() {
 }
 
 vec4 sample_padded(vec2 _uv_padded, vec2 _texture_size, vec2 _out_size, float _pad) {
-	vec2 pixel_pos = _uv_padded * _out_size - _pad;
+	vec2 pixel_pos = floor(_uv_padded * _out_size - _pad);
 	if (pixel_pos.x < 0.0 || pixel_pos.y < 0.0 || pixel_pos.x >= _texture_size.x || pixel_pos.y >= _texture_size.y) {
 		return vec4(0.0);
 	}
