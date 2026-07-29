@@ -9,7 +9,7 @@ var song_paths:Dictionary[SONGS,String] = {
 }
 signal music_faded
 
-
+var base_volume:float = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Ambience"))
 
 var callables_on_faded:Array[Callable] = []
 func _ready():
@@ -65,16 +65,21 @@ func on_music_faded() -> void:
 
 
 func start_ambience() -> void:
+	if ambience_tween:
+		ambience_tween.kill()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Ambience"),base_volume)
 	ambience_player.start()
-
+	
+var ambience_tween:Tween
 func stop_ambience() -> void:
-	var tween:Tween = get_tree().create_tween()
-	var bus_id = AudioServer.get_bus_index("Ambience")
-	var base_volume = AudioServer.get_bus_volume_db(bus_id)
-	tween.tween_method(func(v): AudioServer.set_bus_volume_db(bus_id, v), AudioServer.get_bus_volume_db(bus_id), -60, 1.5)
-	await tween.finished
-	ambience_player.stop()
-	AudioServer.set_bus_volume_db(bus_id,base_volume)
+	if ambience_player.playing:
+		ambience_tween = get_tree().create_tween()
+		var bus_id = AudioServer.get_bus_index("Ambience")
+		
+		ambience_tween.tween_method(func(v): AudioServer.set_bus_volume_db(bus_id, v), AudioServer.get_bus_volume_db(bus_id), -60, 1.0)
+		await ambience_tween.finished
+		ambience_player.stop()
+		AudioServer.set_bus_volume_db(bus_id,base_volume)
 
 func increase_intensity(_amount:float) -> void:
 	ambience_player.current_intensity += _amount

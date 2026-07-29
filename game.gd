@@ -41,11 +41,6 @@ func _ready() -> void:
 		node.rng = global_rng
 	switch_to_state(STATE.MAIN_MENU)
 	
-func to_title() -> void:
-	#GlobalSoundManager.stop_ambience()
-	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
-
-	clear_game()
 
 func start_run():
 	#start ambience
@@ -91,9 +86,16 @@ func end_run() -> void:
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)
 
-func to_upgrade_menu() -> void:
-	#GlobalSoundManager.stop_ambience()
+func to_title() -> void:
+	GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+
+	clear_game()
+
+func to_upgrade_menu() -> void:
+	GlobalSoundManager.stop_ambience()
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	clear_game()
 
 func pause() -> void:
 	get_tree().paused = true
