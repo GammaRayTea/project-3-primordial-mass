@@ -1,4 +1,9 @@
 class_name HUD extends Control
+@export var audio_filter_cutoff:int = 20500:
+	set(value) :
+		audio_filter_cutoff = value
+		AudioServer.get_bus_effect(AudioServer.get_bus_index("EntitySoundEffects"), 1).cutoff_hz = value
+		AudioServer.get_bus_effect(AudioServer.get_bus_index("Ambience"), 0).cutoff_hz = value
 
 
 @export var hint:Label

@@ -27,6 +27,26 @@
 [ext_resource type="Animation" uid="uid://bpth66xfrg2h8" path="res://assets/player/animations/Leyla_IdleVar.res" id="25_bp242"]
 [ext_resource type="Animation" uid="uid://c6v4pdoxetc5k" path="res://assets/player/animations/Leyla_Walk.res" id="25_cgi3i"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c831vj66lf82r" path="res://assets/player/player_blend_tree.tres" id="27_cgi3i"]
+[ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="28_y6drd"]
+[ext_resource type="AudioStream" uid="uid://dd2mewl18po01" path="res://assets/player/sounds/step_run_1.wav" id="29_bdb11"]
+[ext_resource type="AudioStream" uid="uid://ds8ngctg3da7p" path="res://assets/player/sounds/step_run_2.wav" id="30_p3uph"]
+[ext_resource type="AudioStream" uid="uid://d1cqbdluk54eb" path="res://assets/player/sounds/step_run_3.wav" id="31_qfwia"]
+[ext_resource type="AudioStream" uid="uid://di67ttf8c5ng0" path="res://assets/player/sounds/step_run_4.wav" id="32_gyg5y"]
+[ext_resource type="AudioStream" uid="uid://dnldu3yp2dr32" path="res://assets/player/sounds/step_run_5.wav" id="33_7dece"]
+[ext_resource type="AudioStream" uid="uid://b7arlqy3upoyb" path="res://assets/player/sounds/step_run_6.wav" id="34_25nor"]
+[ext_resource type="AudioStream" uid="uid://ccnblk3pfkoht" path="res://assets/player/sounds/step_run_7.wav" id="35_4e7mj"]
+[ext_resource type="AudioStream" uid="uid://cbwc1blmgtmds" path="res://assets/player/sounds/step_run_8.wav" id="36_uo4t5"]
+[ext_resource type="AudioStream" uid="uid://cmgei4s17ca5y" path="res://assets/player/sounds/step_run_9.wav" id="37_ppbyd"]
+[ext_resource type="AudioStream" uid="uid://b0nxbdiq7uana" path="res://assets/player/sounds/step_walk_1.wav" id="38_g7thf"]
+[ext_resource type="AudioStream" uid="uid://dfatg58sbfm88" path="res://assets/player/sounds/step_walk_2.wav" id="39_gkov1"]
+[ext_resource type="AudioStream" uid="uid://c2n4o4j8brfhh" path="res://assets/player/sounds/step_walk_3.wav" id="40_n6iff"]
+[ext_resource type="AudioStream" uid="uid://dd0ol8306t23q" path="res://assets/player/sounds/step_walk_4.wav" id="41_f4o1b"]
+[ext_resource type="AudioStream" uid="uid://cs2kdf7ns7ep1" path="res://assets/player/sounds/step_walk_5.wav" id="42_152lh"]
+[ext_resource type="AudioStream" uid="uid://bl5b1cqstgrcv" path="res://assets/player/sounds/step_walk_6.wav" id="43_5uxrn"]
+[ext_resource type="AudioStream" uid="uid://cahwsnmy2ut8y" path="res://assets/player/sounds/step_walk_7.wav" id="44_mw300"]
+[ext_resource type="AudioStream" uid="uid://bei1hcq6i3xi8" path="res://assets/player/sounds/step_walk_8.wav" id="45_utkri"]
+[ext_resource type="AudioStream" uid="uid://otr2fphruht8" path="res://assets/player/sounds/step_walk_9.wav" id="46_xe2yg"]
+[ext_resource type="AudioStream" uid="uid://ba7j8i6cnaf1x" path="res://assets/player/sounds/hurt.wav" id="47_gkov1"]
 
 [sub_resource type="Animation" id="Animation_bp242"]
 resource_name = "Leyla_Run"
@@ -462,6 +482,23 @@ tracks/35/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(7.105431e-15, 0, 0), Vector3(7.105431e-15, 0, 0), Vector3(7.105432e-15, 2.2204477e-15, 5.960468e-08), Vector3(7.105432e-15, 2.2204477e-15, 5.960468e-08)]
+}
+tracks/36/type = "method"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("SoundEffectManager")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
+"times": PackedFloat32Array(0.1427, 0.6427),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [PackedStringArray("StepRun")],
+"method": &"_play"
+}, {
+"args": [PackedStringArray("StepRun")],
+"method": &"_play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_cgi3i"]
@@ -1384,6 +1421,35 @@ _data = {
 &"RESET": SubResource("Animation_qfwia")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kpvxy"]
+streams_count = 9
+stream_0/stream = ExtResource("29_bdb11")
+stream_1/stream = ExtResource("30_p3uph")
+stream_2/stream = ExtResource("31_qfwia")
+stream_3/stream = ExtResource("32_gyg5y")
+stream_4/stream = ExtResource("33_7dece")
+stream_5/stream = ExtResource("34_25nor")
+stream_6/stream = ExtResource("35_4e7mj")
+stream_7/stream = ExtResource("36_uo4t5")
+stream_8/stream = ExtResource("37_ppbyd")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x3k17"]
+streams_count = 9
+stream_0/stream = ExtResource("38_g7thf")
+stream_1/stream = ExtResource("39_gkov1")
+stream_2/stream = ExtResource("40_n6iff")
+stream_3/stream = ExtResource("41_f4o1b")
+stream_4/stream = ExtResource("42_152lh")
+stream_5/stream = ExtResource("43_5uxrn")
+stream_6/stream = ExtResource("44_mw300")
+stream_7/stream = ExtResource("45_utkri")
+stream_8/stream = ExtResource("46_xe2yg")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_afl2q"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("47_gkov1")
+
 [node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "sprint_timer", "animation_tree", "idle_animation_variation_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
@@ -1657,6 +1723,29 @@ libraries/ = SubResource("AnimationLibrary_gyg5y")
 tree_root = ExtResource("27_cgi3i")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
+
+[node name="SoundEffectManager" type="Node3D" parent="." unique_id=14521569]
+script = ExtResource("28_y6drd")
+metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
+
+[node name="StepRun" type="AudioStreamPlayer3D" parent="SoundEffectManager" unique_id=2087762353]
+stream = SubResource("AudioStreamRandomizer_kpvxy")
+volume_db = -14.0
+max_polyphony = 2
+bus = &"EntitySoundEffects"
+attenuation_filter_db = 0.0
+
+[node name="StepWalk" type="AudioStreamPlayer3D" parent="SoundEffectManager" unique_id=2085268120]
+stream = SubResource("AudioStreamRandomizer_x3k17")
+volume_db = -14.0
+max_polyphony = 2
+bus = &"EntitySoundEffects"
+attenuation_filter_db = 0.0
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="SoundEffectManager" unique_id=1143334939]
+stream = SubResource("AudioStreamRandomizer_afl2q")
+volume_db = -12.0
+bus = &"EntitySoundEffects"
 
 [connection signal="area_entered" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]

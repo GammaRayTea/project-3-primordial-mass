@@ -107,9 +107,10 @@ func switch_state(_state:STATE) -> void:
 			idle_animation_variation_timer.start(randf_range(5,15))
 		STATE.WALKING:
 			animation = "leyla_walk"
-			time_scale = 3.0
+			time_scale = 1.5
+			
 		STATE.RUNNING:
-			time_scale = 2.0
+			time_scale = 1.5
 			animation = "leyla_run"
 		STATE.PUSHING:
 			animation = "leyla_walk"
@@ -245,19 +246,25 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 
 
 func get_hit(source:HitBox):
-	velocity += source.parent.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
-	print("Player took damage ", source.damage)
-	camera.cam_shake()
-	RunManager.decrease_stability(source.damage)
-	GlobalSoundManager.increase_intensity(0.5)
 	hit_stun_counter = source.hit_stun
 	switch_state( STATE.HIT_STUN)
+	velocity += source.parent.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
+	
+	print("Player took damage ", source.damage)
+	
+	GlobalSoundManager.increase_intensity(0.5)
+	
+	camera.cam_shake()
 	Engine.time_scale = 0.1
 	var timer =  get_tree().create_timer(0.02)
 	await timer.timeout
 	Engine.time_scale = 1.0
-
+	
+	if !RunManager.stable_phase:
+		die()
+	else:
+		RunManager.decrease_stability(source.damage)
 
 func die() -> void:
-	super()
+	(get_tree().get_first_node_in_group("Game") as Game).die()
 #endregion

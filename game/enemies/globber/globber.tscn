@@ -302,7 +302,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dvtg5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_depq0"]
-graph_offset = Vector2(-769.485, -244.84288)
+graph_offset = Vector2(-769.48505, -244.84288)
 nodes/StateMachine/node = ExtResource("19_xmiyw")
 nodes/StateMachine/position = Vector2(-180, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_dvtg5")
@@ -645,9 +645,9 @@ collide_with_areas = true
 [node name="Walk" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="0" unique_id=20060384]
 stream = SubResource("AudioStreamRandomizer_kpvxy")
 volume_db = -8.0
-bus = &"EnemySoundEffects"
+bus = &"EntitySoundEffects"
 
 [node name="Attack" type="AudioStreamPlayer3D" parent="SoundEffectManager" parent_id_path=PackedInt32Array(700150437) index="1" unique_id=547935468]
 stream = SubResource("AudioStreamRandomizer_xmiyw")
 volume_db = 50.0
-bus = &"EnemySoundEffects"
+bus = &"EntitySoundEffects"

@@ -60,8 +60,9 @@ func switch_to_state(_state:Game.STATE) -> void:
 			main_menu.hide()
 			pause_screen.hide()
 			
-			death_screen.show()
 			death_screen.activate()
+			death_screen.show()
+			sound_manager._play(["Death"])
 
 
 func _on_start_run_button_pressed() -> void:

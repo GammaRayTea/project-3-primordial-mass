@@ -17,4 +17,4 @@ func _ready() -> void:
 
 func _on_area_3d_area_entered(_area: Area3D) -> void:
 	if _area.get_parent() is Player:
-		(get_tree().get_first_node_in_group("Game") as Game).die()
+		_area.get_parent().die()

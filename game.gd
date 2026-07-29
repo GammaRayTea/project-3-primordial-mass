@@ -28,11 +28,12 @@ enum STATE {MAIN_MENU, UPGRADE_MENU, IN_GAME, PAUSED, DIED}
 
 func _ready() -> void:
 	ui_controller.upgrade_menu.start_run_button.pressed.connect(switch_to_state.bind(STATE.IN_GAME))
-	#ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(save)
 	ui_controller.main_menu.start_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
 	
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(RunManager.save_game)
+	ui_controller.upgrade_menu.start_run_button.pressed.connect(RunManager.save_game)
+	
 	
 	ui_controller.pause_screen.continue_button.pressed.connect(unpause)
 	ui_controller.pause_screen.continue_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
@@ -154,6 +155,7 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.PAUSED:
 			pause()
 		STATE.DIED:
+			GlobalSoundManager.stop_ambience(true)
 			pause()
 
 

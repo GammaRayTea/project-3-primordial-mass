@@ -28,6 +28,7 @@ func fade_out_music(_time:float = 1.5) -> void:
 
 func fade_player(_player:AudioStreamPlayer, _time:float = 1.5, _target_vol_db:float = 0.0) -> Tween:
 	var tween:Tween = get_tree().create_tween()
+	tween.set_ignore_time_scale(true)
 	tween.tween_property(_player,"volume_db", _target_vol_db, _time)
 	return tween
 
@@ -71,15 +72,19 @@ func start_ambience() -> void:
 	ambience_player.start()
 	
 var ambience_tween:Tween
-func stop_ambience() -> void:
+func stop_ambience(_hard:bool = false) -> void:
 	if ambience_player.playing:
-		ambience_tween = get_tree().create_tween()
-		var bus_id = AudioServer.get_bus_index("Ambience")
-		
-		ambience_tween.tween_method(func(v): AudioServer.set_bus_volume_db(bus_id, v), AudioServer.get_bus_volume_db(bus_id), -60, 1.0)
-		await ambience_tween.finished
-		ambience_player.stop()
-		AudioServer.set_bus_volume_db(bus_id,base_volume)
+		if _hard:
+			ambience_player.stop()
+		else:
+			ambience_tween = get_tree().create_tween()
+			ambience_tween.set_ignore_time_scale(true)
+			var bus_id = AudioServer.get_bus_index("Ambience")
+			
+			ambience_tween.tween_method(func(v): AudioServer.set_bus_volume_db(bus_id, v), AudioServer.get_bus_volume_db(bus_id), -60, 1.0)
+			await ambience_tween.finished
+			ambience_player.stop()
+			AudioServer.set_bus_volume_db(bus_id,base_volume)
 
 func increase_intensity(_amount:float) -> void:
 	ambience_player.current_intensity += _amount

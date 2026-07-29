@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dvceyisvpqphh" path="res://assets/sound/general_sfx/game_events/stability_depleted.wav" id="10_eogtg"]
 [ext_resource type="AudioStream" uid="uid://b8ru7b5h1jeux" path="res://assets/sound/general_sfx/menu/click.wav" id="14_p2jv8"]
 [ext_resource type="AudioStream" uid="uid://bjldqlqa154bj" path="res://assets/sound/general_sfx/menu/upgrade.wav" id="15_s7oao"]
+[ext_resource type="AudioStream" uid="uid://dfmwcdvmv4qn3" path="res://assets/sound/general_sfx/game_events/death.wav" id="16_m555d"]
 
 [node name="UI" type="CanvasLayer" unique_id=982157194 node_paths=PackedStringArray("main_menu", "hud", "upgrade_menu", "pause_screen", "death_screen", "sound_manager")]
 process_mode = 3
@@ -63,6 +64,7 @@ process_mode = 4
 visible = false
 
 [node name="AmbiencePlayer" parent="." unique_id=2024238858 instance=ExtResource("5_8lmuw")]
+process_mode = 3
 visible = false
 
 [node name="SoundEffectManager" type="Node3D" parent="." unique_id=770097936]
@@ -77,7 +79,7 @@ bus = &"UISoundEffects"
 
 [node name="EscapeStart" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1064475499]
 stream = ExtResource("10_eogtg")
-volume_db = -6.0
+volume_db = -3.0
 
 [node name="Clicked" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=1722763158]
 stream = ExtResource("14_p2jv8")
@@ -88,3 +90,7 @@ max_polyphony = 16
 stream = ExtResource("15_s7oao")
 volume_db = -9.1
 max_polyphony = 16
+
+[node name="Death" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=823118263]
+stream = ExtResource("16_m555d")
+volume_db = -4.0
