@@ -13,14 +13,14 @@ script = ExtResource("1_jn4hp")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1406339180]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0.005, 0)
+shaded = true
 texture_filter = 0
 texture = ExtResource("1_1m0y6")
 
-[node name="InteractionBox" type="Area3D" parent="." unique_id=818320370 node_paths=PackedStringArray("target")]
+[node name="InteractionBox" type="Area3D" parent="." unique_id=818320370]
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("2_jn4hp")
-target = NodePath("..")
 metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1997861657]
@@ -28,11 +28,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2394104, 0)
 shape = SubResource("CylinderShape3D_udmuc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1354280854]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4001062, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14741597, 0)
 light_color = Color(0.98039216, 0.96862745, 0.6117647, 1)
 light_energy = 12.137
 shadow_enabled = true
 omni_range = 37.454
-omni_attenuation = 3.008
 
 [connection signal="area_entered" from="InteractionBox" to="." method="_on_interaction_box_entered"]

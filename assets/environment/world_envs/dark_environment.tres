@@ -11,5 +11,6 @@ background_mode = 2
 background_energy_multiplier = 0.2
 sky = SubResource("Sky_0xm2m")
 ambient_light_color = Color(1, 1, 1, 1)
+ssil_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
