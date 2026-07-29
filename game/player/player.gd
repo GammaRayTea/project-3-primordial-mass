@@ -186,6 +186,7 @@ func on_interaction_box_exited(_area: Area3D) -> void:
 func get_hit(source:HitBox):
 	velocity += source.parent.global_position.direction_to(global_position) * Vector3(1,0,1) * source.knockback
 	print("Player took damage ", source.damage)
+	camera.cam_shake()
 	RunManager.decrease_stability(source.damage)
 	GlobalSoundManager.increase_intensity(0.5)
 	

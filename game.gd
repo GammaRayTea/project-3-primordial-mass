@@ -45,6 +45,8 @@ func _ready() -> void:
 
 func start_run():
 	#start ambience
+	ui_controller.hud.set_escape_effect(false)
+	ui_controller.hud.play_vignette_effect("RESET")
 	GlobalSoundManager.fade_out_music(1.5)
 	GlobalSoundManager.start_ambience()
 
@@ -83,8 +85,12 @@ func start_run():
 
 
 func start_escape_sequence() -> void:
+	ui_controller.hud.set_escape_effect(true)
 	escape_sequence.start(dungeon_gen.locked_cells)
 	ui_controller.sound_manager._play(["EscapeStart"])
+	GlobalSoundManager.ambience_player.escaping = true
+	GlobalSoundManager.increase_intensity(1)
+	player.camera.cam_shake(2)
 
 func end_run() -> void:
 	RunManager.leave_run()

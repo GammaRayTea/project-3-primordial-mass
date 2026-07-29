@@ -1,4 +1,4 @@
-class_name PlayerCam extends Camera3D
+class_name PlayerCam extends Node3D
 
 
 
@@ -17,12 +17,15 @@ var height:float = 2.621
 var current_time_until_reset:int = 0
 var current_return_weight:float = 0
 
-@export var ray_cast:RayCast3D
-@export var visualizer:Node3D
-
 @export var wall_margin:float = 0.5
 var target_position:Vector3 = Vector3(0,height,0)
 var player_rotation:Quaternion
+
+@export_category("Components")
+@export var ray_cast:RayCast3D
+@export var visualizer:Node3D
+@export  var animation_player:AnimationPlayer
+
 
 func _ready():
 	target_position = Vector3(0,height,0)
@@ -63,3 +66,8 @@ func _move_to_center() -> void:
 		position = position.lerp(Vector3(0,height,0),current_return_weight)
 	else:
 		current_time_until_reset-= 1
+
+
+func cam_shake(_time:float = 1.0) -> void:
+	animation_player.play("camera_shake")
+	(get_tree().get_first_node_in_group("Game") as Game).ui_controller.hud.play_vignette_effect("hurt")

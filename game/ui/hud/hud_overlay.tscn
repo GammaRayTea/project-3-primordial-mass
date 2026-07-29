@@ -13,7 +13,174 @@ shader_parameter/alpha = 0.42
 shader_parameter/inner_radius = 0.12
 shader_parameter/outer_radius = 0.545
 
-[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("hint")]
+[sub_resource type="Animation" id="Animation_2tv8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vignette:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vignette:material:shader_parameter/outer_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.545]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Vignette:material:shader_parameter/inner_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.12]
+}
+
+[sub_resource type="Animation" id="Animation_2gjfp"]
+resource_name = "escape"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vignette:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4333333, 2),
+"transitions": PackedFloat32Array(1.3195081, 2.4622886, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.06297462, 3.3153065e-05, 0.10126849, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vignette:material:shader_parameter/inner_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4333333, 2),
+"transitions": PackedFloat32Array(1.3195081, 2.4622886, 1),
+"update": 0,
+"values": [0.12, 0.07, 0.12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Vignette:material:shader_parameter/outer_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4333333, 2),
+"transitions": PackedFloat32Array(1.3195081, 2.4622886, 1),
+"update": 0,
+"values": [0.545, 0.43, 0.545]
+}
+
+[sub_resource type="Animation" id="Animation_cofoi"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Vignette:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(0.124, 1.93, 1.93),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.038063996, 0.0009449563, 0.040893383, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vignette:material:shader_parameter/outer_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(0.12, 1.93, 1),
+"update": 0,
+"values": [0.545, 0.4, 0.545]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Vignette:material:shader_parameter/inner_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(0.124, 1.93, 1),
+"update": 0,
+"values": [0.12, 0.08, 0.12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gjfp"]
+_data = {
+&"RESET": SubResource("Animation_2tv8o"),
+&"escape": SubResource("Animation_2gjfp"),
+&"hurt": SubResource("Animation_cofoi")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tv8o"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2gjfp"]
+animation = &"escape"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cofoi"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2gjfp"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gtlt3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tv8o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lp4vu"]
+advance_mode = 2
+advance_condition = &"escape"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_okiks"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y1a1e"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"escape"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cofoi"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2tv8o"]
+states/RESET/node = SubResource("AnimationNodeAnimation_2tv8o")
+states/RESET/position = Vector2(424, 38)
+states/Start/position = Vector2(226, 70)
+states/escape/node = SubResource("AnimationNodeAnimation_2gjfp")
+states/escape/position = Vector2(599, 42)
+states/hurt/node = SubResource("AnimationNodeAnimation_cofoi")
+states/hurt/position = Vector2(533, 200)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_2gjfp"), "RESET", "hurt", SubResource("AnimationNodeStateMachineTransition_gtlt3"), "hurt", "RESET", SubResource("AnimationNodeStateMachineTransition_2tv8o"), "RESET", "escape", SubResource("AnimationNodeStateMachineTransition_lp4vu"), "escape", "hurt", SubResource("AnimationNodeStateMachineTransition_okiks"), "hurt", "escape", SubResource("AnimationNodeStateMachineTransition_y1a1e"), "escape", "RESET", SubResource("AnimationNodeStateMachineTransition_cofoi")]
+
+[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("hint", "animation_tree")]
 oversampling_with_scale = 2
 layout_mode = 3
 anchors_preset = 15
@@ -25,6 +192,7 @@ mouse_filter = 2
 theme = ExtResource("1_2tv8o")
 script = ExtResource("2_cofoi")
 hint = NodePath("Hint")
+animation_tree = NodePath("AnimationTree")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
@@ -79,7 +247,7 @@ text = "Stick
 "
 horizontal_alignment = 1
 
-[node name="Control" type="ColorRect" parent="." unique_id=715104668]
+[node name="Vignette" type="ColorRect" parent="." unique_id=715104668]
 z_index = -2
 material = SubResource("ShaderMaterial_6fwwe")
 layout_mode = 1
@@ -108,3 +276,11 @@ grow_vertical = 0
 theme = ExtResource("1_2tv8o")
 text = "Press E to leave "
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2126894272]
+libraries/ = SubResource("AnimationLibrary_2gjfp")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=230323462]
+tree_root = SubResource("AnimationNodeStateMachine_2tv8o")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/escape = false

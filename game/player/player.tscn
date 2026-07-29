@@ -23,6 +23,90 @@
 [ext_resource type="Texture2D" uid="uid://cgeukhn1x6uhx" path="res://assets/player/animations/LeylaRightLeg.png" id="18_bdb11"]
 [ext_resource type="Texture2D" uid="uid://dryi3olco6bwp" path="res://assets/player/animations/LeylaRightFoot.png" id="19_p3uph"]
 
+[sub_resource type="Animation" id="Animation_bp242"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cgi3i"]
+resource_name = "camera_shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1, 0.12, 0.13333334, 0.36666667, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.03, 0.06, 0.01, -0.06, -0.02, 0.01, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1.124, 1.93, 1),
+"update": 0,
+"values": [0.0, -0.2, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.13333334, 0.23333333, 0.36666667, 0.46666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.03, -0.02, 0.06, -0.07, -0.03, 0.01, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6drd"]
+_data = {
+&"RESET": SubResource("Animation_bp242"),
+&"camera_shake": SubResource("Animation_cgi3i")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_anr75"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -2161,9 +2245,8 @@ _data = {
 script = ExtResource("1_b2mth")
 MAX_WALKING_SPEED = 2.0
 MAX_RUNNING_SPEED = 4.0
-do_gravity = false
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
-camera = NodePath("CameraStuff/Camera")
+camera = NodePath("CameraStuff/CamGibel")
 sprint_timer = NodePath("SprintTimer")
 rotation_pivot = NodePath("RotationPivot")
 
@@ -2175,9 +2258,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0, 0.4745098, 1)
 
-[node name="Camera" type="Camera3D" parent="CameraStuff" unique_id=1886686640 node_paths=PackedStringArray("ray_cast", "visualizer")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6210704, 0)
-visible = false
+[node name="CamGibel" type="Node3D" parent="CameraStuff" unique_id=857493763 node_paths=PackedStringArray("ray_cast", "visualizer", "animation_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.621, 0)
 script = ExtResource("2_4ste8")
 bounding_box = Vector2(1.5, 1)
 return_weight = 0.03
@@ -2185,8 +2267,18 @@ move_weight = 0.03
 height = 2.0
 ray_cast = NodePath("../CameraRayCast")
 visualizer = NodePath("../TargetVisualizer")
+animation_player = NodePath("CamAnimationPlayer")
 
-[node name="CamVisualizer" type="MeshInstance3D" parent="CameraStuff/Camera" unique_id=960573652]
+[node name="Camera" type="Camera3D" parent="CameraStuff/CamGibel" unique_id=1886686640]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+cull_mask = 1048559
+
+[node name="CamAnimationPlayer" type="AnimationPlayer" parent="CameraStuff/CamGibel" unique_id=344973051]
+root_node = NodePath("../Camera")
+libraries/ = SubResource("AnimationLibrary_y6drd")
+
+[node name="CamVisualizer" type="MeshInstance3D" parent="CameraStuff/CamGibel" unique_id=960573652]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 7.033348e-05, 0)
 visible = false
 mesh = SubResource("SphereMesh_4ste8")
 

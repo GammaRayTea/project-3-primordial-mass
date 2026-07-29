@@ -33,7 +33,5 @@ func clear() -> void:
 	generated_void_blocks.all(delete)
 
 func delete(_block:VoidBlock) -> bool:
-	print(_block, " deleted")
 	_block.queue_free()
-	
 	return true

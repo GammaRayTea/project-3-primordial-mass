@@ -82,7 +82,6 @@ void_scene = ExtResource("13_2cqfq")
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
-do_gravity = true
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
