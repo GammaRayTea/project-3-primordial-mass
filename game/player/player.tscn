@@ -57,8 +57,8 @@ size = Vector3(0.5, 1.3132324, 0.45483398)
 size = Vector3(0.94091797, 1.2299805, 1.3635254)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
-radius = 0.3227539
-height = 1.2138672
+radius = 0.5546875
+height = 1.4746094
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.33740234
@@ -2168,6 +2168,7 @@ sprint_timer = NodePath("SprintTimer")
 rotation_pivot = NodePath("RotationPivot")
 
 [node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 
 [node name="CameraRayCast" type="RayCast3D" parent="CameraStuff" unique_id=1700300430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -2194,14 +2195,15 @@ visible = false
 mesh = SubResource("SphereMesh_anr75")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17654419, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17677742, 0)
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=512528227]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.84691143, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.5144136, 0)
 
 [node name="Head" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=46428984]
 transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, 0.97, 0)
@@ -2364,7 +2366,7 @@ collision_mask = 64
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06515837, -0.274588, -0.024813399)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1198813, 0)
 shape = SubResource("CapsuleShape3D_anr75")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
@@ -2379,6 +2381,7 @@ spot_angle = 21.994825
 spot_angle_attenuation = 0.4352755
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=711900110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 visible = false
 collision_layer = 2
 collision_mask = 16

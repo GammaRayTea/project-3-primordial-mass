@@ -276,6 +276,18 @@ tracks/18/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath(".:active")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_845p2"]
 _data = {
@@ -371,7 +383,7 @@ stream_5/stream = ExtResource("43_jd2m3")
 
 [node name="Globber" unique_id=2048773448 node_paths=PackedStringArray("events_on_death") instance=ExtResource("1_nrhof")]
 active = true
-events_on_death = [NodePath("Events/DropEvent"), NodePath("Events/PlayAnimationEvent"), NodePath("Events/SetPropertyEvent")]
+events_on_death = [NodePath("Events/PlayAnimationEvent"), NodePath("Events/DropEvent")]
 
 [node name="WorldCollider" parent="." index="0" unique_id=1421813303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9723653, 0)

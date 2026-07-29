@@ -40,6 +40,7 @@ enemies = NodePath("Enemies")
 objects = NodePath("Objects")
 testing = false
 test_room = ExtResource("1_0xm2m")
+lock_seed = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = ExtResource("6_4c57u")
