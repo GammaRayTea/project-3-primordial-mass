@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://pu453h7dgaif" path="res://game/items/base_item.gd" id="2_athrp"]
 [ext_resource type="Shader" uid="uid://cf1neow66gyr1" path="res://game/items/Shader/outline_shader.gdshader" id="2_f27do"]
 [ext_resource type="Texture2D" uid="uid://bbrkpjkudmro6" path="res://assets/interactables/Loot/Keys/pearl.png" id="2_s3lf6"]
-[ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/Items/currency/goo/goo.png" id="3_pcf5b"]
+[ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/items/currency/goo/goo.png" id="3_pcf5b"]
 [ext_resource type="Script" uid="uid://byvyg00hv12vc" path="res://game/items/currency/currency_drop/apply_shader.gd" id="4_25hcr"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="5_chydh"]
 [ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="8_q7ggp"]

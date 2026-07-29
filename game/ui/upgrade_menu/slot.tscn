@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ci45w48oatrfs"]
 
-[ext_resource type="Texture2D" uid="uid://3q1vr55eub6r" path="res://assets/Themes/ui_elements/upgrade_slot_unupgraded_02.png" id="1_6wpsd"]
+[ext_resource type="Texture2D" uid="uid://3q1vr55eub6r" path="res://assets/themes/ui_elements/upgrade_slot_unupgraded_02.png" id="1_6wpsd"]
 [ext_resource type="Script" uid="uid://s3hyew0qg2gq" path="res://game/ui/upgrade_menu/slot.gd" id="1_vq8o4"]
-[ext_resource type="Texture2D" uid="uid://cs48hkf0c4bbo" path="res://assets/Themes/ui_elements/upgrade_slot_upgraded_02.png" id="3_jta85"]
+[ext_resource type="Texture2D" uid="uid://cs48hkf0c4bbo" path="res://assets/themes/ui_elements/upgrade_slot_upgraded_02.png" id="3_jta85"]
 
 [node name="Slot" type="TextureRect" unique_id=912120537]
 texture_filter = 1

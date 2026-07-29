@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://duokir7aj41i1"]
 
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/Themes/default.tres" id="1_vanuw"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_vanuw"]
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="4_s5jsc"]
-[ext_resource type="Texture2D" uid="uid://dr7f3cngoh8bd" path="res://assets/Themes/ui_elements/upgrade_button_02.png" id="5_s5jsc"]
-[ext_resource type="Texture2D" uid="uid://du1gbnrkhm7ua" path="res://assets/Themes/ui_elements/upgrade_button_hover_02.png" id="5_th2mu"]
-[ext_resource type="Texture2D" uid="uid://jw51yopv3fkg" path="res://assets/Themes/ui_elements/upgrade_button_max.png" id="6_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://dr7f3cngoh8bd" path="res://assets/themes/ui_elements/upgrade_button_02.png" id="5_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://du1gbnrkhm7ua" path="res://assets/themes/ui_elements/upgrade_button_hover_02.png" id="5_th2mu"]
+[ext_resource type="Texture2D" uid="uid://jw51yopv3fkg" path="res://assets/themes/ui_elements/upgrade_button_max.png" id="6_s5jsc"]
 
 [node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label")]
 oversampling_with_scale = 2
@@ -75,7 +75,7 @@ alignment = 2
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[img]res://assets/Items/currency/goo/goo.png[/img] 0"
+text = "[img]res://assets/items/currency/goo/goo.png[/img] 0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
