@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5y7sl6x7c0w3"]
 
 [ext_resource type="Script" uid="uid://daofuuwba4548" path="res://game/ui/upgrade_menu/upgrade_menu.gd" id="1_f1pfv"]
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_hn35m"]
+[ext_resource type="Theme" path="res://assets/themes/default.tres" id="1_hn35m"]
 [ext_resource type="PackedScene" uid="uid://duokir7aj41i1" path="res://game/ui/upgrade_menu/upgrade_module.tscn" id="2_tdrua"]
 
 [node name="UpgradeMenu" type="Control" unique_id=1730159824 node_paths=PackedStringArray("upgrade_container", "start_run_button", "return_to_menu_button", "upgrade_modules")]
