@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caek3g2d8jihd"
-path="res://.godot/imported/test_bar_top.png-a664fedb48d08d5154519d3e911dd4de.ctex"
+uid="uid://bhi4fsoj10yr7"
+path="res://.godot/imported/upgrade_button_click_03.png-b0d232160206e5d09c8a949450a6d864.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Themes/ui_elements/test_bar_top.png"
-dest_files=["res://.godot/imported/test_bar_top.png-a664fedb48d08d5154519d3e911dd4de.ctex"]
+source_file="res://assets/Themes/ui_elements/upgrade_button_click_03.png"
+dest_files=["res://.godot/imported/upgrade_button_click_03.png-b0d232160206e5d09c8a949450a6d864.ctex"]
 
 [params]
 

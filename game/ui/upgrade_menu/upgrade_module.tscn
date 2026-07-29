@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://duokir7aj41i1"]
 
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_vanuw"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/Themes/default.tres" id="1_vanuw"]
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="4_s5jsc"]
-[ext_resource type="Texture2D" uid="uid://dr7f3cngoh8bd" path="res://assets/themes/ui_elements/upgrade_button_02.png" id="5_s5jsc"]
-[ext_resource type="Texture2D" uid="uid://du1gbnrkhm7ua" path="res://assets/themes/ui_elements/upgrade_button_hover_02.png" id="5_th2mu"]
-[ext_resource type="Texture2D" uid="uid://jw51yopv3fkg" path="res://assets/themes/ui_elements/upgrade_button_max.png" id="6_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://dwkpur8bojh0h" path="res://assets/Themes/ui_elements/upgrade_button_03.png" id="5_vject"]
+[ext_resource type="Texture2D" uid="uid://bhi4fsoj10yr7" path="res://assets/Themes/ui_elements/upgrade_button_click_03.png" id="6_45m71"]
+[ext_resource type="Texture2D" uid="uid://dhxanof2fm14m" path="res://assets/Themes/ui_elements/upgrade_button_hover_03.png" id="7_t8u42"]
+[ext_resource type="Texture2D" uid="uid://dfgx85ib3kj78" path="res://assets/Themes/ui_elements/upgrade_button_max_03.png" id="8_vject"]
 
-[node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label")]
+[node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label", "upgrade_icon")]
 oversampling_with_scale = 2
 custom_minimum_size = Vector2(190, 100)
 layout_mode = 3
@@ -24,6 +25,7 @@ plus_button = NodePath("VBoxContainer/ButtonContainer/PlusButton")
 name_label = NodePath("VBoxContainer/Control/UpgradeInfo/ItemNameLabel")
 cost_label = NodePath("VBoxContainer/Control/UpgradeCost/CostLabel")
 description_label = NodePath("VBoxContainer/StatDescription")
+upgrade_icon = NodePath("VBoxContainer/Control/UpgradeInfo/TextureRect")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=641852516]
 layout_mode = 1
@@ -110,10 +112,10 @@ offset_right = -12.0
 offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("5_s5jsc")
-texture_pressed = ExtResource("5_th2mu")
-texture_hover = ExtResource("5_th2mu")
-texture_disabled = ExtResource("6_s5jsc")
+texture_normal = ExtResource("5_vject")
+texture_pressed = ExtResource("6_45m71")
+texture_hover = ExtResource("7_t8u42")
+texture_disabled = ExtResource("8_vject")
 stretch_mode = 4
 
 [node name="StatDescription" type="RichTextLabel" parent="VBoxContainer" unique_id=1536478385]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bca16kj73prld"
-path="res://.godot/imported/upgrade_button.png-e9f920b88d40c37e02486c1d81a7bbc5.ctex"
+uid="uid://d20fcpeeembjd"
+path="res://.godot/imported/upgrade_icon_reduced_decrease.png-db07e8ddb9598e609b80d9f18c08cc78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Themes/ui_elements/upgrade_button.png"
-dest_files=["res://.godot/imported/upgrade_button.png-e9f920b88d40c37e02486c1d81a7bbc5.ctex"]
+source_file="res://assets/Themes/ui_elements/upgrade_icon_reduced_decrease.png"
+dest_files=["res://.godot/imported/upgrade_icon_reduced_decrease.png-db07e8ddb9598e609b80d9f18c08cc78.ctex"]
 
 [params]
 

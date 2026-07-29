@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1mhtbtiot2rb"]
 
-[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_f2q6y"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/Themes/default.tres" id="1_f2q6y"]
 [ext_resource type="Script" uid="uid://dh3xypuwypo1v" path="res://game/ui/pause_screen/pause_screen.gd" id="2_a048l"]
 
 [node name="PauseScreen" type="Control" unique_id=234784416 node_paths=PackedStringArray("continue_button", "exit_button")]
@@ -32,10 +32,12 @@ grow_vertical = 2
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=1899668823]
 layout_mode = 2
+theme = ExtResource("1_f2q6y")
 text = "Continue"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=406863949]
 layout_mode = 2
+theme = ExtResource("1_f2q6y")
 text = "Quit To Menu"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=500664173]

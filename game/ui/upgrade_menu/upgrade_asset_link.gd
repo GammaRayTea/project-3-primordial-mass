@@ -6,12 +6,18 @@ static var currency_icons:Dictionary[GlobalEnum.CURRENCY, String] = {
 	GlobalEnum.CURRENCY.COINS:"res://assets/items/currency/coin/coin.png"
 }
 
+static var stat_icons:Dictionary[GlobalEnum.UPGRADES, String] = {
+	GlobalEnum.UPGRADES.STAMINA:"res://assets/Themes/ui_elements/upgrade_icon_stamina_up.png",
+	GlobalEnum.UPGRADES.STABILITY_BUILDUP:"res://assets/Themes/ui_elements/upgrade_icon_gain_increase.png",
+	GlobalEnum.UPGRADES.STABILITY_RESILIENCE:"res://assets/Themes/ui_elements/upgrade_icon_reduced_decrease.png",
+	GlobalEnum.UPGRADES.STABILITY_CAPACITY:"res://assets/Themes/ui_elements/upgrade_icon_capacity_up.png"
+}
+
 static var stat_names:Dictionary[GlobalEnum.UPGRADES, String] = {
 		GlobalEnum.UPGRADES.STAMINA:"Stamina",
 		GlobalEnum.UPGRADES.STABILITY_BUILDUP:"Stability Buildup",
 		GlobalEnum.UPGRADES.STABILITY_RESILIENCE:"Stability Resilience",
 		GlobalEnum.UPGRADES.STABILITY_CAPACITY:"Stability Capacity"
-
 }
 
 static var stat_descriptions:Dictionary[GlobalEnum.UPGRADES, String] = {

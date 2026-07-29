@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dd4uqabahma3j"]
+
+[ext_resource type="Texture2D" uid="uid://qaysuc8snkg8" path="res://assets/Themes/ui_elements/scrollbar.png" id="1_uvpbk"]
+
+[resource]
+texture = ExtResource("1_uvpbk")
