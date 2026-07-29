@@ -122,7 +122,7 @@ func spawn_object(_type:OBJECT_TYPE,_cell:Cell, _valid_positions:Array[Vector2i]
 	var valid_position = get_valid_position_within_cell(_cell,_valid_positions,tile_spawn_margin)
 	var location_found:bool = valid_position[0]
 	var spawn_pos:Vector2i = valid_position[1]
-	object_instance.global_position = Vector3(spawn_pos.x, 0 , spawn_pos.y) + Vector3(_cell.cell_position.x, 0.1, _cell.cell_position.y)
+	object_instance.global_position = Vector3(spawn_pos.x, 0 , spawn_pos.y) + Vector3(_cell.cell_position.x, 0.1, _cell.cell_position.y) + Vector3(0.5, 0.0, 0.5)
 	
 	
 	if location_found == false:
