@@ -48,19 +48,21 @@ radius = 0.1
 height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpvxy"]
-radius = 0.4
+radius = 0.13427734
+height = 1.133606
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8soms"]
-size = Vector3(0.5, 1, 0.2791748)
+size = Vector3(0.5, 1.324707, 0.2791748)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
-size = Vector3(0.5, 1, 0.45483398)
+size = Vector3(0.5, 1.3132324, 0.45483398)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_udmuc"]
-size = Vector3(1, 1, 1.8989258)
+size = Vector3(0.94091797, 1.2299805, 1.3635254)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anr75"]
-radius = 0.3227539
+radius = 0.5546875
+height = 1.4746094
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4w0n"]
 radius = 0.33740234
@@ -1347,6 +1349,7 @@ sprint_timer = NodePath("SprintTimer")
 rotation_pivot = NodePath("RotationPivot")
 
 [node name="CameraStuff" type="Node3D" parent="." unique_id=1412342342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 
 [node name="CameraRayCast" type="RayCast3D" parent="CameraStuff" unique_id=1700300430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -1359,7 +1362,7 @@ visible = false
 script = ExtResource("2_4ste8")
 bounding_box = Vector2(1.5, 1)
 return_weight = 0.03
-move_weight = 0.07
+move_weight = 0.03
 height = 2.0
 ray_cast = NodePath("../CameraRayCast")
 visualizer = NodePath("../TargetVisualizer")
@@ -1373,162 +1376,178 @@ visible = false
 mesh = SubResource("SphereMesh_anr75")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=1053810935]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17677742, 0)
 shape = SubResource("CapsuleShape3D_kpvxy")
 debug_color = Color(0, 0.6, 0.69803923, 0.89411765)
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=94707568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 
 [node name="Visuals" type="Node3D" parent="RotationPivot" unique_id=512528227]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.6763976, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.5144136, 0)
 
 [node name="Head" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=46428984]
 transform = Transform3D(0.99999964, 0, 0, 0, -4.3711374e-08, -1, 0, 0.99999964, -4.371139e-08, 0, 0.97, 0)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("3_epc1c")
 
 [node name="Ponytail1" type="Sprite3D" parent="RotationPivot/Visuals/Head" unique_id=2025189592]
 transform = Transform3D(0.9999978, 0, 0, 0, 0.9999978, -1.0658115e-14, 0, 1.0658122e-14, 0.9999971, 0.008621212, -0.12480168, 0.0068664625)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("4_kjljb")
 
 [node name="Ponytail2" type="Sprite3D" parent="RotationPivot/Visuals/Head/Ponytail1" unique_id=1350432840]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000004, 0.0004434688, -0.05035825, 0.0031280518)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("5_brh81")
 
 [node name="Ponytail3" type="Sprite3D" parent="RotationPivot/Visuals/Head/Ponytail1/Ponytail2" unique_id=1809843653]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999988, 0.0006866455, -0.016361624, 0.009727463)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("6_ib3u0")
 
 [node name="Ponytail4" type="Sprite3D" parent="RotationPivot/Visuals/Head/Ponytail1/Ponytail2/Ponytail3" unique_id=277966050]
 transform = Transform3D(0.9999993, 0, 0, 0, 0.99999994, 0, 0, 0, 0.9999988, -0.01094272, -0.03821698, 0.009613045)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("7_bp242")
 
 [node name="Ponytail5" type="Sprite3D" parent="RotationPivot/Visuals/Head/Ponytail1/Ponytail2/Ponytail3/Ponytail4" unique_id=151802897]
 transform = Transform3D(0.9999993, 0, 0, 0, 0.9999992, 7.10543e-15, 0, -7.1054235e-15, 1.0000001, 0.0075655417, -0.037484765, 1.4901161e-08)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("8_y6drd")
 
 [node name="Body" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=994165757]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.93, 0)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("8_cgi3i")
 
 [node name="LeftArm" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=2010719286]
 transform = Transform3D(1.0000001, 0, 0, 0, -4.3711392e-08, -1, 0, 1.0000001, -4.371139e-08, 0.13539907, 0.91999996, 0.013268627)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("9_y6drd")
 
 [node name="LeftForeArm" type="Sprite3D" parent="RotationPivot/Visuals/LeftArm" unique_id=68178946]
 transform = Transform3D(-0.9999997, 1.6093337e-21, 1.5099563e-07, 0, 0.9999997, -1.0658127e-14, -1.5099576e-07, -1.0658135e-14, -0.99999887, -0.012829721, 0.091878146, 0.00912188)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("11_w24bm")
 
 [node name="LeftHand" type="Sprite3D" parent="RotationPivot/Visuals/LeftArm/LeftForeArm" unique_id=2075658671]
 transform = Transform3D(0.99999917, -4.2351622e-22, -2.8421737e-14, 4.2351632e-22, 0.99999964, 1.065815e-14, 2.84217e-14, -1.0658141e-14, 1.0000005, 0.008052304, 0.085177585, -0.008697491)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("11_22cju")
 
 [node name="RightArm" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=1512337121]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.1189427, 0.912, 0.024553109)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("12_wrff0")
 
 [node name="RightForeArm" type="Sprite3D" parent="RotationPivot/Visuals/RightArm" unique_id=62305118]
 transform = Transform3D(-1.0000002, -3.3878516e-22, -1.5099558e-07, 1.2705496e-21, 1.0000002, -1.0658124e-14, 1.5099585e-07, -1.0658143e-14, -0.9999985, -0.017984562, 0.08758305, 0.0057220384)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("14_22cju")
 
 [node name="RightHand" type="Sprite3D" parent="RotationPivot/Visuals/RightArm/RightForeArm" unique_id=1128815281]
 transform = Transform3D(1, -8.4703275e-22, -1.421086e-14, 8.4703275e-22, 1, 0, 1.4210851e-14, -1.20370564e-35, 1.0000006, -0.015440427, 0.07497273, -0.0053406097)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("14_uv21l")
 
 [node name="Hips" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=1030738547]
 transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0.008, 0.91, -0.023)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("15_qxyrc")
 
 [node name="LeftLeg" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=1106650543]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.097, 0.85, 0.015)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("18_bdb11")
 
 [node name="LeftFoot" type="Sprite3D" parent="RotationPivot/Visuals/LeftLeg" unique_id=1507392846]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999997, 0, 0.0844574, 0.004119873)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("19_p3uph")
 
 [node name="RightLeg" type="Sprite3D" parent="RotationPivot/Visuals" unique_id=753985025]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, -1, 0, 0.9999999, -4.371139e-08, -0.081, 0.85, 0.015)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("16_cy4e0")
 
 [node name="RightFoot" type="Sprite3D" parent="RotationPivot/Visuals/RightLeg" unique_id=2048164787]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999992, 0, 0.08666992, 0.0043487563)
+cast_shadow = 0
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("17_x6a6n")
 
 [node name="PushStartBox" type="Area3D" parent="RotationPivot" unique_id=2123063969]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushStartBox" unique_id=838779612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6065911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16235352, -0.6065911)
 shape = SubResource("BoxShape3D_8soms")
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
 [node name="PushBox" type="Area3D" parent="RotationPivot" unique_id=200545129]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/PushBox" unique_id=759802779]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6944207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15661621, -0.6944207)
 shape = SubResource("BoxShape3D_kpvxy")
 disabled = true
 debug_color = Color(0.7019608, 0.49019608, 0.0627451, 0.5137255)
 
 [node name="InteractionButtonBox" type="Area3D" parent="RotationPivot" unique_id=310000525]
-visible = false
 collision_layer = 32
 collision_mask = 32
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/InteractionButtonBox" unique_id=671184854]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5050341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029541016, -0.114990234, -0.2373339)
 shape = SubResource("BoxShape3D_udmuc")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
 [node name="DropPickupBox" type="Area3D" parent="RotationPivot" unique_id=1869776768]
-visible = false
 collision_layer = 64
-collision_mask = 0
+collision_mask = 64
 script = ExtResource("3_a4w0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RotationPivot/DropPickupBox" unique_id=1031298244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1198813, 0)
 shape = SubResource("CapsuleShape3D_anr75")
 debug_color = Color(0.6284384, 0.52970546, 0.08941165, 0.41960785)
 
@@ -1543,6 +1562,7 @@ spot_angle = 21.994825
 spot_angle_attenuation = 0.4352755
 
 [node name="HurtBox" type="Area3D" parent="." unique_id=711900110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3533216, 0)
 visible = false
 collision_layer = 2
 collision_mask = 16

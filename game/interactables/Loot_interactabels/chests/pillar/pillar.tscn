@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dvq273e4dny47" path="res://game/interactables/Loot_interactabels/chests/pillar/pillar.gd" id="1_655qp"]
 [ext_resource type="PackedScene" uid="uid://xsag4itubpsr" path="res://assets/interactables/Loot/pillar/pillar.blend" id="1_rmm4o"]
-[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/drop_container.tscn" id="2_76r6u"]
+[ext_resource type="PackedScene" uid="uid://bxc14y6cn37vn" path="res://game/items/currency/currency_drop/currency_drop.tscn" id="2_76r6u"]
 [ext_resource type="Script" uid="uid://cuon1d6qjf5qt" path="res://game/interaction_boxes/interaction_box.gd" id="2_osc8c"]
+[ext_resource type="Script" uid="uid://cm3o2ip4uon7x" path="res://game/sound/sound_effect_manager/sound_effect_manager.gd" id="5_3q4n7"]
+[ext_resource type="AudioStream" uid="uid://dqlu504bik56g" path="res://assets/interactables/Loot/pedestal/sounds/pedestal_activate.wav" id="6_um6dj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tdl64"]
 size = Vector3(0.75, 0.925, 0.65)
@@ -94,9 +96,12 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbr86"]
 size = Vector3(1.8, 1.2, 1.8)
 
-[node name="Pillar" type="Node3D" unique_id=1869070663]
+[node name="Pillar" type="Node3D" unique_id=1869070663 node_paths=PackedStringArray("sprite", "animation_player", "sound_effect_manager")]
 script = ExtResource("1_655qp")
-drop_container_scene = ExtResource("2_76r6u")
+sprite = NodePath("Visuals/Sprite3D")
+animation_player = NodePath("Visuals/Sprite3D/AnimationPlayer")
+sound_effect_manager = NodePath("SoundEffectManager")
+currency_drop_scene = ExtResource("2_76r6u")
 
 [node name="Visuals" type="Node3D" parent="." unique_id=319837126]
 
@@ -128,3 +133,11 @@ metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=500904784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5488769, 0)
 shape = SubResource("BoxShape3D_bbr86")
+
+[node name="SoundEffectManager" type="Node3D" parent="." unique_id=2144362706]
+script = ExtResource("5_3q4n7")
+metadata/_custom_type_script = "uid://cm3o2ip4uon7x"
+
+[node name="Activate" type="AudioStreamPlayer" parent="SoundEffectManager" unique_id=775982147]
+stream = ExtResource("6_um6dj")
+volume_db = -8.0

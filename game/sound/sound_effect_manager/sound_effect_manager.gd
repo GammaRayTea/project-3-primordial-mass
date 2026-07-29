@@ -3,7 +3,7 @@ class_name SoundEffectManager extends Node3D
 
 var sounds:Dictionary[String,Variant]
 @export var debug:bool
-
+@export var persist:bool = false
 #
 func _ready():
 	for child in get_children():
@@ -17,7 +17,11 @@ func _play(_sound_names :PackedStringArray) -> void:
 		if sounds.has(sound_name):
 			if debug:
 				print("playing ", sound_name)
+			if persist:
+				sounds[sound_name].reparent(get_tree().get_first_node_in_group("Game"))
+				sounds[sound_name].finished.connect(sounds[sound_name].queue_free)
 			sounds[sound_name].play()
 		else:
 			if debug:
 				print("Sound ", sound_name, " not found")
+				

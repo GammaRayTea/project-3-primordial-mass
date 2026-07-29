@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
 [ext_resource type="Texture2D" uid="uid://bvh7bcgdwk4gp" path="res://icon.svg" id="4_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://dr7f3cngoh8bd" path="res://assets/themes/ui_elements/upgrade_button_02.png" id="5_s5jsc"]
+[ext_resource type="Texture2D" uid="uid://du1gbnrkhm7ua" path="res://assets/themes/ui_elements/upgrade_button_hover_02.png" id="5_th2mu"]
+[ext_resource type="Texture2D" uid="uid://jw51yopv3fkg" path="res://assets/themes/ui_elements/upgrade_button_max.png" id="6_s5jsc"]
 
 [node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label")]
 oversampling_with_scale = 2
@@ -72,7 +75,7 @@ alignment = 2
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[img]res://assets/Items/currency/goo/goo.png[/img] 0"
+text = "[img]res://assets/items/currency/goo/goo.png[/img] 0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -88,33 +91,34 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -8.0
-offset_right = 76.0
+offset_right = 56.0
 offset_bottom = 8.0
 grow_vertical = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 4
 
-[node name="PlusButton" type="Button" parent="VBoxContainer/ButtonContainer" unique_id=2082322506]
-custom_maximum_size = Vector2(-1, 20)
+[node name="PlusButton" type="TextureButton" parent="VBoxContainer/ButtonContainer" unique_id=1624114475]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = -10.0
-offset_right = -2.0
-offset_bottom = 10.0
+offset_left = -30.0
+offset_top = -9.0
+offset_right = -12.0
+offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 10
-text = "upgrade"
-alignment = 0
+texture_normal = ExtResource("5_s5jsc")
+texture_pressed = ExtResource("5_th2mu")
+texture_hover = ExtResource("5_th2mu")
+texture_disabled = ExtResource("6_s5jsc")
+stretch_mode = 4
 
 [node name="StatDescription" type="RichTextLabel" parent="VBoxContainer" unique_id=1536478385]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 14
-text = "description lorem ipsum dolor sit amet
-
-"
+text = "Increases stability gained"
 fit_content = true
 scroll_active = false

@@ -2,7 +2,7 @@
 
 @export var was_opened: bool = false
 @export var is_locked: bool = false
-@export var drop_container_scene: PackedScene
+@export var currency_drop_scene: PackedScene
 @export var drop_scatter_radius_min: float = 0.6
 @export var drop_scatter_radius_max: float = 1.5
 
@@ -31,16 +31,17 @@ func hover_end() -> void:
 
 
 func _spawn_loot() -> void:
-	if drop_container_scene == null:
+	if currency_drop_scene == null:
 		push_warning("Chest '%s' has no drop_container_scene assigned." % name)
 		return
 	for drop in get_loot():
-		var instance := drop_container_scene.instantiate()
+		var instance := currency_drop_scene.instantiate()
+		instance.item = Currency.new()
+		(instance.item as Currency).type = drop.type
+		(instance.item as Currency).value = drop.value
 		get_parent().add_child(instance)
 		instance.global_position = global_position + Vector3(
 			randf_range(drop_scatter_radius_min, drop_scatter_radius_max),
 			0.2,
 			0.0
 		).rotated(Vector3(0.0, 1.0, 0.0), randf() * TAU)
-		if instance.has_method("setup"):
-			instance.setup(drop.type, drop.value)

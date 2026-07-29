@@ -2,14 +2,25 @@ class_name DungeonPopulator extends Node
 
 
 #@export var generator:DungeonGenerator
+@export var cell_size = Vector2i(16,16)
+@export_category("Wrappers")
 @export var enemy_wrapper:Node3D
 @export var object_wrapper:Node3D
 
+@export_category("Scenes")
 enum ENEMY_NAMES {GLOBBER, BUNNY, DRAGONFLY}
+enum CONTAINER_NAMES {CHEST, PILLAR}
+enum OBJECT_TYPE {CONTAINER, ENEMY, KEY}
 
 @export var enemy_scenes:Dictionary[ENEMY_NAMES,PackedScene]
+@export var container_scenes:Dictionary[CONTAINER_NAMES, PackedScene]
+@export var pearl_scene:PackedScene
 
-@export var cell_size = Vector2i(16,16)
+@export_category("Probabilites")
+@export var base_p_enemy:float = 40.0
+@export var base_p_container:float = 50.0
+@export var base_p_pearl:float = 50.0
+
 
 var rng:RandomNumberGenerator
 
@@ -18,63 +29,122 @@ func evaluate_cell(_cell:Cell) -> void:
 	
 	var valid_positions:Array[Vector2i] = get_list_of_true_positions(_cell.bit_map)
 	
-	# ENEMIES-------
-	var p_enemy:float = 40.0
+	var p_enemy = base_p_enemy
+	var p_container= base_p_container
+	var p_pearl = base_p_pearl
+	
+	
+	
 	
 	
 	# look at neighbours
-	# accumulate value of how many neighbours have enemies
+	# accumulate value of how many neighbours have stuff and subtract from probability
 	for cell in _cell.connections:
-		if cell.enemy_total >0:
+		if cell.enemy_total > 0:
 			p_enemy -= 10.0
-	var test = rng.randf_range(0.0,100.0)
-	if test< p_enemy and _cell.cell_position!= Vector2(0,0):
-		var result = spawn_enemy(_cell,valid_positions )
+		if cell.has_container:
+			p_container -= 10.0
+		if cell.has_pearl:
+			p_pearl -= 10.0
+	
+	# ENEMIES-------
+	var test_enemy = rng.randf_range(0.0,100.0)
+	if test_enemy< p_enemy and _cell.cell_position!= Vector2(0,0):
+		var result = spawn_object(OBJECT_TYPE.ENEMY,_cell,valid_positions )
+		if result[0]:
+			valid_positions.erase(result[1])
+			
+	
+	# CONTAINERS-------
+	var test_container = rng.randf_range(0.0,100.0)
+	if test_container< p_container and _cell.cell_position!= Vector2(0,0):
+		var result = spawn_object(OBJECT_TYPE.CONTAINER,_cell,valid_positions )
+		if result[0]:
+			valid_positions.erase(result[1])
+	
+	# KEYS-------
+	var test_key = rng.randf_range(0.0,100.0)
+	if test_key< p_pearl and _cell.cell_position!= Vector2(0,0):
+		var result = spawn_object(OBJECT_TYPE.KEY,_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
 
 
 
-
 ##Spawns random enemy at random position of given valid positions. Returns chosen position.
-func spawn_enemy(_cell:Cell, _valid_positions:Array[Vector2i]) -> Array:
+func spawn_object(_type:OBJECT_TYPE,_cell:Cell, _valid_positions:Array[Vector2i]) -> Array:
 	
-	#choose random enemy
-	var enemy_key = ENEMY_NAMES.values()[rng.randi_range(0,ENEMY_NAMES.size()-1)]
+
+	var object_instance:Node3D
+	var tile_spawn_margin:int
+	match _type:
+		OBJECT_TYPE.ENEMY:
+			#choose random enemy
+			var enemy_key = ENEMY_NAMES.values()[rng.randi_range(0,ENEMY_NAMES.size()-1)]
+			var enemy_instance:Enemy = enemy_scenes[enemy_key].instantiate()
+			object_instance = enemy_instance
+			enemy_wrapper.add_child(object_instance)
+			
+		
+			tile_spawn_margin = object_instance.tile_spawn_margin
+			
+			#update cell list
+			if _cell.enemy_amounts.keys().has(enemy_key):
+				_cell.enemy_amounts[enemy_key] += 1
+			else:
+				_cell.enemy_amounts[enemy_key] = 0
+			
+		OBJECT_TYPE.CONTAINER:
+			#choose random container:
+			var container_instance:Chest = container_scenes.values().pick_random().instantiate()
+			object_instance = container_instance
+			object_wrapper.add_child(object_instance)
+			
+			tile_spawn_margin = object_instance.tile_spawn_margin
+			
+			_cell.has_container = true
+		OBJECT_TYPE.KEY:
+			#instane pearl
+			var pearl_instance:ItemDrop = pearl_scene.instantiate()
+			object_instance = pearl_instance
+			object_wrapper.add_child(object_instance)
+			
+			tile_spawn_margin = 1
+			
+			_cell.has_pearl = true
 	
-	var trap_p = 0.5
 	
-	#decide whether to place trap
-	if rng.randf_range(0,1) < trap_p:
-		pass
+	
+	
+
+
 	#decide spawn location
+	var valid_position = get_valid_position_within_cell(_cell,_valid_positions,tile_spawn_margin)
+	var location_found:bool = valid_position[0]
+	var spawn_pos:Vector2i = valid_position[1]
+	object_instance.global_position = Vector3(spawn_pos.x, 0 , spawn_pos.y) + Vector3(_cell.cell_position.x, 0.1, _cell.cell_position.y) + Vector3(0.5, 0.0, 0.5)
+	
+	
+	if location_found == false:
+		return [false, Vector2.ZERO]
+		
+	return [true,spawn_pos]
+
+## chooses a random position within a given cell, accounting for the to be spawned objects tile spawn margin
+func get_valid_position_within_cell(_cell:Cell, _valid_positions:Array[Vector2i], _tile_spawn_margin:int) -> Variant:
 	var location_found:bool = false
 	var spawn_pos:Vector2i
-	var enemy_instance:Enemy = enemy_scenes[enemy_key].instantiate()
 	
-	var enemy_margin =  enemy_instance.tile_spawn_margin * 4
 
 	var iteration_countdown = 200
 	while !location_found:
 		iteration_countdown -=1
 		spawn_pos = _valid_positions[rng.randi_range(0,_valid_positions.size()-1)]
-		var adjacent_true_amount:int = get_adjacent_true_amount(spawn_pos,enemy_instance.tile_spawn_margin, _cell.bit_map)
+		var adjacent_true_amount:int = get_adjacent_true_amount(spawn_pos,_tile_spawn_margin, _cell.bit_map)
 		if iteration_countdown <= 0:
 			return [false, Vector2.ZERO]
-		if adjacent_true_amount >= enemy_margin:
+		if adjacent_true_amount >= _tile_spawn_margin * 4:
 			location_found = true
-		
-	#spawn at location
-	
-	
-	enemy_wrapper.add_child(enemy_instance)
-	enemy_instance.global_position = Vector3(spawn_pos.x, 0 , spawn_pos.y) + Vector3(_cell.cell_position.x, 2, _cell.cell_position.y)
-	
-	#update cell list
-	if _cell.enemy_amounts.keys().has(enemy_key):
-		_cell.enemy_amounts[enemy_key]+=1
-	else:
-		_cell.enemy_amounts[enemy_key]= 0
 	return [true,spawn_pos]
 
 ## Returns list of positions within BitMap that are true

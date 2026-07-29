@@ -7,6 +7,7 @@ class_name Game extends Node3D
 @export var default_env:Environment
 @export var test_env:Environment
 @export var dungeon_gen:DungeonGenerator
+@export var escape_sequence:EscapeSequence
 @export var dark:bool = true
 
 @export var player:Player
@@ -30,6 +31,7 @@ func _ready() -> void:
 	#ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(save)
 	ui_controller.main_menu.start_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
 	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
+	ui_controller.upgrade_menu.return_to_menu_button.pressed.connect(RunManager.save_game)
 	
 	ui_controller.pause_screen.continue_button.pressed.connect(unpause)
 	
@@ -40,10 +42,6 @@ func _ready() -> void:
 		node.rng = global_rng
 	switch_to_state(STATE.MAIN_MENU)
 	
-func to_title() -> void:
-	#GlobalSoundManager.stop_ambience()
-	#GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
-	clear_game()
 
 func start_run():
 	#start ambience
@@ -84,14 +82,31 @@ func start_run():
 	RunManager.start_run()
 
 
+func start_escape_sequence() -> void:
+	escape_sequence.start(dungeon_gen.locked_cells)
+	ui_controller.sound_manager._play(["EscapeStart"])
+
 func end_run() -> void:
 	RunManager.leave_run()
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)
 
-func to_upgrade_menu() -> void:
-	#GlobalSoundManager.stop_ambience()
+
+func die() -> void:
+	RunManager.lose_progress()
+	clear_game()
+	switch_to_state(STATE.UPGRADE_MENU)
+
+func to_title() -> void:
+	GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+
+	clear_game()
+
+func to_upgrade_menu() -> void:
+	GlobalSoundManager.stop_ambience()
+	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
+	clear_game()
 
 func pause() -> void:
 	get_tree().paused = true
@@ -113,11 +128,11 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.UPGRADE_MENU:
 			if previous == STATE.MAIN_MENU:
 				GameSaveManager.load_save()
+				ui_controller.upgrade_menu.retrieve_saved_data()
 			to_upgrade_menu()
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:
 				start_run()
-
 		STATE.PAUSED:
 			pause()
 
@@ -135,3 +150,4 @@ func clear_game() -> void:
 	for child in objects.get_children():
 		child.queue_free()
 	dungeon_gen.clear_dungeon()
+	escape_sequence.clear()

@@ -9,8 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://q7pghq5h7g5" path="res://game/environment/cell_generator/dungeon_generator.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://csp4fpbvwywgg" path="res://game/environment/dungeon_populator/dungeon_populator.gd" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bftgjshprtnon" path="res://game/enemies/globber/globber.tscn" id="9_efxa6"]
+[ext_resource type="PackedScene" uid="uid://vlwpvfw4jtmo" path="res://game/interactables/Loot_interactabels/chests/standard_chest/standard_chest.tscn" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://27250itoet37" path="res://game/ui/ui.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://em0uywivb118" path="res://game/environment/start_portal/start_portal.tscn" id="10_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cq022x5yko3lc" path="res://game/interactables/Loot_interactabels/chests/pillar/pillar.tscn" id="10_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dj11wf4hn52e0" path="res://game/items/pickups/keys/pearl_drop.tscn" id="11_w48qg"]
+[ext_resource type="Script" uid="uid://crh85q05wb57o" path="res://game/environment/escape_sequence/escape_sequence.gd" id="12_vivmo"]
+[ext_resource type="PackedScene" uid="uid://barfmjgbphg3s" path="res://game/environment/escape_sequence/void_block.tscn" id="13_2cqfq"]
 
 [node name="Main" type="Node" unique_id=209619049 node_paths=PackedStringArray("game", "ui")]
 script = ExtResource("1_5vw27")
@@ -21,7 +26,7 @@ render_low_res = true
 low_resolution = Vector2i(512, 288)
 high_resolution = Vector2i(1920, 1080)
 
-[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "player", "enemies", "objects") groups=["Game"]]
+[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "escape_sequence", "player", "enemies", "objects") groups=["Game"]]
 process_mode = 4
 script = ExtResource("3_efxa6")
 ui_controller = NodePath("../UI")
@@ -29,6 +34,7 @@ world_environment = NodePath("WorldEnvironment")
 default_env = ExtResource("6_4c57u")
 test_env = ExtResource("5_w48qg")
 dungeon_gen = NodePath("DungeonGenerator")
+escape_sequence = NodePath("EscapeSequence")
 player = NodePath("Player")
 enemies = NodePath("Enemies")
 objects = NodePath("Objects")
@@ -60,10 +66,23 @@ enemy_scenes = Dictionary[int, PackedScene]({
 1: ExtResource("9_efxa6"),
 2: ExtResource("9_efxa6")
 })
+container_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("9_ycdy4"),
+1: ExtResource("10_w48qg")
+})
+pearl_scene = ExtResource("11_w48qg")
+base_p_container = 40.0
+base_p_pearl = 80.0
 metadata/_custom_type_script = "uid://csp4fpbvwywgg"
+
+[node name="EscapeSequence" type="Node3D" parent="Game" unique_id=1915555105]
+process_mode = 4
+script = ExtResource("12_vivmo")
+void_scene = ExtResource("13_2cqfq")
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
+do_gravity = true
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
