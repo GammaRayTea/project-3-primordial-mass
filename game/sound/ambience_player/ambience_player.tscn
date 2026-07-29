@@ -44,6 +44,27 @@
 [ext_resource type="AudioStream" uid="uid://b61xdp24p40ek" path="res://assets/sound/ambience/medium/med_21.ogg" id="41_kuau2"]
 [ext_resource type="AudioStream" uid="uid://cqmjyg4vxb36l" path="res://assets/sound/ambience/medium/med_22.ogg" id="42_lk1e4"]
 [ext_resource type="AudioStream" uid="uid://bqmedcp8gmbx6" path="res://assets/sound/ambience/drone.ogg" id="43_ofmxm"]
+[ext_resource type="AudioStream" uid="uid://cipecl7q6u8bm" path="res://assets/sound/ambience/hi/high_1.ogg" id="44_1hnw5"]
+[ext_resource type="AudioStream" uid="uid://cygo6162racsx" path="res://assets/sound/ambience/hi/high_2.ogg" id="45_7qisn"]
+[ext_resource type="AudioStream" uid="uid://dtfutall7i4nm" path="res://assets/sound/ambience/hi/high_3.ogg" id="46_e275a"]
+[ext_resource type="AudioStream" uid="uid://c42cl4bonj5k" path="res://assets/sound/ambience/hi/high_4.ogg" id="47_pe13c"]
+[ext_resource type="AudioStream" uid="uid://btjjqndtvpv3d" path="res://assets/sound/ambience/hi/high_5.ogg" id="48_pjbgf"]
+[ext_resource type="AudioStream" uid="uid://c0lfuawrgo0gn" path="res://assets/sound/ambience/hi/high_6.ogg" id="49_a0r75"]
+[ext_resource type="AudioStream" uid="uid://gq6bpalwa7vh" path="res://assets/sound/ambience/hi/high_7.ogg" id="50_poooc"]
+[ext_resource type="AudioStream" uid="uid://dnpwuwib3c6s7" path="res://assets/sound/ambience/hi/high_8.ogg" id="51_sujb4"]
+[ext_resource type="AudioStream" uid="uid://bx6bllvthvyw1" path="res://assets/sound/ambience/hi/high_9.ogg" id="52_i6pyq"]
+[ext_resource type="AudioStream" uid="uid://0m4rb26iast8" path="res://assets/sound/ambience/hi/high_10.ogg" id="53_luxob"]
+[ext_resource type="AudioStream" uid="uid://dtncst2lxd5rg" path="res://assets/sound/ambience/hi/high_11.ogg" id="54_20hau"]
+[ext_resource type="AudioStream" uid="uid://b6db8t8eojb18" path="res://assets/sound/ambience/hi/high_12.ogg" id="55_i4sq0"]
+[ext_resource type="AudioStream" uid="uid://cdwbvftsvg1s2" path="res://assets/sound/ambience/hi/high_13.ogg" id="56_hi55u"]
+[ext_resource type="AudioStream" uid="uid://fs13w8abk2kg" path="res://assets/sound/ambience/hi/high_14.ogg" id="57_g4ng1"]
+[ext_resource type="AudioStream" uid="uid://b3isheyfit7el" path="res://assets/sound/ambience/hi/high_15.ogg" id="58_u58pc"]
+[ext_resource type="AudioStream" uid="uid://brw7wbk2ss2xy" path="res://assets/sound/ambience/hi/high_16.ogg" id="59_0dxsg"]
+[ext_resource type="AudioStream" uid="uid://c72bl264gkojj" path="res://assets/sound/ambience/hi/high_17.ogg" id="60_kuau2"]
+[ext_resource type="AudioStream" uid="uid://y82cd4j88d0s" path="res://assets/sound/ambience/hi/high_18.ogg" id="61_lk1e4"]
+[ext_resource type="AudioStream" uid="uid://bnw0lksarpbff" path="res://assets/sound/ambience/hi/high_19.ogg" id="62_e504v"]
+[ext_resource type="AudioStream" uid="uid://dq3k81pc0not0" path="res://assets/sound/ambience/hi/high_20.ogg" id="63_0p7ht"]
+[ext_resource type="AudioStream" uid="uid://6kbge7lq06ft" path="res://assets/sound/ambience/hi/high_21.ogg" id="64_1jctn"]
 
 [sub_resource type="Curve" id="Curve_q46os"]
 _data = [Vector2(0, 0.74712646), 0.0, 0.0, 0, 0, Vector2(1, 0.20224726), 0.0, 0.0, 0, 0]
@@ -65,7 +86,7 @@ stream_player_2d_template = NodePath("AudioStreamPlayer2DTemplate")
 center_marker = NodePath("CenterMarker")
 low_samples = Array[AudioStream]([ExtResource("2_q46os"), ExtResource("3_ofmxm"), ExtResource("4_7v2vm"), ExtResource("5_1x6i1"), ExtResource("6_8yj6u"), ExtResource("7_c1i2t"), ExtResource("8_f0mud"), ExtResource("9_8p6yo"), ExtResource("10_tc0r7"), ExtResource("11_qjiba"), ExtResource("12_w1jyf"), ExtResource("13_4ts7j"), ExtResource("14_ohtkc"), ExtResource("15_t0oir"), ExtResource("16_3jlob"), ExtResource("17_jptcn"), ExtResource("18_31r8q"), ExtResource("19_c5wlq"), ExtResource("20_26k8c"), ExtResource("21_7v2vm")])
 medium_samples = Array[AudioStream]([ExtResource("21_irgpu"), ExtResource("22_ntvvp"), ExtResource("23_fg4f3"), ExtResource("24_0n6mh"), ExtResource("25_1hnw5"), ExtResource("26_7qisn"), ExtResource("27_e275a"), ExtResource("28_pe13c"), ExtResource("29_pjbgf"), ExtResource("30_a0r75"), ExtResource("31_poooc"), ExtResource("32_sujb4"), ExtResource("33_i6pyq"), ExtResource("34_luxob"), ExtResource("35_20hau"), ExtResource("36_i4sq0"), ExtResource("37_hi55u"), ExtResource("38_g4ng1"), ExtResource("39_u58pc"), ExtResource("40_0dxsg"), ExtResource("41_kuau2"), ExtResource("42_lk1e4")])
-high_samples = Array[AudioStream]([ExtResource("42_lk1e4")])
+high_samples = Array[AudioStream]([ExtResource("44_1hnw5"), ExtResource("45_7qisn"), ExtResource("46_e275a"), ExtResource("47_pe13c"), ExtResource("48_pjbgf"), ExtResource("49_a0r75"), ExtResource("50_poooc"), ExtResource("51_sujb4"), ExtResource("52_i6pyq"), ExtResource("53_luxob"), ExtResource("54_20hau"), ExtResource("55_i4sq0"), ExtResource("56_hi55u"), ExtResource("57_g4ng1"), ExtResource("58_u58pc"), ExtResource("59_0dxsg"), ExtResource("60_kuau2"), ExtResource("61_lk1e4"), ExtResource("62_e504v"), ExtResource("63_0p7ht"), ExtResource("64_1jctn")])
 low_curve = SubResource("Curve_q46os")
 medium_curve = SubResource("Curve_ofmxm")
 high_curve = SubResource("Curve_7v2vm")
