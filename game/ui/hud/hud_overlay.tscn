@@ -205,7 +205,7 @@ states/hurt/node = SubResource("AnimationNodeAnimation_cofoi")
 states/hurt/position = Vector2(533, 200)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_2gjfp"), "RESET", "hurt", SubResource("AnimationNodeStateMachineTransition_gtlt3"), "hurt", "RESET", SubResource("AnimationNodeStateMachineTransition_2tv8o"), "RESET", "escape", SubResource("AnimationNodeStateMachineTransition_lp4vu"), "escape", "hurt", SubResource("AnimationNodeStateMachineTransition_okiks"), "hurt", "escape", SubResource("AnimationNodeStateMachineTransition_y1a1e"), "escape", "RESET", SubResource("AnimationNodeStateMachineTransition_cofoi")]
 
-[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("hint", "animation_tree")]
+[node name="Overlay" type="Control" unique_id=1199412428 node_paths=PackedStringArray("hint", "vignette_animation_tree")]
 oversampling_with_scale = 2
 layout_mode = 3
 anchors_preset = 15
@@ -217,7 +217,7 @@ mouse_filter = 2
 theme = ExtResource("1_2tv8o")
 script = ExtResource("2_cofoi")
 hint = NodePath("Hint")
-animation_tree = NodePath("AnimationTree")
+vignette_animation_tree = NodePath("Vignette/AnimationTree")
 
 [node name="ItemPreview" type="Panel" parent="." unique_id=678868192 node_paths=PackedStringArray("image", "label")]
 unique_name_in_owner = true
@@ -283,6 +283,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="VignettePlayer" type="AnimationPlayer" parent="Vignette" unique_id=2126894272]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_2gjfp")
+
+[node name="AnimationTree" type="AnimationTree" parent="Vignette" unique_id=230323462]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_2tv8o")
+anim_player = NodePath("../VignettePlayer")
+parameters/conditions/escape = false
+
 [node name="Hint" type="Label" parent="." unique_id=1253020850]
 texture_filter = 1
 layout_mode = 1
@@ -301,10 +311,4 @@ theme = ExtResource("1_2tv8o")
 text = "Press E to leave "
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2126894272]
-libraries/ = SubResource("AnimationLibrary_2gjfp")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=230323462]
-tree_root = SubResource("AnimationNodeStateMachine_2tv8o")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/escape = false
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

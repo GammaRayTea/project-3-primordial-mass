@@ -4,18 +4,21 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_jya1v"]
 [ext_resource type="PackedScene" uid="uid://dr7knno85ks28" path="res://game/ui/tutorial/hint.tscn" id="3_6t6in"]
 
-[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "stability_hint")]
+[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "stability_hint", "pearl_hint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_jya1v")
 script = ExtResource("1_b5dgg")
 hint_container = NodePath("VBoxContainer")
 movement_hint = NodePath("VBoxContainer/Move")
+sprint_hint = NodePath("VBoxContainer/SprintHint")
 stability_hint = NodePath("StabilityHint")
+pearl_hint = NodePath("PearlHint")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=439091700]
 layout_mode = 1
@@ -27,20 +30,42 @@ anchor_bottom = 0.23600002
 offset_left = -0.20800209
 offset_top = -0.11999893
 offset_right = 0.04798889
-offset_bottom = 0.03199768
+offset_bottom = 48.031998
+mouse_filter = 2
+theme_override_constants/separation = 3
 
 [node name="Move" parent="VBoxContainer" unique_id=486379497 instance=ExtResource("3_6t6in")]
 layout_mode = 2
+mouse_filter = 2
 text = "Move with WASD"
+
+[node name="SprintHint" parent="VBoxContainer" unique_id=1919801331 instance=ExtResource("3_6t6in")]
+layout_mode = 2
+mouse_filter = 2
+text = "Sprint by holding Shift"
 
 [node name="StabilityHint" parent="." unique_id=1754516226 instance=ExtResource("3_6t6in")]
 layout_mode = 1
 anchor_left = 0.025
 anchor_top = 0.708
-anchor_right = 0.5
+anchor_right = 0.44500002
 anchor_bottom = 0.84400004
 offset_left = -1.8000002
-offset_top = 0.09599304
-offset_right = -1.0
-offset_bottom = -0.072006226
+offset_top = 33.095993
+offset_right = 0.1599884
+offset_bottom = 23.927994
+mouse_filter = 2
 text = "Actions deplete this realms stability"
+
+[node name="PearlHint" parent="." unique_id=647360424 instance=ExtResource("3_6t6in")]
+layout_mode = 1
+anchor_left = 0.025
+anchor_top = 0.708
+anchor_right = 0.44500002
+anchor_bottom = 0.84400004
+offset_left = 269.2
+offset_top = 33.095993
+offset_right = 271.15997
+offset_bottom = 23.927994
+mouse_filter = 2
+text = "Place pearls on pillars to stabilise the realm"

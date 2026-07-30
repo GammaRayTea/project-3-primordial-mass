@@ -18,7 +18,44 @@
 [ext_resource type="AudioStream" uid="uid://bjldqlqa154bj" path="res://assets/sound/general_sfx/menu/upgrade.wav" id="15_s7oao"]
 [ext_resource type="AudioStream" uid="uid://dfmwcdvmv4qn3" path="res://assets/sound/general_sfx/game_events/death.wav" id="16_m555d"]
 
-[node name="UI" type="CanvasLayer" unique_id=982157194 node_paths=PackedStringArray("main_menu", "hud", "upgrade_menu", "pause_screen", "death_screen", "sound_manager")]
+[sub_resource type="Animation" id="Animation_gtlt3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Transition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lp4vu"]
+resource_name = "fade"
+length = 1.4333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Transition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dt3s8"]
+_data = {
+&"RESET": SubResource("Animation_gtlt3"),
+&"fade": SubResource("Animation_lp4vu")
+}
+
+[node name="UI" type="CanvasLayer" unique_id=982157194 node_paths=PackedStringArray("main_menu", "hud", "upgrade_menu", "pause_screen", "death_screen", "sound_manager", "transtion_screen", "fade_player")]
 process_mode = 3
 script = ExtResource("1_8573q")
 main_menu = NodePath("MainMenu")
@@ -28,6 +65,22 @@ pause_screen = NodePath("PauseScreen")
 death_screen = NodePath("DeathScreen")
 sound_manager = NodePath("SoundEffectManager")
 tutorial_scene = ExtResource("3_dt3s8")
+transtion_screen = NodePath("Transition")
+fade_player = NodePath("Transition/FadePlayer")
+
+[node name="Transition" type="ColorRect" parent="." unique_id=2126724557]
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="FadePlayer" type="AnimationPlayer" parent="Transition" unique_id=1459585568]
+libraries/ = SubResource("AnimationLibrary_dt3s8")
 
 [node name="MainMenu" parent="." unique_id=1891432706 instance=ExtResource("2_6fpg5")]
 visible = false

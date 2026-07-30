@@ -6,33 +6,38 @@ class_name Tutorial extends Control
 
 @export_category("Hints")
 @export var movement_hint:Control
+@export var sprint_hint:Control
 @export var stability_hint:Control
+
+@export var pearl_hint:Control
 
 enum TUTORIAL_TIMED_PHASE {INIT,SPAWN, STABILITY_HINT, OBJECTIVE}
 var current_phase:TUTORIAL_TIMED_PHASE = TUTORIAL_TIMED_PHASE.INIT
 
 
-signal phase_done
+
 
 func _ready() -> void:
 	
 	
-	
-	phase_done.connect(next_phase)
+
 	next_phase()
 	
 
 func next_phase() -> void:
 	current_phase = (current_phase + 1) as TUTORIAL_TIMED_PHASE
+	await get_tree().create_timer(1).timeout
 	match current_phase:
 		TUTORIAL_TIMED_PHASE.SPAWN:
 			
 			modulate_element(movement_hint)
-			
+			await get_tree().create_timer(1).timeout
+			await modulate_element(sprint_hint)
+			next_phase()
 		TUTORIAL_TIMED_PHASE.STABILITY_HINT:
 			modulate_element(stability_hint)
 
-func modulate_element(_control:Control, ) -> void:
+func modulate_element(_control:Control ) -> void:
 	
 	
 	var tween:Tween = get_tree().create_tween()
@@ -43,4 +48,3 @@ func modulate_element(_control:Control, ) -> void:
 	tween = get_tree().create_tween()
 	tween.tween_property(_control,"modulate:a",0.0, 1)
 	await tween.finished
-	next_phase()

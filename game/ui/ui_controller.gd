@@ -6,8 +6,12 @@ class_name UIController extends CanvasLayer
 @export var death_screen:DeathScreen
 @export var sound_manager:SoundEffectManager
 @export var tutorial_scene:PackedScene
+
+@export var transtion_screen:ColorRect
+@export var fade_player:AnimationPlayer
 var tutorial:Tutorial
 
+signal fade_finished
 
 func _ready() -> void:
 
@@ -74,3 +78,14 @@ func switch_to_state(_state:Game.STATE) -> void:
 
 func _on_start_run_button_pressed() -> void:
 	sound_manager._play(["StartRun"])
+
+
+func fade(_time:float = 1.0) -> void:
+	transtion_screen.show()
+	var from_end:bool = false
+	if _time < 0:
+		from_end = true
+	fade_player.play("fade", -1, _time, from_end)
+	await fade_player.animation_finished
+	transtion_screen.hide()
+	fade_finished.emit()

@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dr7knno85ks28"]
 
 [ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="1_50ujf"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_muuxq"]
 [ext_resource type="Script" uid="uid://bm58labb2apy8" path="res://game/ui/tutorial/tutorial_hint.gd" id="1_yxi1u"]
 
 [node name="Hint" type="Control" unique_id=486379497 node_paths=PackedStringArray("label")]
+custom_maximum_size = Vector2(-1, 30)
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -11,24 +13,27 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_muuxq")
 script = ExtResource("1_yxi1u")
 label = NodePath("MarginContainer/HintLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=942945356]
 z_index = 1
-layout_mode = 0
-offset_right = 512.0
-offset_bottom = 144.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="HintLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1923269892]
-custom_maximum_size = Vector2(200, -1)
 layout_mode = 2
-text = "Text
-"
+text = "axxyyy"
+fit_content = true
 scroll_active = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2142276053]

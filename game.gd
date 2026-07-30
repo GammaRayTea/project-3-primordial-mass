@@ -26,6 +26,7 @@ var paused:bool = false
 enum STATE {MAIN_MENU, UPGRADE_MENU, IN_GAME, PAUSED, DIED}
 
 
+
 func _ready() -> void:
 	ui_controller.upgrade_menu.start_run_button.pressed.connect(switch_to_state.bind(STATE.IN_GAME))
 	ui_controller.main_menu.start_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
@@ -58,6 +59,7 @@ func _ready() -> void:
 
 func start_run():
 	#start ambience
+	ui_controller.fade(1.0)
 	ui_controller.hud.set_escape_effect(false)
 	ui_controller.hud.play_vignette_effect("RESET")
 	GlobalSoundManager.fade_out_music(1.5)
@@ -106,7 +108,8 @@ func start_escape_sequence() -> void:
 	player.camera.cam_shake(2)
 
 func end_run() -> void:
-	ui_controller.tutorial.queue_free()
+	if ui_controller.tutorial:
+		ui_controller.tutorial.queue_free()
 	RunManager.leave_run()
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)
@@ -141,7 +144,8 @@ func switch_to_state(_state:STATE) -> void:
 	#print("switching to ", STATE.keys()[_state])
 	var previous = current_state
 	current_state = _state
-	ui_controller.switch_to_state(_state)
+	
+	
 	match _state:
 		STATE.MAIN_MENU:
 			to_title()
@@ -152,12 +156,14 @@ func switch_to_state(_state:STATE) -> void:
 			to_upgrade_menu()
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:
+				await ui_controller.fade(-1)
 				start_run()
 		STATE.PAUSED:
 			pause()
 		STATE.DIED:
 			GlobalSoundManager.stop_ambience(true)
 			pause()
+	ui_controller.switch_to_state(_state)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
