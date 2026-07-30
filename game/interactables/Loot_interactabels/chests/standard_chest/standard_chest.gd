@@ -2,13 +2,13 @@ class_name StandardChest extends Chest
 
 @export var min_value_goo: int = 1
 @export var max_value_goo: int = 1
-@export var min_drops_goo: int = 2
-@export var max_drops_goo: int = 5
+@export var min_drops_goo: int = 0
+@export var max_drops_goo: int = 2
 
-@export var min_value_coins: int = 1
-@export var max_value_coins: int = 1
-@export var min_drops_coins: int = 6
-@export var max_drops_coins: int = 13
+@export var min_value_coins: int = 2
+@export var max_value_coins: int = 3
+@export var min_drops_coins: int = 3
+@export var max_drops_coins: int = 4
 
 func get_loot() -> Array[Dictionary]:
 	var loot: Array[Dictionary] = []

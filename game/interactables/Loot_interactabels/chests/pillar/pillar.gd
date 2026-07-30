@@ -1,15 +1,15 @@
 class_name Pillar extends Chest
 
 @export var currency_type: GlobalEnum.CURRENCY
-@export var min_value_goo: int = 1
-@export var max_value_goo: int = 2
-@export var min_drops_goo: int = 2
-@export var max_drops_goo: int = 5
+@export var min_value_goo: int = 2
+@export var max_value_goo: int = 3
+@export var min_drops_goo: int = 3
+@export var max_drops_goo: int = 4
 
 @export var min_value_coins: int = 1
-@export var max_value_coins: int = 2
-@export var min_drops_coins: int = 2
-@export var max_drops_coins: int = 5
+@export var max_value_coins: int = 1
+@export var min_drops_coins: int = 0
+@export var max_drops_coins: int = 2
 
 
 @export var sprite:Sprite3D
