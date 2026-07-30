@@ -53,7 +53,7 @@ func modulate_element(_control:Control ) -> void:
 func on_pearl_collected(_node:Node) -> void:
 	if !is_pearl_collected:
 		modulate_element(pearl_hint)
-		is_pearl_collected = false
+		is_pearl_collected = true
 
 func on_stability_depleted() -> void:
 	modulate_element(escape_hint)
