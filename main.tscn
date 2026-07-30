@@ -82,7 +82,7 @@ cycle_decay_speed = 5.0
 void_scene = ExtResource("13_2cqfq")
 
 [node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5647564, 8)
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 

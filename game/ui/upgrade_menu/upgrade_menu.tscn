@@ -60,6 +60,7 @@ horizontal_scroll_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer" unique_id=329675532]
 z_index = 1
 custom_minimum_size = Vector2(290, 500)
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 offset_transform_enabled = true

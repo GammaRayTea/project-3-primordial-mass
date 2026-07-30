@@ -47,6 +47,7 @@
 [ext_resource type="AudioStream" uid="uid://bei1hcq6i3xi8" path="res://assets/player/sounds/step_walk_8.wav" id="45_utkri"]
 [ext_resource type="AudioStream" uid="uid://otr2fphruht8" path="res://assets/player/sounds/step_walk_9.wav" id="46_xe2yg"]
 [ext_resource type="AudioStream" uid="uid://ba7j8i6cnaf1x" path="res://assets/player/sounds/hurt.wav" id="47_gkov1"]
+[ext_resource type="PackedScene" uid="uid://dqnel5fqpvae5" path="res://game/player/stamina_bar.tscn" id="48_n6iff"]
 
 [sub_resource type="Animation" id="Animation_bp242"]
 resource_name = "Leyla_Run"
@@ -1450,12 +1451,16 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("47_gkov1")
 
-[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "sprint_timer", "animation_tree", "idle_animation_variation_timer", "rotation_pivot") groups=["Player"]]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kpvxy"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Player" type="CharacterBody3D" unique_id=472072241 node_paths=PackedStringArray("push_box_shape", "camera", "animation_tree", "stamina_bar", "stamina_bar_animation_player", "idle_animation_variation_timer", "rotation_pivot") groups=["Player"]]
 script = ExtResource("1_b2mth")
 push_box_shape = NodePath("RotationPivot/PushBox/CollisionShape3D")
 camera = NodePath("CameraStuff/CamGibel")
-sprint_timer = NodePath("SprintTimer")
 animation_tree = NodePath("AnimationTree")
+stamina_bar = NodePath("Sprite3D/SubViewport/Control/TextureProgressBar")
+stamina_bar_animation_player = NodePath("Sprite3D/SubViewport/Control/AnimationPlayer")
 idle_animation_variation_timer = NodePath("IdleAnimTimer")
 rotation_pivot = NodePath("RotationPivot")
 
@@ -1515,7 +1520,7 @@ texture_filter = 0
 texture = ExtResource("3_epc1c")
 
 [node name="Ponytail1" type="Sprite3D" parent="RotationPivot/Visuals/Head" unique_id=2025189592]
-transform = Transform3D(0.9999978, 0, 0, 0, 0.9999978, -1.0658115e-14, 0, 1.0658122e-14, 0.9999971, 0.008621212, -0.12480168, 0.0068664625)
+transform = Transform3D(0.9999976, 0, 0, 0, 0.9999976, -1.0658115e-14, 0, 1.0658121e-14, 0.9999971, 0.008621212, -0.12480168, 0.0068664625)
 cast_shadow = 0
 shaded = true
 alpha_cut = 1
@@ -1714,8 +1719,6 @@ debug_color = Color(0.93590873, 0.24546155, 0.17528254, 0.41960785)
 
 [node name="IdleAnimTimer" type="Timer" parent="." unique_id=1531046003]
 
-[node name="SprintTimer" type="Timer" parent="." unique_id=1112385316]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=166413234]
 libraries/ = SubResource("AnimationLibrary_gyg5y")
 
@@ -1747,6 +1750,19 @@ stream = SubResource("AudioStreamRandomizer_afl2q")
 volume_db = -12.0
 bus = &"EntitySoundEffects"
 
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=791012906]
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, -0.15084803, 0.38552856)
+billboard = 1
+texture_filter = 0
+texture = SubResource("ViewportTexture_kpvxy")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=38700327]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(308, 45)
+
+[node name="Control" parent="Sprite3D/SubViewport" unique_id=2005501476 instance=ExtResource("48_n6iff")]
+
 [connection signal="area_entered" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_entered"]
 [connection signal="area_exited" from="RotationPivot/PushStartBox" to="." method="_on_push_start_box_exited"]
 [connection signal="area_entered" from="RotationPivot/PushBox" to="." method="on_push_box_entered"]
@@ -1756,4 +1772,5 @@ bus = &"EntitySoundEffects"
 [connection signal="area_entered" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_entered"]
 [connection signal="area_exited" from="RotationPivot/DropPickupBox" to="." method="on_interaction_box_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
-[connection signal="timeout" from="SprintTimer" to="." method="on_sprint_timer_done"]
+
+[editable path="Sprite3D/SubViewport/Control"]
