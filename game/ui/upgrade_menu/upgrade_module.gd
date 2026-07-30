@@ -10,12 +10,11 @@ class_name UpgradeModule extends Control
 @export var base_cost:int:
 	set(value):
 		base_cost = value
-		update_data()
+
 var current_cost:int
 @export var cost_mulitplier:float = 1.0:
 	set(value):
 		cost_mulitplier = value
-		update_data()
 
 
 signal upgrade_successful
@@ -47,12 +46,15 @@ var current_upgrade_level:int = 0:
 var slots:Array[Slot] = []
 
 func retrieve_saved_data() -> void:
-	current_upgrade_level = GameSaveManager.save_game.player_stat_levels[upgrade_stat]
+	for slot in slots:
+		slot.value = false
+	current_upgrade_level = RunManager.player_stat_levels[upgrade_stat]
+	for i in current_upgrade_level:
+		slots[i].value = true
 	update_data()
 
 func _ready() -> void:
 	
-	update_data()
 	update_slot_amount()
 	plus_button.pressed.connect(on_button_press.bind(true))
 
@@ -71,8 +73,7 @@ func update_slot_amount() -> void:
 			slots[slot].set_owner(slot_container)
 
 func update_data() -> void:
-	for slot in slots:
-		slot.value = false
+
 	#TODO
 	if current_upgrade_level == 0:
 		current_cost = base_cost

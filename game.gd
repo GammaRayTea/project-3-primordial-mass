@@ -130,6 +130,7 @@ func to_title() -> void:
 	clear_game()
 
 func to_upgrade_menu() -> void:
+	ui_controller.upgrade_menu.retrieve_saved_data()
 	GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
 	clear_game()
@@ -153,9 +154,8 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.MAIN_MENU:
 			to_title()
 		STATE.UPGRADE_MENU:
-			if previous == STATE.MAIN_MENU:
-				GameSaveManager.load_save()
-				ui_controller.upgrade_menu.retrieve_saved_data()
+			
+			RunManager.load_game()
 			to_upgrade_menu()
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:

@@ -1,5 +1,5 @@
 extends Node
-var base_max_stability = 100.0
+var base_max_stability = 1000.0
 
 var stability_bar:TextureProgressBar
 var stable_phase:bool = true
@@ -28,7 +28,6 @@ var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int] = {
 	GlobalEnum.UPGRADES.STAMINA:0
 	
 }
-var player_stat
 
 
 func _ready() -> void:
@@ -74,6 +73,14 @@ func leave_run() -> void:
 		GameSaveManager.save_game.tutorial = false
 		
 	save_game()
+
+func load_game() -> void:
+	GameSaveManager.load_save()
+	saved_currency = GameSaveManager.save_game.currency
+	player_stats =  GameSaveManager.save_game.player_stats
+	player_stat_levels =  GameSaveManager.save_game.player_stat_levels
+	
+	print(saved_currency," ",player_stats," ", player_stat_levels)
 
 func save_game() -> void:
 	GameSaveManager.save(saved_currency,player_stats, player_stat_levels)
