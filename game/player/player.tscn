@@ -1520,7 +1520,7 @@ texture_filter = 0
 texture = ExtResource("3_epc1c")
 
 [node name="Ponytail1" type="Sprite3D" parent="RotationPivot/Visuals/Head" unique_id=2025189592]
-transform = Transform3D(0.9999977, 0, 0, 0, 0.9999977, -1.0658115e-14, 0, 1.06581216e-14, 0.9999971, 0.008621212, -0.12480168, 0.0068664625)
+transform = Transform3D(0.9999976, 0, 0, 0, 0.9999976, -1.0658115e-14, 0, 1.0658121e-14, 0.9999971, 0.008621212, -0.12480168, 0.0068664625)
 cast_shadow = 0
 shaded = true
 alpha_cut = 1
