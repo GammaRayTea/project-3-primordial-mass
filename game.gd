@@ -50,7 +50,7 @@ func _ready() -> void:
 	
 
 
-
+	RunManager.stability_depleted.connect(start_escape_sequence)
 
 	for node in get_tree().get_nodes_in_group("RNGUnifier"):
 		node.rng = global_rng

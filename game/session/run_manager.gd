@@ -56,13 +56,10 @@ func reset() -> void:
 #TODO: implement player upgrades
 
 
-
+signal stability_depleted
 
 	
 
-func start_escape_event() -> void:
-	stable_phase = false
-	(get_tree().get_first_node_in_group("Game") as Game).start_escape_sequence()
 
 func lose_progress() -> void:
 	for key in run_currency:
@@ -92,8 +89,8 @@ func decrease_stability(_by_value:float) -> void:
 
 func _on_stability_value_changed(_value:float) -> void:
 	if _value <= 0:
-		start_escape_event()
-
+		stable_phase = false
+		stability_depleted.emit()
 
 
 func change_run_currency(_type:GlobalEnum.CURRENCY,_value:int):

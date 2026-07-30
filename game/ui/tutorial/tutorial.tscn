@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_jya1v"]
 [ext_resource type="PackedScene" uid="uid://dr7knno85ks28" path="res://game/ui/tutorial/hint.tscn" id="3_6t6in"]
 
-[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "stability_hint", "pearl_hint")]
+[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "stability_hint", "pearl_hint", "escape_hint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ movement_hint = NodePath("VBoxContainer/Move")
 sprint_hint = NodePath("VBoxContainer/SprintHint")
 stability_hint = NodePath("StabilityHint")
 pearl_hint = NodePath("PearlHint")
+escape_hint = NodePath("StabilityDepletedHint")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=439091700]
 layout_mode = 1
@@ -57,15 +58,28 @@ offset_bottom = 23.927994
 mouse_filter = 2
 text = "Actions deplete this realms stability"
 
+[node name="StabilityDepletedHint" parent="." unique_id=2102784859 instance=ExtResource("3_6t6in")]
+layout_mode = 1
+anchor_left = 0.44900003
+anchor_top = 0.64900005
+anchor_right = 0.551
+anchor_bottom = 0.753
+offset_left = 0.11198425
+offset_top = 50.087982
+offset_right = -0.11199951
+offset_bottom = 50.135986
+mouse_filter = 2
+text = "Escape"
+
 [node name="PearlHint" parent="." unique_id=647360424 instance=ExtResource("3_6t6in")]
 layout_mode = 1
-anchor_left = 0.025
-anchor_top = 0.708
-anchor_right = 0.44500002
-anchor_bottom = 0.84400004
-offset_left = 269.2
-offset_top = 33.095993
-offset_right = 271.15997
-offset_bottom = 23.927994
+anchor_left = 0.441
+anchor_top = 0.823
+anchor_right = 0.975
+anchor_bottom = 0.92700005
+offset_left = 5.2079926
+offset_top = -207.024
+offset_right = 4.799988
+offset_bottom = -206.97601
 mouse_filter = 2
 text = "Place pearls on pillars to stabilise the realm"

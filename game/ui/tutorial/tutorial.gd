@@ -10,16 +10,17 @@ class_name Tutorial extends Control
 @export var stability_hint:Control
 
 @export var pearl_hint:Control
+@export var escape_hint:Control
 
 enum TUTORIAL_TIMED_PHASE {INIT,SPAWN, STABILITY_HINT, OBJECTIVE}
 var current_phase:TUTORIAL_TIMED_PHASE = TUTORIAL_TIMED_PHASE.INIT
 
-
+var is_pearl_collected:bool = false
 
 
 func _ready() -> void:
-	
-	
+	get_tree().node_added.connect(on_node_created)
+	RunManager.stability_depleted.connect(on_stability_depleted)
 
 	next_phase()
 	
@@ -48,3 +49,15 @@ func modulate_element(_control:Control ) -> void:
 	tween = get_tree().create_tween()
 	tween.tween_property(_control,"modulate:a",0.0, 1)
 	await tween.finished
+
+func on_pearl_collected(_node:Node) -> void:
+	if !is_pearl_collected:
+		modulate_element(pearl_hint)
+		is_pearl_collected = false
+
+func on_stability_depleted() -> void:
+	modulate_element(escape_hint)
+
+func on_node_created(_node:Node) -> void:
+	if _node is ItemDrop:
+		_node.child_exiting_tree.connect(on_pearl_collected)

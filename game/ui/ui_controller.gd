@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	for button in get_tree().get_nodes_in_group("Button"):
 		button.pressed.connect(sound_manager._play.bind(["Clicked"]))
-		print(button)
+
 	for module in upgrade_menu.upgrade_modules:
 		module.upgrade_successful.connect(sound_manager._play.bind(["Upgraded"]))
 
