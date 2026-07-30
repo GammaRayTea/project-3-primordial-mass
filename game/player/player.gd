@@ -76,7 +76,7 @@ func _physics_process(_delta: float) -> void:
 			if direction:
 				switch_state( STATE.WALKING)
 			recharge_stamina()
-			
+			reduce_velocity()
 		STATE.WALKING:
 			apply_gravity(_delta)
 			if Input.is_action_pressed("sprint") and can_sprint:
