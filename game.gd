@@ -10,7 +10,8 @@ class_name Game extends Node3D
 @export var escape_sequence:EscapeSequence
 @export var dark:bool = true
 
-@export var player:Player
+@export var player_scene:PackedScene
+var player:Player
 @export var enemies:Node3D
 @export var objects:Node3D
 
@@ -83,6 +84,9 @@ func start_run():
 	process_mode = Node.PROCESS_MODE_INHERIT
 	
 	#init player
+	player = player_scene.instantiate()
+	add_child(player)
+	dungeon_gen.player = player
 	player.start()
 	
 	#start dungeon gen
@@ -123,7 +127,6 @@ func die() -> void:
 func to_title() -> void:
 	GlobalSoundManager.stop_ambience()
 	GlobalSoundManager.queue_music(GlobalSoundManager.SONGS.MENU, true)
-
 	clear_game()
 
 func to_upgrade_menu() -> void:
@@ -173,10 +176,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func clear_game() -> void:
-	process_mode = Node.PROCESS_MODE_DISABLED
+	set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
+
 	for child in enemies.get_children():
 		child.queue_free()
 	for child in objects.get_children():
 		child.queue_free()
 	dungeon_gen.clear_dungeon()
 	escape_sequence.clear()
+	if player:
+		player.queue_free()

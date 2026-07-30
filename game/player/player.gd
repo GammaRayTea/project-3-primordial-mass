@@ -47,11 +47,13 @@ func _ready() -> void:
 	idle_animation_variation_timer.timeout.connect(start_idle_variation_animation)
 
 func start() -> void:
-	global_position = Vector3(8,1,8)
+	global_position = Vector3(8,0.518,8)
 	current_sprint_value = MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA]
 	
 	stamina_bar_animation_player.play("RESET")
 	stamina_bar_animation_player.stop()
+	stamina_bar.modulate.a = 0.0
+	
 
 	for key in held_items:
 		held_items.set(key, 0)
@@ -60,6 +62,8 @@ func start() -> void:
 	push_target = null
 	control_interaction_target = null
 	can_sprint = true
+	
+	camera.position.y = camera.height
 
 func _physics_process(_delta: float) -> void:
 	var direction:Vector3 = process_movement_input()
@@ -98,11 +102,11 @@ func _physics_process(_delta: float) -> void:
 			if hit_stun_counter <= 0:
 				switch_state( STATE.IDLE)
 			reduce_velocity()
-			move_and_slide()
+			
 			apply_gravity(_delta)
 			recharge_stamina()
 			
-	
+	move_and_slide()
 
 
 
@@ -200,7 +204,7 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 			switch_state( STATE.IDLE)
 	
 	
-	move_and_slide()
+
 #endregion
 
 
