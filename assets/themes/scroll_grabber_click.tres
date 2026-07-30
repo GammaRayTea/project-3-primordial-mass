@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://b5du7r74o0ce6"]
+
+[ext_resource type="Texture2D" uid="uid://bfs5rpg7d0si1" path="res://assets/themes/ui_elements/scroll_bar_grabber_pressed_02.png" id="1_pyfkv"]
+
+[resource]
+texture = ExtResource("1_pyfkv")

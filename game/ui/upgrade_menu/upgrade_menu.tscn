@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://daofuuwba4548" path="res://game/ui/upgrade_menu/upgrade_menu.gd" id="1_f1pfv"]
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_hn35m"]
 [ext_resource type="PackedScene" uid="uid://duokir7aj41i1" path="res://game/ui/upgrade_menu/upgrade_module.tscn" id="2_tdrua"]
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="3_6fukm"]
 [ext_resource type="PackedScene" uid="uid://cu60eu3ic4y03" path="res://game/ui/upgrade_menu/currency_counter.tscn" id="3_cu5kv"]
 
 [node name="UpgradeMenu" type="Control" unique_id=1730159824 node_paths=PackedStringArray("upgrade_container", "start_run_button", "return_to_menu_button", "currency_counter", "upgrade_modules")]
@@ -15,11 +16,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hn35m")
 script = ExtResource("1_f1pfv")
-upgrade_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+upgrade_container = NodePath("VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer")
 start_run_button = NodePath("VBoxContainer/HBoxContainer/StartRunButton")
 return_to_menu_button = NodePath("ReturnToMenuButton")
 currency_counter = NodePath("VBoxContainer/HBoxContainer/CurrencyCounter")
-upgrade_modules = [NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStBuildup"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStRes"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStCap"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStam")]
+upgrade_modules = [NodePath("VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer/UpgradeStBuildup"), NodePath("VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer/UpgradeStRes"), NodePath("VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer/UpgradeStCap"), NodePath("VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer/UpgradeStam")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2009022849]
 propagate_maximum_size = false
@@ -30,27 +31,48 @@ offset_top = 12.0
 offset_right = 475.0
 offset_bottom = 269.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=568882911]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=456755107]
 z_index = -1
+custom_minimum_size = Vector2(20.085, 220)
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1_hn35m")
-horizontal_scroll_mode = 0
+texture = ExtResource("3_6fukm")
+region_rect = Rect2(0, 0, 49.805, 50.22)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=329675532]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/NinePatchRect" unique_id=568882911]
 z_index = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 324.0
+offset_bottom = 208.0
+size_flags_vertical = 3
+offset_transform_enabled = true
+theme = ExtResource("1_hn35m")
+draw_focus_border = true
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer" unique_id=329675532]
+z_index = 1
+custom_minimum_size = Vector2(290, 500)
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
+offset_transform_enabled = true
 
-[node name="UpgradeStBuildup" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStBuildup" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat_amount = 0.1
 base_cost = 5
 cost_mulitplier = 2.0
 max_level = 5
 
-[node name="UpgradeStRes" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStRes" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
 upgrade_stat_amount = 0.1
@@ -58,7 +80,7 @@ base_cost = 5
 cost_mulitplier = 2.0
 max_level = 6
 
-[node name="UpgradeStCap" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStCap" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
 upgrade_stat_amount = 0.1
@@ -66,7 +88,7 @@ base_cost = 20
 cost_mulitplier = 0.8
 max_level = 6
 
-[node name="UpgradeStam" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStam" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 3
 upgrade_stat_amount = 0.1
