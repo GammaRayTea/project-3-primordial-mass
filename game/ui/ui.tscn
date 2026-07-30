@@ -92,6 +92,7 @@ z_index = -1
 z_index = -1
 
 [node name="StabilityBar" type="TextureProgressBar" parent="Overlay" unique_id=1776531798 groups=["StabilityBar"]]
+modulate = Color(0.9079417, 0.9079417, 0.90794164, 1)
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -111,7 +112,8 @@ nine_patch_stretch = true
 texture_under = ExtResource("5_n6aae")
 texture_over = ExtResource("6_vhpns")
 texture_progress = ExtResource("5_cshcc")
-tint_progress = Color(0.7595951, 0.75959516, 0.759595, 1)
+tint_under = Color(0.53568584, 0.5356859, 0.5356859, 1)
+tint_progress = Color(0.839099, 0.73440224, 0.9691394, 1)
 
 [node name="PauseScreen" parent="." unique_id=653894896 instance=ExtResource("5_6fpg5")]
 visible = false
