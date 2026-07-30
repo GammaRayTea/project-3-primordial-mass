@@ -82,7 +82,7 @@ func _physics_process(_delta) -> void:
 		if !escaping:
 			current_intensity -= 0.005
 			current_density -= 0.005
-	
+	print(current_intensity)
 
 
 func play_sample(_intensity:INTENSITY) ->void:

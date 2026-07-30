@@ -87,3 +87,5 @@ func _on_screen_entered() -> void:
 
 func _on_screen_exited() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
+	if active:
+		GlobalSoundManager.increase_intensity(-0.1)
