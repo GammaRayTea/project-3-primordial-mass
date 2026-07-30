@@ -45,7 +45,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/NinePatchRect" unique_id=568882911]
-z_index = -1
+z_index = 1
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -95,14 +95,6 @@ upgrade_stat_amount = 0.1
 upgrade_currency = 2
 base_cost = 10
 max_level = 5
-
-[node name="VScrollBar" type="VScrollBar" parent="VBoxContainer/NinePatchRect" unique_id=1043307844]
-layout_mode = 1
-offset_left = 310.0
-offset_top = 10.0
-offset_right = 318.0
-offset_bottom = 210.0
-theme = ExtResource("1_hn35m")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1102358768]
 custom_minimum_size = Vector2(0, 40)
