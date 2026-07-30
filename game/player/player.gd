@@ -16,16 +16,20 @@ class_name Player extends Entity
 @export_category("Components")
 @export var push_box_shape:CollisionShape3D
 @export var camera:PlayerCam
-@export var sprint_timer:Timer
 @export var animation_tree:AnimationTree
-
+@export var stamina_bar:TextureProgressBar
+@export var stamina_bar_animation_player:AnimationPlayer
 
 @export var idle_animation_variation_timer:Timer
 
 
 var hit_stun_counter:float = 0.0
 
-var current_sprint_value:float = 0
+var current_sprint_value:float = 0:
+	set(_value):
+		
+		current_sprint_value = _value
+		stamina_bar.value = current_sprint_value /MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA] * 100
 var can_sprint:bool = true
 enum STATE {IDLE, WALKING, RUNNING, PUSHING, HIT_STUN}
 var current_state =  STATE.IDLE
@@ -65,13 +69,15 @@ func _physics_process(_delta: float) -> void:
 			apply_gravity(_delta)
 			if direction:
 				switch_state( STATE.WALKING)
+			recharge_stamina()
+			
 		STATE.WALKING:
 			apply_gravity(_delta)
 			if Input.is_action_pressed("sprint") and can_sprint:
 				switch_state( STATE.RUNNING)
-			else:
-				current_sprint_value = lerp(current_sprint_value, MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA], 0.1)
 			move(_delta,direction, MAX_WALKING_SPEED, BASE_ACCELERATION)
+			recharge_stamina()
+			
 		STATE.RUNNING:
 			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, BASE_ACCELERATION)
@@ -83,17 +89,19 @@ func _physics_process(_delta: float) -> void:
 			apply_gravity(_delta)
 			move(_delta,direction, MAX_RUNNING_SPEED, PUSH_ACCELERATION)
 			push(_delta,direction)
+			recharge_stamina()
+			
 		STATE.HIT_STUN:
 			hit_stun_counter-= 1
-
 			if hit_stun_counter <= 0:
 				switch_state( STATE.IDLE)
 			reduce_velocity()
 			move_and_slide()
 			apply_gravity(_delta)
+			recharge_stamina()
 			
-			
-			
+	
+
 
 
 func switch_state(_state:STATE) -> void:
@@ -112,6 +120,9 @@ func switch_state(_state:STATE) -> void:
 		STATE.RUNNING:
 			time_scale = 1.5
 			animation = "leyla_run"
+			current_sprint_value -= 100
+			stamina_bar.modulate.a = 1.0
+			
 		STATE.PUSHING:
 			animation = "leyla_walk"
 		STATE.HIT_STUN:
@@ -133,12 +144,21 @@ func handle_sprint() -> void:
 	current_sprint_value-= SPRINT_REDUCTION
 	if current_sprint_value <= 0:
 		can_sprint = false
+		stamina_bar_animation_player.play("empty")
 		switch_state( STATE.IDLE)
-		sprint_timer.start(SPRINT_RECHARGE_TIME)
 		
-func on_sprint_timer_done() -> void:
-	can_sprint = true
-	sprint_timer.stop()
+
+func recharge_stamina() -> void:
+	var max_sprint:float =  MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA]
+	current_sprint_value += max_sprint / SPRINT_RECHARGE_TIME / 60
+	current_sprint_value = clampf(current_sprint_value,0, max_sprint)
+	if current_sprint_value == max_sprint:
+		if !can_sprint:
+			can_sprint = true
+			stamina_bar_animation_player.play("RESET")
+			stamina_bar_animation_player.stop()
+		else:
+			stamina_bar.modulate.a -= 0.01
 #endregion
 
 #region input
