@@ -44,24 +44,29 @@ size_flags_vertical = 3
 [node name="UpgradeStBuildup" parent="ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat_amount = 0.1
+base_cost = 10
 max_level = 5
 
 [node name="UpgradeStRes" parent="ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
 upgrade_stat_amount = 0.1
+base_cost = 10
 max_level = 6
 
 [node name="UpgradeStCap" parent="ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
 upgrade_stat_amount = 0.1
+base_cost = 20
 max_level = 6
 
 [node name="UpgradeStam" parent="ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 3
 upgrade_stat_amount = 0.1
+upgrade_currency = 2
+base_cost = 10
 max_level = 5
 
 [node name="StartRunButton" type="Button" parent="." unique_id=1383201851 groups=["Button"]]
