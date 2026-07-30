@@ -70,8 +70,11 @@ func update_slot_amount() -> void:
 
 func update_data() -> void:
 	#TODO
-	@warning_ignore("narrowing_conversion")
-	current_cost = base_cost *cost_mulitplier * (current_upgrade_level+1)
+	if current_upgrade_level == 0:
+		current_cost = base_cost
+	else:
+		@warning_ignore("narrowing_conversion")
+		current_cost = base_cost * pow(2, current_upgrade_level) * cost_mulitplier 
 	name_label.text = ItemAssets.stat_names[upgrade_stat]
 	cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
 	description_label.text = ItemAssets.stat_descriptions[upgrade_stat]
@@ -84,6 +87,7 @@ func on_button_press(_increase:bool) -> void:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
 			RunManager.change_currency(upgrade_currency, -current_cost)
 			current_upgrade_level += 1
+			update_data()
 			upgrade_successful.emit()
 			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
 			if current_upgrade_level == max_level:

@@ -515,7 +515,8 @@ metadata/_custom_type_script = "uid://yc0ay2h3j4ck"
 script = ExtResource("8_l7o33")
 drop_container = ExtResource("9_ydwe4")
 source = NodePath("../..")
-max_value = 10
+min_value = 1
+max_value = 16
 type = 1
 metadata/_custom_type_script = "uid://bjk3g7dq7gj20"
 

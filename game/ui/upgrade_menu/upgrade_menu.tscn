@@ -44,24 +44,32 @@ size_flags_horizontal = 3
 [node name="UpgradeStBuildup" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat_amount = 0.1
+base_cost = 5
+cost_mulitplier = 2.0
 max_level = 5
 
 [node name="UpgradeStRes" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
 upgrade_stat_amount = 0.1
+base_cost = 5
+cost_mulitplier = 2.0
 max_level = 6
 
 [node name="UpgradeStCap" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
 upgrade_stat_amount = 0.1
+base_cost = 20
+cost_mulitplier = 0.8
 max_level = 6
 
 [node name="UpgradeStam" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 3
 upgrade_stat_amount = 0.1
+upgrade_currency = 2
+base_cost = 10
 max_level = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1102358768]
