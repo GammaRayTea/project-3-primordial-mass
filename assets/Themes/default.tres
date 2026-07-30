@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://hdpxgs0blgb8" path="res://assets/themes/default_button_hover.tres" id="3_pum6u"]
 [ext_resource type="StyleBox" uid="uid://be55fpxlrpanf" path="res://assets/themes/default_button_normal.tres" id="4_m5ycy"]
 [ext_resource type="StyleBox" uid="uid://dd4uqabahma3j" path="res://assets/themes/scroll_grabber_normal.tres" id="5_m5ycy"]
+[ext_resource type="Texture2D" uid="uid://bfs5rpg7d0si1" path="res://assets/themes/ui_elements/scroll_bar_grabber_pressed_02.png" id="6_4bmj0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tdl64"]
 texture = ExtResource("2_dw7e0")
@@ -17,6 +18,9 @@ region_rect = Rect2(1.19911, 0.3875451, 45.3407, 47.327152)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y40n4"]
 bg_color = Color(0.03529412, 0.03529412, 0.03529412, 0.14117648)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qf2id"]
+texture = ExtResource("6_4bmj0")
 
 [resource]
 default_font = ExtResource("1_x0tin")
@@ -31,3 +35,6 @@ ScrollContainer/constants/scrollbar_v_separation = 1
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_y40n4")
 VScrollBar/styles/grabber = ExtResource("5_m5ycy")
 VScrollBar/styles/grabber_highlight = ExtResource("5_m5ycy")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_qf2id")
+VScrollBar/styles/scroll = ExtResource("5_m5ycy")
+VScrollBar/styles/scroll_focus = ExtResource("5_m5ycy")
