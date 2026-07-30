@@ -97,7 +97,7 @@ func change_currency(_type:GlobalEnum.CURRENCY,_value:int):
 		GlobalEnum.CURRENCY.STABILITY:
 			increase_stability(_value)
 		_:
-			run_currency[_type] += _value
+			saved_currency[_type] += _value
 
 
 ## changes given stats value by [param _value]
