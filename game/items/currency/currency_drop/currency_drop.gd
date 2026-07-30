@@ -7,7 +7,7 @@ func _ready() -> void:
 	super()
 	
 func hover_start() -> void:
-	RunManager.change_currency(item.type,item.value)
+	RunManager.change_run_currency(item.type,item.value)
 	sound_manager._play(["PickUp"])
 	queue_free()
 func hover_end() -> void:

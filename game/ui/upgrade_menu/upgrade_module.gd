@@ -48,6 +48,7 @@ var slots:Array[Slot] = []
 
 func retrieve_saved_data() -> void:
 	current_upgrade_level = GameSaveManager.save_game.player_stat_levels[upgrade_stat]
+	update_data()
 
 func _ready() -> void:
 	update_data()
@@ -85,10 +86,10 @@ func on_button_press(_increase:bool) -> void:
 	
 	if _increase:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
-			RunManager.change_currency(upgrade_currency, -current_cost)
+			RunManager.change_saved_currency(upgrade_currency, -current_cost)
 			current_upgrade_level += 1
-			update_data()
-			upgrade_successful.emit()
 			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
 			if current_upgrade_level == max_level:
 				plus_button.disabled = true
+			update_data()
+			upgrade_successful.emit()

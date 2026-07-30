@@ -92,12 +92,17 @@ func _on_stability_value_changed(_value:float) -> void:
 
 
 
-func change_currency(_type:GlobalEnum.CURRENCY,_value:int):
+func change_run_currency(_type:GlobalEnum.CURRENCY,_value:int):
 	match _type:
 		GlobalEnum.CURRENCY.STABILITY:
 			increase_stability(_value)
 		_:
 			run_currency[_type] += _value
+
+
+func change_saved_currency(_type:GlobalEnum.CURRENCY,_value:int):
+	saved_currency[_type] += _value
+	save_game()
 
 
 ## changes given stats value by [param _value]

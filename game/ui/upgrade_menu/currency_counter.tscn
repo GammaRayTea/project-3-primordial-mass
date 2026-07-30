@@ -1,54 +1,68 @@
 [gd_scene format=3 uid="uid://cu60eu3ic4y03"]
 
 [ext_resource type="Script" uid="uid://cpn1sovitbk75" path="res://game/ui/upgrade_menu/currency_counter.gd" id="1_glcwy"]
+[ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_l5cqj"]
+[ext_resource type="Texture2D" uid="uid://yfpn2k00uju3" path="res://assets/items/currency/goo/goo.png" id="2_m86b1"]
 [ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="2_xo4nx"]
+[ext_resource type="Texture2D" uid="uid://ckg8nstgr8oli" path="res://assets/items/currency/coin/coin.png" id="3_l5cqj"]
 
-[node name="CurrencyCounter" type="Control" unique_id=2021535070]
-layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 151.0
-offset_top = -64.0
-offset_right = -261.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="CurrencyCounter" type="MarginContainer" unique_id=1113510377 node_paths=PackedStringArray("goo_counter", "coin_counter")]
+offset_right = 175.0
+offset_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_l5cqj")
 script = ExtResource("1_glcwy")
+goo_counter = NodePath("MarginContainer/HBoxContainer/GooCounter")
+coin_counter = NodePath("MarginContainer/HBoxContainer/CoinCounter")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=259924560]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1185409099]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
 
-[node name="GooCounter" type="RichTextLabel" parent="HBoxContainer" unique_id=1613713739]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=259924560]
+layout_mode = 2
+
+[node name="GooTexture" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1613850207]
+layout_mode = 2
+texture = ExtResource("2_m86b1")
+expand_mode = 2
+
+[node name="GooCounter" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=1613713739]
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[img]res://assets/items/currency/goo/goo.png[/img]"
-autowrap_mode = 2
-vertical_alignment = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -7)
+theme_override_font_sizes/normal_font_size = 20
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
 
-[node name="CoinCounter" type="RichTextLabel" parent="HBoxContainer" unique_id=147650903]
+[node name="CoinTexture" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1786877201]
+layout_mode = 2
+texture = ExtResource("3_l5cqj")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="CoinCounter" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=147650903]
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[img]res://assets/items/currency/coin/coin.png[/img]"
-autowrap_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -7)
+theme_override_font_sizes/normal_font_size = 20
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=179554263]
 z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture = ExtResource("2_xo4nx")
 region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 16
@@ -57,3 +71,5 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
