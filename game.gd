@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	
 	ui_controller.pause_screen.continue_button.pressed.connect(unpause)
-	ui_controller.pause_screen.continue_button.pressed.connect(switch_to_state.bind(STATE.UPGRADE_MENU))
+	ui_controller.pause_screen.continue_button.pressed.connect(switch_to_state.bind(STATE.IN_GAME))
 
 	ui_controller.pause_screen.exit_button.pressed.connect(unpause)
 	ui_controller.pause_screen.exit_button.pressed.connect(switch_to_state.bind(STATE.MAIN_MENU))
