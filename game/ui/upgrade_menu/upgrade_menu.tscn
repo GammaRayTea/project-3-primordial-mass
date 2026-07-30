@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://daofuuwba4548" path="res://game/ui/upgrade_menu/upgrade_menu.gd" id="1_f1pfv"]
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_hn35m"]
 [ext_resource type="PackedScene" uid="uid://duokir7aj41i1" path="res://game/ui/upgrade_menu/upgrade_module.tscn" id="2_tdrua"]
+[ext_resource type="PackedScene" uid="uid://cu60eu3ic4y03" path="res://game/ui/upgrade_menu/currency_counter.tscn" id="3_cu5kv"]
 
 [node name="UpgradeMenu" type="Control" unique_id=1730159824 node_paths=PackedStringArray("upgrade_container", "start_run_button", "return_to_menu_button", "upgrade_modules")]
 oversampling_with_scale = 2
@@ -14,69 +15,65 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hn35m")
 script = ExtResource("1_f1pfv")
-upgrade_container = NodePath("ScrollContainer/VBoxContainer")
-start_run_button = NodePath("StartRunButton")
+upgrade_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+start_run_button = NodePath("VBoxContainer/HBoxContainer/StartRunButton")
 return_to_menu_button = NodePath("ReturnToMenuButton")
-upgrade_modules = [NodePath("ScrollContainer/VBoxContainer/UpgradeStBuildup"), NodePath("ScrollContainer/VBoxContainer/UpgradeStRes"), NodePath("ScrollContainer/VBoxContainer/UpgradeStCap"), NodePath("ScrollContainer/VBoxContainer/UpgradeStam")]
+upgrade_modules = [NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStBuildup"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStRes"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStCap"), NodePath("VBoxContainer/ScrollContainer/VBoxContainer/UpgradeStam")]
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=568882911]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2009022849]
+propagate_maximum_size = false
+clip_contents = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.275
-anchor_top = 0.042000003
-anchor_right = 0.92800003
-anchor_bottom = 0.712
-offset_left = 0.19999695
-offset_top = -0.09600067
-offset_right = -0.13601685
-offset_bottom = -0.055999756
-grow_horizontal = 0
-grow_vertical = 2
+offset_left = 141.0
+offset_top = 12.0
+offset_right = 475.0
+offset_bottom = 269.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=568882911]
+z_index = -1
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("1_hn35m")
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=329675532]
-custom_minimum_size = Vector2(190, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=329675532]
+z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="UpgradeStBuildup" parent="ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStBuildup" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat_amount = 0.1
 max_level = 5
 
-[node name="UpgradeStRes" parent="ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStRes" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
 upgrade_stat_amount = 0.1
 max_level = 6
 
-[node name="UpgradeStCap" parent="ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStCap" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
 upgrade_stat_amount = 0.1
 max_level = 6
 
-[node name="UpgradeStam" parent="ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
+[node name="UpgradeStam" parent="VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1302455092 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 3
 upgrade_stat_amount = 0.1
 max_level = 5
 
-[node name="StartRunButton" type="Button" parent="." unique_id=1383201851 groups=["Button"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -85.0
-offset_top = -38.0
-offset_right = -17.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1102358768]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="CurrencyCounter" parent="VBoxContainer/HBoxContainer" unique_id=2021535070 instance=ExtResource("3_cu5kv")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StartRunButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1383201851 groups=["Button"]]
+layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Enter Realm
 
@@ -103,4 +100,4 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.19217557, 2.5346857e-05, 0.19217399, 1)
 
-[connection signal="pressed" from="StartRunButton" to="." method="_on_start_run_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/StartRunButton" to="." method="_on_start_run_button_pressed"]

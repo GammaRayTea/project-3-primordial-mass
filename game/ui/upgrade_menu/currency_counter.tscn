@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cu60eu3ic4y03"]
+
+[ext_resource type="Script" uid="uid://cpn1sovitbk75" path="res://game/ui/upgrade_menu/currency_counter.gd" id="1_glcwy"]
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="2_xo4nx"]
+
+[node name="CurrencyCounter" type="Control" unique_id=2021535070]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 151.0
+offset_top = -64.0
+offset_right = -261.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_glcwy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=259924560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GooCounter" type="RichTextLabel" parent="HBoxContainer" unique_id=1613713739]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[img]res://assets/items/currency/goo/goo.png[/img]"
+autowrap_mode = 2
+vertical_alignment = 1
+
+[node name="CoinCounter" type="RichTextLabel" parent="HBoxContainer" unique_id=147650903]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[img]res://assets/items/currency/coin/coin.png[/img]"
+autowrap_mode = 2
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=179554263]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xo4nx")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

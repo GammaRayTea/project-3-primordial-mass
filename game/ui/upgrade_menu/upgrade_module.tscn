@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_vanuw"]
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
-[ext_resource type="Texture2D" uid="uid://bhtw8j4os52tv" path="res://assets/themes/ui_elements/upgrade_icon_gain_increase.png" id="4_45m71"]
+[ext_resource type="Texture2D" uid="uid://bhtw8j4os52tv" path="res://assets/Themes/ui_elements/upgrade_icon_gain_increase.png" id="4_45m71"]
 [ext_resource type="Texture2D" uid="uid://dwkpur8bojh0h" path="res://assets/themes/ui_elements/upgrade_button_03.png" id="5_vject"]
 [ext_resource type="Texture2D" uid="uid://bhi4fsoj10yr7" path="res://assets/themes/ui_elements/upgrade_button_click_03.png" id="6_45m71"]
 [ext_resource type="Texture2D" uid="uid://dhxanof2fm14m" path="res://assets/themes/ui_elements/upgrade_button_hover_03.png" id="7_t8u42"]
@@ -12,12 +12,14 @@
 
 [node name="UpgradeModule" type="Control" unique_id=2044226998 node_paths=PackedStringArray("slot_container", "plus_button", "name_label", "cost_label", "description_label", "upgrade_icon")]
 oversampling_with_scale = 2
-custom_minimum_size = Vector2(190, 100)
+custom_minimum_size = Vector2(0, 100)
+custom_maximum_size = Vector2(-1, 100)
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.312
 offset_bottom = 8.143997
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_vanuw")
 script = ExtResource("2_6bhfk")
 slot_scene = ExtResource("3_th2mu")
