@@ -79,7 +79,7 @@ graph_offset = Vector2(-8, 43)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_07ahx"]
 
 [resource]
-graph_offset = Vector2(-80.70526, -27.255203)
+graph_offset = Vector2(-842.6667, 0)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_07ahx")
 nodes/TimeScale/position = Vector2(80, 100)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_my75e")
