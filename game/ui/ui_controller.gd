@@ -5,6 +5,8 @@ class_name UIController extends CanvasLayer
 @export var pause_screen:PauseScreen
 @export var death_screen:DeathScreen
 @export var sound_manager:SoundEffectManager
+@export var tutorial_scene:PackedScene
+var tutorial:Tutorial
 
 
 func _ready() -> void:
@@ -16,6 +18,7 @@ func _ready() -> void:
 		print(button)
 	for module in upgrade_menu.upgrade_modules:
 		module.upgrade_successful.connect(sound_manager._play.bind(["Upgraded"]))
+
 
 
 func switch_to_state(_state:Game.STATE) -> void:
@@ -40,6 +43,10 @@ func switch_to_state(_state:Game.STATE) -> void:
 		
 		
 		Game.STATE.IN_GAME:
+			if GameSaveManager.save_game.tutorial:
+				tutorial = tutorial_scene.instantiate()
+				add_child(tutorial)
+			
 			death_screen.hide()
 			upgrade_menu.hide()
 			main_menu.hide()

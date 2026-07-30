@@ -106,6 +106,7 @@ func start_escape_sequence() -> void:
 	player.camera.cam_shake(2)
 
 func end_run() -> void:
+	ui_controller.tutorial.queue_free()
 	RunManager.leave_run()
 	clear_game()
 	switch_to_state(STATE.UPGRADE_MENU)

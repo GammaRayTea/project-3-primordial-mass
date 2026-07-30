@@ -33,6 +33,15 @@ func activate(_source: Node3D) -> void:
 		else:
 			print("not enough pearl")
 
+func hover_start()-> void:
+	var game:Game = (get_tree().get_first_node_in_group("Game") as Game)
+	if game.player.held_items[GlobalEnum.ITEM.PEARL] > 0 and !was_opened:
+		game.ui_controller.hud.show_hint("Press E to place Pearl")
+
+func hover_end()-> void:
+	(get_tree().get_first_node_in_group("Game") as Game).ui_controller.hud.hide_hint()
+
+
 
 func get_loot() -> Array[Dictionary]:
 	var loot: Array[Dictionary] = []

@@ -10,6 +10,16 @@ class_name StandardChest extends Chest
 @export var min_drops_coins: int = 3
 @export var max_drops_coins: int = 4
 
+
+
+func hover_start()-> void:
+	var game:Game = (get_tree().get_first_node_in_group("Game") as Game)
+	if !was_opened:
+		game.ui_controller.hud.show_hint("Press E to open")
+
+func hover_end()-> void:
+	(get_tree().get_first_node_in_group("Game") as Game).ui_controller.hud.hide_hint()
+
 func get_loot() -> Array[Dictionary]:
 	var loot: Array[Dictionary] = []
 	var drop_count_goo: int = randi_range(min_drops_goo, max_drops_goo)

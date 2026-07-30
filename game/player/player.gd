@@ -50,6 +50,8 @@ func start() -> void:
 	global_position = Vector3(8,1,8)
 	current_sprint_value = MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA]
 	
+	stamina_bar_animation_player.play("RESET")
+	stamina_bar_animation_player.stop()
 
 	for key in held_items:
 		held_items.set(key, 0)

@@ -51,6 +51,7 @@ func retrieve_saved_data() -> void:
 	update_data()
 
 func _ready() -> void:
+	
 	update_data()
 	update_slot_amount()
 	plus_button.pressed.connect(on_button_press.bind(true))
@@ -70,6 +71,8 @@ func update_slot_amount() -> void:
 			slots[slot].set_owner(slot_container)
 
 func update_data() -> void:
+	for slot in slots:
+		slot.value = false
 	#TODO
 	if current_upgrade_level == 0:
 		current_cost = base_cost
@@ -87,9 +90,10 @@ func on_button_press(_increase:bool) -> void:
 	if _increase:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
 			RunManager.change_saved_currency(upgrade_currency, -current_cost)
+			update_data()
 			current_upgrade_level += 1
 			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
 			if current_upgrade_level == max_level:
 				plus_button.disabled = true
-			update_data()
+			
 			upgrade_successful.emit()

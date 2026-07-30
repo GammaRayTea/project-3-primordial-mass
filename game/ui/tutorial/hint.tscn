@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dr7knno85ks28"]
+
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="1_50ujf"]
+[ext_resource type="Script" uid="uid://bm58labb2apy8" path="res://game/ui/tutorial/tutorial_hint.gd" id="1_yxi1u"]
+
+[node name="Hint" type="Control" unique_id=486379497 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yxi1u")
+label = NodePath("MarginContainer/HintLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=942945356]
+z_index = 1
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 144.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HintLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1923269892]
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+text = "Text
+"
+scroll_active = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2142276053]
+modulate = Color(0.47788018, 0.47788018, 0.47788, 0.23529412)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_50ujf")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

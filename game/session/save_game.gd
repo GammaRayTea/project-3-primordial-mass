@@ -4,6 +4,9 @@ class_name SaveGame extends Resource
 
 @export var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int]
 @export var currency:Dictionary[GlobalEnum.CURRENCY, int] 
+
+@export var tutorial = true
+
 func _init() -> void:
 	currency = {
 	GlobalEnum.CURRENCY.GOO : 0,

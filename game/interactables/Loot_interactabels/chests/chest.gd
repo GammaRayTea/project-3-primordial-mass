@@ -6,7 +6,7 @@
 @export var drop_scatter_radius_min: float = 0.6
 @export var drop_scatter_radius_max: float = 1.5
 
-var in_player_range: bool = false
+
 
 func activate(_source: Node3D) -> void:
 	if is_locked:
@@ -21,10 +21,10 @@ func deactivate(_source: Node3D) -> void:
 	pass
 
 func hover_start() -> void:
-	in_player_range = true
+	pass
 
 func hover_end() -> void:
-	in_player_range = false
+	pass
 
 
 @abstract func get_loot() -> Array[Dictionary]

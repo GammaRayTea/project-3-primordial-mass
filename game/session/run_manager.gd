@@ -70,8 +70,12 @@ func lose_progress() -> void:
 	save_game()
 
 func leave_run() -> void:
+	
 	for key in run_currency:
 		saved_currency[key]+= run_currency[key]
+	if GameSaveManager.save_game.tutorial:
+		GameSaveManager.save_game.tutorial = false
+		
 	save_game()
 
 func save_game() -> void:
@@ -109,8 +113,9 @@ func change_saved_currency(_type:GlobalEnum.CURRENCY,_value:int):
 func change_stat(_type:GlobalEnum.UPGRADES, _value:float, _level:int) -> void:
 	if !player_stats.has(_type):
 		player_stats[_type] = 1.0
-	player_stats[_type]+= _value
+	player_stats[_type] += _value
 	player_stats[_type] = max(player_stats[_type],0.1)
+	print(_type, " ", player_stats[_type] )
 	
 	player_stat_levels[_type] = _level
 	if _type == GlobalEnum.UPGRADES.STABILITY_CAPACITY:
