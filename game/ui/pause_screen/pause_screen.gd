@@ -9,3 +9,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_released("pause"):
 		get_viewport().set_input_as_handled()
 		(get_tree().get_first_node_in_group("Game") as Game).unpause()
+		(get_tree().get_first_node_in_group("Game") as Game).switch_to_state(Game.STATE.IN_GAME)

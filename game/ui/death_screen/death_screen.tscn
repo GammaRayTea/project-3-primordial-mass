@@ -120,7 +120,7 @@ _data = {
 &"show_death_screen": SubResource("Animation_qjhuv")
 }
 
-[node name="DeathScreen" type="Control" unique_id=234784416 node_paths=PackedStringArray("animation_player", "continue_button", "exit_button")]
+[node name="DeathScreen" type="Control" unique_id=234784416 node_paths=PackedStringArray("continue_button", "exit_button", "animation_player")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -130,9 +130,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qqtbg")
 script = ExtResource("2_b3sf8")
-animation_player = NodePath("AnimationPlayer")
 continue_button = NodePath("TextAndButtons/VBoxContainer/ContinueButton")
 exit_button = NodePath("TextAndButtons/VBoxContainer/ExitButton")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Vignette" type="ColorRect" parent="." unique_id=1543452211]
 visible = false
