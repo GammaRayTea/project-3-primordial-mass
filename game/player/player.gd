@@ -106,6 +106,9 @@ func _physics_process(_delta: float) -> void:
 			apply_gravity(_delta)
 			recharge_stamina()
 			
+	var tim_scale = animation_tree["parameters/TimeScale/scale"]
+	if tim_scale < 1.0:
+		print(tim_scale)
 	move_and_slide()
 
 
@@ -134,7 +137,8 @@ func switch_state(_state:STATE) -> void:
 		STATE.HIT_STUN:
 			animation = "leyla_flinch"
 
-	animation_tree["parameters/TimeScale/scale"] = time_scale
+	animation_tree.set("parameters/TimeScale/scale", time_scale)
+
 	animation_tree["parameters/StateMachine/playback"].travel(animation)
 	current_state =  _state
 
@@ -199,7 +203,6 @@ func move(_delta: float, _direction:Vector3, _target_speed:float, _acceleration:
 		RunManager.decrease_stability(1)
 	else:
 		reduce_velocity()
-		animation_tree["parameters/TimeScale/scale"]*=0.7
 		if velocity.x == 0 and velocity.z == 0:
 			switch_state( STATE.IDLE)
 	
