@@ -111,6 +111,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("5_n6aae")
 texture_over = ExtResource("6_vhpns")
 texture_progress = ExtResource("5_cshcc")
+tint_progress = Color(0.7595951, 0.75959516, 0.759595, 1)
 
 [node name="PauseScreen" parent="." unique_id=653894896 instance=ExtResource("5_6fpg5")]
 visible = false
@@ -120,7 +121,6 @@ process_mode = 4
 visible = false
 
 [node name="AmbiencePlayer" parent="." unique_id=2024238858 instance=ExtResource("5_8lmuw")]
-process_mode = 3
 visible = false
 
 [node name="SoundEffectManager" type="Node3D" parent="." unique_id=770097936]

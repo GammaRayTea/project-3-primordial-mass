@@ -26,7 +26,7 @@ render_low_res = true
 low_resolution = Vector2i(512, 288)
 high_resolution = Vector2i(1920, 1080)
 
-[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "escape_sequence", "player", "enemies", "objects") groups=["Game"]]
+[node name="Game" type="Node3D" parent="." unique_id=1350780846 node_paths=PackedStringArray("ui_controller", "world_environment", "dungeon_gen", "escape_sequence", "enemies", "objects") groups=["Game"]]
 process_mode = 4
 script = ExtResource("3_efxa6")
 ui_controller = NodePath("../UI")
@@ -35,7 +35,7 @@ default_env = ExtResource("6_4c57u")
 test_env = ExtResource("5_w48qg")
 dungeon_gen = NodePath("DungeonGenerator")
 escape_sequence = NodePath("EscapeSequence")
-player = NodePath("Player")
+player_scene = ExtResource("2_h2yge")
 enemies = NodePath("Enemies")
 objects = NodePath("Objects")
 testing = false
@@ -52,9 +52,8 @@ shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.585
 
-[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("player", "dungeon_populator") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
+[node name="DungeonGenerator" parent="Game" unique_id=1510930155 node_paths=PackedStringArray("dungeon_populator") groups=["RNGUnifier"] instance=ExtResource("6_7mycd")]
 cell_margin = 4
-player = NodePath("../Player")
 dungeon_populator = NodePath("DungeonPopulator")
 
 [node name="DungeonPopulator" type="Node" parent="Game/DungeonGenerator" unique_id=884732775 node_paths=PackedStringArray("enemy_wrapper", "object_wrapper") groups=["RNGUnifier"]]
@@ -80,9 +79,6 @@ process_mode = 4
 script = ExtResource("12_vivmo")
 cycle_decay_speed = 5.0
 void_scene = ExtResource("13_2cqfq")
-
-[node name="Player" parent="Game" unique_id=472072241 instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5647564, 8)
 
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
