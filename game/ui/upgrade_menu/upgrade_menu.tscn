@@ -130,6 +130,7 @@ theme_override_font_sizes/font_size = 13
 text = "Return To Title"
 
 [node name="Background" type="TextureRect" parent="." unique_id=1332331507]
+modulate = Color(0.20913485, 8.9956375e-05, 0.2485033, 1)
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
