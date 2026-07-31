@@ -18,8 +18,8 @@ enum OBJECT_TYPE {CONTAINER, ENEMY, KEY}
 
 @export_category("Probabilites")
 @export var base_p_enemy:float = 40.0
-@export var base_p_container:float = 50.0
-@export var base_p_pearl:float = 50.0
+@export var base_p_container:float = 55.0
+@export var base_p_pearl:float = 40.0
 
 
 var rng:RandomNumberGenerator
@@ -44,6 +44,8 @@ func evaluate_cell(_cell:Cell) -> void:
 			p_enemy -= 10.0
 		if cell.has_container:
 			p_container -= 10.0
+			p_enemy += 15.0
+			p_pearl += 5.0
 		if cell.has_pearl:
 			p_pearl -= 10.0
 	
