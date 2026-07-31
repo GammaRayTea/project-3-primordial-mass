@@ -70,23 +70,24 @@ offset_transform_enabled = true
 
 [node name="UpgradeStBuildup" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=2044226998 instance=ExtResource("2_tdrua")]
 layout_mode = 2
-base_upgrade_stat_amount = 1.0
+base_upgrade_stat_amount = 1.2000000000000002
 base_cost = 5
 cost_mulitplier = 2.0
-max_level = 5
+max_level = 7
 
 [node name="UpgradeStRes" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=1683650734 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 1
-base_upgrade_stat_amount = 1.0
+base_upgrade_stat_amount = 0.7999999999999998
+upgrade_curve_offset = 0.09999999999999998
 base_cost = 5
 cost_mulitplier = 2.0
-max_level = 5
+max_level = 7
 
 [node name="UpgradeStCap" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer" unique_id=1559313207 instance=ExtResource("2_tdrua")]
 layout_mode = 2
 upgrade_stat = 2
-base_upgrade_stat_amount = 1.0
+base_upgrade_stat_amount = -0.5
 upgrade_curve_multiplier = 16.0
 upgrade_curve_offset = -0.04999999999999999
 base_cost = 20
