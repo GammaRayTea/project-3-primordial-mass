@@ -7,6 +7,7 @@ class_name Tutorial extends Control
 @export_category("Hints")
 @export var movement_hint:Control
 @export var sprint_hint:Control
+@export var story_hint:Control
 @export var portal_hint:Control
 
 @export var stability_hint:Control
@@ -37,6 +38,7 @@ func next_phase() -> void:
 			await get_tree().create_timer(1).timeout
 			await modulate_element(sprint_hint)
 			await modulate_element(portal_hint)
+			await modulate_element(story_hint)
 			next_phase()
 		TUTORIAL_TIMED_PHASE.STABILITY_HINT:
 			modulate_element(stability_hint)

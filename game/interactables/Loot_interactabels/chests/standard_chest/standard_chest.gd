@@ -12,13 +12,28 @@ class_name StandardChest extends Chest
 
 
 
+func activate(_source: Node3D) -> void:
+	if is_locked:
+		return
+	if was_opened:
+		return
+	was_opened = true
+	var anim_player: AnimationPlayer = $Visuals/chest/AnimationPlayer
+	anim_player.play("CylinderAction")
+	await anim_player.animation_finished
+	
+	_spawn_loot()
+
+
 func hover_start()-> void:
 	var game:Game = (get_tree().get_first_node_in_group("Game") as Game)
 	if !was_opened:
 		game.ui_controller.hud.show_hint("Press E to open")
 
+
 func hover_end()-> void:
 	(get_tree().get_first_node_in_group("Game") as Game).ui_controller.hud.hide_hint()
+
 
 func get_loot() -> Array[Dictionary]:
 	var loot: Array[Dictionary] = []

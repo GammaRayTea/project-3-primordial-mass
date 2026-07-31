@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://c8257oy8c1lmb"]
 
-[ext_resource type="PackedScene" uid="uid://slg88wvcuno1" path="res://game/environment/test_room/test_room.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://dowd86n4o64xs" path="res://main.gd" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ct0p6npqva67" path="res://game/player/player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://dnlold3vjngv1" path="res://game.gd" id="3_efxa6"]
@@ -40,7 +39,6 @@ start_portal_scene = ExtResource("10_efxa6")
 enemies = NodePath("Enemies")
 objects = NodePath("Objects")
 testing = false
-test_room = ExtResource("1_0xm2m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game" unique_id=443886966]
 environment = ExtResource("6_4c57u")

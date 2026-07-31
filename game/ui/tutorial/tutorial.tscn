@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_jya1v"]
 [ext_resource type="PackedScene" uid="uid://dr7knno85ks28" path="res://game/ui/tutorial/hint.tscn" id="3_6t6in"]
 
-[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "portal_hint", "stability_hint", "pearl_hint", "escape_hint")]
+[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "story_hint", "portal_hint", "stability_hint", "pearl_hint", "escape_hint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ script = ExtResource("1_b5dgg")
 hint_container = NodePath("VBoxContainer")
 movement_hint = NodePath("VBoxContainer/Move")
 sprint_hint = NodePath("VBoxContainer/SprintHint")
+story_hint = NodePath("VBoxContainer/StoryHint")
 portal_hint = NodePath("VBoxContainer/PortalHint")
 stability_hint = NodePath("StabilityHint")
 pearl_hint = NodePath("PearlHint")
@@ -50,6 +51,11 @@ text = "Sprint by holding Shift"
 layout_mode = 2
 mouse_filter = 2
 text = "The portal will reactivate soon"
+
+[node name="StoryHint" parent="VBoxContainer" unique_id=624826915 instance=ExtResource("3_6t6in")]
+layout_mode = 2
+mouse_filter = 2
+text = "Find your loved one"
 
 [node name="StabilityHint" parent="." unique_id=1754516226 instance=ExtResource("3_6t6in")]
 layout_mode = 1
