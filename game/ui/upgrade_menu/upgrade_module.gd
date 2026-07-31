@@ -3,7 +3,9 @@ class_name UpgradeModule extends Control
 ##Class responsible for displaying and updating one player stat in the shop menu
 
 @export var upgrade_stat:GlobalEnum.UPGRADES
-@export var upgrade_stat_amount:float = -0.1
+@export var base_upgrade_stat_amount:float = -0.1
+var upgrade_stat_amount:float
+@export var upgrade_curve_multiplier:float = 8
 
 
 @export var upgrade_currency:GlobalEnum.CURRENCY
@@ -15,6 +17,7 @@ var current_cost:int
 @export var cost_mulitplier:float = 1.0:
 	set(value):
 		cost_mulitplier = value
+
 
 
 signal upgrade_successful
@@ -73,13 +76,13 @@ func update_slot_amount() -> void:
 			slots[slot].set_owner(slot_container)
 
 func update_data() -> void:
-
 	#TODO
 	if current_upgrade_level == 0:
 		current_cost = base_cost
 	else:
 		@warning_ignore("narrowing_conversion")
 		current_cost = base_cost * pow(2, current_upgrade_level) * cost_mulitplier 
+	upgrade_stat_amount = snapped(pow(base_cost * current_upgrade_level + upgrade_curve_multiplier, -1.0) * upgrade_curve_multiplier, 0.01) / 4.0
 	name_label.text = ItemAssets.stat_names[upgrade_stat]
 	cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
 	description_label.text = ItemAssets.stat_descriptions[upgrade_stat]
@@ -92,8 +95,8 @@ func on_button_press(_increase:bool) -> void:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
 			RunManager.change_saved_currency(upgrade_currency, -current_cost)
 			current_upgrade_level += 1
+			RunManager.change_stat(upgrade_stat, upgrade_stat_amount, current_upgrade_level)
 			update_data()
-			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
 			if current_upgrade_level == max_level:
 				plus_button.disabled = true
 			
