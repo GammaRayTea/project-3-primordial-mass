@@ -84,7 +84,10 @@ func update_data() -> void:
 		current_cost = base_cost * pow(2, current_upgrade_level) * cost_mulitplier 
 	upgrade_stat_amount = snapped(pow(base_cost * current_upgrade_level + upgrade_curve_multiplier, -1.0) * upgrade_curve_multiplier, 0.01) / 4.0
 	name_label.text = ItemAssets.stat_names[upgrade_stat]
-	cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
+	if plus_button.disabled == true:
+		cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + "MAX"
+	else:
+		cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + str(current_cost)
 	description_label.text = ItemAssets.stat_descriptions[upgrade_stat]
 	upgrade_icon.texture = load(ItemAssets.stat_icons[upgrade_stat])
 	
@@ -96,8 +99,8 @@ func on_button_press(_increase:bool) -> void:
 			RunManager.change_saved_currency(upgrade_currency, -current_cost)
 			current_upgrade_level += 1
 			RunManager.change_stat(upgrade_stat, upgrade_stat_amount, current_upgrade_level)
-			update_data()
 			if current_upgrade_level == max_level:
 				plus_button.disabled = true
 			
+			update_data()
 			upgrade_successful.emit()
