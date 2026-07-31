@@ -66,8 +66,6 @@ func evaluate_cell(_cell:Cell) -> void:
 		var result = spawn_object(OBJECT_TYPE.CONTAINER,_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
-	else:
-		print("container test failed ", test_container, " ", p_container)
 	# KEYS-------
 	var test_key = rng.randf_range(0.0,100.0)
 	if test_key < p_pearl:

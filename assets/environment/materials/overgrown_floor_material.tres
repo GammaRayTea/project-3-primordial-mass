@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://pgvnj7vif25k"]
+
+[ext_resource type="Shader" uid="uid://c4e31weirlooc" path="res://assets/environment/floor_variance.gdshader" id="1_uokxd"]
+[ext_resource type="Texture2D" uid="uid://d3p4y61wqfq5e" path="res://assets/environment/textures/floor_wood_overgrown/FloorWoodOvergrown.png" id="2_uokxd"]
+[ext_resource type="Texture2D" uid="uid://dasp1qjlojyra" path="res://assets/environment/textures/floor_wood_overgrown/FloorWoodOvergrownHole.png" id="3_hkqr8"]
+[ext_resource type="Texture2D" uid="uid://bua25biq47jw6" path="res://assets/environment/textures/floor_wood_overgrown/FloorWoodOvergrownSpill1.png" id="4_cx2qm"]
+[ext_resource type="Texture2D" uid="uid://dql5jhhok7e0i" path="res://assets/environment/textures/floor_wood_overgrown/FloorWoodOvergrownSpill2.png" id="5_ubnxk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_uokxd")
+shader_parameter/default_texture = ExtResource("2_uokxd")
+shader_parameter/texture2 = ExtResource("3_hkqr8")
+shader_parameter/texture3 = ExtResource("4_cx2qm")
+shader_parameter/texture4 = ExtResource("5_ubnxk")

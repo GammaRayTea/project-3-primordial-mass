@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_vanuw"]
 [ext_resource type="Script" uid="uid://bmj62uva5l80m" path="res://game/ui/upgrade_menu/upgrade_module.gd" id="2_6bhfk"]
 [ext_resource type="PackedScene" uid="uid://ci45w48oatrfs" path="res://game/ui/upgrade_menu/slot.tscn" id="3_th2mu"]
-[ext_resource type="Texture2D" uid="uid://bhtw8j4os52tv" path="res://assets/themes/ui_elements/upgrade_icon_gain_increase.png" id="4_45m71"]
+[ext_resource type="Texture2D" uid="uid://bhtw8j4os52tv" path="res://assets/themes/ui_elements/icons/upgrade_icon_gain_increase.png" id="4_45m71"]
 [ext_resource type="Texture2D" uid="uid://dwkpur8bojh0h" path="res://assets/themes/ui_elements/upgrade_button_03.png" id="5_vject"]
 [ext_resource type="Texture2D" uid="uid://bhi4fsoj10yr7" path="res://assets/themes/ui_elements/upgrade_button_click_03.png" id="6_45m71"]
 [ext_resource type="Texture2D" uid="uid://dhxanof2fm14m" path="res://assets/themes/ui_elements/upgrade_button_hover_03.png" id="7_t8u42"]

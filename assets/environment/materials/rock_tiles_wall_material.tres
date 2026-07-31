@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b812iu2l3ehsp"]
+
+[ext_resource type="Shader" uid="uid://cgvw8cutyqund" path="res://assets/environment/wall_variance.gdshader" id="1_m03hx"]
+[ext_resource type="Texture2D" uid="uid://d3omy4rlndgmp" path="res://assets/environment/textures/wall_tiles_stone/wall_tile_4.png" id="2_0qjf2"]
+[ext_resource type="Texture2D" uid="uid://bkbs16m2ydwfm" path="res://assets/environment/textures/wall_tiles_stone/wall_tile_7.png" id="3_jekdt"]
+[ext_resource type="Texture2D" uid="uid://dwvuhi5jwum8n" path="res://assets/environment/textures/wall_tiles_stone/wall_tile_2.png" id="4_v4jsc"]
+[ext_resource type="Texture2D" uid="uid://dkipjadyx5ogy" path="res://assets/environment/textures/wall_tiles_stone/wall_tile_6.png" id="5_2ehda"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_m03hx")
+shader_parameter/default_texture = ExtResource("2_0qjf2")
+shader_parameter/texture2 = ExtResource("3_jekdt")
+shader_parameter/texture3 = ExtResource("4_v4jsc")
+shader_parameter/texture4 = ExtResource("5_2ehda")

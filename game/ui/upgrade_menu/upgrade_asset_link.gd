@@ -7,10 +7,10 @@ static var currency_icons:Dictionary[GlobalEnum.CURRENCY, String] = {
 }
 
 static var stat_icons:Dictionary[GlobalEnum.UPGRADES, String] = {
-	GlobalEnum.UPGRADES.STAMINA:"res://assets/themes/ui_elements/upgrade_icon_stamina_up.png",
-	GlobalEnum.UPGRADES.STABILITY_BUILDUP:"res://assets/themes/ui_elements/upgrade_icon_gain_increase.png",
-	GlobalEnum.UPGRADES.STABILITY_RESILIENCE:"res://assets/themes/ui_elements/upgrade_icon_reduced_decrease.png",
-	GlobalEnum.UPGRADES.STABILITY_CAPACITY:"res://assets/themes/ui_elements/upgrade_icon_capacity_up.png"
+	GlobalEnum.UPGRADES.STAMINA:"res://assets/themes/ui_elements/icons/upgrade_icon_stamina_up.png",
+	GlobalEnum.UPGRADES.STABILITY_BUILDUP:"res://assets/themes/ui_elements/icons/upgrade_icon_gain_increase.png",
+	GlobalEnum.UPGRADES.STABILITY_RESILIENCE:"res://assets/themes/ui_elements/icons/upgrade_icon_reduced_decrease.png",
+	GlobalEnum.UPGRADES.STABILITY_CAPACITY:"res://assets/themes/ui_elements/icons/upgrade_icon_capacity_up.png"
 }
 
 static var stat_names:Dictionary[GlobalEnum.UPGRADES, String] = {

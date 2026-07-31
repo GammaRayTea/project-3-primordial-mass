@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://dufesu16bkhva"]
 
 [ext_resource type="Shader" uid="uid://cgvw8cutyqund" path="res://assets/environment/wall_variance.gdshader" id="1_ka1t2"]
-[ext_resource type="Texture2D" uid="uid://cdruchpf13bev" path="res://assets/environment/textures/WallBrickBotOvergrownt.png" id="2_pt2xx"]
-[ext_resource type="Texture2D" uid="uid://c1yjebino6wdg" path="res://assets/environment/textures/WallBrickTopOvergrown.png" id="3_vtide"]
-[ext_resource type="Texture2D" uid="uid://bvb04jdmahjnu" path="res://assets/environment/textures/WallBrickBotOvergrownHole2.png" id="4_0v47b"]
+[ext_resource type="Texture2D" uid="uid://cdruchpf13bev" path="res://assets/environment/textures/wall_brick/WallBrickBotOvergrownt.png" id="2_pt2xx"]
+[ext_resource type="Texture2D" uid="uid://c1yjebino6wdg" path="res://assets/environment/textures/wall_brick/WallBrickTopOvergrown.png" id="3_vtide"]
+[ext_resource type="Texture2D" uid="uid://bvb04jdmahjnu" path="res://assets/environment/textures/wall_brick/WallBrickBotOvergrownHole2.png" id="4_0v47b"]
 
 [resource]
 render_priority = 0

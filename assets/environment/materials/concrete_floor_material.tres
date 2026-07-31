@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c87v8r3h4wugq"]
+
+[ext_resource type="Shader" uid="uid://cgvw8cutyqund" path="res://assets/environment/wall_variance.gdshader" id="1_53fs5"]
+[ext_resource type="Texture2D" uid="uid://d0eb7x4whw84y" path="res://assets/environment/textures/floor_concrete/floor_tile_biome03_1.png" id="2_pnm3i"]
+[ext_resource type="Texture2D" uid="uid://ccu116835e1h0" path="res://assets/environment/textures/floor_concrete/floor_tile_biome03_3.png" id="3_8sc3x"]
+[ext_resource type="Texture2D" uid="uid://corrrchjovrea" path="res://assets/environment/textures/floor_concrete/floor_tile_biome03_2.png" id="4_g0nmp"]
+[ext_resource type="Texture2D" uid="uid://bxe2nx0ot5w83" path="res://assets/environment/textures/floor_concrete/floor_tile_biome03_5.png" id="5_gia6f"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_53fs5")
+shader_parameter/default_texture = ExtResource("2_pnm3i")
+shader_parameter/texture2 = ExtResource("3_8sc3x")
+shader_parameter/texture3 = ExtResource("4_g0nmp")
+shader_parameter/texture4 = ExtResource("5_gia6f")

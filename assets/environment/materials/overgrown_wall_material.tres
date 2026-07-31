@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c3kfk3pm0836d"]
+
+[ext_resource type="Shader" uid="uid://c4e31weirlooc" path="res://assets/environment/floor_variance.gdshader" id="1_4wxb2"]
+[ext_resource type="Texture2D" uid="uid://bd2ra22werp05" path="res://assets/environment/textures/tiles_floor_metal_overgrown/TilesFloorMetalOvergrown.png" id="2_gluer"]
+[ext_resource type="Texture2D" uid="uid://d3807lc2ho2xh" path="res://assets/environment/textures/tiles_floor_metal_overgrown/TilesFloorMetalOvergrownRustHole.png" id="3_q3hhs"]
+[ext_resource type="Texture2D" uid="uid://bkvlk15fu5lwx" path="res://assets/environment/textures/tiles_floor_metal_overgrown/TilesFloorMetalOvergrownRustSpill.png" id="4_g4ba8"]
+[ext_resource type="Texture2D" uid="uid://ctafk70wh31w2" path="res://assets/environment/textures/tiles_floor_metal_overgrown/TilesFloorMetalOvergrownRust.png" id="5_y2beh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_4wxb2")
+shader_parameter/default_texture = ExtResource("2_gluer")
+shader_parameter/texture2 = ExtResource("3_q3hhs")
+shader_parameter/texture3 = ExtResource("4_g4ba8")
+shader_parameter/texture4 = ExtResource("5_y2beh")
