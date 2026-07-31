@@ -3,7 +3,7 @@ class_name UpgradeModule extends Control
 ##Class responsible for displaying and updating one player stat in the shop menu
 
 @export var upgrade_stat:GlobalEnum.UPGRADES
-@export var base_upgrade_stat_amount:float = -0.1
+@export_range(-5.0, 5.0, 0.01) var base_upgrade_stat_amount:float = -0.1
 var upgrade_stat_amount:float
 @export_range(1.0, 100.0, 1.0) var upgrade_curve_multiplier:float = 8
 @export_range(-0.5, 0.5, 0.01) var upgrade_curve_offset:float = 0
@@ -82,7 +82,10 @@ func update_data() -> void:
 	else:
 		@warning_ignore("narrowing_conversion")
 		current_cost = base_cost * pow(2, current_upgrade_level) * cost_mulitplier 
-	upgrade_stat_amount = snapped(pow(base_cost * current_upgrade_level + upgrade_curve_multiplier, -1.0) * upgrade_curve_multiplier, 0.01) / 4.0
+	if current_upgrade_level >= upgrade_curve_multiplier * 2.0:
+		upgrade_stat_amount = (snapped(pow(base_upgrade_stat_amount * (upgrade_curve_multiplier * 2.0 - 1) + upgrade_curve_multiplier, -1.0) * upgrade_curve_multiplier, 0.01) / 4.0) - upgrade_curve_offset
+	else:
+		upgrade_stat_amount = (snapped(pow(base_upgrade_stat_amount * current_upgrade_level + upgrade_curve_multiplier, -1.0) * upgrade_curve_multiplier, 0.01) / 4.0) - upgrade_curve_offset
 	name_label.text = ItemAssets.stat_names[upgrade_stat]
 	if plus_button.disabled == true:
 		cost_label.text = '[img]'+ ItemAssets.currency_icons[upgrade_currency] + '[/img] ' + "MAX"

@@ -70,8 +70,6 @@ container_scenes = Dictionary[int, PackedScene]({
 1: ExtResource("10_w48qg")
 })
 pearl_scene = ExtResource("11_w48qg")
-base_p_container = 40.0
-base_p_pearl = 80.0
 metadata/_custom_type_script = "uid://csp4fpbvwywgg"
 
 [node name="EscapeSequence" type="Node3D" parent="Game" unique_id=1915555105]

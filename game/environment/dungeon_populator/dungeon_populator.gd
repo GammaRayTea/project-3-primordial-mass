@@ -18,7 +18,7 @@ enum OBJECT_TYPE {CONTAINER, ENEMY, KEY}
 
 @export_category("Probabilites")
 @export var base_p_enemy:float = 40.0
-@export var base_p_container:float = 55.0
+@export var base_p_container:float = 60.0
 @export var base_p_pearl:float = 40.0
 
 
@@ -26,6 +26,8 @@ var rng:RandomNumberGenerator
 
 
 func evaluate_cell(_cell:Cell) -> void:
+	if _cell.cell_position == Vector2(0.0, 0.0):
+		return
 	
 	var valid_positions:Array[Vector2i] = get_list_of_true_positions(_cell.bit_map)
 	
@@ -52,7 +54,7 @@ func evaluate_cell(_cell:Cell) -> void:
 	
 	# ENEMIES-------
 	var test_enemy = rng.randf_range(0.0,100.0)
-	if test_enemy< p_enemy and _cell.cell_position!= Vector2(0,0):
+	if test_enemy < p_enemy:
 		var result = spawn_object(OBJECT_TYPE.ENEMY,_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
@@ -60,14 +62,15 @@ func evaluate_cell(_cell:Cell) -> void:
 	
 	# CONTAINERS-------
 	var test_container = rng.randf_range(0.0,100.0)
-	if test_container< p_container and _cell.cell_position!= Vector2(0,0):
+	if test_container < p_container:
 		var result = spawn_object(OBJECT_TYPE.CONTAINER,_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
-	
+	else:
+		print("container test failed ", test_container, " ", p_container)
 	# KEYS-------
 	var test_key = rng.randf_range(0.0,100.0)
-	if test_key< p_pearl and _cell.cell_position!= Vector2(0,0):
+	if test_key < p_pearl:
 		var result = spawn_object(OBJECT_TYPE.KEY,_cell,valid_positions )
 		if result[0]:
 			valid_positions.erase(result[1])
