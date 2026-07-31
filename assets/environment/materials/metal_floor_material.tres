@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dqleeufoegk7e"]
+
+[ext_resource type="Shader" uid="uid://c4e31weirlooc" path="res://assets/environment/floor_variance.gdshader" id="1_up1m8"]
+[ext_resource type="Texture2D" uid="uid://ultm2iii6eic" path="res://assets/environment/textures/TilesFloorMetal.png" id="2_cjuyr"]
+[ext_resource type="Texture2D" uid="uid://b71o1p48cpdej" path="res://assets/environment/textures/TilesFloorMetalHole.png" id="3_t4g3m"]
+[ext_resource type="Texture2D" uid="uid://cr81obvdrvle5" path="res://assets/environment/textures/TilesFloorMetalRust.png" id="4_jlx54"]
+[ext_resource type="Texture2D" uid="uid://ckna6k4cyv30g" path="res://assets/environment/textures/TilesFloorMetalRustSpill.png" id="5_2oxtb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_up1m8")
+shader_parameter/default_texture = ExtResource("2_cjuyr")
+shader_parameter/texture2 = ExtResource("3_t4g3m")
+shader_parameter/texture3 = ExtResource("4_jlx54")
+shader_parameter/texture4 = ExtResource("5_2oxtb")

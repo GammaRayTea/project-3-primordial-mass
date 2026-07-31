@@ -28,6 +28,7 @@ var generated_cells: Dictionary[Vector2, Cell] = {}
 var locked_cells: Dictionary[Vector2, Cell] = {}
 
 var current_cell_tier:int
+var mat_index:int = 0
 
 
 func _start_generation() -> void:
@@ -148,18 +149,28 @@ func lock_in_cells(_check_range: int, _staged_delaunay_ids: PackedInt32Array) ->
 
 	if have_new_cells_been_locked:
 		current_cell_tier+=1
+		if current_cell_tier%3 == 0:
+			mat_index+= 1
+			if mat_index == EnvironmentMaterials.MATERIAL_SETS.size():
+				mat_index = 0
+
 	generated_map.draw_point_ids.append_array(active_delaunay)
 	generated_map.current_cell_tier = current_cell_tier
 	generated_map.queue_redraw()
 	
 
 func make_cell_mesh(_bit_map:BitMap, _position:Vector2) -> void:
+	var material_set:Array
+	
+	
+	material_set = EnvironmentMaterials.get_material_set(EnvironmentMaterials.MATERIAL_SETS.values()[mat_index])
+
 	var cell_instance: RoomMesh = RoomMesh.new(
 		Vector2(cell_size,cell_size),
 		rng,
-		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.FLOOR_WOOD),
-		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.TEST_CEILING),
-		EnvironmentMaterials.get_material(EnvironmentMaterials.MATERIALS.WALL_PAPER),
+		material_set[0],
+		material_set[1],
+		material_set[2]
 		)
 	add_child(cell_instance)
 	var cell_position_wc: Vector3 = cell_to_world(_position / cell_size)
