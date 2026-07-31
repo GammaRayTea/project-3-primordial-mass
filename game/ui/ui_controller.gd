@@ -75,6 +75,14 @@ func switch_to_state(_state:Game.STATE) -> void:
 			death_screen.show()
 			sound_manager._play(["Death"])
 
+#func _physics_process(delta: float) -> void:
+	#print($Overlay/StabilityBar.max_value)
+	#print($Overlay/StabilityBar.value)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action("ui_accept"):
+		RunManager.saved_currency[GlobalEnum.CURRENCY.GOO] +=100
+		RunManager.saved_currency[GlobalEnum.CURRENCY.COINS] +=100
 
 func _on_start_run_button_pressed() -> void:
 	sound_manager._play(["StartRun"])

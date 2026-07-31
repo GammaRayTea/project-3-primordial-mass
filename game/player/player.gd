@@ -29,7 +29,8 @@ var current_sprint_value:float = 0:
 	set(_value):
 		
 		current_sprint_value = _value
-		stamina_bar.value = current_sprint_value /MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA] * 100
+		stamina_bar.value = 100*current_sprint_value /(MAX_SPRINT_VALUE * RunManager.player_stats[GlobalEnum.UPGRADES.STAMINA])
+
 var can_sprint:bool = true
 enum STATE {IDLE, WALKING, RUNNING, PUSHING, HIT_STUN}
 var current_state =  STATE.IDLE
