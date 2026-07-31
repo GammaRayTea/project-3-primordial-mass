@@ -15,10 +15,10 @@ func _init() -> void:
 	player_stats = {
 		GlobalEnum.UPGRADES.STABILITY_BUILDUP:0.2,
 		GlobalEnum.UPGRADES.STABILITY_RESILIENCE:0.3,
-		GlobalEnum.UPGRADES.STABILITY_CAPACITY:0.6,
+		GlobalEnum.UPGRADES.STABILITY_CAPACITY:0.8,
 		GlobalEnum.UPGRADES.STAMINA:1.0
-	
 	}
+	
 	player_stat_levels = {
 		GlobalEnum.UPGRADES.STABILITY_BUILDUP:0,
 		GlobalEnum.UPGRADES.STABILITY_RESILIENCE:0,

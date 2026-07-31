@@ -48,6 +48,7 @@ func evaluate_cell(_cell:Cell) -> void:
 			p_pearl += 5.0
 		if cell.has_pearl:
 			p_pearl -= 10.0
+			p_container += 5.0
 	
 	# ENEMIES-------
 	var test_enemy = rng.randf_range(0.0,100.0)

@@ -5,19 +5,19 @@ class_name UpgradeModule extends Control
 @export var upgrade_stat:GlobalEnum.UPGRADES
 @export var base_upgrade_stat_amount:float = -0.1
 var upgrade_stat_amount:float
-@export var upgrade_curve_multiplier:float = 8
-
+@export_range(1.0, 100.0, 1.0) var upgrade_curve_multiplier:float = 8
+@export_range(-0.5, 0.5, 0.01) var upgrade_curve_offset:float = 0
 
 @export var upgrade_currency:GlobalEnum.CURRENCY
 @export var base_cost:int:
 	set(value):
 		base_cost = value
 
+
 var current_cost:int
 @export var cost_mulitplier:float = 1.0:
 	set(value):
 		cost_mulitplier = value
-
 
 
 signal upgrade_successful
