@@ -12,6 +12,9 @@ class_name Game extends Node3D
 
 @export var player_scene:PackedScene
 var player:Player
+@export var start_portal_scene:PackedScene
+var start_portal:StartPortal
+
 @export var enemies:Node3D
 @export var objects:Node3D
 
@@ -58,6 +61,7 @@ func _ready() -> void:
 	switch_to_state(STATE.MAIN_MENU)
 	
 
+
 func start_run():
 	#start ambience
 	ui_controller.fade(1.0)
@@ -89,6 +93,10 @@ func start_run():
 	player.start()
 	dungeon_gen.player = player
 	
+	#init starting portal
+	start_portal = start_portal_scene.instantiate()
+	objects.add_child(start_portal)
+	
 	#start dungeon gen
 	if testing:
 		var room = test_room.instantiate()
@@ -105,6 +113,7 @@ func start_run():
 
 func start_escape_sequence() -> void:
 	ui_controller.hud.set_escape_effect(true)
+	start_portal.activate_timer.timeout.emit()
 	escape_sequence.start(dungeon_gen.locked_cells)
 	ui_controller.sound_manager._play(["EscapeStart"])
 	GlobalSoundManager.ambience_player.escaping = true

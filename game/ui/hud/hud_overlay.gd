@@ -11,7 +11,7 @@ class_name HUD extends Control
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	hint.hide()
 
 func set_item(_item:Item) -> void:
 	%ItemPreview.set_item(_item)
