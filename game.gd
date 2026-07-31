@@ -85,8 +85,8 @@ func start_run():
 	
 	#init player
 	player = player_scene.instantiate()
-	player.start()
 	add_child(player)
+	player.start()
 	dungeon_gen.player = player
 	
 	#start dungeon gen
