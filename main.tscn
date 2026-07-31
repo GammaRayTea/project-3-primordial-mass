@@ -35,7 +35,6 @@ default_env = ExtResource("6_4c57u")
 test_env = ExtResource("5_w48qg")
 dungeon_gen = NodePath("DungeonGenerator")
 escape_sequence = NodePath("EscapeSequence")
-dark = false
 player_scene = ExtResource("2_h2yge")
 start_portal_scene = ExtResource("10_efxa6")
 enemies = NodePath("Enemies")
