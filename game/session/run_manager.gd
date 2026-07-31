@@ -5,29 +5,29 @@ var stability_bar:TextureProgressBar
 var stable_phase:bool = true
 
 
-var saved_currency:Dictionary[GlobalEnum.CURRENCY, int] = {
-	GlobalEnum.CURRENCY.GOO : 0,
-	GlobalEnum.CURRENCY.COINS: 0
-}
+var saved_currency:Dictionary[GlobalEnum.CURRENCY, int]# = {
+	#GlobalEnum.CURRENCY.GOO : 0,
+	#GlobalEnum.CURRENCY.COINS: 0
+#}
 var run_currency:Dictionary[GlobalEnum.CURRENCY, int]
 
 
 
 
-var player_stats:Dictionary[GlobalEnum.UPGRADES,float] = {
-	GlobalEnum.UPGRADES.STABILITY_BUILDUP:1.0,
-	GlobalEnum.UPGRADES.STABILITY_RESILIENCE:1.0,
-	GlobalEnum.UPGRADES.STABILITY_CAPACITY:1.0,
-	GlobalEnum.UPGRADES.STAMINA:1.0
-	
-}
-var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int] = {
-	GlobalEnum.UPGRADES.STABILITY_BUILDUP:0,
-	GlobalEnum.UPGRADES.STABILITY_RESILIENCE:0,
-	GlobalEnum.UPGRADES.STABILITY_CAPACITY:0,
-	GlobalEnum.UPGRADES.STAMINA:0
-	
-}
+var player_stats:Dictionary[GlobalEnum.UPGRADES,float]# = {
+	#GlobalEnum.UPGRADES.STABILITY_BUILDUP:0.3,
+	#GlobalEnum.UPGRADES.STABILITY_RESILIENCE:0.6,
+	#GlobalEnum.UPGRADES.STABILITY_CAPACITY:0.8,
+	#GlobalEnum.UPGRADES.STAMINA:1.0
+	#
+#}
+var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int]# = {
+	#GlobalEnum.UPGRADES.STABILITY_BUILDUP:0,
+	#GlobalEnum.UPGRADES.STABILITY_RESILIENCE:0,
+	#GlobalEnum.UPGRADES.STABILITY_CAPACITY:0,
+	#GlobalEnum.UPGRADES.STAMINA:0
+	#
+#}
 
 
 func _ready() -> void:
@@ -37,7 +37,7 @@ func _ready() -> void:
 	if stability_bar:
 		stability_bar.value = stability_bar.max_value
 		stability_bar.value_changed.connect(_on_stability_value_changed)
-	reset()
+
 
 func start_run() -> void:
 	

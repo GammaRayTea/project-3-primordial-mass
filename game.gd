@@ -156,6 +156,7 @@ func switch_to_state(_state:STATE) -> void:
 		STATE.UPGRADE_MENU:
 			
 			RunManager.load_game()
+			RunManager.reset()
 			to_upgrade_menu()
 		STATE.IN_GAME:
 			if !previous == STATE.PAUSED:
