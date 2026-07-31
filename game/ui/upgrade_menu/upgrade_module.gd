@@ -91,8 +91,8 @@ func on_button_press(_increase:bool) -> void:
 	if _increase:
 		if RunManager.saved_currency[upgrade_currency] >= current_cost:
 			RunManager.change_saved_currency(upgrade_currency, -current_cost)
-			update_data()
 			current_upgrade_level += 1
+			update_data()
 			RunManager.change_stat(upgrade_stat,upgrade_stat_amount, current_upgrade_level)
 			if current_upgrade_level == max_level:
 				plus_button.disabled = true
