@@ -105,10 +105,8 @@ func _physics_process(_delta: float) -> void:
 			
 			apply_gravity(_delta)
 			recharge_stamina()
-			
-	var tim_scale = animation_tree["parameters/TimeScale/scale"]
-	if tim_scale < 1.0:
-		print(tim_scale)
+
+
 	move_and_slide()
 
 

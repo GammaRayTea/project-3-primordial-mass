@@ -85,9 +85,9 @@ func start_run():
 	
 	#init player
 	player = player_scene.instantiate()
+	player.start()
 	add_child(player)
 	dungeon_gen.player = player
-	player.start()
 	
 	#start dungeon gen
 	if testing:
