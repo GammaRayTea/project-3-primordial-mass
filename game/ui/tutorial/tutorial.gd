@@ -7,6 +7,8 @@ class_name Tutorial extends Control
 @export_category("Hints")
 @export var movement_hint:Control
 @export var sprint_hint:Control
+@export var portal_hint:Control
+
 @export var stability_hint:Control
 
 @export var pearl_hint:Control
@@ -34,12 +36,12 @@ func next_phase() -> void:
 			modulate_element(movement_hint)
 			await get_tree().create_timer(1).timeout
 			await modulate_element(sprint_hint)
+			await modulate_element(portal_hint)
 			next_phase()
 		TUTORIAL_TIMED_PHASE.STABILITY_HINT:
 			modulate_element(stability_hint)
 
 func modulate_element(_control:Control ) -> void:
-	
 	
 	var tween:Tween = get_tree().create_tween()
 	tween.tween_property(_control,"modulate:a", 1.0, 1)
@@ -49,6 +51,7 @@ func modulate_element(_control:Control ) -> void:
 	tween = get_tree().create_tween()
 	tween.tween_property(_control,"modulate:a",0.0, 1)
 	await tween.finished
+	_control.hide()
 
 func on_pearl_collected(_node:Node) -> void:
 	if !is_pearl_collected:
@@ -57,6 +60,7 @@ func on_pearl_collected(_node:Node) -> void:
 
 func on_stability_depleted() -> void:
 	modulate_element(escape_hint)
+
 
 func on_node_created(_node:Node) -> void:
 	if _node is ItemDrop:

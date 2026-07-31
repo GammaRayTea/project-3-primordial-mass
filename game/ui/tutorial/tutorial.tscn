@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_jya1v"]
 [ext_resource type="PackedScene" uid="uid://dr7knno85ks28" path="res://game/ui/tutorial/hint.tscn" id="3_6t6in"]
 
-[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "stability_hint", "pearl_hint", "escape_hint")]
+[node name="Tutorial" type="Control" unique_id=1183441685 node_paths=PackedStringArray("hint_container", "movement_hint", "sprint_hint", "portal_hint", "stability_hint", "pearl_hint", "escape_hint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ script = ExtResource("1_b5dgg")
 hint_container = NodePath("VBoxContainer")
 movement_hint = NodePath("VBoxContainer/Move")
 sprint_hint = NodePath("VBoxContainer/SprintHint")
+portal_hint = NodePath("VBoxContainer/PortalHint")
 stability_hint = NodePath("StabilityHint")
 pearl_hint = NodePath("PearlHint")
 escape_hint = NodePath("StabilityDepletedHint")
@@ -30,8 +31,8 @@ anchor_right = 0.37100002
 anchor_bottom = 0.23600002
 offset_left = -0.20800209
 offset_top = -0.11999893
-offset_right = 0.04798889
-offset_bottom = 48.031998
+offset_right = 38.04799
+offset_bottom = 65.032
 mouse_filter = 2
 theme_override_constants/separation = 3
 
@@ -45,29 +46,34 @@ layout_mode = 2
 mouse_filter = 2
 text = "Sprint by holding Shift"
 
+[node name="PortalHint" parent="VBoxContainer" unique_id=1449200787 instance=ExtResource("3_6t6in")]
+layout_mode = 2
+mouse_filter = 2
+text = "The portal will reactivate soon"
+
 [node name="StabilityHint" parent="." unique_id=1754516226 instance=ExtResource("3_6t6in")]
 layout_mode = 1
-anchor_left = 0.025
-anchor_top = 0.708
+anchor_left = 0.021000002
+anchor_top = 0.823
 anchor_right = 0.44500002
-anchor_bottom = 0.84400004
-offset_left = -1.8000002
-offset_top = 33.095993
+anchor_bottom = 0.92700005
+offset_left = 0.24799919
+offset_top = -0.024002075
 offset_right = 0.1599884
-offset_bottom = 23.927994
+offset_bottom = 0.023986816
 mouse_filter = 2
 text = "Actions deplete this realms stability"
 
 [node name="StabilityDepletedHint" parent="." unique_id=2102784859 instance=ExtResource("3_6t6in")]
 layout_mode = 1
 anchor_left = 0.44900003
-anchor_top = 0.64900005
+anchor_top = 0.823
 anchor_right = 0.551
-anchor_bottom = 0.753
+anchor_bottom = 0.92700005
 offset_left = 0.11198425
-offset_top = 50.087982
+offset_top = -0.024002075
 offset_right = -0.11199951
-offset_bottom = 50.135986
+offset_bottom = 0.023986816
 mouse_filter = 2
 text = "Escape"
 
@@ -78,8 +84,8 @@ anchor_top = 0.823
 anchor_right = 0.975
 anchor_bottom = 0.92700005
 offset_left = 5.2079926
-offset_top = -207.024
+offset_top = -204.024
 offset_right = 4.799988
-offset_bottom = -206.97601
+offset_bottom = -203.97601
 mouse_filter = 2
 text = "Place pearls on pillars to stabilise the realm"

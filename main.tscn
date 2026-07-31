@@ -36,6 +36,7 @@ test_env = ExtResource("5_w48qg")
 dungeon_gen = NodePath("DungeonGenerator")
 escape_sequence = NodePath("EscapeSequence")
 player_scene = ExtResource("2_h2yge")
+start_portal_scene = ExtResource("10_efxa6")
 enemies = NodePath("Enemies")
 objects = NodePath("Objects")
 testing = false
@@ -82,9 +83,5 @@ void_scene = ExtResource("13_2cqfq")
 [node name="Enemies" type="Node3D" parent="Game" unique_id=467509300]
 
 [node name="Objects" type="Node3D" parent="Game" unique_id=2104293269]
-
-[node name="StartPortal" parent="Game" unique_id=1420404931 node_paths=PackedStringArray("ui") instance=ExtResource("10_efxa6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.1, 8)
-ui = NodePath("../../UI")
 
 [node name="UI" parent="." unique_id=982157194 instance=ExtResource("10_4c57u")]

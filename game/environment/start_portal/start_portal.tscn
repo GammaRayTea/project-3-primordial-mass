@@ -8,8 +8,10 @@
 height = 0.49163818
 radius = 0.18652344
 
-[node name="StartPortal" type="Node3D" unique_id=1420404931]
+[node name="StartPortal" type="Node3D" unique_id=1420404931 node_paths=PackedStringArray("activate_timer", "collsion_shape")]
 script = ExtResource("1_jn4hp")
+activate_timer = NodePath("Timer")
+collsion_shape = NodePath("InteractionBox/CollisionShape3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1406339180]
 transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, 0, 0.005, 0)
@@ -26,6 +28,7 @@ metadata/_custom_type_script = "uid://cuon1d6qjf5qt"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionBox" unique_id=1997861657]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2394104, 0)
 shape = SubResource("CylinderShape3D_udmuc")
+disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1354280854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14741597, 0)
@@ -33,5 +36,8 @@ light_color = Color(0.98039216, 0.96862745, 0.6117647, 1)
 light_energy = 12.137
 shadow_enabled = true
 omni_range = 37.454
+
+[node name="Timer" type="Timer" parent="." unique_id=670371479]
+wait_time = 60.0
 
 [connection signal="area_entered" from="InteractionBox" to="." method="_on_interaction_box_entered"]
