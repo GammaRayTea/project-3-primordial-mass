@@ -10,7 +10,9 @@ func _ready() -> void:
 	fog_volume.material = escape_fog_material.duplicate_deep()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(fog_volume.material,"density", 6.0, activation_time)
+	
+	tween.tween_property(fog_volume.material,"edge_fade", 0.03213655203581, activation_time)
+	
 	await tween.finished
 	collison_shape.disabled = false
 	

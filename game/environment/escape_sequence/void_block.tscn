@@ -3,6 +3,20 @@
 [ext_resource type="Script" uid="uid://koked3gr4de6" path="res://game/environment/escape_sequence/void_block.gd" id="1_pgv6n"]
 [ext_resource type="Material" uid="uid://bx0k04b6rm3t6" path="res://assets/environment/escape_fog_material.tres" id="2_j15ht"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j15ht"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_vti48"]
+sky_material = SubResource("ProceduralSkyMaterial_j15ht")
+
+[sub_resource type="Environment" id="Environment_1e6el"]
+background_mode = 2
+sky = SubResource("Sky_vti48")
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpvxy"]
 size = Vector3(16, 4, 16)
 
@@ -11,6 +25,9 @@ script = ExtResource("1_pgv6n")
 fog_volume = NodePath("FogVolume")
 collison_shape = NodePath("Area3D/CollisionShape3D")
 escape_fog_material = ExtResource("2_j15ht")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=250593344]
+environment = SubResource("Environment_1e6el")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=266980424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 8)
