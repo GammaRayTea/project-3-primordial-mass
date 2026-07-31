@@ -1,5 +1,5 @@
 extends Node
-var base_max_stability = 1000.0
+var base_max_stability
 
 var stability_bar:TextureProgressBar
 var stable_phase:bool = true
@@ -32,8 +32,8 @@ var player_stat_levels:Dictionary[GlobalEnum.UPGRADES,int] = {
 
 func _ready() -> void:
 	
-	
 	stability_bar = get_tree().get_first_node_in_group("StabilityBar")
+	base_max_stability = stability_bar.max_value
 	if stability_bar:
 		stability_bar.value = stability_bar.max_value
 		stability_bar.value_changed.connect(_on_stability_value_changed)
@@ -48,7 +48,7 @@ func reset() -> void:
 	GlobalEnum.CURRENCY.GOO : 0,
 	GlobalEnum.CURRENCY.COINS: 0
 	}
-	stability_bar.value = base_max_stability * player_stats[GlobalEnum.UPGRADES.STABILITY_CAPACITY]
+	stability_bar.max_value = base_max_stability * player_stats[GlobalEnum.UPGRADES.STABILITY_CAPACITY]
 	stability_bar.value = stability_bar.max_value
 	
 	stable_phase = true
@@ -79,8 +79,8 @@ func load_game() -> void:
 	saved_currency = GameSaveManager.save_game.currency
 	player_stats =  GameSaveManager.save_game.player_stats
 	player_stat_levels =  GameSaveManager.save_game.player_stat_levels
-	
-	print(saved_currency," ",player_stats," ", player_stat_levels)
+	#
+	#print(saved_currency," ",player_stats," ", player_stat_levels)
 
 func save_game() -> void:
 	GameSaveManager.save(saved_currency,player_stats, player_stat_levels)
@@ -91,7 +91,8 @@ func increase_stability(_by_value:float) -> void:
 
 func decrease_stability(_by_value:float) -> void:
 	if stable_phase:
-		stability_bar.value -= _by_value / player_stats[GlobalEnum.UPGRADES.STABILITY_RESILIENCE]
+		stability_bar.value -= (_by_value / player_stats[GlobalEnum.UPGRADES.STABILITY_RESILIENCE])
+
 
 
 func _on_stability_value_changed(_value:float) -> void:
@@ -119,7 +120,6 @@ func change_stat(_type:GlobalEnum.UPGRADES, _value:float, _level:int) -> void:
 		player_stats[_type] = 1.0
 	player_stats[_type] += _value
 	player_stats[_type] = max(player_stats[_type],0.1)
-	print(_type, " ", player_stats[_type] )
 	
 	player_stat_levels[_type] = _level
 	if _type == GlobalEnum.UPGRADES.STABILITY_CAPACITY:
