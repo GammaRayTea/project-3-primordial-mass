@@ -80,10 +80,12 @@ func switch_to_state(_state:Game.STATE) -> void:
 	#print($Overlay/StabilityBar.value)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action("ui_accept"):
-		RunManager.saved_currency[GlobalEnum.CURRENCY.GOO] +=100
-		RunManager.saved_currency[GlobalEnum.CURRENCY.COINS] +=100
-
+	if event.is_action_released("ui_accept"):
+		if !DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 func _on_start_run_button_pressed() -> void:
 	sound_manager._play(["StartRun"])
 

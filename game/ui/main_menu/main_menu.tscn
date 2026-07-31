@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bmdf4c0niky3d" path="res://assets/themes/default.tres" id="1_2ww3u"]
 [ext_resource type="Script" uid="uid://sp7uqxf7j40l" path="res://game/ui/main_menu/main_menu.gd" id="2_mkp5f"]
+[ext_resource type="Texture2D" uid="uid://c0dt7b55x4fvm" path="res://assets/themes/ui_elements/bg_dark.png" id="3_mkp5f"]
 
 [node name="MainMenu" type="Control" unique_id=1891432706 node_paths=PackedStringArray("start_button", "clear_save_button")]
 oversampling_with_scale = 2
@@ -70,5 +71,61 @@ offset_bottom = -7.0
 grow_vertical = 0
 text = "Clear save data
 "
+
+[node name="Hint" type="Control" parent="." unique_id=486379497]
+custom_maximum_size = Vector2(-1, 30)
+layout_mode = 1
+anchor_left = 0.59400004
+anchor_top = 0.85800004
+anchor_right = 0.975
+anchor_bottom = 0.9620001
+offset_left = -29.128021
+offset_top = -0.104003906
+offset_right = -0.2000122
+offset_bottom = -2.0560303
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_2ww3u")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hint" unique_id=942945356]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HintLabel" type="RichTextLabel" parent="Hint/MarginContainer" unique_id=1923269892]
+layout_mode = 2
+text = "Press Enter to toggle full screen"
+fit_content = true
+scroll_active = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Hint" unique_id=2142276053]
+modulate = Color(0.47788018, 0.47788018, 0.47788, 0.23529412)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_mkp5f")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]
